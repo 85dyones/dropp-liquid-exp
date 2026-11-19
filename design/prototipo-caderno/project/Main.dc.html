@@ -1,0 +1,1252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Caderno · lotes e fichas</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wdth,wght@62..125,400..800&amp;family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;display=swap">
+<style>
+body { margin: 0; }
+.app { width: 390px; height: 844px; box-sizing: border-box; display: flex; flex-direction: column; background-color: #EFE8D8; background-image: radial-gradient(rgba(90, 65, 30, 0.06) 1px, transparent 1.3px); background-size: 4px 4px; color: #1C1A16; font-family: Archivo, "Helvetica Neue", Arial, sans-serif; font-size: 15px; line-height: 1.45; position: relative; overflow: hidden; }
+.app * { box-sizing: border-box; }
+.app p, .app h2, .app ul, .app ol, .app dl, .app dd { margin: 0; }
+button { font-family: inherit; color: #1C1A16; }
+.app :focus-visible { outline: 2px solid #A21CAF; outline-offset: 2px; }
+.mono { font-family: "Courier Prime", "Courier New", monospace; }
+
+.topo { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 14px 10px; flex: none; }
+.marca { display: flex; align-items: center; gap: 8px; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 26px; line-height: 1; text-transform: uppercase; letter-spacing: 0.02em; }
+.marca svg { width: 22px; height: 26px; flex: none; }
+.mais { appearance: none; border: 0; background: #1C1A16; color: #F8F3E7 !important; font-weight: 700; font-size: 13px; padding: 0 14px; min-height: 40px; cursor: pointer; }
+.abas { display: flex; align-items: stretch; border-bottom: 1.5px solid #1C1A16; padding: 0 12px 0 6px; flex: none; }
+.aba { appearance: none; border: 0; background: transparent; padding: 0 10px; min-height: 46px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 125; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1.5px; color: #6E6555; }
+.aba[aria-pressed="true"] { color: #1C1A16; border-bottom-color: #D946EF; }
+.voltar-bar { display: flex; align-items: center; gap: 4px; padding: 6px 12px 6px 4px; border-bottom: 1.5px solid #1C1A16; min-height: 58px; flex: none; }
+.voltar { appearance: none; border: 0; background: transparent; min-height: 44px; padding: 0 12px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.voltar-bar h2 { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.02em; }
+
+.corpo { flex: 1; overflow-y: auto; padding: 14px 14px 92px; display: flex; flex-direction: column; gap: 14px; }
+.corpo > * { flex: none; }
+.rot { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: #6E6555; }
+.titulo-bloco { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.05; text-transform: uppercase; letter-spacing: 0.01em; }
+.titulo-grande { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 36px; line-height: 0.95; text-transform: uppercase; }
+.nota { font-size: 13px; line-height: 1.45; color: #6E6555; }
+.papel { background-color: #FAF6EC; background-image: radial-gradient(rgba(90, 65, 30, 0.05) 1px, transparent 1.3px); background-size: 5px 5px; color: #1C1A16; position: relative; border: 1.5px solid #1C1A16; }
+.papel .nota, .papel .rot { color: #5B5344; }
+.papel.corte::before, .papel.corte::after { content: ""; position: absolute; width: 14px; height: 14px; opacity: 0.5; background: linear-gradient(#1C1A16, #1C1A16) center / 1px 100% no-repeat, linear-gradient(#1C1A16, #1C1A16) center / 100% 1px no-repeat; pointer-events: none; }
+.papel.corte::before { top: -8px; left: -8px; }
+.papel.corte::after { bottom: -8px; right: -8px; }
+.bloco { padding: 14px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 9px; border-radius: 4px; }
+.sec-cab { display: grid; gap: 2px; }
+.linha-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { appearance: none; border: 1.5px solid #1C1A16; background: transparent; color: #1C1A16; min-height: 46px; padding: 0 14px; font-weight: 700; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+.btn.cheio { background: #1C1A16; color: #F8F3E7; }
+.btn.largo { width: 100%; }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.chk { list-style: none; padding: 0; display: grid; gap: 7px; font-size: 14px; line-height: 1.4; }
+.chk li { display: flex; gap: 8px; align-items: baseline; }
+.st { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11.5px; line-height: 1.3; padding: 1px 6px; white-space: nowrap; flex: none; }
+.st.ok { background: #10B981; color: #0F1C17; }
+.st.meio { background: #FACC15; color: #1C1A16; }
+.st.falta { border: 1px solid currentColor; }
+.st.solto { white-space: normal; flex: 1 1 auto; min-width: 0; }
+.campo { display: grid; gap: 6px; }
+.seg-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.seg-row.quatro { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.seg { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 44px; padding: 4px 6px; font-size: 12.5px; font-weight: 600; line-height: 1.2; cursor: pointer; display: grid; align-content: center; justify-items: center; gap: 1px; text-align: center; }
+.seg small { font-family: "Courier Prime", "Courier New", monospace; font-weight: 400; font-size: 10px; white-space: nowrap; letter-spacing: -0.02em; }
+.seg[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
+
+.lote { appearance: none; width: 100%; text-align: left; cursor: pointer; padding: 12px 14px 12px; display: grid; gap: 4px; border-radius: 4px; }
+.lote:hover { background-color: #FFFDF6; }
+.lote-topo { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.lote-tempo { display: block; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 30px; line-height: 1; text-transform: uppercase; letter-spacing: 0.01em; }
+.lote-tempo.grande { font-size: 44px; line-height: 0.95; }
+.lote-nome { display: block; font-weight: 700; font-size: 17px; line-height: 1.25; }
+.regua-lote { position: relative; display: block; height: 16px; margin-top: 4px; }
+.rl-trilho { position: absolute; left: 0; right: 0; top: 5px; height: 7px; border: 1px solid #1C1A16; display: block; }
+.rl-enchido { position: absolute; left: 0; top: 0; bottom: 0; display: block; }
+.rl-hoje { position: absolute; top: 0; width: 2px; height: 16px; background: #1C1A16; transform: translateX(-1px); display: block; }
+.rl-pronto { position: absolute; top: 2px; width: 1.5px; height: 12px; background: #1C1A16; opacity: 0.55; display: block; }
+.lote-datas { display: flex; justify-content: space-between; gap: 8px; font-family: "Courier Prime", "Courier New", monospace; font-size: 10.5px; color: #5B5344; }
+.lote-tec { display: block; font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; line-height: 1.4; color: #5B5344; }
+.lote-cab { display: grid; gap: 4px; }
+
+.fatos { border-top: 1.5px solid #1C1A16; }
+.fatos div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(28, 26, 22, 0.18); font-size: 14px; line-height: 1.4; }
+.fatos dt { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6E6555; padding-top: 3px; }
+
+.etiqueta { background: #FCFCFA; color: #121212; padding: 18px 16px 16px; position: relative; display: grid; gap: 8px; font-family: "Courier Prime", "Courier New", monospace; box-shadow: 0 12px 26px -16px rgba(60, 45, 20, 0.55); }
+.etiqueta::before, .etiqueta::after { content: ""; position: absolute; left: 0; right: 0; height: 6px; background: radial-gradient(circle at 3px 3px, #EFE8D8 2.2px, transparent 2.6px) 0 0 / 10px 6px repeat-x; }
+.etiqueta::before { top: -1px; }
+.etiqueta::after { bottom: -1px; transform: rotate(180deg); }
+.etq-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.etq-cab b { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 19px; letter-spacing: 0.05em; }
+.etq-cab span { font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; text-align: right; }
+.etq-nome { font-family: Archivo, Arial, sans-serif; font-weight: 800; font-variation-settings: "wdth" 70; font-size: 30px; line-height: 0.95; text-transform: uppercase; }
+.etq-id { font-size: 11.5px; }
+.etq-hr { border-top: 1.5px dashed #121212; opacity: 0.7; }
+.etq-datas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.etq-datas div { display: grid; gap: 1px; }
+.etq-datas .etq-k { font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.etq-datas b { font-family: Archivo, Arial, sans-serif; font-weight: 800; font-variation-settings: "wdth" 75; font-size: 21px; line-height: 1.05; }
+.etq-datas small { font-size: 10.5px; }
+.etq-ing { font-size: 11px; line-height: 1.4; }
+.etq-al { font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.etq-pe { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
+.etq-pe .qr { width: 84px; height: 84px; flex: none; }
+.etq-marca { display: flex; align-items: center; gap: 6px; font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; }
+.etq-marca svg { width: 14px; height: 17px; flex: none; }
+@keyframes saia { from { transform: translateY(-18px); clip-path: inset(0 0 100% 0); } to { transform: none; clip-path: inset(0 0 0 0); } }
+@keyframes saib { from { transform: translateY(-18px); clip-path: inset(0 0 100% 0); } to { transform: none; clip-path: inset(0 0 0 0); } }
+.sai-a { animation: saia 700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.sai-b { animation: saib 700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.ing { list-style: none; padding: 0; display: grid; gap: 4px; }
+.ing li { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; line-height: 1.35; padding: 4px 0; border-bottom: 1px dotted rgba(28, 26, 22, 0.35); }
+.ing .q { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; white-space: nowrap; }
+
+.dono { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1.5px solid #1C1A16; }
+.dono button { appearance: none; border: 0; background: transparent; min-height: 42px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.dono button[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
+.ficha { appearance: none; width: 100%; text-align: left; cursor: pointer; padding: 14px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; border-radius: 4px; }
+.ficha:hover { background-color: #FFFDF6; }
+.ficha-l { display: grid; gap: 3px; min-width: 0; }
+.ficha-nome { display: block; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 22px; line-height: 1.05; text-transform: uppercase; }
+.ficha-serv { display: block; font-family: "Courier Prime", "Courier New", monospace; font-size: 11.5px; line-height: 1.35; color: #5B5344; }
+.spec div { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-bottom: 1px dotted rgba(28, 26, 22, 0.35); font-size: 14.5px; line-height: 1.35; }
+.spec dd { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; white-space: nowrap; }
+.metodo { font-size: 14px; line-height: 1.45; }
+.servir { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.serv-item { border: 1.5px solid #1C1A16; padding: 8px; display: grid; gap: 2px; align-content: start; }
+.serv-item b { font-size: 13px; line-height: 1.3; }
+.serv-item .rot { letter-spacing: 0.12em; }
+.custo { list-style: none; padding: 0; display: grid; }
+.custo li { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; line-height: 1.35; padding: 5px 0; border-bottom: 1px dotted rgba(28, 26, 22, 0.35); }
+.custo .v { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; }
+.custo-tot { display: flex; justify-content: space-between; gap: 10px; font-weight: 700; font-size: 14px; }
+.custo-tot b { font-family: "Courier Prime", "Courier New", monospace; }
+.pct-grande { display: flex; align-items: center; gap: 12px; border-top: 1.5px solid #1C1A16; padding-top: 10px; }
+.pct-grande .st { white-space: normal; flex: 1 1 auto; min-width: 0; line-height: 1.35; padding: 2px 6px; }
+.pct-grande b { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 46px; line-height: 0.9; }
+.fonte { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; line-height: 1.45; background: rgba(28, 26, 22, 0.06); padding: 8px 10px; }
+
+.stepper { display: grid; grid-template-columns: minmax(0, 1fr) 46px 72px 46px; align-items: center; gap: 6px; }
+.passo { appearance: none; border: 1.5px solid #1C1A16; background: transparent; height: 46px; font-size: 22px; font-weight: 700; line-height: 1; cursor: pointer; }
+.stepper b { text-align: center; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 28px; line-height: 1; }
+.resultado { display: grid; gap: 2px; border-top: 1.5px solid #1C1A16; padding-top: 10px; }
+.resultado b { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 42px; line-height: 0.95; text-transform: uppercase; }
+.formula { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; line-height: 1.5; background: rgba(28, 26, 22, 0.06); padding: 8px 10px; white-space: pre-line; }
+
+.topo-acoes { display: flex; gap: 6px; align-items: center; }
+.icone-btn { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 40px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13px; cursor: pointer; }
+.icone-btn svg { width: 18px; height: 18px; flex: none; }
+.lote-conf { display: block; font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11.5px; color: #0B7A57; }
+.lido { display: flex; gap: 8px; align-items: baseline; font-size: 13.5px; line-height: 1.4; }
+.etq-pe-dir { display: grid; gap: 8px; justify-items: end; text-align: right; min-width: 0; }
+.etq-ler { font-size: 10px; line-height: 1.3; max-width: 160px; }
+.visor { position: relative; height: 250px; background: #0F1310; border-radius: 4px; display: grid; place-items: center; overflow: hidden; }
+.canto-v { position: absolute; width: 34px; height: 34px; border-color: #F3ECDD; border-style: solid; border-width: 0; }
+.c1 { top: 18px; left: 18px; border-top-width: 3px; border-left-width: 3px; }
+.c2 { top: 18px; right: 18px; border-top-width: 3px; border-right-width: 3px; }
+.c3 { bottom: 18px; left: 18px; border-bottom-width: 3px; border-left-width: 3px; }
+.c4 { bottom: 18px; right: 18px; border-bottom-width: 3px; border-right-width: 3px; }
+.alvo { background: #FCFCFA; padding: 12px 12px 8px; display: grid; gap: 6px; justify-items: center; transform: rotate(-3deg); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45); }
+.qr-alvo { width: 140px; height: 140px; display: block; }
+.alvo-rot { font-family: "Courier Prime", "Courier New", monospace; font-size: 11px; color: #121212; text-align: center; max-width: 160px; line-height: 1.3; }
+.visor-fim { color: #F3ECDD; font-weight: 700; text-align: center; padding: 0 40px; }
+.bancada { list-style: none; padding: 0; display: grid; gap: 8px; }
+.bancada li { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 0; align-items: stretch; }
+.garrafa { appearance: none; border: 1.5px solid #1C1A16; background: #FAF6EC; text-align: left; padding: 8px 10px; display: grid; gap: 2px; cursor: pointer; min-height: 56px; }
+.g-nome { display: block; font-weight: 700; font-size: 14px; line-height: 1.25; }
+.g-sub { display: block; font-family: "Courier Prime", "Courier New", monospace; font-size: 11px; color: #5B5344; }
+.garrafa .st { justify-self: start; margin-top: 2px; }
+.garrafa.fora { background: transparent; border-style: dashed; cursor: default; }
+.st.perdido { background: #EF4444; color: #1C1A16; }
+.btn.sumir { font-size: 12px; padding: 0 10px; min-height: 56px; margin-left: 6px; }
+.aviso { position: absolute; left: 12px; right: 12px; bottom: 74px; background: #1C1A16; color: #F8F3E7; padding: 6px 6px 6px 14px; display: flex; gap: 8px; align-items: center; font-size: 14px; line-height: 1.35; font-weight: 600; z-index: 5; box-shadow: 0 10px 24px rgba(60, 45, 20, 0.35); }
+.aviso button { appearance: none; border: 0; background: transparent; color: #F8F3E7; min-height: 44px; padding: 0 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: underline; }
+.nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1.5px solid #1C1A16; background: #EFE8D8; position: relative; z-index: 6; flex: none; }
+.nav button { appearance: none; border: 0; background: transparent; min-height: 62px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 115; letter-spacing: 0.06em; color: #6E6555; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.nav button[aria-current="page"] { color: #1C1A16; }
+.nav button:disabled { cursor: not-allowed; }
+.nav button:disabled svg { opacity: 0.6; }
+.nav svg { width: 22px; height: 22px; }
+@media (prefers-reduced-motion: reduce) { .sai-a, .sai-b { animation: none; } }
+</style>
+</helmet>
+<div class="app">
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <g id="gota-oficial">
+        <path d="M50 8 C50 8 36 28 32 46 C37 40 45 36 50 36 C55 36 63 40 68 46 C64 28 50 8 50 8 Z" fill="#FACC15"></path>
+        <path d="M32 46 C24 57 20 68 22 79 C25 80 29 80 34 78 C31 66 33 55 42 46 C38 45 35 45 32 46 Z" fill="#10B981"></path>
+        <path d="M22 79 C24 93 35 106 50 108 C46 98 46 88 50 78 C39 77 31 82 22 79 Z" fill="#06B6D4"></path>
+        <path d="M68 46 C76 57 80 68 78 79 C75 80 71 80 66 78 C69 66 67 55 58 46 C62 45 65 45 68 46 Z" fill="#F97316"></path>
+        <path d="M78 79 C76 93 65 106 50 108 C54 98 54 88 50 78 C61 77 69 82 78 79 Z" fill="#EF4444"></path>
+        <path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="#D946EF"></path>
+        <path d="M50 78 C44 86 44 95 50 106 C56 95 56 86 50 78 Z" fill="#8B5CF6"></path>
+      </g>
+      <g id="gota-traco" fill="none" stroke="#121212" stroke-width="3.5" stroke-linejoin="round">
+        <path d="M50 8 C50 8 36 28 32 46 C37 40 45 36 50 36 C55 36 63 40 68 46 C64 28 50 8 50 8 Z"></path>
+        <path d="M32 46 C24 57 20 68 22 79 C25 80 29 80 34 78 C31 66 33 55 42 46 C38 45 35 45 32 46 Z"></path>
+        <path d="M22 79 C24 93 35 106 50 108 C46 98 46 88 50 78 C39 77 31 82 22 79 Z"></path>
+        <path d="M68 46 C76 57 80 68 78 79 C75 80 71 80 66 78 C69 66 67 55 58 46 C62 45 65 45 68 46 Z"></path>
+        <path d="M78 79 C76 93 65 106 50 108 C54 98 54 88 50 78 C61 77 69 82 78 79 Z"></path>
+        <path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z"></path>
+        <path d="M50 78 C44 86 44 95 50 106 C56 95 56 86 50 78 Z"></path>
+      </g>
+    </defs>
+  </svg>
+
+  <sc-if value="{{principal}}" hint-placeholder-val="{{ true }}">
+    <div class="topo">
+      <p class="marca"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>Caderno</p>
+      <div class="topo-acoes">
+        <button type="button" class="icone-btn" aria-label="Conferir lotes pelo QR" onClick="{{irConferir}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"></path><path d="M8 8h3v3H8zM13 13h3v3h-3zM13 8h3M8 13v3"></path></svg>Conferir</button>
+        <button type="button" class="mais" onClick="{{irNovo}}">+ Lote</button>
+      </div>
+    </div>
+    <div class="abas">
+      <sc-for list="{{abas}}" as="ab" hint-placeholder-count="3">
+        <button type="button" class="aba" aria-pressed="{{ab.on}}" onClick="{{ab.pick}}">{{ab.t}}</button>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{mostrarVoltar}}" hint-placeholder-val="{{ false }}">
+    <div class="voltar-bar">
+      <button type="button" class="voltar" onClick="{{voltar}}">← Voltar</button>
+      <h2>{{tituloTela}}</h2>
+    </div>
+  </sc-if>
+
+  <div class="corpo" ref="{{corpoRef}}">
+    <sc-if value="{{tLotes}}" hint-placeholder-val="{{ true }}">
+      <div class="sec-cab">
+        <p class="titulo-bloco">Lotes da casa</p>
+        <p class="nota">{{lotesResumo}}</p>
+      </div>
+      <sc-for list="{{lotes}}" as="lt" hint-placeholder-count="5">
+        <button type="button" class="papel corte lote" aria-label="{{lt.aria}}" onClick="{{lt.abrir}}">
+          <span class="lote-topo"><span class="rot">{{lt.idRot}}</span><span class="{{lt.chipCls}}">{{lt.chip}}</span></span>
+          <span class="lote-tempo" style="color: {{lt.cor}}">{{lt.tempo}}</span>
+          <span class="lote-nome">{{lt.nome}}</span>
+          <span class="regua-lote" aria-hidden="true">
+            <span class="rl-trilho"><span class="rl-enchido" style="width: {{lt.pctHoje}}%; background: {{lt.cor}}"></span></span>
+            <span class="rl-pronto" style="left: {{lt.pctPronto}}%; opacity: {{lt.prontoOpac}}"></span>
+            <span class="rl-hoje" style="left: {{lt.pctHoje}}%"></span>
+          </span>
+          <span class="lote-datas"><span>{{lt.ini}}</span><span>{{lt.fimRot}}</span></span>
+          <span class="lote-tec">{{lt.tec}}</span>
+          <sc-if value="{{lt.conferido}}" hint-placeholder-val="{{ false }}"><span class="lote-conf">{{lt.confTxt}}</span></sc-if>
+        </button>
+      </sc-for>
+      <p class="nota">Contados pelo tempo: o que vence, o que acaba e o que fica pronto vem antes dos dados técnicos. Na régua, o traço preto é hoje.</p>
+    </sc-if>
+
+    <sc-if value="{{tLote}}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{sel.lidoAgora}}" hint-placeholder-val="{{ false }}"><p class="lido"><span class="st ok">QR lido</span><span>{{sel.lidoTxt}}</span></p></sc-if>
+      <div class="lote-cab">
+        <span class="rot">{{sel.idRot}}</span>
+        <span class="lote-tempo grande" style="color: {{sel.cor}}">{{sel.tempo}}</span>
+        <p class="lote-nome">{{sel.nome}}</p>
+        <p class="nota">{{sel.sub}}</p>
+        <span class="regua-lote" aria-hidden="true">
+          <span class="rl-trilho"><span class="rl-enchido" style="width: {{sel.pctHoje}}%; background: {{sel.cor}}"></span></span>
+          <span class="rl-pronto" style="left: {{sel.pctPronto}}%; opacity: {{sel.prontoOpac}}"></span>
+          <span class="rl-hoje" style="left: {{sel.pctHoje}}%"></span>
+        </span>
+        <span class="lote-datas"><span>{{sel.ini}}</span><span>{{sel.fimRot}}</span></span>
+      </div>
+      <dl class="fatos">
+        <sc-for list="{{sel.fatos}}" as="ft" hint-placeholder-count="6">
+          <div><dt>{{ft.k}}</dt><dd>{{ft.v}}</dd></div>
+        </sc-for>
+      </dl>
+      <span class="rot">A etiqueta · térmica da barra</span>
+      <div class="{{etqCls}}" role="img" aria-label="{{sel.etqAria}}">
+        <div class="etq-cab"><b>SEA BAR</b><span>Valência · barra principal</span></div>
+        <p class="etq-nome">{{sel.nome}}</p>
+        <p class="etq-id">{{sel.etqId}}</p>
+        <div class="etq-hr"></div>
+        <div class="etq-datas">
+          <div><span class="etq-k">Feito</span><b>{{sel.etqFeito}}</b><small>por Teo A.</small></div>
+          <div><span class="etq-k">{{sel.etqFimRot}}</span><b>{{sel.etqFim}}</b><small>{{sel.temp}}</small></div>
+        </div>
+        <div class="etq-hr"></div>
+        <p class="etq-ing">{{sel.ing}}</p>
+        <p class="etq-al">{{sel.etqAler}}</p>
+        <div class="etq-pe">
+          <svg class="qr" viewBox="0 0 {{sel.qrLado}} {{sel.qrLado}}" shape-rendering="crispEdges" aria-hidden="true"><rect width="{{sel.qrLado}}" height="{{sel.qrLado}}" fill="#FFFFFF"></rect><path fill="#121212" d="{{sel.qrPath}}"></path></svg>
+          <div class="etq-pe-dir">
+            <span class="etq-ler">Leia no DROPP para dar baixa, registrar perda ou reimprimir</span>
+            <span class="etq-marca"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-traco"></use></svg>DROPP · Liquid Experience</span>
+          </div>
+        </div>
+      </div>
+      <div class="linha-btns">
+        <button type="button" class="btn cheio" onClick="{{imprimir}}">Imprimir etiqueta</button>
+        <button type="button" class="btn" aria-expanded="{{perdaAberta}}" onClick="{{abrirPerda}}">Registrar perda</button>
+        <button type="button" class="btn" onClick="{{esvaziar}}">Garrafa vazia</button>
+      </div>
+      <sc-if value="{{perdaAberta}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">Registrar perda</span>
+          <div class="campo">
+            <span class="rot" id="lbl-qtd">Quanto</span>
+            <div class="seg-row" role="group" aria-labelledby="lbl-qtd">
+              <sc-for list="{{perdaQtds}}" as="q" hint-placeholder-count="3">
+                <button type="button" class="seg" aria-pressed="{{q.on}}" onClick="{{q.pick}}">{{q.t}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div class="campo">
+            <span class="rot" id="lbl-motivo">Por quê</span>
+            <div class="seg-row" role="group" aria-labelledby="lbl-motivo">
+              <sc-for list="{{perdaMotivos}}" as="mt" hint-placeholder-count="3">
+                <button type="button" class="seg" aria-pressed="{{mt.on}}" onClick="{{mt.pick}}">{{mt.t}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <p class="nota">{{perdaTxt}}</p>
+          <button type="button" class="btn cheio largo" disabled="{{semPerda}}" onClick="{{registrarPerda}}">Registrar perda</button>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tConferir}}" hint-placeholder-val="{{ false }}">
+      <p class="nota">Aponte a câmera para o QR de cada garrafa. O DROPP abre o lote e marca a garrafa como conferida.</p>
+      <div class="visor" aria-hidden="true">
+        <span class="canto-v c1"></span><span class="canto-v c2"></span><span class="canto-v c3"></span><span class="canto-v c4"></span>
+        <sc-if value="{{temAlvo}}" hint-placeholder-val="{{ true }}">
+          <div class="alvo">
+            <svg class="qr-alvo" viewBox="0 0 {{alvo.qrLado}} {{alvo.qrLado}}" shape-rendering="crispEdges"><rect width="{{alvo.qrLado}}" height="{{alvo.qrLado}}" fill="#FFFFFF"></rect><path fill="#121212" d="{{alvo.qrPath}}"></path></svg>
+            <span class="alvo-rot">{{alvo.rotulo}}</span>
+          </div>
+        </sc-if>
+        <sc-if value="{{semAlvo}}" hint-placeholder-val="{{ false }}">
+          <p class="visor-fim">Todas as garrafas da bancada foram lidas.</p>
+        </sc-if>
+      </div>
+      <sc-if value="{{temAlvo}}" hint-placeholder-val="{{ true }}">
+        <button type="button" class="btn cheio largo" onClick="{{lerAlvo}}">{{lerAlvoRot}}</button>
+      </sc-if>
+      <div class="sec-cab"><p class="titulo-bloco">Garrafas do dia</p><p class="nota">{{confResumo}}</p></div>
+      <ul class="bancada">
+        <sc-for list="{{naBancada}}" as="gf" hint-placeholder-count="5">
+          <li>
+            <button type="button" class="{{gf.cls}}" aria-label="{{gf.aria}}" onClick="{{gf.ler}}"><span class="g-nome">{{gf.nome}}</span><span class="g-sub">{{gf.sub}}</span><span class="{{gf.stCls}}">{{gf.st}}</span></button>
+            <sc-if value="{{gf.podeSumir}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn sumir" onClick="{{gf.sumiu}}">Não está aqui</button></sc-if>
+          </li>
+        </sc-for>
+      </ul>
+      <button type="button" class="btn largo" onClick="{{fecharConferencia}}">Fechar a conferência</button>
+    </sc-if>
+
+    <sc-if value="{{tNovo}}" hint-placeholder-val="{{ false }}">
+      <p class="nota">O lote sai da ficha de preparo da casa: as quantidades, a validade e os alérgenos vêm dela.</p>
+      <div class="campo">
+        <span class="rot" id="lbl-prep">Qual preparo</span>
+        <div class="seg-row" role="group" aria-labelledby="lbl-prep">
+          <sc-for list="{{preparos}}" as="pp" hint-placeholder-count="3">
+            <button type="button" class="seg" aria-pressed="{{pp.on}}" onClick="{{pp.pick}}">{{pp.t}}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div class="campo">
+        <span class="rot" id="lbl-litros">Quanto</span>
+        <div class="seg-row" role="group" aria-labelledby="lbl-litros">
+          <sc-for list="{{quantidades}}" as="qt" hint-placeholder-count="3">
+            <button type="button" class="seg" aria-pressed="{{qt.on}}" onClick="{{qt.pick}}">{{qt.t}}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div class="papel corte bloco">
+        <span class="rot">{{novoRot}}</span>
+        <p class="titulo-bloco">{{novoNome}}</p>
+        <ul class="ing">
+          <sc-for list="{{novoIng}}" as="ig" hint-placeholder-count="4">
+            <li><span>{{ig.n}}</span><span class="q">{{ig.q}}</span></li>
+          </sc-for>
+        </ul>
+        <ul class="chk">
+          <li><span class="st falta">validade</span><span>{{novoVence}}</span></li>
+          <li><span class="st falta">custo</span><span>{{novoCusto}}</span></li>
+          <li><span class="{{novoAlerCls}}">alérgenos</span><span>{{novoAler}}</span></li>
+        </ul>
+        <p class="fonte">{{novoFonte}}</p>
+      </div>
+      <button type="button" class="btn cheio largo" onClick="{{criarLote}}">Criar lote e imprimir etiqueta</button>
+    </sc-if>
+
+    <sc-if value="{{tFichas}}" hint-placeholder-val="{{ false }}">
+      <div class="dono" role="group" aria-label="De quem são as fichas">
+        <button type="button" aria-pressed="{{donoCasa}}" onClick="{{verCasa}}">Da casa</button>
+        <button type="button" aria-pressed="{{donoMeu}}" onClick="{{verMeu}}">Minhas</button>
+      </div>
+      <p class="nota">{{fichasNota}}</p>
+      <sc-for list="{{fichas}}" as="fc" hint-placeholder-count="5">
+        <button type="button" class="papel corte ficha" aria-label="{{fc.aria}}" onClick="{{fc.abrir}}">
+          <span class="ficha-l"><span class="ficha-nome">{{fc.nome}}</span><span class="ficha-serv">{{fc.serv}}</span></span>
+          <span class="{{fc.custoCls}}">{{fc.custoTxt}}</span>
+        </button>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{tFicha}}" hint-placeholder-val="{{ false }}">
+      <div class="lote-cab">
+        <p class="titulo-grande">{{fs.nome}}</p>
+        <p class="nota">{{fs.autoria}}</p>
+      </div>
+      <div class="papel corte bloco">
+        <span class="rot">A receita</span>
+        <dl class="spec">
+          <sc-for list="{{fs.spec}}" as="sp" hint-placeholder-count="4">
+            <div><dt>{{sp.i}}</dt><dd>{{sp.q}}</dd></div>
+          </sc-for>
+        </dl>
+        <p class="metodo">{{fs.metodo}}</p>
+      </div>
+      <div class="servir">
+        <div class="serv-item"><span class="rot">Copo</span><b>{{fs.copo}}</b></div>
+        <div class="serv-item"><span class="rot">Gelo</span><b>{{fs.gelo}}</b></div>
+        <div class="serv-item"><span class="rot">Guarnição</span><b>{{fs.guarn}}</b></div>
+      </div>
+      <sc-if value="{{fs.temCusto}}" hint-placeholder-val="{{ true }}">
+        <div class="papel corte bloco">
+          <span class="rot">Custo por dose</span>
+          <ul class="custo">
+            <sc-for list="{{fs.custo}}" as="ct" hint-placeholder-count="5">
+              <li><span>{{ct.i}}</span><span class="v">{{ct.v}}</span></li>
+            </sc-for>
+          </ul>
+          <div class="custo-tot"><span>Custo da dose</span><b>{{fs.total}}</b></div>
+          <div class="custo-tot"><span>Preço na carta</span><b>{{fs.preco}}</b></div>
+          <div class="pct-grande"><b>{{fs.pct}}</b><span class="{{fs.pctCls}}">{{fs.pctNota}}</span></div>
+          <p class="fonte">{{fs.fonte}}</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{fs.semCusto}}" hint-placeholder-val="{{ false }}">
+        <p class="nota">Sem custo: fichas pessoais não usam os preços da casa.</p>
+      </sc-if>
+      <button type="button" class="btn cheio largo" onClick="{{fs.acao}}">{{fs.acaoRot}}</button>
+    </sc-if>
+
+    <sc-if value="{{tContas}}" hint-placeholder-val="{{ false }}">
+      <p class="nota">O banco calcula, e cada conta mostra a fórmula embaixo.</p>
+    <div class="campo">
+        <span class="rot" id="lbl-calc">Qual conta</span>
+        <div class="seg-row quatro" role="group" aria-labelledby="lbl-calc">
+          <sc-for list="{{calcs}}" as="cl" hint-placeholder-count="3">
+            <button type="button" class="seg" aria-pressed="{{cl.on}}" onClick="{{cl.pick}}">{{cl.t}}</button>
+          </sc-for>
+        </div>
+      </div>
+      <sc-if value="{{calcBatch}}" hint-placeholder-val="{{ true }}">
+      <div class="papel corte bloco">
+        <span class="rot">Diluição do batch · Negroni engarrafado</span>
+        <div class="stepper">
+          <span class="rot">Doses</span>
+          <button type="button" class="passo" aria-label="Menos 10 doses" onClick="{{menosDoses}}">−</button>
+          <b>{{doses}}</b>
+          <button type="button" class="passo" aria-label="Mais 10 doses" onClick="{{maisDoses}}">+</button>
+        </div>
+        <div class="campo">
+          <span class="rot" id="lbl-dil">Diluição</span>
+          <div class="seg-row" role="group" aria-labelledby="lbl-dil">
+            <sc-for list="{{dils}}" as="dl" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{dl.on}}" onClick="{{dl.pick}}">{{dl.t}}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="resultado"><span class="rot">Água a juntar</span><b>{{agua}}</b></div>
+        <ul class="chk">
+          <li><span class="st falta">batch</span><span>{{totalBatch}}</span></li>
+          <li><span class="st falta">ABV</span><span>{{abvFinal}}</span></li>
+          <li><span class="st falta">dose</span><span>{{porDose}}</span></li>
+        </ul>
+        <p class="formula">{{formulaDil}}</p>
+      </div>
+      </sc-if>
+      <sc-if value="{{calcCusto}}" hint-placeholder-val="{{ false }}">
+      <div class="papel corte bloco">
+        <span class="rot">Custo por dose · da garrafa</span>
+        <div class="campo">
+          <span class="rot" id="lbl-garrafa">Garrafa</span>
+          <div class="seg-row" role="group" aria-labelledby="lbl-garrafa">
+            <sc-for list="{{garrafas}}" as="gr" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{gr.on}}" onClick="{{gr.pick}}"><span>{{gr.t}}</span><small>{{gr.sub}}</small></button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="campo">
+          <span class="rot" id="lbl-dose">Dose</span>
+          <div class="seg-row quatro" role="group" aria-labelledby="lbl-dose">
+            <sc-for list="{{dosesMl}}" as="ds" hint-placeholder-count="4">
+              <button type="button" class="seg" aria-pressed="{{ds.on}}" onClick="{{ds.pick}}">{{ds.t}}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="resultado"><span class="rot">Por dose</span><b>{{custoDose}}</b></div>
+        <ul class="chk">
+          <li><span class="st falta">garrafa</span><span>{{porGarrafa}}</span></li>
+          <li><span class="st falta">por ml</span><span>{{porMl}}</span></li>
+        </ul>
+        <p class="formula">{{formulaCusto}}</p>
+      </div>
+      </sc-if>
+      <sc-if value="{{calcCache}}" hint-placeholder-val="{{ false }}">
+      <div class="papel corte bloco">
+        <span class="rot">Cachê · freela de sábado, do recado do Turno</span>
+        <div class="campo">
+          <span class="rot" id="lbl-oferta">Oferta</span>
+          <div class="seg-row" role="group" aria-labelledby="lbl-oferta">
+            <sc-for list="{{ofertas}}" as="of" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{of.on}}" onClick="{{of.pick}}"><span>{{of.t}}</span><small>{{of.sub}}</small></button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="campo">
+          <span class="rot" id="lbl-prep">Preparo</span>
+          <div class="seg-row" role="group" aria-labelledby="lbl-prep">
+            <sc-for list="{{prepHs}}" as="ph" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{ph.on}}" onClick="{{ph.pick}}">{{ph.t}}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="campo">
+          <span class="rot" id="lbl-desloc">Deslocamento</span>
+          <div class="seg-row" role="group" aria-labelledby="lbl-desloc">
+            <sc-for list="{{deslocs}}" as="dc" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{dc.on}}" onClick="{{dc.pick}}"><span>{{dc.t}}</span><small>{{dc.sub}}</small></button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="campo">
+          <span class="rot" id="lbl-ins">Insumos seus</span>
+          <div class="seg-row" role="group" aria-labelledby="lbl-ins">
+            <sc-for list="{{insSeusOp}}" as="is" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{is.on}}" onClick="{{is.pick}}"><span>{{is.t}}</span><small>{{is.sub}}</small></button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="campo">
+          <span class="rot" id="lbl-irpf">Retenção de IRPF</span>
+          <div class="seg-row" role="group" aria-labelledby="lbl-irpf">
+            <sc-for list="{{irpfs}}" as="ir" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{ir.on}}" onClick="{{ir.pick}}"><span>{{ir.t}}</span><small>{{ir.sub}}</small></button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="resultado"><span class="rot">No bolso, por hora</span><b>{{porHora}}</b></div>
+        <p class="lido"><span class="{{refCls}}">{{refTxt}}</span></p>
+        <ul class="chk">
+          <li><span class="st falta">líquido</span><span>{{liquidoTxt}}</span></li>
+          <li><span class="st falta">tempo</span><span>{{tempoTxt}}</span></li>
+          <li><span class="st falta">empate</span><span>{{empateTxt}}</span></li>
+        </ul>
+        <p class="nota">{{ivaTxt}}</p>
+        <p class="formula">{{formulaCache}}</p>
+      </div>
+      </sc-if>
+      <sc-if value="{{calcEvento}}" hint-placeholder-val="{{ false }}">
+      <div class="papel corte bloco">
+        <span class="rot">Insumos para evento · pelas fichas da casa</span>
+        <div class="stepper">
+          <span class="rot">Convidados</span>
+          <button type="button" class="passo" aria-label="Menos 10 convidados" onClick="{{menosConv}}">−</button>
+          <b>{{convidados}}</b>
+          <button type="button" class="passo" aria-label="Mais 10 convidados" onClick="{{maisConv}}">+</button>
+        </div>
+        <div class="campo">
+          <span class="rot" id="lbl-dur">Duração</span>
+          <div class="seg-row" role="group" aria-labelledby="lbl-dur">
+            <sc-for list="{{horasEvOp}}" as="hv" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{hv.on}}" onClick="{{hv.pick}}">{{hv.t}}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="campo">
+          <span class="rot" id="lbl-ritmo">Ritmo</span>
+          <div class="seg-row" role="group" aria-labelledby="lbl-ritmo">
+            <sc-for list="{{ritmos}}" as="rt" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{rt.on}}" onClick="{{rt.pick}}"><span>{{rt.t}}</span><small>{{rt.sub}}</small></button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="campo">
+          <span class="rot" id="lbl-carta">Carta do evento</span>
+          <div class="seg-row" role="group" aria-labelledby="lbl-carta">
+            <sc-for list="{{cartaOp}}" as="ce" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{ce.on}}" onClick="{{ce.pick}}">{{ce.t}}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="resultado"><span class="rot">Drinks no evento</span><b>{{totalDrinks}}</b></div>
+        <p class="nota">{{divisao}}</p>
+        <span class="rot">Comprar · garrafas</span>
+        <ul class="custo">
+          <sc-for list="{{compras}}" as="cp" hint-placeholder-count="3">
+            <li><span>{{cp.i}}</span><span class="v">{{cp.v}}</span></li>
+          </sc-for>
+        </ul>
+        <span class="rot">Preparar no Caderno</span>
+        <ul class="custo">
+          <sc-for list="{{preparosEv}}" as="pr" hint-placeholder-count="3">
+            <li><span>{{pr.i}}</span><span class="v">{{pr.v}}</span></li>
+          </sc-for>
+        </ul>
+        <sc-if value="{{temMel}}" hint-placeholder-val="{{ true }}"><p class="lido"><span class="st meio solto">{{melTxt}}</span></p></sc-if>
+        <span class="rot">Guarnição</span>
+        <ul class="custo">
+          <sc-for list="{{guarnicoes}}" as="gn" hint-placeholder-count="3">
+            <li><span>{{gn.i}}</span><span class="v">{{gn.v}}</span></li>
+          </sc-for>
+        </ul>
+        <span class="rot">Gelo</span>
+        <p>{{geloTxt}}</p>
+        <sc-if value="{{temGeloNota}}" hint-placeholder-val="{{ true }}"><p class="nota">{{geloNota}}</p></sc-if>
+        <span class="rot">Custo</span>
+        <ul class="chk">
+          <li><span class="st falta">insumos</span><span>{{custoEvTxt}}</span></li>
+          <li><span class="st falta">pessoa</span><span>{{custoPessoaTxt}}</span></li>
+          <li><span class="st falta">preço</span><span>{{precoPessoaTxt}}</span></li>
+        </ul>
+        <p class="formula">{{formulaEvento}}</p>
+      </div>
+      </sc-if>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{temAviso}}" hint-placeholder-val="{{ false }}">
+    <div class="aviso" role="status">
+      <span style="flex: 1">{{aviso}}</span>
+      <button type="button" onClick="{{fecharAviso}}">Fechar</button>
+    </div>
+  </sc-if>
+
+  <nav class="nav" aria-label="Áreas do DROPP">
+    <button type="button" disabled title="Fora deste protótipo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>
+      Turno
+    </button>
+    <button type="button" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17"></rect><path d="M8.5 8h7M8.5 12h7M8.5 16h4"></path></svg>
+      Caderno
+    </button>
+    <button type="button" disabled title="Fora deste protótipo">
+      <svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>
+      Passaporte
+    </button>
+    <button type="button" disabled title="Fora deste protótipo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 5.5h6a2 2 0 0 1 2 2V20a2 2 0 0 0-2-2H4zM20 5.5h-6a2 2 0 0 0-2 2V20a2 2 0 0 1 2-2h6z"></path></svg>
+      Atlas
+    </button>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"aba":{"editor":"enum","options":["lotes","fichas","contas"],"default":"lotes","section":"Protótipo"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._chave = this._chaveTela();
+  }
+
+  _chaveTela() {
+    const st = this.state || {};
+    const p = this.props || {};
+    return [st.tela || 'principal', st.aba || p.aba || 'lotes', st.loteSel || '', st.fichaSel || '', st.dono || 'casa', st.calcSel || 'batch'].join('|');
+  }
+
+  componentDidUpdate() {
+    const chave = this._chaveTela();
+    if (this._chave !== undefined && this._chave !== chave && this._corpo) this._corpo.scrollTop = 0;
+    this._chave = chave;
+  }
+
+  _qr(texto) {
+    this._qrCache = this._qrCache || {};
+    if (this._qrCache[texto]) return this._qrCache[texto];
+    var bytes = [];
+    var s = unescape(encodeURIComponent(texto));
+    for (var i = 0; i < s.length; i++) bytes.push(s.charCodeAt(i));
+    var ECC = [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22];
+    var BLOCOS = [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5];
+    var raw = function (v) { var r = (16 * v + 128) * v + 64; if (v >= 2) { var na = Math.floor(v / 7) + 2; r -= (25 * na - 10) * na - 55; if (v >= 7) r -= 36; } return r; };
+    var cap = function (v) { return Math.floor(raw(v) / 8) - ECC[v] * BLOCOS[v]; };
+    var nec = 12 + 12 + bytes.length * 8;
+    var v = 1;
+    while (v < 9 && nec > cap(v) * 8) v++;
+    var bb = [];
+    var put = function (val, n) { for (var i = n - 1; i >= 0; i--) bb.push((val >>> i) & 1); };
+    put(7, 4); put(26, 8);
+    put(4, 4); put(bytes.length, 8);
+    for (var i = 0; i < bytes.length; i++) put(bytes[i], 8);
+    var capBits = cap(v) * 8;
+    put(0, Math.min(4, capBits - bb.length));
+    put(0, (8 - bb.length % 8) % 8);
+    for (var pad = 0xEC; bb.length < capBits; pad ^= 0xEC ^ 0x11) put(pad, 8);
+    var dados = [];
+    for (var i = 0; i < bb.length; i += 8) { var x = 0; for (var j = 0; j < 8; j++) x = (x << 1) | bb[i + j]; dados.push(x); }
+    var mul = function (x, y) { var z = 0; for (var i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; } return z; };
+    var divisor = function (g) { var r = []; for (var i = 0; i < g - 1; i++) r.push(0); r.push(1); var raiz = 1; for (var i = 0; i < g; i++) { for (var j = 0; j < r.length; j++) { r[j] = mul(r[j], raiz); if (j + 1 < r.length) r[j] ^= r[j + 1]; } raiz = mul(raiz, 2); } return r; };
+    var resto = function (d, div) { var r = div.map(function () { return 0; }); d.forEach(function (b) { var f = b ^ r.shift(); r.push(0); div.forEach(function (c, i) { r[i] ^= mul(c, f); }); }); return r; };
+    var nb = BLOCOS[v], el = ECC[v], tot = Math.floor(raw(v) / 8), curtos = nb - tot % nb, curtoLen = Math.floor(tot / nb);
+    var blocos = [], div = divisor(el), k = 0;
+    for (var i = 0; i < nb; i++) { var d = dados.slice(k, k + curtoLen - el + (i < curtos ? 0 : 1)); k += d.length; var e = resto(d, div); if (i < curtos) d.push(0); blocos.push(d.concat(e)); }
+    var cw = [];
+    for (var i = 0; i < blocos[0].length; i++) for (var j = 0; j < blocos.length; j++) if (i !== curtoLen - el || j >= curtos) cw.push(blocos[j][i]);
+    var n = v * 4 + 17, mod = [], fun = [];
+    for (var y = 0; y < n; y++) { mod.push([]); fun.push([]); for (var x = 0; x < n; x++) { mod[y].push(false); fun[y].push(false); } }
+    var fset = function (x, y, dk) { mod[y][x] = dk; fun[y][x] = true; };
+    for (var i = 0; i < n; i++) { fset(6, i, i % 2 === 0); fset(i, 6, i % 2 === 0); }
+    var finder = function (cx, cy) { for (var dy = -4; dy <= 4; dy++) for (var dx = -4; dx <= 4; dx++) { var dist = Math.max(Math.abs(dx), Math.abs(dy)), xx = cx + dx, yy = cy + dy; if (xx >= 0 && xx < n && yy >= 0 && yy < n) fset(xx, yy, dist !== 2 && dist !== 4); } };
+    finder(3, 3); finder(n - 4, 3); finder(3, n - 4);
+    var al = [];
+    if (v > 1) { var na = Math.floor(v / 7) + 2, passo = Math.ceil((v * 4 + 4) / (na * 2 - 2)) * 2; al = [6]; for (var pos = n - 7; al.length < na; pos -= passo) al.splice(1, 0, pos); }
+    for (var i = 0; i < al.length; i++) for (var j = 0; j < al.length; j++) {
+      if ((i === 0 && j === 0) || (i === 0 && j === al.length - 1) || (i === al.length - 1 && j === 0)) continue;
+      for (var dy = -2; dy <= 2; dy++) for (var dx = -2; dx <= 2; dx++) fset(al[i] + dx, al[j] + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1);
+    }
+    var formato = function (mask) {
+      var r = mask;
+      for (var i = 0; i < 10; i++) r = (r << 1) ^ ((r >>> 9) * 0x537);
+      var bits = ((mask << 10) | r) ^ 0x5412;
+      var bt = function (i) { return ((bits >>> i) & 1) === 1; };
+      for (var i = 0; i <= 5; i++) fset(8, i, bt(i));
+      fset(8, 7, bt(6)); fset(8, 8, bt(7)); fset(7, 8, bt(8));
+      for (var i = 9; i < 15; i++) fset(14 - i, 8, bt(i));
+      for (var i = 0; i < 8; i++) fset(n - 1 - i, 8, bt(i));
+      for (var i = 8; i < 15; i++) fset(8, n - 15 + i, bt(i));
+      fset(8, n - 8, true);
+    };
+    formato(0);
+    if (v >= 7) {
+      var rv = v;
+      for (var i = 0; i < 12; i++) rv = (rv << 1) ^ ((rv >>> 11) * 0x1F25);
+      var vb = (v << 12) | rv;
+      for (var i = 0; i < 18; i++) { var b = ((vb >>> i) & 1) === 1, a = n - 11 + i % 3, c = Math.floor(i / 3); fset(a, c, b); fset(c, a, b); }
+    }
+    var ib = 0;
+    for (var dir = n - 1; dir >= 1; dir -= 2) {
+      if (dir === 6) dir = 5;
+      for (var vert = 0; vert < n; vert++) for (var j = 0; j < 2; j++) {
+        var x = dir - j, sobe = ((dir + 1) & 2) === 0, y = sobe ? n - 1 - vert : vert;
+        if (!fun[y][x] && ib < cw.length * 8) { mod[y][x] = ((cw[ib >>> 3] >>> (7 - (ib & 7))) & 1) === 1; ib++; }
+      }
+    }
+    var mascara = function (m) {
+      for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) {
+        var inv;
+        if (m === 0) inv = (x + y) % 2 === 0;
+        else if (m === 1) inv = y % 2 === 0;
+        else if (m === 2) inv = x % 3 === 0;
+        else if (m === 3) inv = (x + y) % 3 === 0;
+        else if (m === 4) inv = (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0;
+        else if (m === 5) inv = (x * y) % 2 + (x * y) % 3 === 0;
+        else if (m === 6) inv = ((x * y) % 2 + (x * y) % 3) % 2 === 0;
+        else inv = ((x + y) % 2 + (x * y) % 3) % 2 === 0;
+        if (!fun[y][x] && inv) mod[y][x] = !mod[y][x];
+      }
+    };
+    var penalidade = function () {
+      var p = 0, escuros = 0;
+      for (var y = 0; y < n; y++) {
+        var cr = null, rl = 0, cc = null, cl = 0;
+        for (var x = 0; x < n; x++) {
+          if (mod[y][x] === cr) { rl++; if (rl === 5) p += 3; else if (rl > 5) p++; } else { cr = mod[y][x]; rl = 1; }
+          if (mod[x][y] === cc) { cl++; if (cl === 5) p += 3; else if (cl > 5) p++; } else { cc = mod[x][y]; cl = 1; }
+          if (mod[y][x]) escuros++;
+          if (y < n - 1 && x < n - 1 && mod[y][x] === mod[y][x + 1] && mod[y][x] === mod[y + 1][x] && mod[y][x] === mod[y + 1][x + 1]) p += 3;
+        }
+      }
+      p += (Math.ceil(Math.abs(escuros * 20 - n * n * 10) / (n * n)) - 1) * 10;
+      return p;
+    };
+    var melhor = 0, menor = Infinity;
+    for (var m = 0; m < 8; m++) { mascara(m); formato(m); var pen = penalidade(); if (pen < menor) { menor = pen; melhor = m; } mascara(m); }
+    mascara(melhor);
+    formato(melhor);
+    var caminho = '';
+    for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) if (mod[y][x]) caminho += 'M' + (x + 4) + ' ' + (y + 4) + 'h1v1h-1z';
+    var res = { lado: n + 8, path: caminho, versao: v };
+    this._qrCache[texto] = res;
+    return res;
+  }
+
+  renderVals() {
+    const p = this.props || {};
+    const s = Object.assign({
+      aba: p.aba || 'lotes', tela: 'principal', loteSel: 'PF-001', fichaSel: 'negroni', dono: 'casa',
+      perdaAberta: false, perdaQtd: 0, perdaMotivo: '', perdas: {}, baixados: {}, criados: [], conferidos: {}, sumidos: {}, vazios: {}, lidoAgora: '', volta: '',
+      novoPrep: 'lim', novoL: 3, imprimindo: 0,
+      doses: 40, dil: 20, garrafa: 'campari', dose: 30, aviso: '',
+      calcSel: 'batch', oferta: 120, prepH: 1, desloc: 4, insSeus: 15, irpf: 15, convidados: 60, horasEv: 3, ritmo: 1, cartaEv: ['negroni', 'penicillin', 'shrub']
+    }, this.state || {});
+    const set = (o) => this.setState(o);
+
+    const virg = (n, d) => n.toFixed(d).replace('.', ',');
+    const euro = (n) => '€' + virg(n, 2);
+    const milhar = (n) => String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const litros = (ml) => virg(ml / 1000, ml % 1000 === 0 ? 0 : (ml % 100 === 0 ? 1 : 2)) + ' L';
+    const vol = (ml) => ml < 1000 ? milhar(ml) + ' ml' : litros(ml);
+    const pad3 = (n) => ('00' + n).slice(-3);
+    const hoje = new Date(2026, 10, 20);
+    const dia = (off) => { const d = new Date(hoje.getTime()); d.setDate(d.getDate() + off); return d; };
+    const dm = (off) => { const d = dia(off); return ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2); };
+    const dma = (off) => dm(off) + '/' + dia(off).getFullYear();
+    const semana = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+    const sem = (off) => semana[dia(off).getDay()];
+    const cores = { vermelho: '#B02A2A', laranja: '#B4520C', violeta: '#5B36C2', verde: '#0B7A57', tinta: '#1C1A16' };
+
+    const lotesBase = [
+      { id: 'PF-001', nome: 'Cordial de maracujá', recip: 'Garrafa #2', feito: -3, vence: 2, total: 2500, rest: 700, tec: 'Brix 52° · pH 3,1', custoMl: 0.017, custoTxt: '€0,34 por 20 ml', aler: 'nenhum', ing: 'Maracujá, açúcar de cana, ácido málico, água.', temp: 'manter a 4 °C', tipo: 'vence' },
+      { id: 'MEL-005', nome: 'Xarope de mel 2:1', recip: 'Garrafa #5', feito: -3, vence: 11, total: 1000, rest: 200, ritmo: 400, tec: 'Brix 66°', custoMl: 0.0061, custoTxt: '€0,14 por 22,5 ml', aler: 'nenhum', ing: 'Mel de laranjeira, água.', temp: 'manter a 4 °C', tipo: 'acaba' },
+      { id: 'VRM-007', nome: 'Vermute de castanha', recip: 'Frasco de infusão #3', feito: -5, pronto: 2, vence: 56, total: 3000, rest: 3000, tec: 'infusão a frio · 17% ABV', custoMl: 0.0098, custoTxt: '€0,29 por 30 ml', aler: 'castanha (fruto de casca rija)', ing: 'Vermute rosso, castanha torrada, casca de laranja.', temp: 'temperatura ambiente', tipo: 'pronto' },
+      { id: 'MP-002', nome: 'Ponche de leite clarificado', recip: 'Barril #4', feito: -8, vence: 22, total: 5000, rest: 3200, tec: 'clarificado com soro · 19,4% ABV', custoMl: 0.0202, custoTxt: '€1,82 por 90 ml', aler: 'leite', ing: 'Rum, chá preto, especiarias, limão, leite (clarificado).', temp: 'manter a 3 °C', tipo: 'longe' },
+      { id: 'RS-003', nome: 'Centeio com gergelim tostado', recip: 'Frasco de infusão #9', feito: -10, revisar: 80, total: 3750, rest: 3400, tec: 'fat wash · 50% ABV', custoMl: 0.0256, custoTxt: '€1,15 por 45 ml', aler: 'gergelim', ing: 'Whisky de centeio, óleo de gergelim tostado (lavado e congelado).', temp: 'temperatura ambiente', tipo: 'estavel' }
+    ];
+
+    const montarLote = (b, ordem) => {
+      const rest = Math.max(0, b.rest - (s.perdas[b.id] || 0));
+      const fim = b.vence !== undefined ? b.vence : b.revisar;
+      let tempo = '';
+      let sub = '';
+      let cor = cores.tinta;
+      let chip = '';
+      let chipCls = 'st falta';
+      let rank = 9;
+      if (b.tipo === 'vence') {
+        tempo = b.vence <= 0 ? 'Vence hoje' : (b.vence === 1 ? 'Vence amanhã' : (b.vence <= 6 ? 'Vence ' + sem(b.vence) : 'Vence em ' + b.vence + ' dias'));
+        sub = 'Em ' + b.vence + ' dias, ' + dm(b.vence) + '. Restam ' + litros(rest) + '.';
+        cor = b.vence <= 2 ? cores.vermelho : cores.laranja; chip = 'atenção'; chipCls = 'st meio'; rank = 0;
+      } else if (b.tipo === 'acaba') {
+        tempo = rest <= b.ritmo ? 'Acaba hoje' : 'Dá para hoje';
+        sub = 'Restam ' + litros(rest) + '; numa sexta saem ' + litros(b.ritmo) + '.';
+        cor = cores.laranja; chip = 'repor'; chipCls = 'st meio'; rank = 1;
+      } else if (b.tipo === 'pronto') {
+        tempo = 'Pronto em ' + b.pronto + ' dias';
+        sub = 'Começou há ' + (-b.feito) + ' dias; a infusão leva ' + (b.pronto - b.feito) + '. Pronto ' + sem(b.pronto) + ', ' + dm(b.pronto) + '.';
+        cor = cores.violeta; chip = 'em infusão'; rank = 2;
+      } else if (b.tipo === 'longe') {
+        tempo = 'Vence em ' + b.vence + ' dias';
+        sub = 'Vence ' + sem(b.vence) + ', ' + dm(b.vence) + '. Restam ' + litros(rest) + '.';
+        cor = cores.verde; chip = 'ativo'; chipCls = 'st ok'; rank = 4;
+      } else if (b.tipo === 'estavel') {
+        tempo = 'Estável';
+        sub = 'Sem validade curta. Revisar em ' + b.revisar + ' dias, ' + dm(b.revisar) + '.';
+        chip = 'estável'; rank = 5;
+      } else {
+        tempo = 'Pronto agora';
+        sub = 'Feito agora. Vence ' + sem(b.vence) + ', ' + dm(b.vence) + '.';
+        cor = cores.verde; chip = 'novo'; chipCls = 'st ok'; rank = -1;
+      }
+      const qr = this._qr('DROPP LOTE ' + b.id + '\n' + b.nome + '\nFeito ' + dma(b.feito) + '\n' + (b.tipo === 'estavel' ? 'Revisar ' : 'Vence ') + dma(fim) + ' · ' + b.temp.replace(/^manter a /, '') + '\nAlérgenos: ' + b.aler);
+      const pct = (x) => Math.max(0, Math.min(100, Math.round(((x - b.feito) / (fim - b.feito)) * 1000) / 10));
+      const fimRot = (b.tipo === 'estavel' ? 'revisar ' : 'vence ') + dm(fim);
+      return {
+        id: b.id, nome: b.nome, rank: rank, ordem: ordem, rest: rest, custoMl: b.custoMl,
+        idRot: 'Lote ' + b.id + ' · ' + b.recip,
+        tempo: tempo, sub: sub, cor: cor, chip: chip, chipCls: chipCls,
+        pctHoje: pct(0),
+        pctPronto: b.pronto !== undefined ? pct(b.pronto) : 0,
+        prontoOpac: b.pronto !== undefined ? '0.55' : '0',
+        ini: b.feito === 0 ? 'feito hoje' : 'feito ' + dm(b.feito),
+        fimRot: fimRot,
+        tec: 'Restam ' + litros(rest) + ' de ' + litros(b.total) + ' · ' + b.tec,
+        aria: b.nome + ', lote ' + b.id + '. ' + tempo + '. Abrir o lote.',
+        fatos: [
+          { k: 'Lote', v: b.id + ' · ' + b.recip },
+          { k: 'Feito', v: dma(b.feito) + ', por Teo Aranda' },
+          { k: b.tipo === 'estavel' ? 'Revisar' : 'Validade', v: dma(fim) + ' · ' + b.temp },
+          { k: 'Restam', v: litros(rest) + ' de ' + litros(b.total) },
+          { k: 'Técnico', v: b.tec },
+          { k: 'Custo', v: b.custoTxt },
+          { k: 'Alérgenos', v: b.aler }
+        ],
+        etqId: 'Lote ' + b.id + ' · ' + b.recip,
+        etqFeito: dma(b.feito),
+        etqFimRot: b.tipo === 'estavel' ? 'Revisar' : 'Vence',
+        etqFim: dma(fim),
+        temp: b.temp,
+        ing: b.ing,
+        etqAler: 'Alérgenos: ' + b.aler,
+        etqAria: 'Etiqueta térmica: Sea Bar, ' + b.nome + ', lote ' + b.id + ', feito em ' + dma(b.feito) + ', ' + (b.tipo === 'estavel' ? 'revisar em ' : 'vence em ') + dma(fim) + '. Alérgenos: ' + b.aler + '.',
+        recip: b.recip,
+        conferido: !!s.conferidos[b.id],
+        confTxt: s.conferidos[b.id] ? 'conferido pelo QR às ' + s.conferidos[b.id] : '',
+        lidoAgora: s.lidoAgora === b.id,
+        lidoTxt: s.conferidos[b.id] ? 'Lido pelo QR às ' + s.conferidos[b.id] + ' · garrafa conferida' : '',
+        qrLado: qr.lado,
+        qrPath: qr.path,
+        abrir: () => set({ tela: 'lote', loteSel: b.id, lidoAgora: '', volta: '', perdaAberta: false, perdaQtd: 0, perdaMotivo: '', aviso: '' })
+      };
+    };
+    const todos = lotesBase.concat(s.criados).map((b, i) => montarLote(b, i));
+    const ativos = todos.filter((l) => !s.baixados[l.id]).sort((a, b) => (a.rank - b.rank) || (a.ordem - b.ordem));
+    const atencao = ativos.filter((l) => l.rank === 0 || l.rank === 1).length;
+    const lotesResumo = (ativos.length === 1 ? '1 lote na casa · ' : ativos.length + ' lotes na casa · ') + (atencao === 0 ? 'nenhum pede atenção hoje' : atencao + (atencao === 1 ? ' pede atenção hoje' : ' pedem atenção hoje'));
+    const doDia = todos.filter((l) => !s.baixados[l.id] || !!s.conferidos[l.id] || !!s.sumidos[l.id]).sort((a, b) => (a.rank - b.rank) || (a.ordem - b.ordem));
+    const lidasDia = doDia.filter((l) => !!s.conferidos[l.id]).length;
+    const vaziasDia = doDia.filter((l) => !!s.conferidos[l.id] && !!s.vazios[l.id]).length;
+    const naoEstava = doDia.filter((l) => !!s.sumidos[l.id]).length;
+    const semLeitura = doDia.length - lidasDia - naoEstava;
+    const contagemDia = doDia.length + (doDia.length === 1 ? ' garrafa' : ' garrafas') + ' hoje: ' + [lidasDia + (lidasDia === 1 ? ' lida' : ' lidas') + (vaziasDia ? ' (' + vaziasDia + (vaziasDia === 1 ? ' vazia)' : ' vazias)') : '')].concat(naoEstava ? [naoEstava + (naoEstava === 1 ? ' não estava' : ' não estavam')] : []).concat(semLeitura ? [semLeitura + ' sem leitura'] : []).join(' · ');
+    const lotesResumoConf = lotesResumo + (lidasDia || naoEstava ? ' · ' + lidasDia + ' de ' + doDia.length + ' lidas hoje' : '');
+    const sel = todos.find((l) => l.id === s.loteSel) || ativos[0] || todos[0];
+    const confs = s.conferidos;
+    const horaConf = (k) => '17:' + ('0' + (10 + k)).slice(-2);
+    const lerLote = (id) => {
+      const c = Object.assign({}, confs);
+      if (!c[id]) c[id] = horaConf(Object.keys(c).length);
+      set({ conferidos: c, lidoAgora: id, volta: 'conferir', tela: 'lote', loteSel: id, perdaAberta: false, perdaQtd: 0, perdaMotivo: '', aviso: '' });
+    };
+    const naoLidos = ativos.filter((l) => !confs[l.id]);
+    const alvoL = naoLidos[0] || null;
+    const alvo = alvoL ? { qrLado: alvoL.qrLado, qrPath: alvoL.qrPath, rotulo: alvoL.nome + ' · ' + alvoL.recip } : { qrLado: 8, qrPath: '', rotulo: '' };
+    const naBancada = doDia.map((l) => ({
+      nome: l.nome,
+      sub: 'Lote ' + l.id + ' · ' + l.recip,
+      st: s.sumidos[l.id] ? 'não estava' : confs[l.id] ? 'lida ' + confs[l.id] + (s.baixados[l.id] ? (s.vazios[l.id] ? ' · vazia' : ' · baixada') : '') : 'não lida',
+      stCls: s.sumidos[l.id] ? 'st perdido' : confs[l.id] ? 'st ok' : 'st falta',
+      cls: s.baixados[l.id] ? 'garrafa fora' : 'garrafa',
+      aria: l.nome + (s.sumidos[l.id] ? ', não estava na bancada.' : s.baixados[l.id] ? ', lida às ' + confs[l.id] + ', já saiu do estoque.' : (confs[l.id] ? ', lida às ' + confs[l.id] : ', ainda não lida') + '. Ler o QR desta garrafa.'),
+      ler: () => { if (!s.baixados[l.id]) lerLote(l.id); },
+      podeSumir: !confs[l.id] && !s.baixados[l.id],
+      sumiu: () => {
+        const pe = Object.assign({}, s.perdas);
+        pe[l.id] = (pe[l.id] || 0) + l.rest;
+        const bx = Object.assign({}, s.baixados);
+        bx[l.id] = true;
+        const sm = Object.assign({}, s.sumidos);
+        sm[l.id] = true;
+        set({ perdas: pe, baixados: bx, sumidos: sm, aviso: 'Lote ' + l.id + ' não estava na bancada: baixado como perdido, ' + litros(l.rest) + ' (' + euro(l.rest * l.custoMl) + ')' + '. Entra no livro de turno.' });
+      }
+    }));
+    const fecharConferencia = () => set({ tela: 'principal', aba: 'lotes', lidoAgora: '', volta: '', aviso: 'Conferência do dia fechada. ' + contagemDia + '.' + (semLeitura ? ' As sem leitura ficam para a próxima.' : '') });
+    const esvaziar = () => {
+      const bx = Object.assign({}, s.baixados);
+      bx[sel.id] = true;
+      const vz = Object.assign({}, s.vazios);
+      vz[sel.id] = true;
+      set({ baixados: bx, vazios: vz, tela: s.volta === 'conferir' ? 'conferir' : 'principal', aba: 'lotes', lidoAgora: '', perdaAberta: false, perdaQtd: 0, perdaMotivo: '', aviso: 'Lote ' + sel.id + ' baixado: garrafa vazia. Sai do estoque sem perda.' });
+    };
+
+    const perdaQtds = [100, 250].filter((q) => q < sel.rest).concat([sel.rest]).map((q, i, arr) => ({
+      t: i === arr.length - 1 ? 'Tudo (' + litros(q) + ')' : q + ' ml',
+      on: s.perdaQtd === q,
+      pick: () => set({ perdaQtd: q })
+    }));
+    const perdaMotivos = ['Venceu', 'Caiu', 'Sabor errado'].map((t) => ({ t: t, on: s.perdaMotivo === t, pick: () => set({ perdaMotivo: t }) }));
+    const perdaTxt = s.perdaQtd ? vol(s.perdaQtd) + ' de ' + sel.nome.toLowerCase() + ' = ' + euro(s.perdaQtd * sel.custoMl) + ' no custo da semana.' : 'Escolha quanto e por quê.';
+    const registrarPerda = () => {
+      const q = s.perdaQtd;
+      if (!q || !s.perdaMotivo) return;
+      const pe = Object.assign({}, s.perdas);
+      pe[sel.id] = (pe[sel.id] || 0) + q;
+      const custo = euro(q * sel.custoMl);
+      if (q >= sel.rest) {
+        const bx = Object.assign({}, s.baixados);
+        bx[sel.id] = true;
+        set({ perdas: pe, baixados: bx, tela: 'principal', aba: 'lotes', perdaAberta: false, perdaQtd: 0, perdaMotivo: '', aviso: 'Lote ' + sel.id + ' baixado: ' + litros(q) + ' (' + custo + '). Entra no livro de turno.' });
+      } else {
+        set({ perdas: pe, perdaAberta: false, perdaQtd: 0, perdaMotivo: '', aviso: 'Perda registrada: ' + vol(q) + ', ' + s.perdaMotivo.toLowerCase() + ' (' + custo + '). Entra no livro de turno.' });
+      }
+    };
+
+    const preparosBase = [
+      { id: 'lim', t: 'Cordial de limão', prefixo: 'LIM', prox: 22, dias: 3, custoL: 1.40, aler: 'nenhum', temp: 'manter a 4 °C', tec: 'Brix 48°', ingTxt: 'Limão, açúcar, água, casca de limão.',
+        ing: [['Suco de limão', 400, 'ml'], ['Açúcar', 400, 'g'], ['Água', 250, 'ml'], ['Casca de limão', 6, 'un']] },
+      { id: 'mel', t: 'Xarope de mel', nome: 'Xarope de mel 2:1', prefixo: 'MEL', prox: 6, dias: 14, custoL: 6.10, aler: 'nenhum', temp: 'manter a 4 °C', tec: 'Brix 66°', ingTxt: 'Mel de laranjeira, água.',
+        ing: [['Mel de laranjeira', 670, 'g'], ['Água quente', 335, 'ml']] },
+      { id: 'org', t: 'Orgeat', prefixo: 'ORG', prox: 12, dias: 7, custoL: 4.80, aler: 'amêndoa (fruto de casca rija)', temp: 'manter a 4 °C', tec: 'Brix 55°', ingTxt: 'Amêndoa torrada, açúcar, água, água de flor de laranjeira.',
+        ing: [['Amêndoa torrada', 300, 'g'], ['Água', 600, 'ml'], ['Açúcar', 500, 'g'], ['Água de flor de laranjeira', 5, 'ml']] }
+    ];
+    const prep = preparosBase.find((x) => x.id === s.novoPrep) || preparosBase[0];
+    const prepNome = prep.nome || prep.t;
+    const L = s.novoL;
+    const novoId = prep.prefixo + '-' + pad3(prep.prox + s.criados.filter((c) => c.prefixo === prep.prefixo).length);
+    const criarLote = () => {
+      const novo = {
+        id: novoId, nome: prepNome, recip: 'Garrafa #' + (6 + s.criados.length), feito: 0, vence: prep.dias, total: L * 1000, rest: L * 1000,
+        tec: prep.tec, custoMl: prep.custoL / 1000, custoTxt: euro(prep.custoL / 1000 * 20) + ' por 20 ml', aler: prep.aler, ing: prep.ingTxt, temp: prep.temp, tipo: 'novo', prefixo: prep.prefixo
+      };
+      set({ criados: s.criados.concat([novo]), tela: 'lote', loteSel: novoId, imprimindo: s.imprimindo + 1, perdaAberta: false, perdaQtd: 0, perdaMotivo: '', aviso: 'Lote ' + novoId + ' criado. A etiqueta está saindo na térmica da barra.' });
+    };
+
+    const meta = 22;
+    const fichasCasa = [
+      { id: 'negroni', nome: 'Negroni da casa', copo: 'copo baixo', gelo: 'gelo em bloco', guarn: 'casca de laranja', preco: 9.00,
+        metodo: 'Mexer 20 s com gelo e servir sobre o bloco.', autoria: 'Ficha da casa · Sea Bar · atualizada em 02/11.',
+        spec: [['Gin London Dry', '30 ml'], ['Campari', '30 ml'], ['Vermute rosso da casa', '30 ml'], ['Casca de laranja', '1']],
+        custo: [['Gin London Dry · 30 ml', 0.78], ['Campari · 30 ml', 0.73], ['Vermute rosso · 30 ml', 0.42], ['Casca de laranja', 0.05], ['Gelo em bloco', 0.10]],
+        fonte: 'Preços das notas de 12/11. O Campari subiu 11% e levou o custo de 22% para 23%.' },
+      { id: 'boulevardier', nome: 'Boulevardier', copo: 'copo baixo', gelo: 'gelo em bloco', guarn: 'casca de laranja', preco: 12.00,
+        metodo: 'Mexer 20 s com gelo e servir sobre o bloco.', autoria: 'Ficha da casa · Sea Bar · atualizada em 02/11.',
+        spec: [['Bourbon', '45 ml'], ['Campari', '30 ml'], ['Vermute rosso da casa', '30 ml'], ['Casca de laranja', '1']],
+        custo: [['Bourbon · 45 ml', 1.35], ['Campari · 30 ml', 0.73], ['Vermute rosso · 30 ml', 0.42], ['Casca de laranja', 0.05], ['Gelo em bloco', 0.10]],
+        fonte: 'Preços das notas de 12/11.' },
+      { id: 'penicillin', nome: 'Penicillin', copo: 'copo baixo', gelo: 'gelo em bloco', guarn: 'gengibre cristalizado', preco: 11.00,
+        metodo: 'Bater com gelo, coar sobre o bloco e flutuar o Islay.', autoria: 'Ficha da casa · Sea Bar · atualizada em 15/10.',
+        spec: [['Blended scotch', '60 ml'], ['Suco de limão', '22,5 ml'], ['Xarope de mel 2:1', '22,5 ml'], ['Suco de gengibre', '7,5 ml'], ['Islay, por cima', '7,5 ml']],
+        custo: [['Blended scotch · 60 ml', 1.68], ['Suco de limão · 22,5 ml', 0.09], ['Xarope de mel · 22,5 ml', 0.14], ['Suco de gengibre · 7,5 ml', 0.04], ['Islay · 7,5 ml', 0.38], ['Gelo em bloco', 0.10]],
+        fonte: 'Preços das notas de 12/11. O xarope de mel sai do lote MEL-005.' },
+      { id: 'shrub', nome: 'Shrub de gengibre', copo: 'copo alto', gelo: 'gelo em cubos', guarn: 'rodela de limão', preco: 9.00,
+        metodo: 'Montar no copo com gelo e completar com soda.', autoria: 'Criação de Teo Aranda · Sea Bar · setembro de 2026. A autoria vai para o passaporte; a receita fica com a casa.',
+        spec: [['Rum branco', '45 ml'], ['Shrub de gengibre', '25 ml'], ['Suco de limão', '15 ml'], ['Soda', '60 ml']],
+        custo: [['Rum branco · 45 ml', 1.08], ['Shrub de gengibre · 25 ml', 0.06], ['Suco de limão · 15 ml', 0.06], ['Soda · 60 ml', 0.10], ['Gelo em cubos', 0.05]],
+        fonte: 'Preços das notas de 12/11.' },
+      { id: 'hanky', nome: 'Hanky Panky', copo: 'taça coupe', gelo: 'sem gelo', guarn: 'casca de laranja', preco: 10.00,
+        metodo: 'Bater bem com gelo, coar na taça e torcer a casca de laranja por cima.', autoria: 'Clássico do Arquivo · receita de Ada Coleman, do American Bar do Savoy.',
+        spec: [['Gin London Dry', '45 ml'], ['Vermute rosso da casa', '45 ml'], ['Fernet-Branca', '2 dashes'], ['Casca de laranja', '1']],
+        custo: [['Gin London Dry · 45 ml', 1.17], ['Vermute rosso · 45 ml', 0.63], ['Fernet-Branca · 2 dashes', 0.08], ['Casca de laranja', 0.05]],
+        fonte: 'Preços das notas de 12/11.' }
+    ];
+    const fichasMinhas = [
+      { id: 'pera', nome: 'Sour de pera e sálvia', copo: 'taça coupe', gelo: 'sem gelo', guarn: 'folha de sálvia',
+        metodo: 'Bater a seco, bater com gelo e coar duas vezes.', autoria: 'Sua · criada em março de 2025 para uma competição. Não pertence a nenhuma casa.',
+        spec: [['Gin London Dry', '45 ml'], ['Licor de pera', '20 ml'], ['Suco de limão', '20 ml'], ['Xarope de sálvia', '15 ml'], ['Clara de ovo', '20 ml']] },
+      { id: 'martini', nome: 'Martini de azeitona galega', copo: 'taça Nick & Nora', gelo: 'sem gelo', guarn: 'azeitona galega',
+        metodo: 'Mexer 30 s com gelo e coar na taça gelada.', autoria: 'Sua · versão pessoal desde 2023. Não pertence a nenhuma casa.',
+        spec: [['Gin London Dry', '60 ml'], ['Vermute seco', '10 ml'], ['Salmoura de azeitona', '5 ml']] }
+    ];
+    const casaFichas = s.dono === 'casa';
+    const calc = (f) => {
+      if (!f.custo) return null;
+      const total = Math.round(f.custo.reduce((a, c) => a + c[1], 0) * 100) / 100;
+      const pct = Math.round((total / f.preco) * 100);
+      return { total: total, pct: pct };
+    };
+    const lista = casaFichas ? fichasCasa : fichasMinhas;
+    const fichas = lista.map((f) => {
+      const c = calc(f);
+      return {
+        nome: f.nome,
+        serv: f.copo + ' · ' + f.gelo + ' · ' + f.guarn,
+        custoTxt: c ? 'custo ' + c.pct + '%' : 'pessoal',
+        custoCls: c ? (c.pct > meta ? 'st meio' : 'st ok') : 'st falta',
+        aria: f.nome + (c ? ', custo ' + c.pct + '%' : ', ficha pessoal') + '. Abrir a ficha.',
+        abrir: () => set({ tela: 'ficha', fichaSel: f.id, aviso: '' })
+      };
+    });
+    const fb = fichasCasa.concat(fichasMinhas).find((f) => f.id === s.fichaSel) || fichasCasa[0];
+    const fc = calc(fb);
+    const ehCasa = fichasCasa.indexOf(fb) >= 0;
+    const fs = {
+      nome: fb.nome,
+      autoria: fb.autoria,
+      spec: fb.spec.map((x) => ({ i: x[0], q: x[1] })),
+      metodo: fb.metodo,
+      copo: fb.copo,
+      gelo: fb.gelo,
+      guarn: fb.guarn,
+      temCusto: !!fc,
+      semCusto: !fc,
+      custo: fb.custo ? fb.custo.map((x) => ({ i: x[0], v: euro(x[1]) })) : [],
+      total: fc ? euro(fc.total) : '',
+      preco: fb.preco ? euro(fb.preco) : '',
+      pct: fc ? fc.pct + '%' : '',
+      pctCls: fc ? (fc.pct > meta ? 'st meio' : 'st ok') : 'st falta',
+      pctNota: fc ? (fc.pct > meta ? 'acima da meta de ' + meta + '% da casa' : (fc.pct === meta ? 'na meta de ' + meta + '% da casa' : 'abaixo da meta de ' + meta + '% da casa')) : '',
+      fonte: fb.fonte || '',
+      acaoRot: ehCasa ? 'Mandar ao time' : 'Propor à casa',
+      acao: ehCasa
+        ? () => set({ aviso: 'Ficha enviada aos 6 do time. Quem abrir confirma que leu.' })
+        : () => set({ aviso: 'Proposta enviada a Marta Ortega. A autoria continua sua; se entrar na carta, vira carimbo de Carta no passaporte.' })
+    };
+
+    const dilF = s.dil / 100;
+    const agua = s.doses * 90 * dilF;
+    const totalMl = s.doses * 90 * (1 + dilF);
+    const abv = 27 / (1 + dilF);
+    const garrafasBase = [
+      { id: 'campari', t: 'Campari', sub: '1 L · €24,40', preco: 24.40, ml: 1000 },
+      { id: 'gin', t: 'Gin', sub: '70 cl · €18,20', preco: 18.20, ml: 700 },
+      { id: 'bourbon', t: 'Bourbon', sub: '70 cl · €21,00', preco: 21.00, ml: 700 }
+    ];
+    const g = garrafasBase.find((x) => x.id === s.garrafa) || garrafasBase[0];
+    const custoDose = g.preco / g.ml * s.dose;
+
+
+    const calcs = [["batch", "Batch"], ["custo", "Custo"], ["cache", "Cachê"], ["evento", "Evento"]].map((x) => ({ t: x[1], on: s.calcSel === x[0], pick: () => set({ calcSel: x[0] }) }));
+    const refHora = 151 / 8;
+    const horasServ = 5;
+    const retencao = s.oferta * s.irpf / 100;
+    const liquido = s.oferta - retencao - s.desloc - s.insSeus;
+    const horasTot = horasServ + s.prepH;
+    const porHora = liquido / horasTot;
+    const empate = Math.ceil((refHora * horasTot + s.desloc + s.insSeus) / (1 - s.irpf / 100));
+    const acimaRef = porHora >= refHora;
+    const segs = (lista, chave, fmt) => lista.map((x) => ({ t: fmt(x[0]), sub: x[1], on: s[chave] === x[0], pick: () => { const o = {}; o[chave] = x[0]; set(o); } }));
+
+    const curtos = { negroni: 'Negroni', boulevardier: 'Boulevardier', penicillin: 'Penicillin', shrub: 'Shrub', hanky: 'Hanky Panky' };
+    const insEv = {
+      negroni: { gelo: 0.15, itens: [['Gin London Dry', 30, 'g', 700], ['Campari', 30, 'g', 1000], ['Vermute rosso da casa', 30, 'g', 1000], ['Casca de laranja', 1, 'u'], ['bloco', 1, 'b']] },
+      boulevardier: { gelo: 0.15, itens: [['Bourbon', 45, 'g', 700], ['Campari', 30, 'g', 1000], ['Vermute rosso da casa', 30, 'g', 1000], ['Casca de laranja', 1, 'u'], ['bloco', 1, 'b']] },
+      penicillin: { gelo: 0.15, itens: [['Blended scotch', 60, 'g', 700], ['Islay', 7.5, 'g', 700], ['Suco de limão', 22.5, 'p'], ['Xarope de mel 2:1', 22.5, 'p'], ['Suco de gengibre', 7.5, 'p'], ['Gengibre cristalizado', 1, 'u'], ['bloco', 1, 'b']] },
+      shrub: { gelo: 0.35, itens: [['Rum branco', 45, 'g', 700], ['Soda', 60, 'g', 1000], ['Shrub de gengibre', 25, 'p'], ['Suco de limão', 15, 'p'], ['Rodela de limão', 1, 'u']] },
+      hanky: { gelo: 0.15, itens: [['Gin London Dry', 45, 'g', 700], ['Vermute rosso da casa', 45, 'g', 1000], ['Fernet-Branca', 1.5, 'g', 700], ['Casca de laranja', 1, 'u']] }
+    };
+    const unidades = { 'Casca de laranja': [4, 'laranjas'], 'Rodela de limão': [6, 'limões'], 'Gengibre cristalizado': [0, 'peças'] };
+    const totalDrinks = Math.round(s.convidados * s.horasEv * s.ritmo);
+    const cartaSel = fichasCasa.filter((f) => s.cartaEv.indexOf(f.id) >= 0);
+    const nSel = Math.max(1, cartaSel.length);
+    const porFicha = cartaSel.map((f, i) => ({ f: f, n: Math.floor(totalDrinks / nSel) + (i < totalDrinks % nSel ? 1 : 0) }));
+    const soma = {}, ordem = [];
+    let blocos = 0, geloKg = 0, custoEv = 0;
+    porFicha.forEach((pf) => {
+      const d = insEv[pf.f.id];
+      geloKg += d.gelo * pf.n;
+      custoEv += calc(pf.f).total * pf.n;
+      d.itens.forEach((it) => {
+        if (it[2] === 'b') { blocos += it[1] * pf.n; return; }
+        if (!soma[it[0]]) { soma[it[0]] = { q: 0, tipo: it[2], gml: it[3] }; ordem.push(it[0]); }
+        soma[it[0]].q += it[1] * pf.n;
+      });
+    });
+    const compras = ordem.filter((k) => soma[k].tipo === 'g').map((k) => {
+      const x = soma[k], n = Math.ceil(x.q / x.gml);
+      return { i: k + ' · ' + vol(Math.round(x.q)), v: n + ' × ' + (x.gml === 1000 ? '1 L' : '70 cl') };
+    });
+    const preparosEv = ordem.filter((k) => soma[k].tipo === 'p').map((k) => ({ i: k, v: vol(Math.round(soma[k].q)) }));
+    const guarnicoes = ordem.filter((k) => soma[k].tipo === 'u').map((k) => {
+      const x = soma[k], u = unidades[k];
+      return { i: k, v: u && u[0] ? x.q + ' · ' + Math.ceil(x.q / u[0]) + ' ' + u[1] : x.q + ' ' + (u ? u[1] : '') };
+    });
+    const melMl = soma['Xarope de mel 2:1'] ? soma['Xarope de mel 2:1'].q : 0;
+    const custoPessoa = custoEv / s.convidados;
+    const precoPessoa = custoEv / (meta / 100) / s.convidados;
+    const nomesSel = cartaSel.map((f) => curtos[f.id]);
+    const juntaNomes = (a) => a.length <= 1 ? a.join('') : a.slice(0, -1).join(', ') + ' e ' + a[a.length - 1];
+    const ritmoTxt = virg(s.ritmo, s.ritmo % 1 ? 2 : 0).replace(/,50$/, ',5');
+
+    const titulos = { lote: 'Lote ' + sel.id, novo: 'Novo lote', ficha: 'Ficha', conferir: 'Conferir lotes' };
+    const principal = s.tela === 'principal';
+
+    return {
+      principal: principal,
+      mostrarVoltar: !principal,
+      tituloTela: titulos[s.tela] || '',
+      voltar: () => set({ tela: s.tela === 'lote' && s.volta === 'conferir' ? 'conferir' : 'principal', lidoAgora: '', perdaAberta: false, perdaQtd: 0, perdaMotivo: '', aviso: '' }),
+      abas: [{ id: 'lotes', t: 'Lotes' }, { id: 'fichas', t: 'Fichas' }, { id: 'contas', t: 'Contas' }].map((a) => ({ t: a.t, on: s.aba === a.id, pick: () => set({ aba: a.id, aviso: '' }) })),
+      irNovo: () => set({ tela: 'novo', aviso: '' }),
+      corpoRef: this._refCorpo || (this._refCorpo = (el) => { this._corpo = el; }),
+
+      tLotes: principal && s.aba === 'lotes',
+      tFichas: principal && s.aba === 'fichas',
+      tContas: principal && s.aba === 'contas',
+      tLote: s.tela === 'lote',
+      tNovo: s.tela === 'novo',
+      tFicha: s.tela === 'ficha',
+      tConferir: s.tela === 'conferir',
+      irConferir: () => set({ tela: 'conferir', volta: 'conferir', aviso: '' }),
+      alvo: alvo,
+      temAlvo: !!alvoL,
+      semAlvo: !alvoL,
+      lerAlvo: () => { if (alvoL) lerLote(alvoL.id); },
+      lerAlvoRot: alvoL ? 'Ler o QR: ' + alvoL.nome : '',
+      confResumo: contagemDia,
+      naBancada: naBancada,
+      fecharConferencia: fecharConferencia,
+      esvaziar: esvaziar,
+
+      lotesResumo: lotesResumoConf,
+      lotes: ativos,
+      sel: sel,
+      etqCls: 'etiqueta' + (s.imprimindo === 0 ? '' : (s.imprimindo % 2 === 1 ? ' sai-a' : ' sai-b')),
+      imprimir: () => set({ imprimindo: s.imprimindo + 1, aviso: 'Etiqueta enviada à térmica da barra.' }),
+      perdaAberta: s.perdaAberta,
+      abrirPerda: () => set({ perdaAberta: !s.perdaAberta, perdaQtd: 0, perdaMotivo: '' }),
+      perdaQtds: perdaQtds,
+      perdaMotivos: perdaMotivos,
+      perdaTxt: perdaTxt,
+      semPerda: !(s.perdaQtd > 0 && !!s.perdaMotivo),
+      registrarPerda: registrarPerda,
+
+      preparos: preparosBase.map((x) => ({ t: x.t, on: x.id === prep.id, pick: () => set({ novoPrep: x.id }) })),
+      quantidades: [1, 2, 3].map((n) => ({ t: n + ' L', on: n === L, pick: () => set({ novoL: n }) })),
+      novoRot: 'Lote ' + novoId + ' · ' + L + ' L',
+      novoNome: prepNome,
+      novoIng: prep.ing.map((x) => ({ n: x[0], q: x[2] === 'un' ? (x[1] * L) + ' un' : milhar(x[1] * L) + ' ' + x[2] })),
+      novoVence: 'Vence ' + sem(prep.dias) + ', ' + dm(prep.dias) + ' · ' + prep.temp,
+      novoCusto: euro(prep.custoL * L) + ' o lote · ' + euro(prep.custoL / 1000 * 20) + ' por 20 ml',
+      novoAler: prep.aler,
+      novoAlerCls: prep.aler === 'nenhum' ? 'st falta' : 'st meio',
+      novoFonte: 'Ficha de preparo de 02/11: quantidades por litro × ' + L + ' L; validade de ' + prep.dias + ' dias.',
+      criarLote: criarLote,
+
+      donoCasa: casaFichas,
+      donoMeu: !casaFichas,
+      verCasa: () => set({ dono: 'casa' }),
+      verMeu: () => set({ dono: 'meu' }),
+      fichasNota: casaFichas ? 'Fichas da casa: o time inteiro usa, e a casa fica com elas.' : 'Fichas pessoais não pertencem a nenhuma casa. Se você sair do Sea Bar, elas vão com você.',
+      fichas: fichas,
+      fs: fs,
+
+      doses: s.doses,
+      menosDoses: () => set({ doses: Math.max(10, s.doses - 10) }),
+      maisDoses: () => set({ doses: Math.min(120, s.doses + 10) }),
+      dils: [15, 20, 25].map((d) => ({ t: d + '%', on: s.dil === d, pick: () => set({ dil: d }) })),
+      agua: vol(agua),
+      totalBatch: 'Total de ' + litros(totalMl) + ' para ' + s.doses + ' doses',
+      abvFinal: 'ABV final de ' + virg(abv, 1) + '%',
+      porDose: 'Cada dose com ' + milhar(90 * (1 + dilF)) + ' ml',
+      formulaDil: 'água = ' + s.doses + ' doses × 90 ml × ' + s.dil + '% = ' + vol(agua) + '\nABV = 27% ÷ ' + virg(1 + dilF, 2) + ' = ' + virg(abv, 1) + '%',
+      garrafas: garrafasBase.map((x) => ({ t: x.t, sub: x.sub, on: x.id === g.id, pick: () => set({ garrafa: x.id }) })),
+      dosesMl: [20, 30, 45, 60].map((d) => ({ t: d + ' ml', on: s.dose === d, pick: () => set({ dose: d }) })),
+      custoDose: euro(custoDose),
+      porGarrafa: Math.floor(g.ml / s.dose) + ' doses por garrafa',
+      porMl: '€' + virg(g.preco / g.ml, 4) + ' por ml',
+      formulaCusto: euro(g.preco) + ' ÷ ' + milhar(g.ml) + ' ml × ' + s.dose + ' ml = ' + euro(custoDose) + '\n' + milhar(g.ml) + ' ml ÷ ' + s.dose + ' ml = ' + Math.floor(g.ml / s.dose) + ' doses',
+      calcs: calcs,
+      calcBatch: s.calcSel === 'batch', calcCusto: s.calcSel === 'custo', calcCache: s.calcSel === 'cache', calcEvento: s.calcSel === 'evento',
+      ofertas: segs([[120, 'oferta'], [150, ''], [180, 'Barback']], 'oferta', (v) => euro(v).replace(',00', '')),
+      prepHs: segs([[0, ''], [1, ''], [2, '']], 'prepH', (v) => v + ' h'),
+      deslocs: segs([[0, 'a pé'], [4, 'metrô'], [12, 'táxi']], 'desloc', (v) => euro(v).replace(',00', '')),
+      insSeusOp: segs([[0, 'nada'], [15, 'xaropes'], [30, 'xaropes e gelo']], 'insSeus', (v) => euro(v).replace(',00', '')),
+      irpfs: segs([[7, 'primeiros anos'], [15, 'geral']], 'irpf', (v) => v + '%'),
+      porHora: euro(porHora),
+      refCls: acimaRef ? 'st ok solto' : 'st meio solto',
+      refTxt: (acimaRef ? 'acima' : 'abaixo') + ' da sua noite no Sea Bar, ' + euro(refHora) + ' por hora',
+      liquidoTxt: euro(liquido) + ' depois de IRPF, deslocamento e insumos',
+      tempoTxt: horasTot + ' h: ' + horasServ + ' de serviço e ' + s.prepH + ' de preparo',
+      empateTxt: acimaRef ? 'Acima do empate, que é ' + euro(empate).replace(',00', '') : 'Para empatar com o Sea Bar, peça pelo menos ' + euro(empate).replace(',00', ''),
+      ivaTxt: 'Na fatura, o IVA de 21% vai por fora (' + euro(s.oferta * 0.21) + ') e não é seu. A cota mensal de autônomo não entra nesta conta.',
+      formulaCache: 'líquido = ' + euro(s.oferta) + ' − IRPF ' + s.irpf + '% (' + euro(retencao) + ') − ' + euro(s.desloc) + ' − ' + euro(s.insSeus) + ' = ' + euro(liquido) + '\npor hora = ' + euro(liquido) + ' ÷ ' + horasTot + ' h = ' + euro(porHora) + '\nSea Bar = €151 ÷ 8 h = ' + euro(refHora) + ' por hora',
+      convidados: s.convidados,
+      menosConv: () => set({ convidados: Math.max(10, s.convidados - 10) }),
+      maisConv: () => set({ convidados: Math.min(300, s.convidados + 10) }),
+      horasEvOp: [2, 3, 4].map((h) => ({ t: h + ' h', on: s.horasEv === h, pick: () => set({ horasEv: h }) })),
+      ritmos: [[0.75, 'calmo'], [1, 'normal'], [1.5, 'festa']].map((r) => ({ t: r[1], sub: virg(r[0], r[0] % 1 ? 2 : 0).replace(/,50$/, ',5') + ' por hora', on: s.ritmo === r[0], pick: () => set({ ritmo: r[0] }) })),
+      cartaOp: fichasCasa.map((f) => ({ t: curtos[f.id], on: s.cartaEv.indexOf(f.id) >= 0, pick: () => {
+        const tem = s.cartaEv.indexOf(f.id) >= 0;
+        if (tem && s.cartaEv.length === 1) { set({ aviso: 'A carta do evento precisa de pelo menos um drink.' }); return; }
+        set({ cartaEv: tem ? s.cartaEv.filter((x) => x !== f.id) : s.cartaEv.concat([f.id]), aviso: '' });
+      } })),
+      totalDrinks: totalDrinks + ' drinks',
+      divisao: porFicha.length > 1 && porFicha.every((pf) => pf.n === porFicha[0].n) ? porFicha[0].n + ' de cada: ' + juntaNomes(nomesSel) : porFicha.map((pf) => pf.n + ' ' + curtos[pf.f.id]).join(' · '),
+      compras: compras,
+      preparosEv: preparosEv,
+      temMel: melMl > 0,
+      melTxt: 'O lote MEL-005 tem 0,2 L de xarope de mel: faça um lote novo de ' + litros(Math.ceil(melMl / 500) * 500) + ' antes do evento.',
+      guarnicoes: guarnicoes,
+      geloTxt: (blocos ? blocos + ' blocos de gelo claro e ' : '') + virg(geloKg, 0) + ' kg de gelo de serviço',
+      geloNota: blocos ? 'Os blocos saem da técnica de gelo claro do Atlas: uma caixa de 10 L rende perto de 7 kg.' : '',
+      temGeloNota: blocos > 0,
+      custoEvTxt: euro(custoEv) + ' pelos ml usados; o que sobra da garrafa volta para o bar',
+      custoPessoaTxt: euro(custoPessoa) + ' por pessoa',
+      precoPessoaTxt: 'Na meta de ' + meta + '% da casa: ' + euro(precoPessoa) + ' por pessoa, sem o cachê da equipe',
+      formulaEvento: 'drinks = ' + s.convidados + ' convidados × ' + s.horasEv + ' h × ' + ritmoTxt + ' por hora = ' + totalDrinks + '\ncusto = ' + porFicha.map((pf) => pf.n + ' × ' + euro(calc(pf.f).total)).join(' + ') + ' = ' + euro(custoEv) + '\npor pessoa = ' + euro(custoEv) + ' ÷ ' + meta + '% ÷ ' + s.convidados + ' = ' + euro(precoPessoa),
+
+      temAviso: !!s.aviso,
+      aviso: s.aviso,
+      fecharAviso: () => set({ aviso: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

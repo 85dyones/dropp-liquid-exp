@@ -1,0 +1,96 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-11-18T22:39:23Z"
+  },
+  "title": "DROPP Liquid Experience",
+  "namespace": "Dropp",
+  "libraries": [
+    {
+      "name": "react",
+      "version": "18"
+    },
+    {
+      "name": "react-dom",
+      "version": "18"
+    }
+  ],
+  "sections": {},
+  "groups": [
+    "Marca",
+    "Icones"
+  ],
+  "assetGroups": {
+    "Marca": {
+      "name": "Marca",
+      "tile": "l",
+      "order": [
+        "gota.svg",
+        "gota-contorno.svg"
+      ],
+      "files": {
+        "gota.svg": {
+          "name": "gota.svg",
+          "blob": "471110a19204ec59bc5b6250db946a81",
+          "size": 859,
+          "type": "image/svg+xml"
+        },
+        "gota-contorno.svg": {
+          "name": "gota-contorno.svg",
+          "blob": "ceb604e86d1fd8b40877cf02c1d28054",
+          "size": 853,
+          "type": "image/svg+xml"
+        }
+      }
+    },
+    "Icones": {
+      "name": "Icones",
+      "tile": "s",
+      "order": [
+        "turno.svg",
+        "caderno.svg",
+        "atlas.svg",
+        "conferir.svg"
+      ],
+      "files": {
+        "turno.svg": {
+          "name": "turno.svg",
+          "blob": "26949aee334f80aae83dc0682a896387",
+          "size": 257,
+          "type": "image/svg+xml"
+        },
+        "caderno.svg": {
+          "name": "caderno.svg",
+          "blob": "d04ffcb706ecb57d31d06c970b7519ee",
+          "size": 278,
+          "type": "image/svg+xml"
+        },
+        "atlas.svg": {
+          "name": "atlas.svg",
+          "blob": "de70c864d7d706d82474e8014f6e2b1a",
+          "size": 288,
+          "type": "image/svg+xml"
+        },
+        "conferir.svg": {
+          "name": "conferir.svg",
+          "blob": "5efb0cb246855b2c45dba92e688e0395",
+          "size": 297,
+          "type": "image/svg+xml"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "by": "Claude",
+    "at": "2026-11-19T14:53:20Z",
+    "via": "Claude Code",
+    "note": "Etiqueta e Rótulo com nome fictício: Teo Aranda, por Teo A., dropp.me/teo."
+  }
+}

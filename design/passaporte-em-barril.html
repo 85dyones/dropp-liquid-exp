@@ -1,0 +1,502 @@
+<title>Passaporte em barril</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: moldura escura de garrafa com cartões de papel de rótulo gasto, como a capa da Stone Groove;
+   a cor de destaque é a do próprio destilado, que escurece com o tempo em barril.
+   Visual único e escuro por escolha: é um rótulo de destilaria, não um documento. */
+:root {
+  color-scheme: dark;
+  --noite: #0F1C17;        /* moldura: verde de garrafa à noite */
+  --noite-2: #17291F;      /* painéis escuros */
+  --fio-escuro: #2C4236;
+  --papel: #ECE3CE;        /* papel de rótulo */
+  --papel-2: #E1D4B6;
+  --tinta: #1C1A16;
+  --apagado: #5B5344;      /* texto secundário no papel */
+  --claro: #EDE6D6;        /* texto no escuro */
+  --claro-2: #AEB8B1;      /* secundário no escuro */
+  --bitter: #B5361F;       /* vermelho de bitter: ação e fita */
+  --curacao: #2F5F8F;      /* azul de curaçao: bloco de cor */
+  --blanco: #E6E2D5;       /* escala do líquido */
+  --reposado: #DDB25A;
+  --anejo: #B06A28;
+  --extra: #5E2F16;
+
+  --display: "Anton", "Impact", "Arial Narrow", sans-serif;
+  --texto: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Courier Prime", "Courier New", ui-monospace, monospace;
+
+  --grao: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.33  0 0 0 0 0.25  0 0 0 0 0.14  0 0 0 0.11 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --gasto: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.75'/></filter><rect width='180' height='180' filter='url(%23f)'/></svg>");
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--noite); color: var(--claro);
+  background-image: radial-gradient(ellipse at 50% 0%, #1B3328 0%, transparent 60%);
+  font: 400 1rem/1.6 var(--texto);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 96px;
+}
+.pagina { max-width: 1180px; margin: 0 auto; display: grid; gap: 40px; }
+h1, h2, h3, p, ul, ol, figure, dl { margin: 0; }
+h1, h2, h3 { text-wrap: balance; font-weight: 400; }
+a { color: inherit; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--reposado); outline-offset: 2px; }
+
+/* cartão de papel gasto */
+.cartao {
+  background-color: var(--papel); background-image: var(--grao);
+  color: var(--tinta); border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(90, 70, 40, 0.25), inset 0 0 70px rgba(120, 85, 35, 0.28), 0 18px 40px rgba(0, 0, 0, 0.45);
+  padding: clamp(20px, 3vw, 40px);
+  position: relative; overflow: hidden;
+}
+.espacada { font: 600 0.75rem/1.3 var(--texto); font-variation-settings: "wdth" 125; letter-spacing: 0.32em; text-transform: uppercase; }
+.linha-assinatura { display: flex; align-items: center; gap: 14px; color: var(--apagado); }
+.linha-assinatura::after { content: ""; flex: 1; height: 1.5px; background: currentColor; opacity: 0.6; max-width: 240px; }
+.mono { font-family: var(--mono); }
+.display { font-family: var(--display); text-transform: uppercase; letter-spacing: 0.005em; line-height: 0.92; }
+
+/* abertura */
+.abre { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(20px, 3vw, 44px); align-items: start; }
+@media (max-width: 920px) { .abre { grid-template-columns: 1fr; } }
+.abre-texto { display: grid; gap: 20px; align-content: start; min-width: 0; }
+.abre h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.7rem, 1.6rem + 4.6vw, 5.6rem); line-height: 0.9; }
+.abre h1 span { color: var(--bitter); display: block; }
+.abre .lide { font: 700 1.0625rem/1.45 var(--texto); }
+.abre .corpo-mono { font: 400 0.98rem/1.6 var(--mono); max-width: 58ch; }
+.catalogo { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 18px; border-top: 1.5px solid var(--tinta); padding-top: 14px; font: 400 0.9rem/1.45 var(--mono); }
+.catalogo dt { font-weight: 700; color: var(--bitter); }
+.catalogo dd { margin: 0; }
+.blocos { display: flex; height: 14px; gap: 0; margin-top: 4px; }
+.blocos i { flex: 1; }
+
+/* celular com a tela nova */
+.celular { width: 100%; max-width: 380px; justify-self: center; background: var(--noite-2); border-radius: 34px; padding: 10px; box-shadow: 0 0 0 1px #0A120E, 0 24px 50px rgba(0, 0, 0, 0.5); }
+.tela { background: var(--noite); border-radius: 26px; overflow: hidden; color: var(--claro); }
+.tela-topo { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 10px; }
+.tela-topo .marca { font-family: var(--display); font-size: 1.6rem; letter-spacing: 0.02em; text-transform: uppercase; }
+.tela-topo .espacada { font-size: 0.6rem; color: var(--claro-2); }
+.abas { display: flex; gap: 0; padding: 0 12px; border-bottom: 1.5px solid var(--fio-escuro); }
+.abas span { font: 600 0.7rem/1 var(--texto); font-variation-settings: "wdth" 125; letter-spacing: 0.2em; text-transform: uppercase; padding: 12px 8px; color: var(--claro-2); border-bottom: 3px solid transparent; }
+.abas span.on { color: var(--claro); border-bottom-color: var(--reposado); }
+.tela-corpo { padding: 14px; display: grid; gap: 14px; }
+
+/* o rótulo de garrafa */
+.rotulo { background-color: var(--papel); background-image: var(--grao); color: var(--tinta); border-radius: 6px 6px 4px 4px; position: relative; overflow: hidden; box-shadow: inset 0 0 40px rgba(120, 85, 35, 0.3); }
+.rotulo .arco { background: var(--noite-2); color: var(--papel); text-align: center; padding: 16px 12px 22px; border-radius: 0 0 50% 50% / 0 0 26px 26px; display: grid; gap: 4px; }
+.rotulo .arco .espacada { font-size: 0.56rem; letter-spacing: 0.34em; color: var(--reposado); }
+.rotulo .arco b { font-family: var(--display); font-weight: 400; font-size: 1.05rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.rotulo .miolo { padding: 12px 16px 14px; display: grid; gap: 10px; }
+.rotulo .num { display: flex; justify-content: space-between; font: 700 0.72rem/1 var(--mono); }
+.rotulo .nome { font-family: var(--display); font-size: 2.6rem; line-height: 0.9; text-transform: uppercase; text-align: center; }
+.rotulo .cargo { font: 400 0.78rem/1.3 var(--mono); text-align: center; color: var(--apagado); }
+.idade { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px; border-block: 1.5px solid var(--tinta); padding: 8px 0; }
+.idade strong { font-family: var(--display); font-weight: 400; font-size: 3.2rem; line-height: 0.85; color: var(--bitter); }
+.idade span { font: 600 0.7rem/1.35 var(--texto); font-variation-settings: "wdth" 125; letter-spacing: 0.24em; text-transform: uppercase; }
+.fita { position: relative; background: var(--bitter); color: var(--papel); text-align: center; font-family: var(--display); font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 12px; margin-inline: 6px; }
+.fita::before, .fita::after { content: ""; position: absolute; top: 4px; width: 14px; height: 100%; background: #8E2916; z-index: -1; }
+.fita::before { left: -10px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 40% 50%); }
+.fita::after { right: -10px; clip-path: polygon(0 0, 100% 0, 60% 50%, 100% 100%, 0 100%); }
+.cantos { display: flex; justify-content: space-between; gap: 8px; }
+.cantos span { border: 1.5px solid var(--tinta); padding: 4px 6px; font: 700 0.62rem/1.15 var(--mono); text-align: center; text-transform: uppercase; }
+
+/* lista de ofícios como lista de faixas */
+.faixas { background: var(--noite-2); border: 1.5px solid var(--fio-escuro); border-radius: 4px; padding: 12px 12px 6px; display: grid; gap: 4px; }
+.faixas-cab { display: flex; justify-content: space-between; align-items: baseline; padding: 0 4px 8px; border-bottom: 1px solid var(--fio-escuro); }
+.faixas-cab .espacada { font-size: 0.62rem; color: var(--claro-2); }
+.faixas ol { list-style: none; padding: 0; display: grid; }
+.faixa { appearance: none; width: 100%; border: 0; border-bottom: 1px solid var(--fio-escuro); background: transparent; color: var(--claro); display: grid; grid-template-columns: 14px 24px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 10px 4px; min-height: 44px; text-align: left; cursor: pointer; font: inherit; }
+.faixa:hover { background: rgba(237, 230, 214, 0.05); }
+.faixa .seta { color: var(--reposado); font-size: 0.8rem; visibility: hidden; }
+.faixa[aria-pressed="true"] .seta { visibility: visible; }
+.faixa[aria-pressed="true"] .n, .faixa[aria-pressed="true"] .t { color: var(--reposado); }
+.faixa .n { font: 700 0.8rem/1 var(--mono); color: var(--claro-2); }
+.faixa .t { font: 600 0.78rem/1.2 var(--texto); font-variation-settings: "wdth" 115; letter-spacing: 0.14em; text-transform: uppercase; }
+.faixa .g { display: flex; align-items: center; gap: 6px; font: 400 0.78rem/1 var(--mono); color: var(--claro-2); white-space: nowrap; }
+.copita { width: 11px; height: 14px; border: 1.5px solid var(--claro); border-top: 0; border-radius: 0 0 6px 6px; position: relative; overflow: hidden; flex: none; }
+.copita::after { content: ""; position: absolute; inset: 35% 0 0 0; background: var(--liq); }
+.barril { padding: 12px 4px 10px; display: grid; gap: 10px; }
+.barril .titulo { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.barril .titulo b { font-family: var(--display); font-weight: 400; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.02em; }
+.barril .titulo span { font: 400 0.8rem/1 var(--mono); color: var(--claro-2); }
+.regua { position: relative; height: 44px; }
+.regua .trilho { position: absolute; left: 0; right: 0; top: 10px; height: 10px; display: flex; }
+.regua .trilho i { display: block; height: 100%; }
+.regua .marca-t { position: absolute; top: 2px; width: 2px; height: 26px; background: var(--claro); transform: translateX(-1px); }
+.regua .marca-t::after { content: ""; position: absolute; top: -5px; left: -4px; border: 5px solid transparent; border-top-color: var(--claro); }
+.regua .ticks { position: absolute; left: 0; right: 0; top: 26px; font: 400 0.65rem/1 var(--mono); color: var(--claro-2); }
+.regua .ticks span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.regua .ticks span:first-child { transform: none; }
+.regua .ticks span:last-child { transform: translateX(-100%); }
+.barril ul { list-style: none; padding: 0; display: grid; gap: 6px; font: 400 0.8rem/1.35 var(--mono); }
+.barril li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 8px; }
+.st { font-weight: 700; }
+.st.ok { color: #9CC9A9; }
+.st.falta { color: var(--reposado); }
+
+/* seções */
+section { display: grid; gap: 22px; }
+.sec-cab { display: grid; gap: 10px; max-width: 72ch; }
+.sec-cab h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem, 1.4rem + 2.4vw, 3.4rem); line-height: 0.95; }
+.sec-cab p { color: var(--claro-2); font-size: 1.05rem; }
+.sec-cab p strong { color: var(--claro); font-weight: 700; }
+.cartao .sec-cab p { color: var(--apagado); }
+.cartao .sec-cab p strong { color: var(--tinta); }
+
+/* voo de degustação: a escala */
+.voo { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--tinta); border-bottom: 2px solid var(--tinta); }
+.copo { display: grid; justify-items: center; gap: 10px; padding: 22px 12px 18px; text-align: center; min-width: 0; }
+.copo + .copo { border-left: 1px solid rgba(28, 26, 22, 0.25); }
+.copo svg { width: 64px; height: 92px; }
+.copo h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.7rem; line-height: 1; }
+.copo .era { font: 600 0.68rem/1.3 var(--texto); font-variation-settings: "wdth" 125; letter-spacing: 0.22em; text-transform: uppercase; color: var(--apagado); }
+.copo p { font: 400 0.88rem/1.45 var(--mono); max-width: 26ch; }
+@media (max-width: 760px) { .voo { grid-template-columns: repeat(2, minmax(0, 1fr)); } .copo:nth-child(3) { border-left: 0; } .copo:nth-child(n+3) { border-top: 1px solid rgba(28, 26, 22, 0.25); } }
+
+.rolagem { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font: 400 0.92rem/1.45 var(--mono); }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid rgba(28, 26, 22, 0.22); }
+th { font: 600 0.68rem/1.3 var(--texto); font-variation-settings: "wdth" 125; letter-spacing: 0.2em; text-transform: uppercase; color: var(--apagado); border-bottom: 1.5px solid var(--tinta); }
+td:first-child { font-family: var(--display); font-size: 1.15rem; text-transform: uppercase; white-space: nowrap; }
+td:first-child i { display: inline-block; width: 12px; height: 12px; border: 1.5px solid var(--tinta); background: var(--liq); margin-right: 8px; vertical-align: 1px; }
+.fonte-nota { font: 400 0.85rem/1.5 var(--mono); color: var(--apagado); max-width: 90ch; }
+
+.duas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1.5px solid var(--tinta); }
+.duas > div { padding: 16px 20px 16px 0; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.duas > div + div { padding-left: 20px; border-left: 1px solid rgba(28, 26, 22, 0.25); }
+.duas h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.35rem; line-height: 1.05; }
+.duas p, .duas li { font-size: 0.97rem; line-height: 1.55; }
+.duas ul { padding-left: 1.1em; display: grid; gap: 6px; }
+@media (max-width: 760px) { .duas { grid-template-columns: 1fr; } .duas > div + div { padding-left: 0; border-left: 0; border-top: 1px solid rgba(28, 26, 22, 0.25); } }
+
+/* referência */
+.ref { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 28px; align-items: start; }
+@media (max-width: 900px) { .ref { grid-template-columns: 1fr; } }
+.ref figure { display: grid; gap: 8px; }
+.ref img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.ref figcaption { font: 400 0.85rem/1.45 var(--mono); color: var(--claro-2); }
+.emprestimos { display: grid; gap: 0; border-top: 1.5px solid var(--fio-escuro); }
+.emprestimos div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--fio-escuro); font-size: 0.93rem; line-height: 1.45; }
+.emprestimos div:first-child { font: 600 0.66rem/1.3 var(--texto); font-variation-settings: "wdth" 125; letter-spacing: 0.22em; text-transform: uppercase; color: var(--claro-2); }
+.emprestimos .fora { color: var(--claro-2); }
+
+/* sistema */
+.paleta { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0; border: 1.5px solid var(--tinta); }
+.paleta div { display: grid; gap: 4px; padding: 0 0 10px; border-right: 1px solid rgba(28, 26, 22, 0.25); min-width: 0; }
+.paleta i { display: block; height: 54px; background: var(--c); border-bottom: 1px solid rgba(28, 26, 22, 0.25); }
+.paleta b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.05rem; padding: 6px 10px 0; }
+.paleta span { font: 400 0.75rem/1.35 var(--mono); color: var(--apagado); padding: 0 10px; }
+.tipos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1.5px solid var(--tinta); }
+.tipos > div { padding: 14px 18px 14px 0; display: grid; gap: 6px; min-width: 0; }
+.tipos > div + div { padding-left: 18px; border-left: 1px solid rgba(28, 26, 22, 0.25); }
+.tipos .amostra-d { font-family: var(--display); font-size: 2.6rem; line-height: 0.95; text-transform: uppercase; }
+.tipos .amostra-e { font: 600 0.9rem/1.4 var(--texto); font-variation-settings: "wdth" 125; letter-spacing: 0.3em; text-transform: uppercase; }
+.tipos .amostra-m { font: 400 1.05rem/1.45 var(--mono); }
+.tipos small { font: 400 0.78rem/1.4 var(--mono); color: var(--apagado); }
+@media (max-width: 760px) { .tipos { grid-template-columns: 1fr; } .tipos > div + div { padding-left: 0; border-left: 0; border-top: 1px solid rgba(28, 26, 22, 0.25); } }
+
+.selos { display: flex; flex-wrap: wrap; gap: 22px 26px; padding: 8px 4px; align-items: center; }
+.selo { width: 118px; height: 118px; border-radius: 50%; border: 3px solid currentColor; outline: 1.5px solid currentColor; outline-offset: -9px; display: grid; align-content: center; justify-items: center; text-align: center; gap: 2px; color: var(--cor); transform: rotate(var(--r)); -webkit-mask-image: var(--gasto); mask-image: var(--gasto); -webkit-mask-size: 180px 180px; mask-size: 180px 180px; }
+.selo small { font: 600 0.58rem/1.2 var(--texto); font-variation-settings: "wdth" 125; letter-spacing: 0.24em; text-transform: uppercase; }
+.selo b { font-family: var(--display); font-weight: 400; font-size: 1.15rem; line-height: 0.95; text-transform: uppercase; padding-inline: 10px; }
+.selo em { font: italic 400 0.68rem/1.2 var(--mono); }
+.selo.ret { width: auto; height: auto; border-radius: 4px; padding: 12px 18px; }
+
+.proximo { display: grid; gap: 0; border-top: 1.5px solid var(--fio-escuro); counter-reset: p; }
+.proximo li { list-style: none; display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--fio-escuro); counter-increment: p; font-size: 0.98rem; line-height: 1.5; }
+.proximo li::before { content: counter(p, decimal-leading-zero); font: 700 0.9rem/1.5 var(--mono); color: var(--reposado); }
+.proximo li b { font-weight: 700; }
+.proximo { padding: 0; }
+.fontes { font: 400 0.85rem/1.6 var(--mono); color: var(--claro-2); display: grid; gap: 4px; }
+.fontes a { color: var(--claro); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<main class="pagina">
+
+<div class="cartao">
+  <div class="abre">
+    <div class="abre-texto">
+      <p class="espacada linha-assinatura">Passaporte do Ofício · direção 02</p>
+      <h1>Cada ofício amadurece <span>no seu barril.</span></h1>
+      <p class="lide">Os graus do passaporte viram idades de destilado: Blanco, Reposado, Añejo e Extra Añejo. Cada ofício tem o seu barril, e nenhum grau chega antes do tempo mínimo.</p>
+      <p class="corpo-mono">O conceito continua o mesmo: rótulo, carimbos assinados, ofícios, brinde, Arquivo e temporadas. Mudam o nome e a cor dos graus, que passam a ser os do líquido no copo, e a roupa do app, que sai do minimalismo para a linha indie de rótulo antigo da Stone Groove.</p>
+      <dl class="catalogo">
+        <dt>DRP-01</dt><dd>Graus por idade de destilado, um barril por ofício</dd>
+        <dt>DRP-02</dt><dd>O número grande do rótulo vira a idade: anos de balcão, como num 12 ou num 30 anos</dd>
+        <dt>DRP-03</dt><dd>Visual de rótulo de garrafa: papel gasto, arco, fita, cantos com números</dd>
+      </dl>
+      <div class="blocos" aria-hidden="true"><i style="background: var(--blanco)"></i><i style="background: var(--reposado)"></i><i style="background: var(--anejo)"></i><i style="background: var(--extra)"></i><i style="background: var(--bitter)"></i><i style="background: var(--curacao)"></i></div>
+    </div>
+
+    <div class="celular" aria-label="Exemplo da tela Rótulo na nova direção">
+      <div class="tela">
+        <div class="tela-topo"><span class="marca">Passaporte</span><span class="espacada">Lado do bartender</span></div>
+        <div class="abas" aria-hidden="true"><span class="on">Rótulo</span><span>Páginas</span><span>Ofícios</span></div>
+        <div class="tela-corpo">
+          <div class="rotulo">
+            <div class="arco"><span class="espacada">DROPP · passaporte do ofício</span><b>Maturado no balcão</b></div>
+            <div class="miolo">
+              <div class="num"><span>Nº 0942</span><span>LOTE TA-2014</span></div>
+              <p class="nome">Teo Aranda</p>
+              <p class="cargo">head bartender · Sea Bar, Valência</p>
+              <div class="idade"><strong>12</strong><span>anos de balcão<br>engarrafado em Valência</span></div>
+              <p class="fita">El bar primero</p>
+              <div class="cantos"><span>7<br>casas</span><span>38<br>fichas</span><span>12<br>jornadas</span><span>9<br>formados</span></div>
+            </div>
+          </div>
+
+          <div class="faixas">
+            <div class="faixas-cab"><span class="espacada">Ofícios · barris</span><span class="espacada">6 faixas</span></div>
+            <ol id="faixas"></ol>
+            <div class="barril" id="barril" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cartao">
+  <section aria-labelledby="t-escala">
+    <div class="sec-cab">
+      <p class="espacada linha-assinatura">A escala</p>
+      <h2 id="t-escala">Quatro idades, a cor do líquido</h2>
+      <p>Os nomes vêm das categorias de envelhecimento da tequila, que também aparecem em rum e brandy e que o balcão lê em qualquer país. <strong>A cor de cada grau é a do destilado no copo</strong>, que escurece com o tempo em madeira.</p>
+    </div>
+    <div class="voo" role="list" aria-label="Os quatro graus">
+      <div class="copo" role="listitem">
+        <svg viewBox="0 0 64 92" aria-hidden="true"><path d="M10 8 H54 L50 58 Q48 70 32 70 Q16 70 14 58 Z" fill="#E6E2D5" stroke="#1C1A16" stroke-width="2.5"></path><path d="M10 8 H54 L52 22 H12 Z" fill="#ECE3CE" stroke="none"></path><path d="M10 8 H54 L50 58 Q48 70 32 70 Q16 70 14 58 Z" fill="none" stroke="#1C1A16" stroke-width="2.5"></path><path d="M32 70 V84 M20 86 H44" stroke="#1C1A16" stroke-width="2.5" fill="none"></path></svg>
+        <h3>Blanco</h3>
+        <span class="era">entrou no ofício</span>
+        <p>Ganha com o primeiro carimbo daquele ofício.</p>
+      </div>
+      <div class="copo" role="listitem">
+        <svg viewBox="0 0 64 92" aria-hidden="true"><path d="M10 8 H54 L50 58 Q48 70 32 70 Q16 70 14 58 Z" fill="#DDB25A"></path><path d="M10 8 H54 L52 22 H12 Z" fill="#ECE3CE"></path><path d="M10 8 H54 L50 58 Q48 70 32 70 Q16 70 14 58 Z" fill="none" stroke="#1C1A16" stroke-width="2.5"></path><path d="M32 70 V84 M20 86 H44" stroke="#1C1A16" stroke-width="2.5" fill="none"></path></svg>
+        <h3>Reposado</h3>
+        <span class="era">6 meses no barril</span>
+        <p>Três carimbos e a assinatura de um Añejo do ofício.</p>
+      </div>
+      <div class="copo" role="listitem">
+        <svg viewBox="0 0 64 92" aria-hidden="true"><path d="M10 8 H54 L50 58 Q48 70 32 70 Q16 70 14 58 Z" fill="#B06A28"></path><path d="M10 8 H54 L52 22 H12 Z" fill="#ECE3CE"></path><path d="M10 8 H54 L50 58 Q48 70 32 70 Q16 70 14 58 Z" fill="none" stroke="#1C1A16" stroke-width="2.5"></path><path d="M32 70 V84 M20 86 H44" stroke="#1C1A16" stroke-width="2.5" fill="none"></path></svg>
+        <h3>Añejo</h3>
+        <span class="era">2 anos no barril</span>
+        <p>Seis carimbos, um de Carta ou Jornada, e dois Añejos assinando.</p>
+      </div>
+      <div class="copo" role="listitem">
+        <svg viewBox="0 0 64 92" aria-hidden="true"><path d="M10 8 H54 L50 58 Q48 70 32 70 Q16 70 14 58 Z" fill="#5E2F16"></path><path d="M10 8 H54 L52 22 H12 Z" fill="#ECE3CE"></path><path d="M10 8 H54 L50 58 Q48 70 32 70 Q16 70 14 58 Z" fill="none" stroke="#1C1A16" stroke-width="2.5"></path><path d="M32 70 V84 M20 86 H44" stroke="#1C1A16" stroke-width="2.5" fill="none"></path></svg>
+        <h3>Extra Añejo</h3>
+        <span class="era">5 anos no barril</span>
+        <p>Ter assinado o Reposado de três pessoas naquele ofício.</p>
+      </div>
+    </div>
+
+    <div class="rolagem">
+      <table>
+        <thead><tr><th>Grau</th><th>Tempo mínimo no ofício</th><th>Provas</th><th>Quem assina</th><th>Substitui</th></tr></thead>
+        <tbody>
+          <tr><td style="--liq: var(--blanco)"><i></i>Blanco</td><td>nenhum</td><td>1 carimbo do ofício</td><td>quem deu o carimbo</td><td>Aprendiz</td></tr>
+          <tr><td style="--liq: var(--reposado)"><i></i>Reposado</td><td>6 meses</td><td>3 carimbos, 1 de Casa ou Jornada</td><td>1 Añejo do ofício</td><td>Oficial</td></tr>
+          <tr><td style="--liq: var(--anejo)"><i></i>Añejo</td><td>2 anos</td><td>6 carimbos, 1 de Carta ou Jornada</td><td>2 Añejos do ofício</td><td>Mestre</td></tr>
+          <tr><td style="--liq: var(--extra)"><i></i>Extra Añejo</td><td>5 anos</td><td>assinou o Reposado de 3 pessoas</td><td>2 Extra Añejos ou a casa que formou</td><td>novo: o grau de quem ensina</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fonte-nota">Na tequila, o Reposado pede no mínimo 60 dias em carvalho, o Añejo 1 ano e o Extra Añejo 3 anos (<a href="https://www.diffordsguide.com/g/1084/tequila/classifications">Difford's Guide</a>). Os prazos do passaporte são nossos e ficam para validar com bartenders; da tequila vem a regra de que nada envelhece antes do tempo. Os nomes ficam em espanhol nas duas versões, como aparecem nas garrafas.</p>
+
+    <div class="duas">
+      <div>
+        <h3>Por que não vira FIFA de novo</h3>
+        <ul>
+          <li>A cor é a do líquido, que escurece com o tempo. Não é metal de raridade.</li>
+          <li>Cada ofício tem o seu barril. Ninguém é Añejo no geral, e não existe nota que some os ofícios.</li>
+          <li>Tempo não se compra nem se acelera. O barril tem prazo mínimo, como na tequila.</li>
+          <li>O número grande do rótulo é a idade, um fato que se confere, como o 12 ou o 30 de um uísque.</li>
+          <li>O grau mais alto se ganha formando gente, não acumulando pontos.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>O que ficou de fora</h3>
+        <p><b>Cores de rótulo de uma marca</b> (vermelho, preto, dourado, azul). É a hierarquia de um fabricante e volta ao nível por cor do FIFA.</p>
+        <p><b>Solera, de Jerez.</b> Os barris ficam em fileiras: o vinho novo entra na criadera de cima e desce até a solera, a mais velha, de onde se engarrafa (<a href="https://www.sherrynotes.com/2013/background/sherry-solera-system/">SherryNotes</a>). É bonito, mas difícil de ler para quem não conhece xerez. A palavra pode batizar a Casa-escola: a <b>solera da casa</b> são as pessoas que ela formou.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section aria-labelledby="t-ref">
+  <div class="sec-cab">
+    <p class="espacada" style="color: var(--claro-2)">A referência</p>
+    <h2 id="t-ref">O que a Stone Groove empresta</h2>
+    <p>A destilaria monta a página como um rótulo antigo sobre uma capa de disco. <strong>Levamos a gramática do rótulo e deixamos a música, as cores e a fonte dela.</strong></p>
+  </div>
+  <div class="ref">
+    <figure>
+      <img src="referencias/indie/stone-groove-hero.jpg" alt="Capa da Stone Groove Spirits: papel gasto, título ultracondensado em preto e laranja, garrafa de bourbon, disco de vinil, catálogo numerado e lista de faixas com a faixa atual marcada" loading="lazy">
+      <figcaption><a href="https://stonegroovespirits.com/">Stone Groove Spirits</a>, captura do <a href="https://www.awwwards.com/sites/stone-groove-spirits">Awwwards</a>. O site tem verificação de idade na entrada; as seções internas não foram abertas.</figcaption>
+    </figure>
+    <div class="emprestimos">
+      <div><span>Na Stone Groove</span><span>No Passaporte</span></div>
+      <div><span>Cartão de papel gasto, cantos arredondados, sobre moldura escura</span><span>Rótulo e páginas em papel de rótulo, sobre o verde-garrafa da noite</span></div>
+      <div><span>Título ultracondensado em duas cores</span><span>Anton em tinta e vermelho de bitter</span></div>
+      <div><span>Catálogo SG-001, faixas 001 a 004</span><span>Nº do passaporte, lote, códigos DRP e números de carimbo</span></div>
+      <div><span>Lista de faixas com ▶ na atual</span><span>Ofícios como faixas, com o barril de cada um</span></div>
+      <div><span>Rótulo com arco, fita e caixas de teor e volume</span><span>Arco "maturado no balcão", fita "El bar primero", cantos com casas, fichas, jornadas e formados</span></div>
+      <div><span>Blocos de cor estilo Mondrian</span><span>Blocos nas cores do líquido, do Blanco ao Extra Añejo, mais bitter e curaçao</span></div>
+      <div class="fora"><span>Disco, guitarra, laranja e azul-marinho, fonte própria</span><span>Fica de fora</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="cartao">
+  <section aria-labelledby="t-sistema">
+    <div class="sec-cab">
+      <p class="espacada linha-assinatura">O sistema</p>
+      <h2 id="t-sistema">Cores, letras e carimbos</h2>
+      <p>Três famílias e uma paleta que sai do bar: a garrafa, o papel do rótulo, o bitter, o curaçao e a cor do destilado em quatro idades. <strong>A cor de grau só aparece ligada a um ofício</strong>, nunca na pessoa.</p>
+    </div>
+    <div class="paleta" aria-label="Paleta">
+      <div><i style="--c: #0F1C17"></i><b>Garrafa</b><span>#0F1C17 · moldura</span></div>
+      <div><i style="--c: #ECE3CE"></i><b>Rótulo</b><span>#ECE3CE · papel</span></div>
+      <div><i style="--c: #B5361F"></i><b>Bitter</b><span>#B5361F · ação e fita</span></div>
+      <div><i style="--c: #2F5F8F"></i><b>Curaçao</b><span>#2F5F8F · bloco</span></div>
+      <div><i style="--c: #E6E2D5"></i><b>Blanco</b><span>#E6E2D5</span></div>
+      <div><i style="--c: #DDB25A"></i><b>Reposado</b><span>#DDB25A</span></div>
+      <div><i style="--c: #B06A28"></i><b>Añejo</b><span>#B06A28</span></div>
+      <div><i style="--c: #5E2F16"></i><b>Extra Añejo</b><span>#5E2F16</span></div>
+    </div>
+    <div class="tipos">
+      <div><span class="amostra-d">Hanky Panky</span><small>Anton · títulos, nome no rótulo, números grandes</small></div>
+      <div><span class="amostra-e">Maturado no balcão</span><small>Archivo largo · rótulos espaçados, abas, assinatura</small></div>
+      <div><span class="amostra-m">½ gin, ½ vermute, 2 dashes de Fernet</span><small>Courier Prime · fichas, provas, catálogo</small></div>
+    </div>
+    <div class="selos" aria-label="Carimbos na nova linha">
+      <div class="selo" style="--cor: #2F5F8F; --r: -6deg"><small>Jornada</small><b>Bar Brasa</b><em>Madri · 14/11</em></div>
+      <div class="selo ret" style="--cor: #B5361F; --r: 3deg"><small>Arquivo · ARQ-031</small><b>Hanky Panky</b><em>Ada Coleman</em></div>
+      <div class="selo" style="--cor: #8A5300; --r: 5deg"><small>Brinde</small><b>Elena R.</b><em>VLC · 18/11</em></div>
+      <div class="selo ret" style="--cor: #1C5A44; --r: -3deg"><small>Carta · outono 2026</small><b>Shrub de gengibre</b><em>1.240 saídas</em></div>
+    </div>
+    <div class="duas">
+      <div>
+        <h3>Permitido</h3>
+        <ul>
+          <li>Papel gasto, arco de rótulo, fita, caixas nos cantos</li>
+          <li>Numeração de catálogo que identifica algo real</li>
+          <li>Lista de faixas com ▶ na selecionada</li>
+          <li>Blocos de cor na escala do líquido</li>
+          <li>Carimbo em tinta, uma vez, com "rever a tinta"</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Proibido</h3>
+        <ul>
+          <li>Cor de grau na pessoa, no avatar ou numa moldura de carta</li>
+          <li>Brilho, foil, giro 3D, abrir pacote</li>
+          <li>Disco de vinil, guitarra ou qualquer peça da Stone Groove</li>
+          <li>Garrafa, rótulo ou cor de uma marca de verdade</li>
+          <li>Ranking, soma de graus ou "nível geral"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section aria-labelledby="t-proximo">
+  <div class="sec-cab">
+    <p class="espacada" style="color: var(--claro-2)">Para o próximo protótipo</p>
+    <h2 id="t-proximo">O que muda nas telas</h2>
+    <p>Se esta direção for aprovada, as duas versões do protótipo (português e espanhol) mudam assim. <strong>Fluxos, carimbos e regras de confiança continuam iguais.</strong></p>
+  </div>
+  <ol class="proximo">
+    <li><span><b>Rótulo:</b> a etiqueta térmica vira rótulo de garrafa, com arco, idade em anos de balcão, fita e cantos. A cópia térmica continua para imprimir no bar, em uma cor.</span></li>
+    <li><span><b>Ofícios:</b> a lista vira lista de faixas, e cada ofício abre o seu barril, com a régua de tempo e o que falta para a próxima idade.</span></li>
+    <li><span><b>Graus:</b> Aprendiz, Oficial e Mestre passam a Blanco, Reposado e Añejo, e entra o Extra Añejo, o grau de quem forma gente.</span></li>
+    <li><span><b>Páginas e carimbos:</b> papel de rótulo, tinta nas cores do sistema e números de carimbo no estilo de catálogo.</span></li>
+    <li><span><b>Casa-escola:</b> passa a se chamar solera da casa, se você gostar da palavra.</span></li>
+  </ol>
+  <div class="fontes">
+    <span>Fontes: <a href="https://www.diffordsguide.com/g/1084/tequila/classifications">Difford's Guide, classificações da tequila</a> · <a href="https://www.sherrynotes.com/2013/background/sherry-solera-system/">SherryNotes, sistema de solera</a> · <a href="https://www.awwwards.com/sites/stone-groove-spirits">Stone Groove Spirits no Awwwards</a>. Consultadas em 18/11/2026. Nomes, números e bares do exemplo são fictícios, exceto o Sea Bar, que vem do protótipo do cliente.</span>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  var oficios = [
+    { nome: 'Hospitalidade', grau: 'Añejo', liq: '#B06A28', meses: 108, linhas: [['ok', 'tempo', '9 anos no barril'], ['ok', 'provas', '11 carimbos'], ['falta', 'próximo', 'Extra Añejo: assinou o Reposado de 2 de 3 pessoas']] },
+    { nome: 'Clássicos', grau: 'Reposado', liq: '#DDB25A', meses: 38, linhas: [['ok', 'tempo', '3 anos e 2 meses; o Añejo pede 2 anos'], ['ok', 'provas', '6 carimbos, 3 de Carta'], ['falta', 'próximo', 'Añejo: faltam 2 assinaturas de Añejos em Clássicos']] },
+    { nome: 'Preparo e fermentação', grau: 'Reposado', liq: '#DDB25A', meses: 20, linhas: [['falta', 'tempo', '1 ano e 8 meses; faltam 4 meses para o Añejo'], ['ok', 'provas', '7 carimbos'], ['falta', 'próximo', 'Añejo: tempo e 2 assinaturas']] },
+    { nome: 'Custo e gestão', grau: 'Reposado', liq: '#DDB25A', meses: 30, linhas: [['ok', 'tempo', '2 anos e 6 meses'], ['falta', 'provas', '4 de 6 carimbos'], ['falta', 'próximo', 'Añejo: uma carta inteira com custo fechado']] },
+    { nome: 'Gelo', grau: 'Blanco', liq: '#E6E2D5', meses: 4, linhas: [['falta', 'tempo', '4 meses; o Reposado pede 6'], ['falta', 'provas', '2 de 3 carimbos'], ['falta', 'próximo', 'Reposado: um curso com prática e 1 assinatura']] },
+    { nome: 'Sem álcool', grau: 'Blanco', liq: '#E6E2D5', meses: 1, linhas: [['falta', 'tempo', '1 mês'], ['ok', 'provas', '1 carimbo de Carta'], ['falta', 'próximo', 'Reposado: mais 2 carimbos e 5 meses']] }
+  ];
+  var maxMeses = 120;
+  var faixasEl = document.getElementById('faixas');
+  var barrilEl = document.getElementById('barril');
+  var atual = 1;
+
+  function pct(m) { return Math.min(100, (m / maxMeses) * 100); }
+
+  function desenharBarril(o) {
+    barrilEl.innerHTML = '';
+    var tit = document.createElement('div'); tit.className = 'titulo';
+    var b = document.createElement('b'); b.textContent = o.nome;
+    var s = document.createElement('span'); s.textContent = o.grau;
+    tit.appendChild(b); tit.appendChild(s); barrilEl.appendChild(tit);
+
+    var regua = document.createElement('div'); regua.className = 'regua';
+    regua.setAttribute('role', 'img');
+    regua.setAttribute('aria-label', 'Tempo no barril: ' + o.meses + ' meses numa régua de 0 a 10 anos. Reposado a partir de 6 meses, Añejo de 2 anos, Extra Añejo de 5 anos.');
+    var trilho = document.createElement('div'); trilho.className = 'trilho';
+    [[0, 6, '#E6E2D5'], [6, 24, '#DDB25A'], [24, 60, '#B06A28'], [60, 120, '#5E2F16']].forEach(function (f) {
+      var i = document.createElement('i'); i.style.width = ((f[1] - f[0]) / maxMeses * 100) + '%'; i.style.background = f[2]; trilho.appendChild(i);
+    });
+    regua.appendChild(trilho);
+    var marca = document.createElement('span'); marca.className = 'marca-t'; marca.style.left = pct(o.meses) + '%'; regua.appendChild(marca);
+    var ticks = document.createElement('div'); ticks.className = 'ticks';
+    [[0, '0'], [24, '2 anos'], [60, '5 anos'], [120, '10 anos']].forEach(function (t) {
+      var sp = document.createElement('span'); sp.style.left = pct(t[0]) + '%'; sp.textContent = t[1]; ticks.appendChild(sp);
+    });
+    regua.appendChild(ticks);
+    barrilEl.appendChild(regua);
+
+    var ul = document.createElement('ul');
+    o.linhas.forEach(function (l) {
+      var li = document.createElement('li');
+      var st = document.createElement('span'); st.className = 'st ' + l[0]; st.textContent = l[1];
+      var tx = document.createElement('span'); tx.textContent = l[2];
+      li.appendChild(st); li.appendChild(tx); ul.appendChild(li);
+    });
+    barrilEl.appendChild(ul);
+  }
+
+  function desenharFaixas() {
+    faixasEl.innerHTML = '';
+    oficios.forEach(function (o, i) {
+      var li = document.createElement('li');
+      var bt = document.createElement('button'); bt.type = 'button'; bt.className = 'faixa';
+      bt.setAttribute('aria-pressed', i === atual ? 'true' : 'false');
+      bt.setAttribute('aria-label', o.nome + ', ' + o.grau + '. Ver o barril.');
+      var seta = document.createElement('span'); seta.className = 'seta'; seta.textContent = '▶'; seta.setAttribute('aria-hidden', 'true');
+      var n = document.createElement('span'); n.className = 'n'; n.textContent = (i + 1 < 10 ? '0' : '') + (i + 1);
+      var t = document.createElement('span'); t.className = 't'; t.textContent = o.nome;
+      var g = document.createElement('span'); g.className = 'g';
+      var cop = document.createElement('i'); cop.className = 'copita'; cop.style.setProperty('--liq', o.liq);
+      var gt = document.createElement('span'); gt.textContent = o.grau;
+      g.appendChild(cop); g.appendChild(gt);
+      bt.appendChild(seta); bt.appendChild(n); bt.appendChild(t); bt.appendChild(g);
+      bt.addEventListener('click', function () { atual = i; desenharFaixas(); desenharBarril(oficios[i]); });
+      li.appendChild(bt); faixasEl.appendChild(li);
+    });
+  }
+
+  desenharFaixas();
+  desenharBarril(oficios[atual]);
+})();
+</script>

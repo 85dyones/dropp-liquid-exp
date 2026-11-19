@@ -1,0 +1,14 @@
+# Material do cliente e de terceiros: fica só na máquina local
+/code*.html
+/design/antes/
+/design/referencias/
+/design/leitura-dropp.html
+
+# Sistema e build
+.DS_Store
+Thumbs.db
+desktop.ini
+node_modules/
+dist/
+.vite/
+*.log

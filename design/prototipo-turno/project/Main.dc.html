@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Turno · Barback</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wdth,wght@62..125,400..800&amp;family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;display=swap">
+<style>
+body { margin: 0; }
+.app { width: 390px; height: 844px; box-sizing: border-box; display: flex; flex-direction: column; background-color: #EFE8D8; background-image: radial-gradient(rgba(90, 65, 30, 0.06) 1px, transparent 1.3px); background-size: 4px 4px; color: #1C1A16; font-family: Archivo, "Helvetica Neue", Arial, sans-serif; font-size: 15px; line-height: 1.45; position: relative; overflow: hidden; }
+.app * { box-sizing: border-box; }
+.app p, .app h2, .app ul, .app ol, .app dl, .app dd { margin: 0; }
+button { font-family: inherit; color: #1C1A16; }
+.app :focus-visible { outline: 2px solid #A21CAF; outline-offset: 2px; }
+.mono { font-family: "Courier Prime", "Courier New", monospace; }
+
+.topo { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 14px 10px; flex: none; }
+.marca { display: flex; align-items: center; gap: 8px; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 26px; line-height: 1; text-transform: uppercase; letter-spacing: 0.02em; }
+.marca svg { width: 22px; height: 26px; flex: none; }
+.visao { display: flex; border: 1.5px solid #1C1A16; }
+.visao button { appearance: none; border: 0; background: transparent; padding: 0 14px; min-height: 38px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.visao button[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
+.relogio { display: grid; gap: 6px; padding: 0 14px 12px; border-bottom: 1.5px solid #1C1A16; flex: none; }
+.horas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.hora { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 48px; padding: 4px 6px; display: grid; justify-items: center; align-content: center; gap: 1px; cursor: pointer; }
+.hora b { font-family: "Courier Prime", "Courier New", monospace; font-size: 15px; font-weight: 700; line-height: 1.1; }
+.hora span { font-weight: 600; font-variation-settings: "wdth" 120; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; }
+.hora[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
+.fio-topo { height: 0; border-bottom: 1.5px solid #1C1A16; flex: none; }
+.voltar-bar { display: flex; align-items: center; gap: 4px; padding: 6px 12px 6px 4px; border-bottom: 1.5px solid #1C1A16; min-height: 58px; flex: none; }
+.voltar { appearance: none; border: 0; background: transparent; min-height: 44px; padding: 0 12px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.voltar-bar h2 { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.02em; }
+
+.corpo { flex: 1; overflow-y: auto; padding: 14px 14px 92px; display: flex; flex-direction: column; gap: 14px; }
+.corpo > * { flex: none; }
+.rot { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: #6E6555; }
+.titulo-bloco { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.05; text-transform: uppercase; letter-spacing: 0.01em; }
+.titulo-grande { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 40px; line-height: 0.95; text-transform: uppercase; }
+.nota { font-size: 13px; line-height: 1.45; color: #6E6555; }
+.papel { background-color: #FAF6EC; background-image: radial-gradient(rgba(90, 65, 30, 0.05) 1px, transparent 1.3px); background-size: 5px 5px; color: #1C1A16; position: relative; border: 1.5px solid #1C1A16; }
+.papel .nota, .papel .rot { color: #5B5344; }
+.papel.corte::before, .papel.corte::after { content: ""; position: absolute; width: 14px; height: 14px; opacity: 0.5; background: linear-gradient(#1C1A16, #1C1A16) center / 1px 100% no-repeat, linear-gradient(#1C1A16, #1C1A16) center / 100% 1px no-repeat; pointer-events: none; }
+.papel.corte::before { top: -8px; left: -8px; }
+.papel.corte::after { bottom: -8px; right: -8px; }
+.bloco { padding: 14px; display: grid; gap: 9px; border-radius: 4px; }
+.linha-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { appearance: none; border: 1.5px solid #1C1A16; background: transparent; color: #1C1A16; min-height: 46px; padding: 0 14px; font-weight: 700; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+.btn.cheio { background: #1C1A16; color: #F8F3E7; }
+.btn.largo { width: 100%; }
+.chk { list-style: none; padding: 0; display: grid; gap: 8px; font-size: 14px; line-height: 1.4; }
+.chk li { display: flex; gap: 8px; align-items: baseline; }
+.st { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11.5px; line-height: 1.3; padding: 1px 6px; white-space: nowrap; flex: none; }
+.st.ok { background: #10B981; color: #0F1C17; }
+.st.meio { background: #FACC15; color: #1C1A16; }
+.st.bb { background: #1C1A16; color: #F8F3E7; }
+.pet { display: inline-block; width: 12px; height: 12px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); flex: none; }
+
+.fato { padding: 16px 14px 14px; display: grid; gap: 2px; border-radius: 4px; }
+.fato-n { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 54px; line-height: 0.95; text-transform: uppercase; margin-top: 4px; }
+.fato-sub { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 14px; }
+.fato .nota { margin-top: 6px; }
+.sec-cab { display: grid; gap: 2px; padding-top: 4px; }
+
+.recado { padding: 14px; display: grid; gap: 10px; border-radius: 4px; }
+.rec-topo { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.cadeira { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-variation-settings: "wdth" 120; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; }
+.nivel { font-family: "Courier Prime", "Courier New", monospace; font-size: 11.5px; color: #5B5344; text-align: right; }
+.rec-titulo { font-weight: 700; font-size: 18px; line-height: 1.25; }
+.rec-linhas { display: grid; gap: 4px; border-top: 1px solid rgba(28, 26, 22, 0.18); padding-top: 8px; }
+.rec-linhas div { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 8px; font-size: 13.5px; line-height: 1.4; }
+.rec-linhas dt { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11px; text-transform: uppercase; color: #5B5344; padding-top: 2px; }
+.fonte-btn { appearance: none; border: 0; background: transparent; padding: 0; min-height: 44px; justify-self: start; font-size: 13px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.fonte { font-family: "Courier Prime", "Courier New", monospace; font-size: 12.5px; line-height: 1.45; background: rgba(28, 26, 22, 0.06); padding: 8px 10px; }
+.limite { font-family: "Courier Prime", "Courier New", monospace; font-size: 12.5px; line-height: 1.45; border-left: 3px solid #1C1A16; padding-left: 8px; }
+.opcoes { display: grid; gap: 6px; }
+.opcao-btn { width: 100%; justify-content: space-between; text-align: left; padding: 8px 14px; }
+.efeito { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 12.5px; white-space: nowrap; }
+.feito { display: flex; gap: 8px; align-items: baseline; font-size: 13.5px; line-height: 1.4; }
+.cartaz { background: #1C1A16; color: #F3ECDD; border-radius: 4px; padding: 14px 12px; display: grid; justify-items: center; gap: 3px; text-align: center; }
+.cartaz svg { width: 22px; height: 26px; margin-bottom: 2px; }
+.cartaz .rot { color: #D9D2C2; }
+.cartaz b { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 30px; line-height: 1; text-transform: uppercase; letter-spacing: 0.02em; }
+.cartaz .mono { font-size: 12px; }
+.cartaz .lema { display: block; font-weight: 700; font-variation-settings: "wdth" 125; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 6px; }
+.cartaz .lema .y { color: #FACC15; }
+.ja-pe { display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; }
+.formiga { appearance: none; border: 0; background: transparent; width: 44px; height: 44px; flex: none; display: grid; place-items: end; padding: 0 0 4px; cursor: pointer; margin: -10px -6px -10px 0; }
+.formiga svg { width: 18px; height: 12px; animation: anda 7s ease-in-out infinite; }
+@keyframes anda { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-5px); } 55% { transform: translateX(-5px); } }
+
+.servico-cab { display: grid; gap: 4px; }
+.conversa { list-style: none; padding: 0; display: grid; gap: 8px; }
+.fala { display: grid; gap: 4px; padding: 10px 12px; max-width: 88%; border-radius: 4px; }
+.fala.voce { justify-self: end; background: #1C1A16; color: #F8F3E7; }
+.fala.bb { justify-self: start; background: #FAF6EC; border: 1.5px solid #1C1A16; }
+.fala .quem { font-weight: 700; font-variation-settings: "wdth" 120; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; }
+.fala p { font-size: 15px; line-height: 1.4; }
+.fonte-linha { font-family: "Courier Prime", "Courier New", monospace; font-size: 11.5px; line-height: 1.4; color: #5B5344; }
+.fala .btn { justify-self: start; margin-top: 4px; }
+.mic-area { display: grid; justify-items: center; gap: 8px; padding: 6px 0; }
+.mic { appearance: none; width: 92px; height: 92px; border-radius: 50%; border: 2px solid #1C1A16; background: #FAF6EC; display: grid; place-items: center; cursor: pointer; box-shadow: 0 0 0 7px rgba(217, 70, 239, 0.2); }
+.mic svg { width: 34px; height: 34px; }
+.sugestoes { display: grid; gap: 6px; }
+.sugestao { appearance: none; border: 1.5px dashed #1C1A16; background: transparent; min-height: 44px; padding: 8px 12px; text-align: left; font-size: 14px; cursor: pointer; }
+
+.gravar { appearance: none; border: 0; background: #1C1A16; color: #F8F3E7; min-height: 132px; border-radius: 4px; display: grid; justify-items: center; align-content: center; gap: 6px; padding: 16px; cursor: pointer; font-weight: 700; font-size: 16px; }
+.gravar .ponto { width: 20px; height: 20px; border-radius: 50%; background: #EF4444; }
+.gravar .mono { font-weight: 400; font-size: 12.5px; color: #D9D2C2; }
+.citacao { font-family: "Courier Prime", "Courier New", monospace; font-size: 15px; line-height: 1.5; }
+.supos { list-style: none; padding: 0; display: grid; gap: 8px; }
+.supos li { display: flex; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 1px solid rgba(28, 26, 22, 0.18); padding-bottom: 8px; }
+.supos li:last-child { border-bottom: 0; padding-bottom: 0; }
+.supos .sup-txt { display: grid; gap: 2px; min-width: 0; }
+.supos .ouvi { font-family: "Courier Prime", "Courier New", monospace; font-size: 12.5px; color: #5B5344; }
+.supos b { font-size: 14.5px; line-height: 1.35; }
+.supos .btn { flex: none; min-height: 44px; padding: 0 12px; font-size: 13px; }
+.campo { display: grid; gap: 6px; }
+.humores { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.seg { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 44px; padding: 0 4px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.seg[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
+
+.noite { display: grid; gap: 4px; }
+.entradas { list-style: none; padding: 0; display: grid; border-top: 1.5px solid #1C1A16; }
+.entradas li { display: grid; grid-template-columns: 44px 12px minmax(0, 1fr); gap: 8px; align-items: start; padding: 10px 0; border-bottom: 1px solid rgba(28, 26, 22, 0.18); }
+.hora-e { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 12.5px; padding-top: 1px; }
+.entradas .pet { margin-top: 5px; }
+.ent-txt { display: grid; gap: 2px; }
+.ent-txt p { font-size: 14px; line-height: 1.4; }
+.ent-txt .quem { font-family: "Courier Prime", "Courier New", monospace; font-size: 11.5px; color: #5B5344; }
+
+.cad-card { padding: 14px; display: grid; gap: 10px; border-radius: 4px; }
+.cad-nome { display: flex; align-items: center; gap: 10px; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 21px; line-height: 1; text-transform: uppercase; }
+.niveis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+
+.aviso { position: absolute; left: 12px; right: 12px; bottom: 74px; background: #1C1A16; color: #F8F3E7; padding: 6px 6px 6px 14px; display: flex; gap: 8px; align-items: center; font-size: 14px; line-height: 1.35; font-weight: 600; z-index: 5; box-shadow: 0 10px 24px rgba(60, 45, 20, 0.35); }
+.aviso button { appearance: none; border: 0; background: transparent; color: #F8F3E7; min-height: 44px; padding: 0 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: underline; }
+.nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1.5px solid #1C1A16; background: #EFE8D8; position: relative; z-index: 6; flex: none; }
+.nav button { appearance: none; border: 0; background: transparent; min-height: 62px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 115; letter-spacing: 0.06em; color: #6E6555; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.nav button[aria-current="page"] { color: #1C1A16; }
+.nav button:disabled { cursor: not-allowed; }
+.nav button:disabled svg { opacity: 0.6; }
+.nav svg { width: 22px; height: 22px; }
+@media (prefers-reduced-motion: reduce) { .formiga svg { animation: none; } }
+</style>
+</helmet>
+<div class="app">
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <g id="gota-oficial">
+        <path d="M50 8 C50 8 36 28 32 46 C37 40 45 36 50 36 C55 36 63 40 68 46 C64 28 50 8 50 8 Z" fill="#FACC15"></path>
+        <path d="M32 46 C24 57 20 68 22 79 C25 80 29 80 34 78 C31 66 33 55 42 46 C38 45 35 45 32 46 Z" fill="#10B981"></path>
+        <path d="M22 79 C24 93 35 106 50 108 C46 98 46 88 50 78 C39 77 31 82 22 79 Z" fill="#06B6D4"></path>
+        <path d="M68 46 C76 57 80 68 78 79 C75 80 71 80 66 78 C69 66 67 55 58 46 C62 45 65 45 68 46 Z" fill="#F97316"></path>
+        <path d="M78 79 C76 93 65 106 50 108 C54 98 54 88 50 78 C61 77 69 82 78 79 Z" fill="#EF4444"></path>
+        <path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="#D946EF"></path>
+        <path d="M50 78 C44 86 44 95 50 106 C56 95 56 86 50 78 Z" fill="#8B5CF6"></path>
+      </g>
+    </defs>
+  </svg>
+
+  <sc-if value="{{principal}}" hint-placeholder-val="{{ true }}">
+    <div class="topo">
+      <p class="marca"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>Turno</p>
+      <div class="visao" role="group" aria-label="De quem é o Barback">
+        <button type="button" aria-pressed="{{donoCasa}}" onClick="{{verCasa}}">Casa</button>
+        <button type="button" aria-pressed="{{donoMeu}}" onClick="{{verMeu}}">Meu</button>
+      </div>
+    </div>
+    <sc-if value="{{mostrarRelogio}}" hint-placeholder-val="{{ true }}">
+      <div class="relogio">
+        <span class="rot">Hora simulada do turno</span>
+        <div class="horas" role="group" aria-label="Hora simulada">
+          <sc-for list="{{horas}}" as="h" hint-placeholder-count="3">
+            <button type="button" class="hora" aria-pressed="{{h.on}}" onClick="{{h.pick}}"><b>{{h.h}}</b><span>{{h.t}}</span></button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{semRelogio}}" hint-placeholder-val="{{ false }}">
+      <div class="fio-topo"></div>
+    </sc-if>
+  </sc-if>
+  <sc-if value="{{mostrarVoltar}}" hint-placeholder-val="{{ false }}">
+    <div class="voltar-bar">
+      <button type="button" class="voltar" onClick="{{voltar}}">← Voltar</button>
+      <h2>{{tituloTela}}</h2>
+    </div>
+  </sc-if>
+
+  <div class="corpo" ref="{{corpoRef}}">
+    <sc-if value="{{tRecados}}" hint-placeholder-val="{{ true }}">
+      <div class="papel corte fato">
+        <span class="rot">{{fatoRot}}</span>
+        <p class="fato-n">{{fatoN}}</p>
+        <p class="fato-sub">{{fatoSub}}</p>
+        <p class="nota">{{fatoBase}}</p>
+      </div>
+      <div class="sec-cab">
+        <p class="titulo-bloco">Recados do Barback</p>
+        <p class="nota">{{pendentesTxt}}</p>
+      </div>
+      <sc-for list="{{recados}}" as="r" hint-placeholder-count="3">
+        <article class="papel corte recado">
+          <div class="rec-topo">
+            <span class="cadeira"><i class="pet" style="background: {{r.cor}}" aria-hidden="true"></i><span>{{r.cadeira}}</span></span>
+            <span class="nivel">{{r.nivel}}</span>
+          </div>
+          <p class="rec-titulo">{{r.titulo}}</p>
+          <dl class="rec-linhas">
+            <sc-for list="{{r.linhas}}" as="l" hint-placeholder-count="2">
+              <div><dt>{{l.k}}</dt><dd>{{l.v}}</dd></div>
+            </sc-for>
+          </dl>
+          <sc-if value="{{r.temCartaz}}" hint-placeholder-val="{{ false }}">
+            <div class="cartaz" role="img" aria-label="Prévia do story: o Sea Bar recebe o Bar Brasa, guest shift na quinta, 26/11, às 21h.">
+              <svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>
+              <span class="rot">Sea Bar recebe</span>
+              <b>Bar Brasa</b>
+              <span class="mono">guest shift · quinta 26/11 · 21h</span>
+              <span class="lema">Meet · <span class="y">Share</span> · Enjoy</span>
+            </div>
+          </sc-if>
+          <button type="button" class="fonte-btn" aria-expanded="{{r.fonteAberta}}" onClick="{{r.verFonte}}">{{r.fonteRot}}</button>
+          <sc-if value="{{r.fonteAberta}}" hint-placeholder-val="{{ false }}">
+            <p class="fonte">{{r.fonte}}</p>
+          </sc-if>
+          <sc-if value="{{r.temLimite}}" hint-placeholder-val="{{ false }}">
+            <p class="limite">{{r.limite}}</p>
+          </sc-if>
+          <sc-if value="{{r.aberto}}" hint-placeholder-val="{{ true }}">
+            <div class="opcoes">
+              <sc-for list="{{r.opcoes}}" as="op" hint-placeholder-count="2">
+                <button type="button" class="{{op.cls}}" onClick="{{op.pick}}"><span>{{op.t}}</span><span class="efeito">{{op.efeito}}</span></button>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{r.soAviso}}" hint-placeholder-val="{{ false }}">
+            <p class="nota">Só aviso: a cadeira está em Observa. Para decidir aqui, suba para Sugere.</p>
+          </sc-if>
+          <sc-if value="{{r.feito}}" hint-placeholder-val="{{ false }}">
+            <p class="feito"><span class="st ok">{{r.feitoRot}}</span><span>{{r.feitoTxt}}</span></p>
+          </sc-if>
+        </article>
+      </sc-for>
+
+      <sc-if value="{{jaFez}}" hint-placeholder-val="{{ true }}">
+        <div class="papel corte bloco">
+          <span class="rot">O Barback já fez, sozinho</span>
+          <ul class="chk">
+            <li><span class="st bb">16:40</span><span>Mandou para a Ana, que começa hoje, as 12 fichas da carta e um teste de 10 perguntas.</span></li>
+            <li><span class="st bb">16:45</span><span>O xarope simples estava abaixo do mínimo (0,4 L): pôs 2 L na lista de preparo.</span></li>
+          </ul>
+          <div class="ja-pe">
+            <p class="nota">Dentro do limite da cadeira Operação. Tudo fica no livro de turno.</p>
+            <button type="button" class="formiga" aria-label="Uma formiga" onClick="{{formiga}}">
+              <svg viewBox="0 0 24 16" aria-hidden="true"><g fill="#1C1A16"><ellipse cx="5.2" cy="9.4" rx="3.6" ry="2.7"></ellipse><ellipse cx="10.8" cy="9" rx="2" ry="1.5"></ellipse><circle cx="15.2" cy="8.2" r="2"></circle></g><g fill="none" stroke="#1C1A16" stroke-width="0.9" stroke-linecap="round"><path d="M9.8 10 L8 14.2"></path><path d="M10.9 10.3 L10.9 14.6"></path><path d="M12 10 L13.8 14.2"></path><path d="M16.2 6.6 Q17.6 3.4 20.2 3.2"></path><path d="M15.5 6.4 Q16.4 3.2 18.4 2.2"></path></g></svg>
+            </button>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{semJaFez}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">Avisos de Operação</span>
+          <p class="nota">{{avisoOpTxt}}</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{casa}}" hint-placeholder-val="{{ true }}">
+        <div class="linha-btns">
+          <button type="button" class="btn" onClick="{{irLivro}}">Livro de turno</button>
+          <button type="button" class="btn" onClick="{{irRegras}}">O que ele pode fazer</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{meu}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">Vai com você</span>
+          <p class="nota">Só você vê este Barback. Se sair do Sea Bar, você leva o passaporte, as fichas pessoais e a sua renda. A casa fica com as fichas e os lotes dela.</p>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tServico}}" hint-placeholder-val="{{ false }}">
+      <div class="servico-cab">
+        <span class="rot">Serviço · 20:00 a 01:00</span>
+        <p class="titulo-grande">Silêncio, só voz</p>
+        <p class="nota">Durante o serviço o Barback não manda recado. Ele só fala quando alguém pergunta ou avisa.</p>
+      </div>
+      <ol class="conversa">
+        <sc-for list="{{falas}}" as="f" hint-placeholder-count="4">
+          <li class="{{f.cls}}">
+            <span class="quem">{{f.quem}}</span>
+            <p>{{f.t}}</p>
+            <sc-if value="{{f.temFonte}}" hint-placeholder-val="{{ false }}">
+              <span class="fonte-linha">{{f.fonte}}</span>
+            </sc-if>
+            <sc-if value="{{f.temAcao}}" hint-placeholder-val="{{ false }}">
+              <button type="button" class="btn" onClick="{{f.acao}}">{{f.acaoRot}}</button>
+            </sc-if>
+          </li>
+        </sc-for>
+      </ol>
+      <div class="mic-area">
+        <button type="button" class="mic" aria-label="Segure para falar com o Barback" onClick="{{falar}}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1C1A16" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"></rect><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"></path></svg>
+        </button>
+        <span class="rot">Segure para falar</span>
+      </div>
+      <sc-if value="{{temSugestoes}}" hint-placeholder-val="{{ true }}">
+        <div class="sugestoes">
+          <span class="rot">Experimente perguntar</span>
+          <sc-for list="{{sugestoes}}" as="g" hint-placeholder-count="3">
+            <button type="button" class="sugestao" onClick="{{g.pick}}">{{g.t}}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tFecho}}" hint-placeholder-val="{{ false }}">
+      <div class="servico-cab">
+        <span class="rot">Fechamento · 01:30</span>
+        <p class="titulo-grande">Sessenta segundos falando</p>
+      </div>
+      <sc-if value="{{passoGravar}}" hint-placeholder-val="{{ true }}">
+        <p class="nota">Fale do jeito que sair. Antes de salvar, o Barback mostra o que entendeu.</p>
+        <button type="button" class="gravar" onClick="{{gravar}}"><span class="ponto" aria-hidden="true"></span><span>Gravar a nota de turno</span><span class="mono">até 60 segundos</span></button>
+      </sc-if>
+      <sc-if value="{{passoEntendi}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">Sua nota · 0:14</span>
+          <p class="citacao">“Acabou o xarope de mel, quebraram dois copos coupe, o especial vendeu bem.”</p>
+        </div>
+        <div class="papel corte bloco">
+          <span class="rot">O que eu entendi</span>
+          <ul class="supos">
+            <sc-for list="{{supos}}" as="a" hint-placeholder-count="3">
+              <li>
+                <div class="sup-txt"><span class="ouvi">{{a.ouviTxt}}</span><b>{{a.supus}}</b></div>
+                <sc-if value="{{a.podeTrocar}}" hint-placeholder-val="{{ true }}">
+                  <button type="button" class="btn" onClick="{{a.trocar}}">Trocar</button>
+                </sc-if>
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+        <div class="papel corte bloco">
+          <span class="rot">O que eu vou fazer</span>
+          <ul class="chk">
+            <sc-for list="{{vaiFazer}}" as="x" hint-placeholder-count="5">
+              <li><span class="st meio">{{x.r}}</span><span>{{x.t}}</span></li>
+            </sc-for>
+          </ul>
+        </div>
+        <div class="campo">
+          <span class="rot" id="lbl-humor">Como foi o turno? Só você vê.</span>
+          <div class="humores" role="group" aria-labelledby="lbl-humor">
+            <sc-for list="{{humores}}" as="hm" hint-placeholder-count="3">
+              <button type="button" class="seg" aria-pressed="{{hm.on}}" onClick="{{hm.pick}}">{{hm.t}}</button>
+            </sc-for>
+          </div>
+        </div>
+        <button type="button" class="btn cheio largo" onClick="{{fechar}}">Confirmar e fechar o turno</button>
+        <button type="button" class="btn largo" onClick="{{gravarDeNovo}}">Gravar de novo</button>
+      </sc-if>
+      <sc-if value="{{passoFechado}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">Turno fechado · 01:32</span>
+          <p class="titulo-bloco">Boa noite, Teo.</p>
+          <p class="nota">A nota está no livro de turno. O pedido de compra espera o seu ok amanhã, às 17:00.</p>
+          <div><button type="button" class="btn" onClick="{{irLivro}}">Abrir o livro de turno</button></div>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tLivro}}" hint-placeholder-val="{{ false }}">
+      <p class="nota">A memória da casa. Cada decisão entra aqui com quem decidiu e de onde veio. Hoje aparece até a hora simulada.</p>
+      <sc-for list="{{noites}}" as="nt" hint-placeholder-count="2">
+        <section class="noite">
+          <span class="rot">{{nt.data}}</span>
+          <ul class="entradas">
+            <sc-for list="{{nt.itens}}" as="e" hint-placeholder-count="3">
+              <li><span class="hora-e">{{e.h}}</span><i class="pet" style="background: {{e.cor}}" aria-hidden="true"></i><div class="ent-txt"><p>{{e.t}}</p><span class="quem">{{e.quem}}</span></div></li>
+            </sc-for>
+          </ul>
+        </section>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{tRegras}}" hint-placeholder-val="{{ false }}">
+      <p class="nota">Você escolhe, cadeira por cadeira, até onde o Barback vai. Isto vale para a casa; o Barback pessoal de cada bartender tem as próprias regras.</p>
+      <sc-for list="{{cadeirasLista}}" as="cd" hint-placeholder-count="3">
+        <div class="papel corte cad-card">
+          <p class="cad-nome"><i class="pet" style="background: {{cd.cor}}" aria-hidden="true"></i><span>{{cd.nome}}</span></p>
+          <div class="niveis" role="group" aria-label="{{cd.aria}}">
+            <sc-for list="{{cd.niveis}}" as="nv" hint-placeholder-count="4">
+              <button type="button" class="seg" aria-pressed="{{nv.on}}" onClick="{{nv.pick}}">{{nv.t}}</button>
+            </sc-for>
+          </div>
+          <p class="nota">{{cd.exemplo}}</p>
+        </div>
+      </sc-for>
+      <div class="papel corte bloco">
+        <span class="rot">Regras que não mudam</span>
+        <ul class="chk">
+          <li><span class="st ok">sempre</span><span>O banco calcula, a IA explica. Nenhum número é inventado.</span></li>
+          <li><span class="st ok">sempre</span><span>Sem ficha, sem resposta: se a ficha não existe, ele diz que não sabe.</span></li>
+          <li><span class="st ok">sempre</span><span>Até três recados por turno, todos antes do serviço.</span></li>
+          <li><span class="st ok">sempre</span><span>Durante o serviço, só fala quando alguém pergunta ou avisa.</span></li>
+          <li><span class="st ok">sempre</span><span>A ficha da casa fica com a casa. O passaporte guarda a autoria, não a receita.</span></li>
+        </ul>
+      </div>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{temAviso}}" hint-placeholder-val="{{ false }}">
+    <div class="aviso" role="status">
+      <span style="flex: 1">{{aviso}}</span>
+      <button type="button" onClick="{{fecharAviso}}">Fechar</button>
+    </div>
+  </sc-if>
+
+  <nav class="nav" aria-label="Áreas do DROPP">
+    <button type="button" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>
+      Turno
+    </button>
+    <button type="button" disabled title="Fora deste protótipo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17"></rect><path d="M8.5 8h7M8.5 12h7M8.5 16h4"></path></svg>
+      Caderno
+    </button>
+    <button type="button" disabled title="Fora deste protótipo">
+      <svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>
+      Passaporte
+    </button>
+    <button type="button" disabled title="Fora deste protótipo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 5.5h6a2 2 0 0 1 2 2V20a2 2 0 0 0-2-2H4zM20 5.5h-6a2 2 0 0 0-2 2V20a2 2 0 0 1 2-2h6z"></path></svg>
+      Atlas
+    </button>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tela":{"editor":"enum","options":["turno","livro","regras"],"default":"turno","section":"Protótipo"},"hora":{"editor":"enum","options":["antes","servico","fecho"],"default":"antes","section":"Protótipo"},"dono":{"editor":"enum","options":["casa","meu"],"default":"casa","section":"Protótipo"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._marcar();
+  }
+
+  _marcar() {
+    const st = this.state || {};
+    const p = this.props || {};
+    const chave = [st.tela || p.tela || 'turno', st.hora || p.hora || 'antes', st.dono || p.dono || 'casa'].join('|');
+    const falas = (st.perguntas || []).length + (st.zombie ? 1 : 0) + (st.gimlet ? 1 : 0);
+    const mudouTela = this._chave !== undefined && this._chave !== chave;
+    const novaFala = this._falas !== undefined && falas > this._falas;
+    this._chave = chave;
+    this._falas = falas;
+    return { mudouTela: mudouTela, novaFala: novaFala };
+  }
+
+  componentDidUpdate() {
+    const m = this._marcar();
+    if (!this._corpo) return;
+    if (m.mudouTela) this._corpo.scrollTop = 0;
+    else if (m.novaFala) this._corpo.scrollTop = this._corpo.scrollHeight;
+  }
+
+  renderVals() {
+    const p = this.props || {};
+    const s = Object.assign({
+      tela: p.tela || 'turno', hora: p.hora || 'antes', dono: p.dono || 'casa',
+      decisoes: {}, fontes: {}, niveis: { op: 'sozinho', fin: 'sugere', mkt: 'ok' },
+      perguntas: [], zombie: false, gimlet: false, passo: 'gravar', supos: { mel: 0, especial: 0 }, humor: '', aviso: ''
+    }, this.state || {});
+    const set = (o) => this.setState(o);
+    const casa = s.dono === 'casa';
+    const meu = !casa;
+    const principal = s.tela === 'turno';
+
+    const cadeiras = {
+      op: { nome: 'Operação', cor: '#10B981' },
+      fin: { nome: 'Financeiro', cor: '#8B5CF6' },
+      mkt: { nome: 'Marketing', cor: '#D946EF' }
+    };
+    const nivelNome = { observa: 'Observa', sugere: 'Sugere', ok: 'Faz com o seu ok', sozinho: 'Faz sozinho, com limite' };
+    const limites = {
+      op: 'Mudar a quantidade pela previsão pede o seu ok.',
+      fin: 'Preço nunca muda sem o seu ok.',
+      mkt: 'Convite novo sempre pede o seu ok.'
+    };
+
+    const recadosCasa = [
+      { id: 'cordial', cad: 'op', titulo: 'Faça 3 L de cordial de limão, e não 2.',
+        linhas: [['por quê', 'Sexta com 140 reservas e 27 °C às 21h.'], ['custa', '+ €4,20 de limão e 25 min de preparo'], ['evita', 'Na sexta 13/11 o cordial acabou às 23:10 e o Gimlet saiu da carta.']],
+        fonte: 'Reservas do sistema (140), previsão do tempo para as 21h e livro de turno das últimas 4 sextas: média de 2,6 L.',
+        opcoes: [
+          { t: 'Fazer 3 L', efeito: '+ €4,20', feito: 'Na lista de preparo: 3 L de cordial de limão.' },
+          { t: 'Manter 2 L', efeito: 'pode faltar', feito: 'Mantido em 2 L. Se acabar antes da meia-noite, entra na nota de fechamento.' }
+        ] },
+      { id: 'negroni', cad: 'fin', titulo: 'O Negroni da casa passou da meta: de 22% para 23% de custo.',
+        linhas: [['por quê', 'O Campari subiu 11% na nota de 12/11.'], ['meta', 'A casa trabalha com até 22% de custo.'], ['vende', '312 Negronis em outubro']],
+        fonte: 'Nota do fornecedor de 12/11, ficha do Negroni de 02/11 e 312 vendas em outubro no PDV. Valores ilustrativos.',
+        opcoes: [
+          { t: 'Subir €0,50 no preço', efeito: 'custo 22%', feito: 'Preço atualizado no PDV a partir de hoje: €9,50. Custo volta a 22%. Medindo as vendas por 4 semanas contra outubro.' },
+          { t: 'Trocar o vermute da casa', efeito: 'custo 21%', feito: 'Ficha do Negroni atualizada com o vermute B e enviada ao time. Custo 21%.' },
+          { t: 'Manter como está', efeito: 'custo 23%', feito: 'Mantido. O Barback avisa se o custo passar de 25%.' }
+        ] },
+      { id: 'guest', cad: 'mkt', titulo: 'Quinta tem guest shift do Bar Brasa aqui. Convido quem já brindou com a casa?', cartaz: true,
+        linhas: [['quem', '46 pessoas brindaram com o Sea Bar nos últimos 6 meses'], ['custa', 'nada: 46 mensagens e 1 story']],
+        fonte: 'Brindes registrados nos passaportes nos últimos 6 meses. A arte usa o nome dos drinks do evento, nunca a receita.',
+        opcoes: [
+          { t: 'Convite e story', efeito: '46 + 1', feito: 'Convite enviado a 46 pessoas e story agendado para quinta, 18:00. As respostas entram no livro de turno.' },
+          { t: 'Só o story', efeito: '1 story', feito: 'Story agendado para quinta, 18:00. Nenhum convite enviado.' },
+          { t: 'Agora não', efeito: '', feito: 'Nada enviado. O Barback não sugere de novo para este evento.' }
+        ] }
+    ];
+    const recadosMeu = [
+      { id: 'folga', cad: 'op', titulo: 'Você está há 9 noites sem folga. Peço a terça, 24/11?',
+        linhas: [['escala', 'Na terça o Sea Bar tem mais 2 pessoas na barra.'], ['freela', 'Nenhum freela marcado para terça.']],
+        fonte: 'Sua escala no Sea Bar e a sua agenda de freelas.',
+        opcoes: [
+          { t: 'Pedir a folga', efeito: '', feito: 'Pedido enviado a Marta Ortega, gerente do bar. A resposta aparece aqui.' },
+          { t: 'Agora não', efeito: '', feito: 'Tudo bem. O Barback volta a avisar em 3 noites.' }
+        ] },
+      { id: 'freela', cad: 'fin', titulo: 'Freela de evento no sábado: cobre €180, não €120.',
+        linhas: [['por quê', 'Sua noite no Sea Bar rende €151 em média, com gorjetas.'], ['inclui', '5 horas e 2 drinks autorais']],
+        fonte: 'Seus registros de setembro a novembro. Valores ilustrativos.',
+        opcoes: [
+          { t: 'Responder €180', efeito: '+ €60', feito: 'Resposta enviada ao organizador com €180 e o que está incluído.' },
+          { t: 'Aceitar €120', efeito: '', feito: 'Aceite enviado. O freela entrou na sua agenda de sábado.' },
+          { t: 'Escrevo eu', efeito: '', feito: 'Rascunho aberto com os números ao lado. Nada enviado.' }
+        ] },
+      { id: 'residencia', cad: 'mkt', titulo: 'A Casa Ostra abriu uma residência de 2 semanas em Clássicos.',
+        linhas: [['pede', 'Grau Infusão em Clássicos'], ['você', 'Infusão, com 3 anos e 2 meses no ofício']],
+        fonte: 'Vaga publicada em 17/11 e o seu Passaporte, só com os carimbos públicos.',
+        opcoes: [
+          { t: 'Candidatar com o passaporte', efeito: '', feito: 'Candidatura enviada com o link dropp.me/teo. Só os carimbos públicos aparecem.' },
+          { t: 'Guardar', efeito: '', feito: 'Guardada na sua lista de vagas. Fecha em 30/11.' }
+        ] }
+    ];
+
+    const montar = (r, nivel) => {
+      const idx = s.decisoes[r.id];
+      const feito = idx !== undefined;
+      const so = !feito && nivel === 'observa';
+      const aberta = !!s.fontes[r.id];
+      return {
+        cadeira: cadeiras[r.cad].nome,
+        cor: cadeiras[r.cad].cor,
+        nivel: nivelNome[nivel],
+        titulo: r.titulo,
+        linhas: r.linhas.map((l) => ({ k: l[0], v: l[1] })),
+        temCartaz: !!r.cartaz,
+        fonte: r.fonte,
+        fonteAberta: aberta,
+        fonteRot: aberta ? 'Esconder de onde veio' : 'De onde veio o número',
+        verFonte: () => { const f = Object.assign({}, s.fontes); f[r.id] = !aberta; set({ fontes: f }); },
+        temLimite: !feito && casa && nivel === 'sozinho',
+        limite: limites[r.cad],
+        aberto: !feito && !so,
+        soAviso: so,
+        feito: feito,
+        feitoRot: casa ? 'decidido' : 'feito',
+        feitoTxt: feito ? r.opcoes[idx].feito : '',
+        opcoes: r.opcoes.map((op, i) => ({
+          t: op.t,
+          efeito: op.efeito,
+          cls: i === 0 ? 'btn cheio opcao-btn' : 'btn opcao-btn',
+          pick: () => {
+            const d = Object.assign({}, s.decisoes);
+            d[r.id] = i;
+            set({ decisoes: d, aviso: casa ? 'Decidido. Entrou no livro de turno.' : 'Feito. Só você vê.' });
+          }
+        }))
+      };
+    };
+    const recados = casa ? recadosCasa.map((r) => montar(r, s.niveis[r.cad])) : recadosMeu.map((r) => montar(r, 'sugere'));
+    const pendentes = recados.filter((r) => r.aberto).length;
+    const soAvisos = recados.filter((r) => r.soAviso).length;
+    let pendentesTxt = 'Tudo decidido. Bom turno.';
+    if (pendentes === 1) pendentesTxt = '1 recado espera você. Um toque decide.';
+    else if (pendentes > 1) pendentesTxt = pendentes + ' recados esperam você. Um toque decide cada um.';
+    else if (soAvisos > 0) pendentesTxt = 'Só avisos por enquanto: nada para decidir.';
+
+    const horas = [
+      { id: 'antes', h: '17:00', t: 'Antes' },
+      { id: 'servico', h: '21:30', t: 'Serviço' },
+      { id: 'fecho', h: '01:30', t: 'Fechamento' }
+    ].map((h) => ({ h: h.h, t: h.t, on: s.hora === h.id, pick: () => set({ hora: h.id, aviso: '' }) }));
+    const faseIdx = { antes: 0, servico: 1, fecho: 2 };
+    const agora = faseIdx[s.hora] || 0;
+
+    const cordial3 = s.decisoes.cordial === 0;
+    const perguntasDef = {
+      mel: { q: 'Quanto vai de mel no Penicillin?', a: '22,5 ml de xarope de mel 2:1.', fonte: 'Ficha do Penicillin, de 15/10.' },
+      cordial: {
+        q: 'Ainda tem cordial de limão?',
+        a: cordial3 ? 'Tem 1,4 L. No ritmo de agora, dá até o fechamento.' : 'Restam 0,3 L. No ritmo de agora, acaba por volta das 23:15.',
+        fonte: cordial3 ? 'Lote LIM-022 (3 L, feito às 18:10) e vendas no PDV desde as 20:00.' : 'Lote LIM-022 (2 L, feito às 18:10) e vendas no PDV desde as 20:00.',
+        acao: (!cordial3 && !s.gimlet) ? () => set({ gimlet: true, aviso: 'Lembrete marcado para as 23:00.' }) : null,
+        acaoRot: 'Avisar o salão às 23:00',
+        depois: (!cordial3 && s.gimlet) ? 'Às 23:00 aviso o salão para parar de oferecer o Gimlet.' : ''
+      },
+      zombie: {
+        q: 'Como é o Zombie da casa?',
+        a: 'Não tenho ficha do Zombie da casa, então não respondo de cabeça.',
+        fonte: 'Sem ficha, sem resposta.',
+        acao: s.zombie ? null : () => set({ zombie: true, aviso: 'Ficha em branco no Caderno, marcada para amanhã.' }),
+        acaoRot: 'Abrir uma ficha para amanhã',
+        depois: s.zombie ? 'Abri uma ficha em branco do Zombie no Caderno, para amanhã às 17:00.' : ''
+      }
+    };
+    const nada = () => {};
+    const falasBase = [
+      { quem: 'Você, por voz', t: 'Quanto vai de Campari no Boulevardier da casa?', cls: 'fala voce' },
+      { quem: 'Barback', t: '30 ml.', fonte: 'Ficha do Boulevardier, atualizada em 02/11.', cls: 'fala bb' },
+      { quem: 'Você, por voz', t: 'Acabou o gelo em bola.', cls: 'fala voce' },
+      { quem: 'Barback', t: 'Avisei o salão e marquei 2 sacos no pedido de amanhã.', fonte: 'Regra de reposição: gelo entra no pedido sozinho, até €30.', cls: 'fala bb' }
+    ];
+    s.perguntas.forEach((id) => {
+      const d = perguntasDef[id];
+      falasBase.push({ quem: 'Você, por voz', t: d.q, cls: 'fala voce' });
+      falasBase.push({ quem: 'Barback', t: d.a, fonte: d.fonte, cls: 'fala bb', acao: d.acao, acaoRot: d.acaoRot });
+      if (d.depois) falasBase.push({ quem: 'Barback', t: d.depois, cls: 'fala bb' });
+    });
+    const falas = falasBase.map((f) => ({
+      quem: f.quem, t: f.t, cls: f.cls,
+      fonte: f.fonte || '', temFonte: !!f.fonte,
+      temAcao: !!f.acao, acao: f.acao || nada, acaoRot: f.acaoRot || ''
+    }));
+    const sugestoes = ['mel', 'cordial', 'zombie'].filter((id) => s.perguntas.indexOf(id) < 0).map((id) => ({
+      t: perguntasDef[id].q,
+      pick: () => set({ perguntas: s.perguntas.concat([id]), aviso: '' })
+    }));
+
+    const suposDef = [
+      { id: 'mel', ouvi: 'xarope de mel', opts: ['lote MEL-004, aberto em 12/11', 'lote MEL-005, aberto em 17/11'] },
+      { id: 'coupe', ouvi: 'dois copos coupe', opts: ['2 coupes quebrados; restam 22 no estoque'] },
+      { id: 'especial', ouvi: 'o especial', opts: ['Shrub de gengibre, o especial de outono', 'Highball de figo, da carta'] }
+    ];
+    const supIdx = (id) => s.supos[id] || 0;
+    const supos = suposDef.map((d) => ({
+      ouviTxt: 'você disse “' + d.ouvi + '”',
+      supus: d.opts[supIdx(d.id) % d.opts.length],
+      podeTrocar: d.opts.length > 1,
+      trocar: () => {
+        const o = Object.assign({}, s.supos);
+        const n = (supIdx(d.id) + 1) % d.opts.length;
+        o[d.id] = n;
+        set({ supos: o, aviso: 'Corrigido: “' + d.ouvi + '” é ' + d.opts[n] + '.' });
+      }
+    }));
+    const melLote = supIdx('mel') === 0 ? 'MEL-004' : 'MEL-005';
+    const especial = supIdx('especial') === 0 ? 'Shrub de gengibre' : 'Highball de figo';
+    const especialN = supIdx('especial') === 0 ? 38 : 21;
+    const vaiFazer = [
+      { r: 'livro', t: 'Registrar a nota no livro de turno.' },
+      { r: 'estoque', t: 'Dar baixa no lote ' + melLote + ' e em 2 coupes.' },
+      { r: 'rascunho', t: 'Pedido de compra: 2 kg de mel e 6 coupes. Só sai com o seu ok.' },
+      { r: 'amanhã', t: 'Pôr 1,5 L de xarope de mel 2:1 na lista de preparo.' },
+      { r: 'destaque', t: especial + ' como destaque da noite: ' + especialN + ' saídas no PDV.' }
+    ];
+    const humores = ['Tranquilo', 'Puxado', 'Pesado'].map((t) => ({ t: t, on: s.humor === t, pick: () => set({ humor: s.humor === t ? '' : t }) }));
+
+    const opSozinho = s.niveis.op === 'sozinho';
+    const hoje = [];
+    if (opSozinho) {
+      hoje.push({ h: '16:40', cad: 'op', t: 'Fichas da carta e teste de 10 perguntas enviados à Ana, que começa hoje.', quem: 'Barback, sozinho · regra de quem chega' });
+      hoje.push({ h: '16:45', cad: 'op', t: 'Xarope simples abaixo do mínimo (0,4 L): 2 L na lista de preparo.', quem: 'Barback, sozinho · limite de preparo' });
+    }
+    const horaDec = { cordial: '17:04', negroni: '17:06', guest: '17:09' };
+    recadosCasa.forEach((r) => {
+      const i = s.decisoes[r.id];
+      if (i !== undefined) hoje.push({ h: horaDec[r.id], cad: r.cad, t: r.opcoes[i].feito, quem: 'decidido por Teo · ' + cadeiras[r.cad].nome });
+    });
+    if (agora >= 1) {
+      hoje.push({ h: '21:52', cad: 'op', t: 'Gelo em bola acabou. Salão avisado; 2 sacos no pedido de amanhã.', quem: 'aviso por voz de Teo' });
+      if (s.gimlet) hoje.push({ h: '22:30', cad: 'op', t: 'Lembrete: às 23:00 o salão para de oferecer o Gimlet.', quem: 'pedido por voz de Teo' });
+      if (s.zombie) hoje.push({ h: '22:41', cad: 'op', t: 'Sem ficha do Zombie da casa: ficha em branco aberta no Caderno.', quem: 'Barback · sem ficha, sem resposta' });
+    }
+    if (agora >= 2 && s.passo === 'fechado') {
+      hoje.push({ h: '01:32', cad: 'op', t: 'Nota de turno: acabou o xarope de mel (' + melLote + '), 2 coupes quebrados, ' + especial + ' foi o destaque.', quem: 'nota por voz de Teo' });
+      hoje.push({ h: '01:32', cad: 'fin', t: 'Pedido de compra em rascunho: 2 kg de mel e 6 coupes.', quem: 'Barback · espera o seu ok' });
+    }
+    const ontem = [
+      { h: '17:02', cad: 'op', t: 'Cordial de maracujá vencia em 3 dias: entrou no especial da noite.', quem: 'decidido por Teo · Operação' },
+      { h: '23:40', cad: 'op', t: 'Pergunta sem ficha: Mezcal Mule. Ficha aberta para a Marta revisar.', quem: 'Barback · sem ficha, sem resposta' },
+      { h: '01:25', cad: 'op', t: 'Nota de turno: varanda cheia às 23h, faltou mais uma pessoa na barra.', quem: 'nota por voz de Lucas Moreno' }
+    ];
+    const comCor = (e) => ({ h: e.h, t: e.t, quem: e.quem, cor: cadeiras[e.cad].cor });
+    const noites = [
+      { data: 'Sexta, 20/11 · hoje', itens: hoje.map(comCor) },
+      { data: 'Quinta, 19/11', itens: ontem.map(comCor) }
+    ];
+
+    const niveisIds = ['observa', 'sugere', 'ok', 'sozinho'];
+    const curto = { observa: 'Observa', sugere: 'Sugere', ok: 'Com ok', sozinho: 'Sozinho' };
+    const exemplos = {
+      op: {
+        observa: 'Só avisa: o cordial de maracujá vence em 3 dias.',
+        sugere: 'Traz a decisão pronta: faça 3 L de cordial, e não 2.',
+        ok: 'Com um toque seu, põe na lista de preparo e avisa o time.',
+        sozinho: 'Repõe o preparo abaixo do mínimo e prepara quem chega. O que muda pela previsão ainda pede o seu ok.'
+      },
+      fin: {
+        observa: 'Só avisa: o Campari subiu 11% na última nota.',
+        sugere: 'Traz três caminhos para o custo do Negroni, com o efeito de cada um.',
+        ok: 'Com um toque seu, muda o preço no PDV ou troca o vermute na ficha.',
+        sozinho: 'Atualiza o custo por dose quando chega a nota. Preço, nunca sozinho.'
+      },
+      mkt: {
+        observa: 'Só avisa: quinta tem guest shift do Bar Brasa.',
+        sugere: 'Traz o convite e o story prontos para você escolher.',
+        ok: 'Com um toque seu, envia os convites e agenda o story.',
+        sozinho: 'Publica o story de um guest shift que você já aprovou.'
+      }
+    };
+    const cadeirasLista = ['op', 'fin', 'mkt'].map((id) => ({
+      nome: cadeiras[id].nome,
+      cor: cadeiras[id].cor,
+      aria: 'Até onde o Barback vai em ' + cadeiras[id].nome,
+      exemplo: exemplos[id][s.niveis[id]],
+      niveis: niveisIds.map((n) => ({
+        t: curto[n],
+        on: s.niveis[id] === n,
+        pick: () => {
+          const o = Object.assign({}, s.niveis);
+          o[id] = n;
+          set({ niveis: o, aviso: cadeiras[id].nome + ': ' + nivelNome[n] + '.' });
+        }
+      }))
+    }));
+
+    const fato = casa
+      ? { rot: 'Sexta, 20/11 · Sea Bar, Valência', n: '140 reservas', sub: '27 °C às 21h', base: 'Estimativa pelas últimas 4 sextas e pela previsão do tempo. Pode mudar.' }
+      : { rot: 'Sua renda em novembro, até hoje', n: '€1.940', sub: 'salário, gorjetas e 1 freela', base: 'Soma do que você registrou. O Barback não vê a sua conta no banco.' };
+    const titulos = { livro: 'Livro de turno', regras: 'O que o Barback pode fazer' };
+
+    return {
+      principal: principal,
+      mostrarVoltar: !principal,
+      tituloTela: titulos[s.tela] || '',
+      voltar: () => set({ tela: 'turno', aviso: '' }),
+      donoCasa: casa,
+      donoMeu: meu,
+      casa: casa,
+      meu: meu,
+      verCasa: () => set({ dono: 'casa', tela: 'turno', aviso: '' }),
+      verMeu: () => set({ dono: 'meu', tela: 'turno', aviso: '' }),
+      mostrarRelogio: casa,
+      semRelogio: meu,
+      horas: horas,
+      corpoRef: this._refCorpo || (this._refCorpo = (el) => { this._corpo = el; }),
+
+      tRecados: principal && (meu || s.hora === 'antes'),
+      tServico: principal && casa && s.hora === 'servico',
+      tFecho: principal && casa && s.hora === 'fecho',
+      tLivro: s.tela === 'livro',
+      tRegras: s.tela === 'regras',
+
+      fatoRot: fato.rot,
+      fatoN: fato.n,
+      fatoSub: fato.sub,
+      fatoBase: fato.base,
+      pendentesTxt: pendentesTxt,
+      recados: recados,
+      jaFez: casa && opSozinho,
+      semJaFez: casa && !opSozinho,
+      avisoOpTxt: 'Com Operação em ' + nivelNome[s.niveis.op] + ', o Barback não repõe nada sozinho. Hoje ele só avisa: o xarope simples está abaixo do mínimo, e a Ana começa hoje.',
+      formiga: () => set({ aviso: 'Psiu: toda casa tem uma Formiga, que repõe tudo antes de alguém pedir.' }),
+      irLivro: () => set({ tela: 'livro', aviso: '' }),
+      irRegras: () => set({ tela: 'regras', aviso: '' }),
+
+      falas: falas,
+      falar: () => set({ aviso: sugestoes.length ? 'No produto, você segura e fala. Aqui, toque numa das perguntas abaixo.' : 'No produto, você segura e fala. As perguntas deste protótipo acabaram.' }),
+      temSugestoes: sugestoes.length > 0,
+      sugestoes: sugestoes,
+
+      passoGravar: s.passo === 'gravar',
+      passoEntendi: s.passo === 'entendi',
+      passoFechado: s.passo === 'fechado',
+      gravar: () => set({ passo: 'entendi', aviso: '' }),
+      gravarDeNovo: () => set({ passo: 'gravar', supos: { mel: 0, especial: 0 }, aviso: '' }),
+      fechar: () => set({ passo: 'fechado', aviso: 'Turno fechado. A nota está no livro de turno.' }),
+      supos: supos,
+      vaiFazer: vaiFazer,
+      humores: humores,
+
+      noites: noites,
+      cadeirasLista: cadeirasLista,
+
+      temAviso: !!s.aviso,
+      aviso: s.aviso,
+      fecharAviso: () => set({ aviso: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

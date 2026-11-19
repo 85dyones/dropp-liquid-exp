@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Etiquetas de lote · DROPP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..800&family=Courier+Prime:wght@400;700&display=swap">
+<style id="pagina"></style>
+<style>
+/* Etiqueta térmica 100 × 50 mm, só tinta preta (a térmica não imprime cor).
+   Regra do cliente: o bar primeiro, o DROPP depois. ?lang=pt|es  ?formato=termica|a4  ?check=1 */
+:root { --tinta: #121212; --papel: #FFFFFF; --mesa: #EFE8D8; --apagado: #5B5344; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--mesa); color: var(--tinta); font-family: Archivo, "Helvetica Neue", Arial, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.tela { max-width: 214mm; margin: 0 auto; padding: 8mm 6mm 2mm; font-size: 13px; line-height: 1.5; color: var(--apagado); }
+.tela h1 { margin: 0 0 4px; font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: 26px; text-transform: uppercase; color: var(--tinta); letter-spacing: 0.01em; }
+.tela p { margin: 0; max-width: 70ch; }
+.folha { display: flex; flex-wrap: wrap; gap: 6mm; justify-content: center; padding: 6mm; }
+.etq { width: 100mm; height: 50mm; background: var(--papel); padding: 2.8mm 3.2mm; display: grid; grid-template-columns: minmax(0, 1fr) 30mm; gap: 2.6mm; overflow: hidden; position: relative; box-shadow: 0 2mm 5mm rgba(60, 45, 20, 0.22); }
+.esq { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; gap: 0.6mm; }
+.cab { display: flex; justify-content: space-between; align-items: baseline; gap: 2mm; }
+.cab b { font-family: Anton, Impact, sans-serif; font-weight: 400; font-size: 4.1mm; letter-spacing: 0.05em; line-height: 1; }
+.cab span { font-family: "Courier Prime", monospace; font-size: 1.9mm; letter-spacing: 0.05em; text-transform: uppercase; text-align: right; line-height: 1.2; }
+.nome { font-weight: 800; font-variation-settings: "wdth" 68; font-size: 5mm; line-height: 0.95; text-transform: uppercase; }
+.id { font-family: "Courier Prime", monospace; font-size: 2.3mm; line-height: 1.2; }
+.hr { border-top: 0.3mm dashed var(--tinta); }
+.datas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2mm; }
+.datas div { display: grid; gap: 0.2mm; }
+.datas .k { font-family: "Courier Prime", monospace; font-weight: 700; font-size: 1.9mm; letter-spacing: 0.08em; text-transform: uppercase; }
+.datas b { font-weight: 800; font-variation-settings: "wdth" 75; font-size: 4.3mm; line-height: 1; }
+.datas small { font-family: "Courier Prime", monospace; font-size: 2mm; line-height: 1.2; }
+.ing { font-family: "Courier Prime", monospace; font-size: 2mm; line-height: 1.25; }
+.al { font-family: "Courier Prime", monospace; font-weight: 700; font-size: 2.1mm; text-transform: uppercase; line-height: 1.2; }
+.dir { display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-width: 0; }
+.qr { width: 30mm; height: 30mm; display: block; margin-top: -1.2mm; }
+.ler { font-family: "Courier Prime", monospace; font-size: 1.75mm; line-height: 1.2; text-align: center; }
+.marca { display: flex; align-items: center; gap: 1mm; font-family: "Courier Prime", monospace; font-size: 1.7mm; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.marca svg { width: 2.6mm; height: 3.1mm; flex: none; }
+.payload { width: 100mm; font-family: "Courier Prime", monospace; font-size: 10px; line-height: 1.35; white-space: pre-wrap; color: var(--apagado); margin-top: 2mm; }
+.item { display: grid; justify-items: start; }
+.a4 .folha, .termica .folha { padding: 0; gap: 0; }
+.a4 .folha { display: grid; grid-template-columns: repeat(2, 100mm); grid-auto-rows: 50mm; justify-content: center; }
+.a4 .etq, .termica .etq { box-shadow: none; outline: 0.2mm dashed #BBB; }
+.termica .etq { break-after: page; page-break-after: always; outline: 0; }
+.termica .item:last-child .etq { break-after: auto; page-break-after: auto; }
+#resultado:empty { display: none; }
+.a4 .payload, .termica .payload, .a4 .tela, .termica .tela { display: none; }
+#resultado { white-space: pre-wrap; font-family: monospace; }
+@media print { body { background: #FFF; } .tela, .payload { display: none !important; } .etq { box-shadow: none; } }
+</style>
+</head>
+<body>
+<div class="tela">
+  <h1 id="titulo">Etiquetas de lote</h1>
+  <p id="intro"></p>
+</div>
+<main class="folha" id="folha"></main>
+<pre id="resultado"></pre>
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+  <defs>
+    <g id="gota-traco" fill="none" stroke="#121212" stroke-width="5" stroke-linejoin="round">
+      <path d="M50 8 C50 8 36 28 32 46 C37 40 45 36 50 36 C55 36 63 40 68 46 C64 28 50 8 50 8 Z"></path>
+      <path d="M32 46 C24 57 20 68 22 79 C25 80 29 80 34 78 C31 66 33 55 42 46 C38 45 35 45 32 46 Z"></path>
+      <path d="M22 79 C24 93 35 106 50 108 C46 98 46 88 50 78 C39 77 31 82 22 79 Z"></path>
+      <path d="M68 46 C76 57 80 68 78 79 C75 80 71 80 66 78 C69 66 67 55 58 46 C62 45 65 45 68 46 Z"></path>
+      <path d="M78 79 C76 93 65 106 50 108 C54 98 54 88 50 78 C61 77 69 82 78 79 Z"></path>
+      <path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z"></path>
+      <path d="M50 78 C44 86 44 95 50 106 C56 95 56 86 50 78 Z"></path>
+    </g>
+  </defs>
+</svg>
+<script>
+function qrMatriz(texto) {
+  var bytes = [];
+  var s = unescape(encodeURIComponent(texto));
+  for (var i = 0; i < s.length; i++) bytes.push(s.charCodeAt(i));
+  var ECC = [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22];
+  var BLOCOS = [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5];
+  var raw = function (v) { var r = (16 * v + 128) * v + 64; if (v >= 2) { var na = Math.floor(v / 7) + 2; r -= (25 * na - 10) * na - 55; if (v >= 7) r -= 36; } return r; };
+  var cap = function (v) { return Math.floor(raw(v) / 8) - ECC[v] * BLOCOS[v]; };
+  var nec = 12 + 12 + bytes.length * 8;
+  var v = 1;
+  while (v < 9 && nec > cap(v) * 8) v++;
+  if (nec > cap(v) * 8) throw new Error('texto longo demais para o QR');
+  var bb = [];
+  var put = function (val, n) { for (var i = n - 1; i >= 0; i--) bb.push((val >>> i) & 1); };
+  put(7, 4); put(26, 8);
+  put(4, 4); put(bytes.length, 8);
+  for (var i = 0; i < bytes.length; i++) put(bytes[i], 8);
+  var capBits = cap(v) * 8;
+  put(0, Math.min(4, capBits - bb.length));
+  put(0, (8 - bb.length % 8) % 8);
+  for (var pad = 0xEC; bb.length < capBits; pad ^= 0xEC ^ 0x11) put(pad, 8);
+  var dados = [];
+  for (var i = 0; i < bb.length; i += 8) { var x = 0; for (var j = 0; j < 8; j++) x = (x << 1) | bb[i + j]; dados.push(x); }
+  var mul = function (x, y) { var z = 0; for (var i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; } return z; };
+  var divisor = function (g) { var r = []; for (var i = 0; i < g - 1; i++) r.push(0); r.push(1); var raiz = 1; for (var i = 0; i < g; i++) { for (var j = 0; j < r.length; j++) { r[j] = mul(r[j], raiz); if (j + 1 < r.length) r[j] ^= r[j + 1]; } raiz = mul(raiz, 2); } return r; };
+  var resto = function (d, div) { var r = div.map(function () { return 0; }); d.forEach(function (b) { var f = b ^ r.shift(); r.push(0); div.forEach(function (c, i) { r[i] ^= mul(c, f); }); }); return r; };
+  var nb = BLOCOS[v], el = ECC[v], tot = Math.floor(raw(v) / 8), curtos = nb - tot % nb, curtoLen = Math.floor(tot / nb);
+  var blocos = [], div = divisor(el), k = 0;
+  for (var i = 0; i < nb; i++) { var d = dados.slice(k, k + curtoLen - el + (i < curtos ? 0 : 1)); k += d.length; var e = resto(d, div); if (i < curtos) d.push(0); blocos.push(d.concat(e)); }
+  var cw = [];
+  for (var i = 0; i < blocos[0].length; i++) for (var j = 0; j < blocos.length; j++) if (i !== curtoLen - el || j >= curtos) cw.push(blocos[j][i]);
+  var n = v * 4 + 17, mod = [], fun = [];
+  for (var y = 0; y < n; y++) { mod.push([]); fun.push([]); for (var x = 0; x < n; x++) { mod[y].push(false); fun[y].push(false); } }
+  var fset = function (x, y, dk) { mod[y][x] = dk; fun[y][x] = true; };
+  for (var i = 0; i < n; i++) { fset(6, i, i % 2 === 0); fset(i, 6, i % 2 === 0); }
+  var finder = function (cx, cy) { for (var dy = -4; dy <= 4; dy++) for (var dx = -4; dx <= 4; dx++) { var dist = Math.max(Math.abs(dx), Math.abs(dy)), xx = cx + dx, yy = cy + dy; if (xx >= 0 && xx < n && yy >= 0 && yy < n) fset(xx, yy, dist !== 2 && dist !== 4); } };
+  finder(3, 3); finder(n - 4, 3); finder(3, n - 4);
+  var al = [];
+  if (v > 1) { var na = Math.floor(v / 7) + 2, passo = Math.ceil((v * 4 + 4) / (na * 2 - 2)) * 2; al = [6]; for (var pos = n - 7; al.length < na; pos -= passo) al.splice(1, 0, pos); }
+  for (var i = 0; i < al.length; i++) for (var j = 0; j < al.length; j++) {
+    if ((i === 0 && j === 0) || (i === 0 && j === al.length - 1) || (i === al.length - 1 && j === 0)) continue;
+    for (var dy = -2; dy <= 2; dy++) for (var dx = -2; dx <= 2; dx++) fset(al[i] + dx, al[j] + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1);
+  }
+  var formato = function (mask) {
+    var dat = mask, r = dat;
+    for (var i = 0; i < 10; i++) r = (r << 1) ^ ((r >>> 9) * 0x537);
+    var bits = ((dat << 10) | r) ^ 0x5412;
+    var bt = function (i) { return ((bits >>> i) & 1) === 1; };
+    for (var i = 0; i <= 5; i++) fset(8, i, bt(i));
+    fset(8, 7, bt(6)); fset(8, 8, bt(7)); fset(7, 8, bt(8));
+    for (var i = 9; i < 15; i++) fset(14 - i, 8, bt(i));
+    for (var i = 0; i < 8; i++) fset(n - 1 - i, 8, bt(i));
+    for (var i = 8; i < 15; i++) fset(8, n - 15 + i, bt(i));
+    fset(8, n - 8, true);
+  };
+  formato(0);
+  if (v >= 7) {
+    var r = v;
+    for (var i = 0; i < 12; i++) r = (r << 1) ^ ((r >>> 11) * 0x1F25);
+    var vb = (v << 12) | r;
+    for (var i = 0; i < 18; i++) { var b = ((vb >>> i) & 1) === 1, a = n - 11 + i % 3, c = Math.floor(i / 3); fset(a, c, b); fset(c, a, b); }
+  }
+  var ib = 0;
+  for (var dir = n - 1; dir >= 1; dir -= 2) {
+    if (dir === 6) dir = 5;
+    for (var vert = 0; vert < n; vert++) for (var j = 0; j < 2; j++) {
+      var x = dir - j, sobe = ((dir + 1) & 2) === 0, y = sobe ? n - 1 - vert : vert;
+      if (!fun[y][x] && ib < cw.length * 8) { mod[y][x] = ((cw[ib >>> 3] >>> (7 - (ib & 7))) & 1) === 1; ib++; }
+    }
+  }
+  var mascara = function (m) {
+    for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) {
+      var inv;
+      if (m === 0) inv = (x + y) % 2 === 0;
+      else if (m === 1) inv = y % 2 === 0;
+      else if (m === 2) inv = x % 3 === 0;
+      else if (m === 3) inv = (x + y) % 3 === 0;
+      else if (m === 4) inv = (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0;
+      else if (m === 5) inv = (x * y) % 2 + (x * y) % 3 === 0;
+      else if (m === 6) inv = ((x * y) % 2 + (x * y) % 3) % 2 === 0;
+      else inv = ((x + y) % 2 + (x * y) % 3) % 2 === 0;
+      if (!fun[y][x] && inv) mod[y][x] = !mod[y][x];
+    }
+  };
+  var penalidade = function () {
+    var p = 0, escuros = 0;
+    for (var y = 0; y < n; y++) {
+      var cr = null, rl = 0, cc = null, cl = 0;
+      for (var x = 0; x < n; x++) {
+        if (mod[y][x] === cr) { rl++; if (rl === 5) p += 3; else if (rl > 5) p++; } else { cr = mod[y][x]; rl = 1; }
+        if (mod[x][y] === cc) { cl++; if (cl === 5) p += 3; else if (cl > 5) p++; } else { cc = mod[x][y]; cl = 1; }
+        if (mod[y][x]) escuros++;
+        if (y < n - 1 && x < n - 1 && mod[y][x] === mod[y][x + 1] && mod[y][x] === mod[y + 1][x] && mod[y][x] === mod[y + 1][x + 1]) p += 3;
+      }
+    }
+    p += (Math.ceil(Math.abs(escuros * 20 - n * n * 10) / (n * n)) - 1) * 10;
+    return p;
+  };
+  var melhor = 0, menor = Infinity;
+  for (var m = 0; m < 8; m++) { mascara(m); formato(m); var pen = penalidade(); if (pen < menor) { menor = pen; melhor = m; } mascara(m); }
+  mascara(melhor);
+  formato(melhor);
+  return { versao: v, n: n, mod: mod };
+}
+function qrCaminho(mat) {
+  var d = '';
+  for (var y = 0; y < mat.n; y++) for (var x = 0; x < mat.n; x++) if (mat.mod[y][x]) d += 'M' + (x + 4) + ' ' + (y + 4) + 'h1v1h-1z';
+  return d;
+}
+
+var params = new URLSearchParams(location.search);
+var lang = params.get('lang') === 'es' ? 'es' : 'pt';
+var formatoFolha = params.get('formato') || 'tela';
+var T = {
+  pt: {
+    titulo: 'Etiquetas de lote', cidade: 'Valência · barra principal', lote: 'Lote', feito: 'Feito', vence: 'Vence', revisar: 'Revisar', por: 'por Teo A.', alerg: 'Alérgenos', ler: 'Leia no DROPP para dar baixa, registrar perda ou reimprimir',
+    intro: 'Etiquetas térmicas de 100 × 50 mm, só em preto. O QR guarda o texto do lote: qualquer celular lê, mesmo sem internet. No DROPP, a primeira linha abre o lote para conferir, dar baixa ou registrar perda.',
+    lotes: [
+      { id: 'PF-001', nome: 'Cordial de maracujá', rec: 'Garrafa #2', feito: '17/11/2026', fim: '22/11/2026', temp: 'manter a 4 °C', ing: 'Maracujá, açúcar de cana, ácido málico, água.', al: 'nenhum' },
+      { id: 'MEL-005', nome: 'Xarope de mel 2:1', rec: 'Garrafa #5', feito: '17/11/2026', fim: '01/12/2026', temp: 'manter a 4 °C', ing: 'Mel de laranjeira, água.', al: 'nenhum' },
+      { id: 'LIM-022', nome: 'Cordial de limão', rec: 'Garrafa #6', feito: '20/11/2026', fim: '23/11/2026', temp: 'manter a 4 °C', ing: 'Limão, açúcar, água, casca de limão.', al: 'nenhum' },
+      { id: 'VRM-007', nome: 'Vermute de castanha', rec: 'Frasco de infusão #3', feito: '15/11/2026', fim: '15/01/2027', temp: 'temperatura ambiente', ing: 'Vermute rosso, castanha torrada, casca de laranja.', al: 'castanha (fruto de casca rija)' },
+      { id: 'MP-002', nome: 'Ponche de leite clarificado', rec: 'Barril #4', feito: '12/11/2026', fim: '12/12/2026', temp: 'manter a 3 °C', ing: 'Rum, chá preto, especiarias, limão, leite (clarificado).', al: 'leite' },
+      { id: 'RS-003', nome: 'Centeio com gergelim tostado', rec: 'Frasco de infusão #9', feito: '10/11/2026', fim: '08/02/2027', revisar: true, temp: 'temperatura ambiente', ing: 'Whisky de centeio, óleo de gergelim tostado.', al: 'gergelim' }
+    ]
+  },
+  es: {
+    titulo: 'Etiquetas de lote', cidade: 'Valencia · barra principal', lote: 'Lote', feito: 'Hecho', vence: 'Caduca', revisar: 'Revisar', por: 'por Teo A.', alerg: 'Alérgenos', ler: 'Léelo en DROPP para dar de baja, registrar merma o reimprimir',
+    intro: 'Etiquetas térmicas de 100 × 50 mm, solo en negro. El QR guarda el texto del lote: cualquier móvil lo lee, incluso sin internet. En DROPP, la primera línea abre el lote para comprobarlo, darlo de baja o registrar merma.',
+    lotes: [
+      { id: 'PF-001', nome: 'Cordial de maracuyá', rec: 'Botella #2', feito: '17/11/2026', fim: '22/11/2026', temp: 'mantener a 4 °C', ing: 'Maracuyá, azúcar de caña, ácido málico, agua.', al: 'ninguno' },
+      { id: 'MEL-005', nome: 'Jarabe de miel 2:1', rec: 'Botella #5', feito: '17/11/2026', fim: '01/12/2026', temp: 'mantener a 4 °C', ing: 'Miel de azahar, agua.', al: 'ninguno' },
+      { id: 'LIM-022', nome: 'Cordial de lima', rec: 'Botella #6', feito: '20/11/2026', fim: '23/11/2026', temp: 'mantener a 4 °C', ing: 'Lima, azúcar, agua, piel de lima.', al: 'ninguno' },
+      { id: 'VRM-007', nome: 'Vermut de castaña', rec: 'Frasco de infusión #3', feito: '15/11/2026', fim: '15/01/2027', temp: 'temperatura ambiente', ing: 'Vermut rosso, castaña tostada, piel de naranja.', al: 'castaña (fruto de cáscara)' },
+      { id: 'MP-002', nome: 'Ponche de leche clarificado', rec: 'Barril #4', feito: '12/11/2026', fim: '12/12/2026', temp: 'mantener a 3 °C', ing: 'Ron, té negro, especias, limón, leche (clarificada).', al: 'leche' },
+      { id: 'RS-003', nome: 'Centeno con sésamo tostado', rec: 'Frasco de infusión #9', feito: '10/11/2026', fim: '08/02/2027', revisar: true, temp: 'temperatura ambiente', ing: 'Whisky de centeno, aceite de sésamo tostado.', al: 'sésamo' }
+    ]
+  }
+}[lang];
+
+function payload(l) {
+  var fimRot = l.revisar ? T.revisar : T.vence;
+  return 'DROPP ' + T.lote.toUpperCase() + ' ' + l.id + '\n' + l.nome + '\n' + T.feito + ' ' + l.feito + '\n' + fimRot + ' ' + l.fim + ' · ' + l.temp.replace(/^(manter a|mantener a) /, '') + '\n' + T.alerg + ': ' + l.al;
+}
+function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+document.documentElement.lang = lang === 'es' ? 'es' : 'pt-BR';
+document.getElementById('titulo').textContent = T.titulo;
+document.getElementById('intro').textContent = T.intro;
+document.body.className = formatoFolha;
+document.getElementById('pagina').textContent = formatoFolha === 'termica'
+  ? '@page { size: 100mm 50mm; margin: 0; }'
+  : (formatoFolha === 'a4' ? '@page { size: A4; margin: 23.5mm 5mm; }' : '@page { size: A4; margin: 10mm; }');
+
+var html = '';
+var mats = [];
+T.lotes.forEach(function (l) {
+  var txt = payload(l);
+  var mat = qrMatriz(txt);
+  mats.push({ id: l.id, txt: txt, mat: mat });
+  var lado = mat.n + 8;
+  html += '<div class="item"><div class="etq" aria-label="' + esc(l.nome) + ', lote ' + l.id + '">' +
+    '<div class="esq">' +
+      '<div class="cab"><b>SEA BAR</b><span>' + esc(T.cidade) + '</span></div>' +
+      '<div class="nome">' + esc(l.nome) + '</div>' +
+      '<div class="id">' + T.lote + ' ' + l.id + ' · ' + esc(l.rec) + '</div>' +
+      '<div class="hr"></div>' +
+      '<div class="datas"><div><span class="k">' + T.feito + '</span><b>' + l.feito + '</b><small>' + T.por + '</small></div>' +
+      '<div><span class="k">' + (l.revisar ? T.revisar : T.vence) + '</span><b>' + l.fim + '</b><small>' + esc(l.temp) + '</small></div></div>' +
+      '<div class="hr"></div>' +
+      '<div class="ing">' + esc(l.ing) + '</div>' +
+      '<div class="al">' + T.alerg + ': ' + esc(l.al) + '</div>' +
+    '</div>' +
+    '<div class="dir">' +
+      '<svg class="qr" viewBox="0 0 ' + lado + ' ' + lado + '" shape-rendering="crispEdges" role="img" aria-label="QR do lote ' + l.id + '"><rect width="' + lado + '" height="' + lado + '" fill="#FFFFFF"></rect><path fill="#121212" d="' + qrCaminho(mat) + '"></path></svg>' +
+      '<div class="ler">' + esc(T.ler) + '</div>' +
+      '<div class="marca"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-traco"></use></svg>DROPP · Liquid Experience</div>' +
+    '</div>' +
+  '</div><div class="payload">QR (versão ' + mat.versao + ', ' + mat.n + ' × ' + mat.n + '):\n' + esc(txt) + '</div></div>';
+});
+document.getElementById('folha').innerHTML = html;
+
+if (params.get('check') === '1') {
+  var out = document.getElementById('resultado');
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js';
+  s.onload = function () {
+    var res = mats.map(function (m) {
+      var esc8 = 6, lado = (m.mat.n + 8) * esc8;
+      var cv = document.createElement('canvas'); cv.width = lado; cv.height = lado;
+      var cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, lado, lado); cx.fillStyle = '#000';
+      for (var y = 0; y < m.mat.n; y++) for (var x = 0; x < m.mat.n; x++) if (m.mat.mod[y][x]) cx.fillRect((x + 4) * esc8, (y + 4) * esc8, esc8, esc8);
+      var img = cx.getImageData(0, 0, lado, lado);
+      var r = jsQR(img.data, lado, lado);
+      return { id: m.id, versao: m.mat.versao, lido: !!r, igual: !!r && r.data === m.txt, lidoTexto: r ? r.data : null };
+    });
+    out.textContent = 'RESULTADO ' + JSON.stringify(res);
+  };
+  s.onerror = function () { out.textContent = 'RESULTADO erro ao carregar o leitor'; };
+  document.head.appendChild(s);
+}
+</script>
+</body>
+</html>

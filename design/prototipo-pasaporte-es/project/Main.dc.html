@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Pasaporte del Oficio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wdth,wght@62..125,400..800&amp;family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;display=swap">
+<style>
+body { margin: 0; }
+.app { width: 390px; height: 844px; box-sizing: border-box; display: flex; flex-direction: column; background-color: #EFE8D8; background-image: radial-gradient(rgba(90, 65, 30, 0.06) 1px, transparent 1.3px); background-size: 4px 4px; color: #1C1A16; font-family: Archivo, "Helvetica Neue", Arial, sans-serif; font-size: 15px; line-height: 1.45; position: relative; overflow: hidden; }
+.app * { box-sizing: border-box; }
+.app p, .app h2, .app ul, .app dl, .app dd { margin: 0; }
+button { font-family: inherit; color: #1C1A16; }
+.app :focus-visible { outline: 2px solid #A21CAF; outline-offset: 2px; }
+.mono { font-family: "Courier Prime", "Courier New", monospace; }
+.esp { font-weight: 600; font-variation-settings: "wdth" 125; letter-spacing: 0.26em; text-transform: uppercase; }
+
+.topo { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 14px 10px; }
+.marca { display: flex; align-items: center; gap: 8px; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 26px; line-height: 1; text-transform: uppercase; letter-spacing: 0.02em; }
+.marca svg { width: 22px; height: 26px; flex: none; }
+.visao { display: flex; border: 1.5px solid #1C1A16; }
+.visao button { appearance: none; border: 0; background: transparent; padding: 0 11px; min-height: 34px; font-size: 12px; font-weight: 600; cursor: pointer; }
+.visao button[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
+.abas { display: flex; align-items: stretch; border-bottom: 1.5px solid #1C1A16; padding: 0 12px 0 6px; }
+.aba { appearance: none; border: 0; background: transparent; padding: 0 9px; min-height: 46px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 125; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1.5px; color: #6E6555; }
+.aba[aria-pressed="true"] { color: #1C1A16; border-bottom-color: #D946EF; }
+.mais { margin-left: auto; align-self: center; appearance: none; border: 0; background: #1C1A16; color: #F8F3E7 !important; font-weight: 700; font-size: 13px; padding: 0 12px; min-height: 38px; cursor: pointer; }
+.voltar-bar { display: flex; align-items: center; gap: 4px; padding: 6px 12px 6px 4px; border-bottom: 1.5px solid #1C1A16; min-height: 58px; }
+.voltar { appearance: none; border: 0; background: transparent; min-height: 44px; padding: 0 12px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.voltar-bar h2 { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.02em; }
+
+.corpo { flex: 1; overflow-y: auto; padding: 14px 14px 92px; display: flex; flex-direction: column; gap: 14px; }
+.banner { background: #D946EF; color: #1C1A16; padding: 10px 12px; font-size: 13px; line-height: 1.4; font-weight: 600; }
+.rot { font-family: Archivo, Arial, sans-serif; font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: #6E6555; }
+.titulo-bloco { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.05; text-transform: uppercase; letter-spacing: 0.01em; }
+.nota { font-size: 13px; line-height: 1.45; color: #6E6555; }
+.papel { background-color: #FAF6EC; background-image: radial-gradient(rgba(90, 65, 30, 0.05) 1px, transparent 1.3px); background-size: 5px 5px; color: #1C1A16; position: relative; border: 1.5px solid #1C1A16; }
+.papel .nota, .papel .rot { color: #5B5344; }
+.papel.corte::before, .papel.corte::after { content: ""; position: absolute; width: 14px; height: 14px; opacity: 0.5; background: linear-gradient(#1C1A16, #1C1A16) center / 1px 100% no-repeat, linear-gradient(#1C1A16, #1C1A16) center / 100% 1px no-repeat; pointer-events: none; }
+.papel.corte::before { top: 6px; left: 6px; }
+.papel.corte::after { bottom: 6px; right: 6px; }
+.bloco { padding: 14px; display: grid; gap: 9px; border-radius: 4px; }
+.linha-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { appearance: none; border: 1.5px solid #1C1A16; background: transparent; color: #1C1A16; min-height: 46px; padding: 0 14px; font-weight: 700; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn.cheio { background: #1C1A16; color: #F8F3E7; }
+.papel .btn { border-color: #1C1A16; color: #1C1A16; }
+.papel .btn.cheio { background: #1C1A16; color: #F8F3E7; }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.btn.largo { width: 100%; }
+.chk { list-style: none; padding: 0; display: grid; gap: 7px; font-size: 14px; line-height: 1.35; }
+.chk li { display: flex; gap: 8px; align-items: baseline; }
+.st { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11.5px; line-height: 1.3; padding: 1px 6px; white-space: nowrap; flex: none; }
+.st.ok { background: #10B981; color: #0F1C17; }
+.st.meio { background: #FACC15; color: #1C1A16; }
+.st.falta { background: transparent; color: inherit; border: 1px solid currentColor; }
+
+.rotulo { flex: none; border-radius: 6px 6px 4px 4px; overflow: hidden; box-shadow: 0 16px 30px -18px rgba(60, 45, 20, 0.5); }
+.arco { background: #1C1A16; color: #F3ECDD; padding: 12px 12px 20px; border-radius: 0 0 50% 50% / 0 0 24px 24px; display: grid; justify-items: center; gap: 4px; }
+.wordmark { display: flex; align-items: center; gap: 8px; }
+.wordmark svg { width: 22px; height: 26px; }
+.wordmark b { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 25px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; }
+.arco .esp { font-size: 9.5px; letter-spacing: 0.4em; color: #D9D2C2; text-align: center; }
+.rot-secao { display: flex; align-items: center; gap: 10px; font-weight: 700; font-variation-settings: "wdth" 125; font-size: 11px; line-height: 1.2; letter-spacing: 0.28em; text-transform: uppercase; }
+.rot-secao span { margin-right: -0.28em; }
+.rot-secao::before, .rot-secao::after { content: ""; flex: 1; height: 1.5px; background: #1C1A16; }
+.rot-miolo { padding: 10px 14px 14px; display: grid; gap: 10px; }
+.rot-num { display: flex; justify-content: space-between; font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11px; }
+.janela { display: grid; justify-items: center; gap: 2px; padding: 8px 0 6px; border-block: 1.5px solid #1C1A16; background-image: radial-gradient(rgba(28, 26, 22, 0.1) 1px, transparent 1.4px); background-size: 6px 6px; }
+.janela svg { width: 150px; height: 180px; overflow: visible; }
+.janela svg path { cursor: pointer; }
+.janela .nota { font-family: "Courier Prime", "Courier New", monospace; font-size: 11px; }
+.rot-nome { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 38px; line-height: 0.9; text-transform: uppercase; text-align: center; }
+.rot-cargo { font-family: "Courier Prime", "Courier New", monospace; font-size: 12.5px; line-height: 1.3; text-align: center; color: #5B5344; }
+.cantos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.canto { appearance: none; border: 1.5px solid #1C1A16; background: transparent; color: #1C1A16; padding: 5px 3px; font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 9.5px; line-height: 1.15; text-align: center; text-transform: uppercase; cursor: pointer; display: grid; gap: 2px; justify-items: center; }
+.canto:hover { background: rgba(28, 26, 22, 0.06); }
+.canto[aria-pressed="true"] { background: #1C1A16; color: #ECE3CE; }
+.c-n { display: block; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 19px; line-height: 1; }
+.c-rot { display: block; }
+.prova-medida { background: rgba(28, 26, 22, 0.07); padding: 10px 12px; display: grid; gap: 6px; font-size: 13px; line-height: 1.4; }
+.prova-medida ul { padding-left: 16px; display: grid; gap: 3px; }
+.fita { position: relative; z-index: 0; background: #1C1A16; color: #ECE3CE; text-align: center; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 15px; letter-spacing: 0.18em; text-transform: uppercase; padding: 6px 12px; margin-inline: 8px; }
+.fita::before, .fita::after { content: ""; position: absolute; top: 4px; width: 14px; height: 100%; background: #3A352C; z-index: -1; }
+.fita::before { left: -10px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 40% 50%); }
+.fita::after { right: -10px; clip-path: polygon(0 0, 100% 0, 60% 50%, 100% 100%, 0 100%); }
+.fita .y { color: #FACC15; }
+.rot-pe { font-family: "Courier Prime", "Courier New", monospace; font-size: 10.5px; line-height: 1.3; display: flex; justify-content: space-between; gap: 8px; color: #5B5344; }
+@keyframes saia { from { transform: translateY(-18px); clip-path: inset(0 0 100% 0); } to { transform: none; clip-path: inset(0 0 0 0); } }
+@keyframes saib { from { transform: translateY(-18px); clip-path: inset(0 0 100% 0); } to { transform: none; clip-path: inset(0 0 0 0); } }
+.sai-a { animation: saia 600ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.sai-b { animation: saib 600ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.folha-cab { display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; }
+.folha { height: 540px; flex: none; overflow: hidden; border-radius: 4px; }
+.folha-n { position: absolute; right: 26px; bottom: 8px; font-family: "Courier Prime", "Courier New", monospace; font-size: 11px; color: #5B5344; }
+.slot { position: absolute; }
+.carimbo { appearance: none; background: transparent; cursor: pointer; border: 2.5px solid currentColor; outline: 1px solid currentColor; outline-offset: -7px; display: grid; align-content: center; justify-items: center; gap: 2px; text-align: center; padding: 11px 16px; min-height: 66px; min-width: 120px;
+  font-family: Archivo, Arial, sans-serif; font-weight: 700; font-variation-settings: "wdth" 120; text-transform: uppercase; letter-spacing: 0.14em; font-size: 9.5px; line-height: 1.15; opacity: 0.93; filter: url(#tinta-gasta); }
+.carimbo b { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 17px; letter-spacing: 0.03em; }
+.carimbo small { font-family: "Courier Prime", "Courier New", monospace; font-weight: 400; font-size: 10px; text-transform: none; letter-spacing: 0; font-style: italic; }
+.forma-redondo { border-radius: 50%; width: 106px; height: 106px; min-width: 0; padding: 10px; }
+.forma-oval { border-radius: 999px; padding: 11px 22px; }
+.cor-violeta { color: #5B36C2; }
+.cor-ciano { color: #0784A0; }
+.cor-laranja { color: #B4520C; }
+.cor-verde { color: #0B7A57; }
+.cor-vermelho { color: #B02A2A; }
+.cor-magenta { color: #A21CAF; }
+.cor-amarelo { color: #8A6A00; }
+.cor-tinta { color: #1C1A16; }
+.carimbo.pendente { border-style: dashed; outline-style: dashed; opacity: 0.75; filter: none; }
+button.carimbo:hover { background: rgba(28, 26, 22, 0.06); }
+button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; }
+@keyframes batea { 0% { transform: scale(1.45); opacity: 0; } 70% { opacity: 1; } 100% { transform: scale(1); } }
+@keyframes bateb { 0% { transform: scale(1.45); opacity: 0; } 70% { opacity: 1; } 100% { transform: scale(1); } }
+.bate-a { animation: batea 220ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+.bate-b { animation: bateb 220ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+
+.palco { display: grid; place-items: center; height: 220px; flex: none; border-radius: 4px; }
+.fatos { border-top: 1.5px solid #1C1A16; }
+.fatos div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 9px 0; border-bottom: 1px solid rgba(28, 26, 22, 0.18); font-size: 14px; line-height: 1.4; }
+.fatos dt { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6E6555; padding-top: 3px; }
+.toggle { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 14px; cursor: pointer; }
+.toggle input { width: 20px; height: 20px; accent-color: #D946EF; margin: 0; }
+
+.legenda { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding: 10px 4px; border-radius: 4px; }
+.leg { display: grid; justify-items: center; gap: 3px; text-align: center; }
+.leg svg { width: 22px; height: 44px; }
+.leg b { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 14px; text-transform: uppercase; letter-spacing: 0.02em; }
+.leg span { font-family: "Courier Prime", "Courier New", monospace; font-size: 10px; color: #5B5344; }
+.oficios { list-style: none; padding: 0; background: #FAF6EC; border: 1.5px solid #1C1A16; border-radius: 4px; }
+.oficio { border-bottom: 1px solid rgba(28, 26, 22, 0.18); }
+.oficio:last-child { border-bottom: 0; }
+.faixa { appearance: none; width: 100%; border: 0; background: transparent; display: grid; grid-template-columns: 12px 22px 13px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 10px 10px; min-height: 48px; text-align: left; cursor: pointer; }
+.faixa:hover { background: rgba(28, 26, 22, 0.05); }
+.faixa .seta { color: #1C1A16; font-size: 11px; visibility: hidden; }
+.faixa[aria-expanded="true"] .seta { visibility: visible; }
+.faixa .n { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 12px; color: #6E6555; }
+.faixa .pet { width: 13px; height: 13px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); }
+.faixa .t { font-weight: 600; font-variation-settings: "wdth" 112; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.2; }
+.faixa[aria-expanded="true"] { background: rgba(28, 26, 22, 0.05); }
+.faixa[aria-expanded="true"] .t { font-weight: 800; }
+.faixa .g { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; color: #6E6555; white-space: nowrap; }
+.barril { padding: 4px 12px 14px; display: grid; gap: 10px; }
+.regua { position: relative; height: 46px; }
+.trilho { position: absolute; left: 0; right: 0; top: 10px; height: 10px; border: 1px solid #1C1A16; }
+.enchido { position: absolute; left: 0; top: 0; bottom: 0; }
+.limiar { position: absolute; top: -4px; bottom: -4px; width: 1.5px; background: #1C1A16; }
+.marca-t { position: absolute; top: 2px; width: 2px; height: 26px; background: #1C1A16; transform: translateX(-1px); }
+.ticks { position: absolute; left: 0; right: 0; top: 28px; font-family: "Courier Prime", "Courier New", monospace; font-size: 10px; color: #6E6555; }
+.ticks span { position: absolute; white-space: nowrap; }
+.barril .chk { font-family: "Courier Prime", "Courier New", monospace; font-size: 12.5px; }
+
+.opcao { appearance: none; text-align: left; padding: 14px; display: grid; gap: 4px; cursor: pointer; min-height: 64px; border-radius: 4px; color: #1C1A16; }
+.opcao strong { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 19px; text-transform: uppercase; letter-spacing: 0.01em; }
+.campo { display: grid; gap: 5px; }
+.campo input, .campo textarea { font: inherit; font-size: 15px; color: #1C1A16; border: 1.5px solid #1C1A16; background: #F3EBD8; min-height: 44px; padding: 9px 10px; width: 100%; border-radius: 0; }
+.campo textarea { resize: vertical; }
+.seg-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.seg { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 40px; padding: 0 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.seg[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
+.visor { position: relative; height: 300px; flex: none; background: #080F0C; display: grid; place-items: center; overflow: hidden; border-radius: 4px; }
+.canto-v { position: absolute; width: 34px; height: 34px; border-color: #ECE3CE; border-style: solid; border-width: 0; }
+.c1 { top: 16px; left: 16px; border-top-width: 3px; border-left-width: 3px; }
+.c2 { top: 16px; right: 16px; border-top-width: 3px; border-right-width: 3px; }
+.c3 { bottom: 16px; left: 16px; border-bottom-width: 3px; border-left-width: 3px; }
+.c4 { bottom: 16px; right: 16px; border-bottom-width: 3px; border-right-width: 3px; }
+.papel-foto { background: #E9E6DD; padding: 26px 30px; transform: rotate(3deg); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
+.fisico { color: #B02A2A; border: 3px solid currentColor; outline: 1.5px solid currentColor; outline-offset: -9px; border-radius: 50%; width: 150px; height: 150px; display: grid; align-content: center; justify-items: center; text-align: center; gap: 2px; transform: rotate(-9deg); font-weight: 700; font-variation-settings: "wdth" 120; text-transform: uppercase; letter-spacing: 0.14em; font-size: 10px; filter: url(#tinta-gasta); }
+.fisico b { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 26px; letter-spacing: 0.03em; }
+.fisico small { font-family: "Courier Prime", "Courier New", monospace; font-size: 10px; letter-spacing: 0.02em; }
+.cena { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 22px 0 14px; }
+.fone { width: 92px; height: 164px; border: 2px solid #1C1A16; border-radius: 18px; display: grid; place-items: center; text-align: center; padding: 8px; font-family: "Courier Prime", "Courier New", monospace; font-size: 11px; line-height: 1.3; }
+.fone.vazio { border-style: dashed; color: #6E6555; }
+.titulo-grande { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 46px; line-height: 0.95; text-transform: uppercase; }
+
+.seg-row.quatro { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.previa { display: grid; place-items: center; padding: 16px 0; background: #DDD4C0; border-radius: 4px; flex: none; }
+.story { width: 198px; height: 352px; background-color: #EFE8D8; background-image: radial-gradient(rgba(90, 65, 30, 0.07) 1px, transparent 1.3px); background-size: 4px 4px; border: 1.5px solid #1C1A16; border-radius: 12px; display: grid; grid-template-rows: auto 1fr auto auto auto auto; justify-items: center; align-items: center; gap: 6px; padding: 16px 12px 12px; box-shadow: 0 12px 26px rgba(60, 45, 20, 0.35); overflow: hidden; }
+.post { width: 272px; height: 272px; background-color: #EFE8D8; background-image: radial-gradient(rgba(90, 65, 30, 0.07) 1px, transparent 1.3px); background-size: 4px 4px; border: 1.5px solid #1C1A16; display: grid; grid-template-rows: auto 1fr auto auto auto; justify-items: center; align-items: center; gap: 4px; padding: 14px 12px 10px; box-shadow: 0 12px 26px rgba(60, 45, 20, 0.35); overflow: hidden; }
+.sp-topo { font-weight: 700; font-variation-settings: "wdth" 125; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; text-align: center; white-space: nowrap; }
+.sp-centro { display: grid; place-items: center; min-height: 0; }
+.sp-carimbo { transform: rotate(-5deg) scale(1.1); }
+.sp-gota { width: 96px; height: 116px; display: block; }
+.sp-nome { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 22px; line-height: 1; text-transform: uppercase; text-align: center; }
+.sp-linha { font-family: "Courier Prime", "Courier New", monospace; font-size: 9.5px; line-height: 1.3; text-align: center; color: #5B5344; }
+.sp-link { background: #1C1A16; color: #F8F3E7; font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11px; padding: 4px 11px; border-radius: 999px; }
+.sp-marca { display: flex; align-items: center; gap: 5px; font-weight: 600; font-variation-settings: "wdth" 125; font-size: 7.5px; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+.sp-marca svg { width: 11px; height: 13px; flex: none; }
+.legenda-post { font-size: 13.5px; line-height: 1.45; background: #FAF6EC; border: 1px dashed rgba(28, 26, 22, 0.5); padding: 10px 12px; }
+.cv { width: 238px; height: 336px; background: #FCFCFA; color: #121212; box-shadow: 0 12px 26px rgba(60, 45, 20, 0.35); padding: 16px 16px 12px; display: grid; align-content: start; gap: 5px; overflow: hidden; }
+.cv-nome { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 19px; line-height: 1; text-transform: uppercase; }
+.cv-sub { font-family: "Courier Prime", "Courier New", monospace; font-size: 9px; color: #5B5344; }
+.cv-sec { margin-top: 6px; border-bottom: 1px solid #121212; font-weight: 700; font-variation-settings: "wdth" 125; font-size: 7.5px; letter-spacing: 0.22em; text-transform: uppercase; padding-bottom: 2px; }
+.cv-lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 2px; }
+.cv-lista li { display: flex; justify-content: space-between; gap: 8px; font-size: 9px; line-height: 1.3; }
+.cv-v { font-family: "Courier Prime", "Courier New", monospace; white-space: nowrap; }
+.cv-pe { margin-top: 8px; font-family: "Courier Prime", "Courier New", monospace; font-size: 8.5px; color: #5B5344; }
+.aviso { position: absolute; left: 12px; right: 12px; bottom: 74px; background: #1C1A16; color: #F8F3E7; padding: 6px 6px 6px 14px; display: flex; gap: 8px; align-items: center; font-size: 14px; line-height: 1.35; font-weight: 600; z-index: 5; box-shadow: 0 10px 24px rgba(60, 45, 20, 0.35); }
+.aviso button { appearance: none; border: 0; background: transparent; color: #F8F3E7; min-height: 44px; padding: 0 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: underline; }
+.nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1.5px solid #1C1A16; background: #EFE8D8; position: relative; z-index: 6; }
+.nav button { appearance: none; border: 0; background: transparent; min-height: 62px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 115; letter-spacing: 0.06em; color: #7A7060; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.nav button[aria-current="page"] { color: #1C1A16; }
+.nav button:disabled { cursor: not-allowed; }
+.nav svg { width: 22px; height: 22px; }
+@media (prefers-reduced-motion: reduce) { .bate-a, .bate-b, .sai-a, .sai-b { animation: none; } }
+</style>
+</helmet>
+<div class="app">
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="tinta-gasta" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="4" result="ruido"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="ruido" scale="1.6" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+      </filter>
+      <pattern id="ht-amarelo" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3.4" height="3.4" fill="#F3EBD8"></rect><circle cx="1.7" cy="1.7" r="1.15" fill="#FACC15"></circle></pattern>
+      <pattern id="ht-verde" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3.4" height="3.4" fill="#F3EBD8"></rect><circle cx="1.7" cy="1.7" r="1.15" fill="#10B981"></circle></pattern>
+      <pattern id="ht-ciano" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3.4" height="3.4" fill="#F3EBD8"></rect><circle cx="1.7" cy="1.7" r="1.15" fill="#06B6D4"></circle></pattern>
+      <pattern id="ht-laranja" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3.4" height="3.4" fill="#F3EBD8"></rect><circle cx="1.7" cy="1.7" r="1.15" fill="#F97316"></circle></pattern>
+      <pattern id="ht-vermelho" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3.4" height="3.4" fill="#F3EBD8"></rect><circle cx="1.7" cy="1.7" r="1.15" fill="#EF4444"></circle></pattern>
+      <pattern id="ht-magenta" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3.4" height="3.4" fill="#F3EBD8"></rect><circle cx="1.7" cy="1.7" r="1.15" fill="#D946EF"></circle></pattern>
+      <pattern id="ht-violeta" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3.4" height="3.4" fill="#F3EBD8"></rect><circle cx="1.7" cy="1.7" r="1.15" fill="#8B5CF6"></circle></pattern>
+      <g id="gota-oficial">
+        <path d="M50 8 C50 8 36 28 32 46 C37 40 45 36 50 36 C55 36 63 40 68 46 C64 28 50 8 50 8 Z" fill="#FACC15"></path>
+        <path d="M32 46 C24 57 20 68 22 79 C25 80 29 80 34 78 C31 66 33 55 42 46 C38 45 35 45 32 46 Z" fill="#10B981"></path>
+        <path d="M22 79 C24 93 35 106 50 108 C46 98 46 88 50 78 C39 77 31 82 22 79 Z" fill="#06B6D4"></path>
+        <path d="M68 46 C76 57 80 68 78 79 C75 80 71 80 66 78 C69 66 67 55 58 46 C62 45 65 45 68 46 Z" fill="#F97316"></path>
+        <path d="M78 79 C76 93 65 106 50 108 C54 98 54 88 50 78 C61 77 69 82 78 79 Z" fill="#EF4444"></path>
+        <path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="#D946EF"></path>
+        <path d="M50 78 C44 86 44 95 50 106 C56 95 56 86 50 78 Z" fill="#8B5CF6"></path>
+      </g>
+    </defs>
+  </svg>
+
+  <sc-if value="{{mostrarAbas}}" hint-placeholder-val="{{ true }}">
+    <div class="topo">
+      <p class="marca"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>Pasaporte</p>
+      <div class="visao" role="group" aria-label="Ver el pasaporte como">
+        <button type="button" aria-pressed="{{visaoEu}}" onClick="{{verEu}}">Yo</button>
+        <button type="button" aria-pressed="{{visaoPublico}}" onClick="{{verPublico}}">Público</button>
+      </div>
+    </div>
+    <div class="abas">
+      <button type="button" class="aba" aria-pressed="{{abaRotulo}}" onClick="{{irRotulo}}">Etiqueta</button>
+      <button type="button" class="aba" aria-pressed="{{abaPaginas}}" onClick="{{irPaginas}}">Páginas</button>
+      <button type="button" class="aba" aria-pressed="{{abaOficios}}" onClick="{{irOficios}}">Oficios</button>
+      <sc-if value="{{eu}}" hint-placeholder-val="{{ true }}">
+        <button type="button" class="mais" onClick="{{irNovo}}">+ Sello</button>
+      </sc-if>
+    </div>
+  </sc-if>
+  <sc-if value="{{mostrarVoltar}}" hint-placeholder-val="{{ false }}">
+    <div class="voltar-bar">
+      <button type="button" class="voltar" onClick="{{voltar}}">← Volver</button>
+      <h2>{{tituloTela}}</h2>
+    </div>
+  </sc-if>
+
+  <div class="corpo" ref="{{corpoRef}}">
+    <sc-if value="{{mostrarBanner}}" hint-placeholder-val="{{ false }}">
+      <p class="banner">Estás viendo el enlace público dropp.me/teo. Las solicitudes pendientes y los sellos ocultos no aparecen.</p>
+    </sc-if>
+
+    <sc-if value="{{tRotulo}}" hint-placeholder-val="{{ true }}">
+      <div class="{{rotuloCls}}">
+        <div class="arco">
+          <span class="wordmark"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg><b>Dropp</b></span>
+          <span class="esp">Liquid experience</span>
+        </div>
+        <div class="rot-miolo">
+          <p class="rot-secao"><span>Pasaporte del oficio</span></p>
+          <div class="rot-num"><span>Nº 0942</span><span>LOTE TA-2014</span></div>
+          <div class="janela">
+            <svg viewBox="16 4 68 108" role="img" aria-label="La gota de Teo: cada pétalo es un oficio, impreso según el grado. Toca un pétalo para abrir el oficio.">
+              <path d="M50 8 C50 8 36 28 32 46 C37 40 45 36 50 36 C55 36 63 40 68 46 C64 28 50 8 50 8 Z" fill="{{pet.amarelo.fill}}" stroke="{{pet.amarelo.stroke}}" stroke-width="{{pet.amarelo.sw}}" stroke-dasharray="{{pet.amarelo.dash}}" onClick="{{pet.amarelo.pick}}"></path>
+              <path d="M32 46 C24 57 20 68 22 79 C25 80 29 80 34 78 C31 66 33 55 42 46 C38 45 35 45 32 46 Z" fill="{{pet.verde.fill}}" stroke="{{pet.verde.stroke}}" stroke-width="{{pet.verde.sw}}" stroke-dasharray="{{pet.verde.dash}}" onClick="{{pet.verde.pick}}"></path>
+              <path d="M22 79 C24 93 35 106 50 108 C46 98 46 88 50 78 C39 77 31 82 22 79 Z" fill="{{pet.ciano.fill}}" stroke="{{pet.ciano.stroke}}" stroke-width="{{pet.ciano.sw}}" stroke-dasharray="{{pet.ciano.dash}}" onClick="{{pet.ciano.pick}}"></path>
+              <path d="M68 46 C76 57 80 68 78 79 C75 80 71 80 66 78 C69 66 67 55 58 46 C62 45 65 45 68 46 Z" fill="{{pet.laranja.fill}}" stroke="{{pet.laranja.stroke}}" stroke-width="{{pet.laranja.sw}}" stroke-dasharray="{{pet.laranja.dash}}" onClick="{{pet.laranja.pick}}"></path>
+              <path d="M78 79 C76 93 65 106 50 108 C54 98 54 88 50 78 C61 77 69 82 78 79 Z" fill="{{pet.vermelho.fill}}" stroke="{{pet.vermelho.stroke}}" stroke-width="{{pet.vermelho.sw}}" stroke-dasharray="{{pet.vermelho.dash}}" onClick="{{pet.vermelho.pick}}"></path>
+              <path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="{{pet.magenta.fill}}" stroke="{{pet.magenta.stroke}}" stroke-width="{{pet.magenta.sw}}" stroke-dasharray="{{pet.magenta.dash}}" onClick="{{pet.magenta.pick}}"></path>
+              <path d="M50 78 C44 86 44 95 50 106 C56 95 56 86 50 78 Z" fill="{{pet.violeta.fill}}" stroke="{{pet.violeta.stroke}}" stroke-width="{{pet.violeta.sw}}" stroke-dasharray="{{pet.violeta.dash}}" onClick="{{pet.violeta.pick}}"></path>
+            </svg>
+            <p class="nota">toca un pétalo para abrir el oficio</p>
+          </div>
+          <p class="rot-nome">Teo Aranda</p>
+          <p class="rot-cargo">head bartender · Sea Bar, Valencia</p>
+          <div class="cantos" role="group" aria-label="Medidas. Toca una para ver su prueba.">
+            <sc-for list="{{medidas}}" as="m" hint-placeholder-count="4">
+              <button type="button" class="canto" aria-pressed="{{m.aberta}}" onClick="{{m.pick}}"><span class="c-n">{{m.n}}</span><span class="c-rot">{{m.rot}}</span></button>
+            </sc-for>
+          </div>
+          <sc-if value="{{temMedida}}" hint-placeholder-val="{{ false }}">
+            <div class="prova-medida">
+              <span class="rot">{{medidaTitulo}}</span>
+              <ul>
+                <sc-for list="{{medidaItens}}" as="it" hint-placeholder-count="3">
+                  <li>{{it.t}}</li>
+                </sc-for>
+              </ul>
+            </div>
+          </sc-if>
+          <p class="fita">Meet · <span class="y">Share</span> · Enjoy</p>
+          <p class="rot-pe"><span>dropp.me/teo</span><span>el bar primero</span></p>
+        </div>
+      </div>
+
+      <sc-if value="{{eu}}" hint-placeholder-val="{{ true }}">
+        <div class="linha-btns">
+          <button type="button" class="btn cheio" onClick="{{imprimir}}">Imprimir etiqueta</button>
+          <button type="button" class="btn" onClick="{{irCompartilharPassaporte}}">Compartir</button>
+        </div>
+        <div class="papel corte bloco">
+          <span class="rot">Esta temporada · página 9</span>
+          <p class="titulo-bloco">Otoño 2026 cierra el 30/11</p>
+          <ul class="chk">
+            <li><span class="st ok">hecho</span><span>31 notas de cierre de turno</span></li>
+            <li><span class="st ok">hecho</span><span>1 ficha nueva: Shrub de jengibre</span></li>
+            <li><span class="st ok">hecho</span><span>1 sello: Jornada en el Bar Brasa</span></li>
+          </ul>
+          <div><button type="button" class="btn" onClick="{{irPaginas}}">Abrir la página 9</button></div>
+        </div>
+        <div class="papel corte bloco">
+          <span class="rot">Próximo grado</span>
+          <p class="titulo-bloco">Reserva en Clásicos</p>
+          <p class="nota">{{proximoGrau}}</p>
+          <div><button type="button" class="btn" onClick="{{irClassicos}}">Ver la barrica</button></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{publico}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">Cómo leer este pasaporte</span>
+          <p class="nota">No hay nota ni ranking. Cada pétalo es un oficio, y cada medida y cada sello lo firmó otra persona, con fecha y lugar. Toca los pétalos y los números para ver las pruebas.</p>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tPaginas}}" hint-placeholder-val="{{ false }}">
+      <div class="folha-cab">
+        <div style="display: grid; gap: 2px">
+          <span class="rot">{{pagNumero}}</span>
+          <p class="titulo-bloco">{{pagTemporada}}</p>
+          <p class="nota">{{pagMeses}}</p>
+        </div>
+        <button type="button" class="btn" onClick="{{rever}}">Repetir la tinta</button>
+      </div>
+      <div class="papel corte folha" role="group" aria-label="{{pagAria}}">
+        <sc-for list="{{pagItens}}" as="c" hint-placeholder-count="4">
+          <div class="slot" style="left: {{c.x}}px; top: {{c.y}}px; transform: rotate({{c.r}}deg)">
+            <button type="button" class="{{c.cls}}" style="animation-delay: {{c.delay}}ms" aria-label="{{c.aria}}" onClick="{{c.abrir}}"><span>{{c.tipo}}</span><b>{{c.titulo}}</b><small>{{c.linha}}</small></button>
+          </div>
+        </sc-for>
+        <span class="folha-n">PÁG. {{pagN}}</span>
+      </div>
+      <div class="linha-btns" style="justify-content: space-between">
+        <button type="button" class="btn" disabled="{{semAnterior}}" onClick="{{anterior}}">{{rotAnterior}}</button>
+        <button type="button" class="btn" disabled="{{semProxima}}" onClick="{{proxima}}">{{rotProxima}}</button>
+      </div>
+      <p class="nota">Toca un sello para ver su prueba. En discontinuo: aún falta una firma.</p>
+    </sc-if>
+
+    <sc-if value="{{tCarimbo}}" hint-placeholder-val="{{ false }}">
+      <div class="papel corte palco">
+        <div style="transform: rotate(-4deg) scale(1.45)">
+          <span class="{{selCls}}"><span>{{selTipo}}</span><b>{{selTitulo}}</b><small>{{selLinha}}</small></span>
+        </div>
+      </div>
+      <sc-if value="{{selPendente}}" hint-placeholder-val="{{ false }}">
+        <p><span class="st meio">{{selEstado}}</span></p>
+      </sc-if>
+      <sc-if value="{{selAssinado}}" hint-placeholder-val="{{ true }}">
+        <p><span class="st ok">{{selEstado}}</span></p>
+      </sc-if>
+      <dl class="fatos">
+        <div><dt>Tipo</dt><dd>{{selTipo}}</dd></div>
+        <div><dt>Cuándo</dt><dd>{{selData}}</dd></div>
+        <div><dt>Dónde</dt><dd>{{selOnde}}</dd></div>
+        <div><dt>Quién firma</dt><dd>{{selQuem}}</dd></div>
+        <div><dt>Prueba</dt><dd>{{selProva}}</dd></div>
+      </dl>
+      <sc-if value="{{podeCompartilhar}}" hint-placeholder-val="{{ true }}">
+        <button type="button" class="btn cheio largo" onClick="{{irCompartilharCarimbo}}">Compartir este sello</button>
+        <sc-if value="{{selOculto}}" hint-placeholder-val="{{ false }}"><p class="nota">Está oculto en el enlace público; al compartirlo, vuelve a aparecer.</p></sc-if>
+      </sc-if>
+      <sc-if value="{{podeSimular}}" hint-placeholder-val="{{ false }}">
+        <button type="button" class="btn cheio largo" onClick="{{assinar}}">{{simularRot}}</button>
+        <p class="nota">Botón solo del prototipo. En el producto, la firma llega cuando la persona aprueba la solicitud.</p>
+      </sc-if>
+      <sc-if value="{{podeOcultar}}" hint-placeholder-val="{{ true }}">
+        <label class="toggle"><input type="checkbox" checked="{{selVisivel}}" onChange="{{alternarVisivel}}"> Mostrar este sello en el enlace público</label>
+      </sc-if>
+      <sc-if value="{{selArquivo}}" hint-placeholder-val="{{ false }}">
+        <button type="button" class="btn largo" onClick="{{irArquivo}}">Abrir la página del Archivo</button>
+      </sc-if>
+      <sc-if value="{{publico}}" hint-placeholder-val="{{ false }}">
+        <button type="button" class="btn largo" onClick="{{contestar}}">Impugnar este sello</button>
+        <p class="nota">La impugnación va a DROPP y a quien lo firmó. Un sello falso se revoca.</p>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tOficios}}" hint-placeholder-val="{{ false }}">
+      <p class="nota">Cada pétalo de la gota es un oficio. El grado es la forma en que el pétalo está impreso, y ningún grado compensa otro.</p>
+      <div class="papel corte legenda" aria-label="Los cuatro grados">
+        <div class="leg"><svg viewBox="36 35 28 64" aria-hidden="true"><path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="#F3EBD8" stroke="#A21CAF" stroke-width="1.6" stroke-dasharray="3 2"></path></svg><b>Gota</b><span>contorno</span></div>
+        <div class="leg"><svg viewBox="36 35 28 64" aria-hidden="true"><path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="url(#ht-magenta)" stroke="#A21CAF" stroke-width="1.2"></path></svg><b>Infusión</b><span>6 meses</span></div>
+        <div class="leg"><svg viewBox="36 35 28 64" aria-hidden="true"><path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="#D946EF"></path></svg><b>Reserva</b><span>2 años</span></div>
+        <div class="leg"><svg viewBox="36 35 28 64" aria-hidden="true"><path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="#D946EF" stroke="#1C1A16" stroke-width="2.4"></path></svg><b>Solera</b><span>5 años</span></div>
+      </div>
+      <ul class="oficios">
+        <sc-for list="{{oficios}}" as="o" hint-placeholder-count="7">
+          <li class="oficio">
+            <button type="button" class="faixa" aria-expanded="{{o.aberto}}" onClick="{{o.pick}}">
+              <span class="seta" aria-hidden="true">▶</span>
+              <span class="n">{{o.n}}</span>
+              <span class="pet" style="background: {{o.cor}}" aria-hidden="true"></span>
+              <span class="t">{{o.nome}}</span>
+              <span class="g">{{o.grau}}</span>
+            </button>
+            <sc-if value="{{o.aberto}}" hint-placeholder-val="{{ false }}">
+              <div class="barril">
+                <div class="regua" role="img" aria-label="{{o.reguaAria}}">
+                  <div class="trilho">
+                    <div class="enchido" style="width: {{o.pct}}%; background: {{o.cor}}"></div>
+                    <i class="limiar" style="left: 5%"></i>
+                    <i class="limiar" style="left: 20%"></i>
+                    <i class="limiar" style="left: 50%"></i>
+                  </div>
+                  <span class="marca-t" style="left: {{o.pct}}%"></span>
+                  <div class="ticks"><span style="left: 0">0</span><span style="left: 20%; transform: translateX(-50%)">Reserva 2a</span><span style="left: 50%; transform: translateX(-50%)">Solera 5a</span><span style="right: 0">10 años</span></div>
+                </div>
+                <ul class="chk">
+                  <sc-for list="{{o.linhas}}" as="l" hint-placeholder-count="3">
+                    <li><span class="{{l.cls}}">{{l.r}}</span><span>{{l.t}}</span></li>
+                  </sc-for>
+                </ul>
+                <sc-if value="{{o.podePedir}}" hint-placeholder-val="{{ false }}">
+                  <button type="button" class="btn cheio largo" onClick="{{o.pedir}}">Pedir firma a una Reserva</button>
+                </sc-if>
+              </div>
+            </sc-if>
+          </li>
+        </sc-for>
+      </ul>
+    </sc-if>
+
+    <sc-if value="{{tNovo}}" hint-placeholder-val="{{ false }}">
+      <p class="nota">Nadie sella su propio pasaporte. Elige cómo llega la prueba.</p>
+      <button type="button" class="papel corte opcao" onClick="{{irPedir}}"><strong>Pedir a quien lo vio</strong><span class="nota">Casa, guest shift, cóctel en carta, curso, mentoría o grado. La otra persona firma.</span></button>
+      <button type="button" class="papel corte opcao" onClick="{{irEscanear}}"><strong>Escanear el sello de la casa</strong><span class="nota">El sello de caucho que la casa asociada estampó en tu cuaderno de papel.</span></button>
+      <button type="button" class="papel corte opcao" onClick="{{irBrinde}}"><strong>Brindar con alguien aquí</strong><span class="nota">Acercad los móviles. Solo vale en persona.</span></button>
+      <button type="button" class="papel corte opcao" onClick="{{irArquivo}}"><strong>Registrar un clásico del Archivo</strong><span class="nota">Hecho con la receta original y comprobado por dos colegas.</span></button>
+    </sc-if>
+
+    <sc-if value="{{tPedir}}" hint-placeholder-val="{{ false }}">
+      <p class="nota">La persona recibe la solicitud en DROPP o por enlace. El sello aparece en discontinuo en tu página hasta que firme.</p>
+      <div class="campo">
+        <span class="rot" id="lbl-tipo">Tipo</span>
+        <div class="seg-row" role="group" aria-labelledby="lbl-tipo">
+          <sc-for list="{{tipos}}" as="t" hint-placeholder-count="6">
+            <button type="button" class="seg" aria-pressed="{{t.on}}" onClick="{{t.pick}}">{{t.t}}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div class="campo"><label class="rot" for="f-onde">Dónde o qué</label><input id="f-onde" type="text" value="{{fOnde}}" onChange="{{setOnde}}"></div>
+      <div class="campo"><label class="rot" for="f-quando">Cuándo</label><input id="f-quando" type="text" value="{{fQuando}}" onChange="{{setQuando}}"></div>
+      <div class="campo"><label class="rot" for="f-quem">Quién firma</label><input id="f-quem" type="text" value="{{fQuem}}" onChange="{{setQuem}}"></div>
+      <div class="campo"><label class="rot" for="f-oque">Qué pasó</label><textarea id="f-oque" rows="3" value="{{fOque}}" onChange="{{setOque}}"></textarea></div>
+      <button type="button" class="btn cheio largo" onClick="{{enviar}}">Enviar para firmar</button>
+    </sc-if>
+
+    <sc-if value="{{tEscanear}}" hint-placeholder-val="{{ false }}">
+      <div class="visor" aria-hidden="true">
+        <span class="canto-v c1"></span><span class="canto-v c2"></span><span class="canto-v c3"></span><span class="canto-v c4"></span>
+        <div class="papel-foto"><div class="fisico"><span>Taberna</span><b>Lume</b><small>VALÈNCIA · Nº 014</small></div></div>
+      </div>
+      <sc-if value="{{escMirar}}" hint-placeholder-val="{{ true }}">
+        <p class="nota">Apunta al sello de caucho de la casa en tu cuaderno de papel. Cada casa asociada tiene el suyo, diseñado para ella.</p>
+        <button type="button" class="btn cheio largo" onClick="{{capturar}}">Capturar</button>
+      </sc-if>
+      <sc-if value="{{escOk}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">Reconocido</span>
+          <p class="titulo-bloco">Taberna Lume, Valencia</p>
+          <p class="nota">Sello nº 014 de la red, estampado hoy, 18/11/2026, en tu guest shift. La casa lo confirma desde su cuenta.</p>
+        </div>
+        <button type="button" class="btn cheio largo" onClick="{{registrarScan}}">Registrar en el pasaporte</button>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tBrinde}}" hint-placeholder-val="{{ false }}">
+      <div class="cena" aria-hidden="true">
+        <div class="fone">Teo<br>Aranda</div>
+        <svg width="56" height="60" viewBox="0 0 56 60" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M18 18 Q26 30 18 42" stroke="#FACC15"></path><path d="M11 12 Q24 30 11 48" stroke="#D946EF"></path><path d="M38 18 Q30 30 38 42" stroke="#06B6D4"></path><path d="M45 12 Q32 30 45 48" stroke="#10B981"></path></svg>
+        <div class="{{foneCls}}">{{foneOutro}}</div>
+      </div>
+      <sc-if value="{{brAproximar}}" hint-placeholder-val="{{ true }}">
+        <p class="titulo-bloco">Acerca los móviles</p>
+        <p class="nota">El brindis solo vale en persona. No da grado ni puntos: registra quién estuvo con quién, dónde y cuándo, en los dos pasaportes.</p>
+        <button type="button" class="btn cheio largo" onClick="{{simularEncontro}}">Simular encuentro</button>
+      </sc-if>
+      <sc-if value="{{brEncontrado}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">Al otro lado</span>
+          <p class="titulo-bloco">Elena Rostova</p>
+          <p class="nota">Head bartender en Valencia. Aún no habíais brindado.</p>
+        </div>
+        <button type="button" class="btn cheio largo" onClick="{{brindar}}">Brindar</button>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tCompartilhar}}" hint-placeholder-val="{{ false }}">
+      <p class="nota">{{shr.intro}}</p>
+      <div class="seg-row quatro" role="group" aria-label="Formato">
+        <sc-for list="{{shr.formatos}}" as="fm" hint-placeholder-count="4">
+          <button type="button" class="seg" aria-pressed="{{fm.on}}" onClick="{{fm.pick}}">{{fm.t}}</button>
+        </sc-for>
+      </div>
+      <sc-if value="{{shr.story}}" hint-placeholder-val="{{ true }}">
+        <div class="previa">
+          <div class="story" role="img" aria-label="{{shr.legenda}}">
+            <span class="sp-topo">Pasaporte del oficio</span>
+            <div class="sp-centro">
+              <sc-if value="{{shr.ehCarimbo}}" hint-placeholder-val="{{ true }}"><div class="sp-carimbo"><span class="{{shr.cls}}"><span>{{shr.tipo}}</span><b>{{shr.titulo}}</b><small>{{shr.linha}}</small></span></div></sc-if>
+              <sc-if value="{{shr.ehPassaporte}}" hint-placeholder-val="{{ false }}"><svg class="sp-gota" viewBox="16 4 68 108" aria-hidden="true"><use href="#gota-oficial"></use></svg></sc-if>
+            </div>
+            <span class="sp-nome">Teo Aranda</span>
+            <span class="sp-linha">{{shr.spLinha}}</span>
+            <span class="sp-link">dropp.me/teo</span>
+            <span class="sp-marca"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>DROPP · Liquid Experience</span>
+          </div>
+        </div>
+        <button type="button" class="btn cheio largo" onClick="{{shr.abrirInsta}}">Abrir en Instagram</button>
+        <p class="nota">El enlace va en el adhesivo de la story. Quien lo toque ve la prueba en dropp.me/teo.</p>
+      </sc-if>
+      <sc-if value="{{shr.post}}" hint-placeholder-val="{{ false }}">
+        <div class="previa">
+          <div class="post" role="img" aria-label="{{shr.legenda}}">
+            <span class="sp-topo">Pasaporte del oficio</span>
+            <div class="sp-centro">
+              <sc-if value="{{shr.ehCarimbo}}" hint-placeholder-val="{{ true }}"><div class="sp-carimbo"><span class="{{shr.cls}}"><span>{{shr.tipo}}</span><b>{{shr.titulo}}</b><small>{{shr.linha}}</small></span></div></sc-if>
+              <sc-if value="{{shr.ehPassaporte}}" hint-placeholder-val="{{ false }}"><svg class="sp-gota" viewBox="16 4 68 108" aria-hidden="true"><use href="#gota-oficial"></use></svg></sc-if>
+            </div>
+            <span class="sp-nome">Teo Aranda</span>
+            <span class="sp-link">dropp.me/teo</span>
+            <span class="sp-marca"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>DROPP · Liquid Experience</span>
+          </div>
+        </div>
+        <p class="legenda-post">{{shr.legenda}}</p>
+        <button type="button" class="btn cheio largo" onClick="{{shr.abrirShare}}">Compartir en el móvil</button>
+        <p class="nota">Abre la hoja de compartir del móvil: Instagram, Facebook o WhatsApp.</p>
+      </sc-if>
+      <sc-if value="{{shr.linkedin}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">LinkedIn · {{shr.liSecao}}</span>
+          <dl class="fatos">
+            <sc-for list="{{shr.liCampos}}" as="lf" hint-placeholder-count="4">
+              <div><dt>{{lf.k}}</dt><dd>{{lf.v}}</dd></div>
+            </sc-for>
+          </dl>
+        </div>
+        <button type="button" class="btn cheio largo" onClick="{{shr.abrirLinkedin}}">{{shr.liBotao}}</button>
+      </sc-if>
+      <sc-if value="{{shr.cv}}" hint-placeholder-val="{{ false }}">
+        <div class="previa">
+          <div class="cv">
+            <span class="cv-nome">Teo Aranda</span>
+            <span class="cv-sub">head bartender · Sea Bar, Valencia · dropp.me/teo</span>
+            <span class="cv-sec">Oficios</span>
+            <ul class="cv-lista">
+              <sc-for list="{{shr.cvOficios}}" as="co" hint-placeholder-count="7">
+                <li><span>{{co.t}}</span><span class="cv-v">{{co.v}}</span></li>
+              </sc-for>
+            </ul>
+            <span class="cv-sec">Sellos recientes</span>
+            <ul class="cv-lista">
+              <sc-for list="{{shr.cvCarimbos}}" as="cc" hint-placeholder-count="5">
+                <li><span>{{cc.t}}</span><span class="cv-v">{{cc.v}}</span></li>
+              </sc-for>
+            </ul>
+            <span class="cv-pe">Cada sello tiene una prueba firmada en dropp.me/teo</span>
+          </div>
+        </div>
+        <button type="button" class="btn cheio largo" onClick="{{shr.baixarPdf}}">Descargar PDF</button>
+        <p class="nota">Una página, solo con lo que es público. Para enviarla con una candidatura.</p>
+      </sc-if>
+      <button type="button" class="btn largo" onClick="{{copiar}}">Copiar enlace</button>
+      <p class="nota">Solo se pueden compartir los sellos firmados y públicos. Nadie aparece etiquetado sin aceptarlo.</p>
+    </sc-if>
+
+    <sc-if value="{{tArquivo}}" hint-placeholder-val="{{ false }}">
+      <span class="rot">Archivo · ARQ-031</span>
+      <p class="titulo-grande">Hanky Panky</p>
+      <p>Creado por Ada Coleman, head bartender del American Bar del Savoy, en Londres, para el actor Charles Hawtrey.</p>
+      <div class="papel corte bloco">
+        <span class="rot">Receta tal como se publicó</span>
+        <ul class="chk mono">
+          <li>1 parte de ginebra seca</li>
+          <li>1 parte de vermut italiano</li>
+          <li>2 dashes de Fernet-Branca</li>
+        </ul>
+        <p class="nota">En el libro, mitad de cada uno: "½ Dry Gin, ½ Italian Vermouth".</p>
+        <p class="nota">Agítalo bien, cuélalo en copa de cóctel y exprime la piel de naranja por encima.</p>
+        <p class="nota">Fuente: The Savoy Cocktail Book, de Harry Craddock (1930).</p>
+      </div>
+      <div class="papel corte bloco">
+        <span class="rot">Tu registro</span>
+        <p>Hecho con la receta el 12/11/2026, en el Sea Bar.</p>
+        <ul class="chk">
+          <li><span class="st ok">firmó</span><span>Elena Rostova lo probó y lo comprobó</span></li>
+          <li><span class="{{arqStCls}}">{{arqSt}}</span><span>Tomás Vidal, segundo colega</span></li>
+        </ul>
+      </div>
+      <sc-if value="{{arqPodePedir}}" hint-placeholder-val="{{ false }}">
+        <button type="button" class="btn cheio largo" onClick="{{pedirConf}}">Recordar a Tomás la comprobación</button>
+      </sc-if>
+      <p class="nota">El Archivo celebra el clásico. Nadie en el Archivo tiene nota.</p>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{temAviso}}" hint-placeholder-val="{{ false }}">
+    <div class="aviso" role="status">
+      <span style="flex: 1">{{aviso}}</span>
+      <button type="button" onClick="{{fecharAviso}}">Cerrar</button>
+    </div>
+  </sc-if>
+
+  <nav class="nav" aria-label="Áreas de DROPP">
+    <button type="button" disabled title="Fuera de este prototipo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>
+      Turno
+    </button>
+    <button type="button" disabled title="Fuera de este prototipo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17"></rect><path d="M8.5 8h7M8.5 12h7M8.5 16h4"></path></svg>
+      Cuaderno
+    </button>
+    <button type="button" aria-current="page">
+      <svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>
+      Pasaporte
+    </button>
+    <button type="button" disabled title="Fuera de este prototipo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 5.5h6a2 2 0 0 1 2 2V20a2 2 0 0 0-2-2H4zM20 5.5h-6a2 2 0 0 0-2 2V20a2 2 0 0 1 2-2h6z"></path></svg>
+      Atlas
+    </button>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tela":{"editor":"enum","options":["rotulo","paginas","carimbo","oficios","novo","pedir","escanear","brinde","arquivo"],"default":"rotulo","section":"Prototipo"},"visao":{"editor":"enum","options":["eu","publico"],"default":"eu","section":"Prototipo"},"carimbo":{"editor":null,"tsType":"string"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._chave = this._chaveTela();
+  }
+
+  _chaveTela() {
+    const st = this.state || {};
+    const p = this.props || {};
+    return [st.tela || p.tela || 'rotulo', st.pagina || 0, st.visao || p.visao || 'eu'].join('|');
+  }
+
+  componentDidUpdate() {
+    const chave = this._chaveTela();
+    if (this._chave !== undefined && this._chave !== chave && this._corpo) this._corpo.scrollTop = 0;
+    this._chave = chave;
+  }
+
+  baseCarimbos() {
+    return [
+      { id: 'jornada-brasa', pag: 0, x: 24, y: 24, r: 3, tipo: 'Jornada', titulo: 'Bar Brasa', linha: 'Madrid · 14/11/2026', forma: 'retangulo', data: '14/11/2026', onde: 'Bar Brasa, Madrid', assinou: 'Lucía Ferrer', papel: 'head bartender anfitriona', prova: 'Guest shift de una noche, con seis cócteles de autor en la carta del evento.' },
+      { id: 'carta-shrub', pag: 0, x: 160, y: 122, r: -3, tipo: 'Carta', titulo: 'Shrub de jengibre', linha: 'carta de otoño', forma: 'oval', data: 'septiembre de 2026', onde: 'Sea Bar, Valencia', assinou: 'Marta Ortega', papel: 'gerente del bar', prova: 'Estuvo 11 semanas en carta y salió 1.240 veces en el TPV de la casa.' },
+      { id: 'brinde-tomas', pag: 0, x: 28, y: 218, r: -4, tipo: 'Brindis', titulo: 'Tomás V.', linha: 'Lisboa · 21/09', forma: 'retangulo', data: '21/09/2026', onde: 'Lisboa', assinou: 'Tomás Vidal', papel: 'bartender de Casa Ostra', prova: 'Encuentro en persona. Los dos acercaron los móviles y los dos pasaportes registraron el brindis.' },
+      { id: 'arquivo-hanky', pag: 0, x: 214, y: 252, r: 5, tipo: 'Archivo', titulo: 'Hanky Panky', linha: 'Ada Coleman', forma: 'redondo', data: '12/11/2026', onde: 'Sea Bar, Valencia', assinou: 'Tomás Vidal', papel: 'segundo colega de la comprobación', prova: 'Hecho con la receta del Savoy. Elena Rostova lo probó y lo comprobó; falta un colega.', pendente: true, arquivo: true },
+      { id: 'escola-pectinase', pag: 1, x: 26, y: 30, r: 4, tipo: 'Escuela', titulo: 'Clarificación', linha: 'práctica aprobada', forma: 'retangulo', data: 'julio de 2026', onde: 'Escuela de coctelería, Valencia', assinou: 'Irene Soler', papel: 'instructora', prova: 'Curso con prueba práctica: clarificar zumo de maracuyá con pectinasa y centrífuga.' },
+      { id: 'jornada-ostra', pag: 1, x: 214, y: 70, r: -5, tipo: 'Jornada', titulo: 'Casa Ostra', linha: 'Lisboa · 22/08', forma: 'redondo', data: '22/08/2026', onde: 'Casa Ostra, Lisboa', assinou: 'Tomás Vidal', papel: 'head bartender anfitrión', prova: 'Dos noches de guest shift con la carta de verano del Sea Bar.' },
+      { id: 'carta-figo', pag: 1, x: 60, y: 250, r: 2, tipo: 'Carta', titulo: 'Highball de higo', linha: 'carta de verano', forma: 'oval', data: 'junio de 2026', onde: 'Sea Bar, Valencia', assinou: 'Marta Ortega', papel: 'gerente del bar', prova: 'Nueve semanas en carta y 860 salidas en el TPV.' },
+      { id: 'brinde-ines', pag: 1, x: 190, y: 384, r: -3, tipo: 'Brindis', titulo: 'Inés R.', linha: 'Madrid · 03/07', forma: 'retangulo', data: '03/07/2026', onde: 'Madrid', assinou: 'Inés Ruiz', papel: 'bartender', prova: 'Encuentro en persona durante una visita al Bar Brasa.' },
+      { id: 'mentor-ana', pag: 2, x: 30, y: 40, r: -3, tipo: 'Mentor', titulo: 'Ana Lima', linha: 'primer sello', forma: 'oval', data: 'marzo de 2026', onde: 'Sea Bar, Valencia', assinou: 'Ana Lima', papel: 'bartender formada por Teo', prova: 'Ana recibió su primer sello, de Casa, con Teo como mentor. Es ella quien firma el sello de Mentor.' },
+      { id: 'casa-seabar', pag: 2, x: 200, y: 170, r: 6, tipo: 'Casa', titulo: 'Sea Bar', linha: 'VLC · desde 2022', forma: 'redondo', data: 'reconfirmado en marzo de 2026', onde: 'Sea Bar, Valencia', assinou: 'Marta Ortega', papel: 'gerente del bar', prova: 'Trabaja en la casa desde marzo de 2022. La casa reconfirma el vínculo una vez al año.' },
+      { id: 'carta-vermute', pag: 2, x: 40, y: 320, r: 3, tipo: 'Carta', titulo: 'Vermut de la casa', linha: 'carta de primavera', forma: 'oval', data: 'abril de 2026', onde: 'Sea Bar, Valencia', assinou: 'Marta Ortega', papel: 'gerente del bar', prova: 'Doce semanas en carta y 2.010 copas servidas.' }
+    ];
+  }
+
+  renderVals() {
+    const p = this.props || {};
+    const principais = ['rotulo', 'paginas', 'oficios'];
+    const fluxos = ['novo', 'pedir', 'escanear', 'brinde', 'arquivo', 'compartilhar'];
+    const telaIni = p.tela || 'rotulo';
+    const s = Object.assign({
+      tela: telaIni,
+      base: principais.indexOf(telaIni) >= 0 ? telaIni : (telaIni === 'carimbo' ? 'paginas' : 'rotulo'),
+      visao: p.visao || 'eu',
+      sel: p.carimbo || 'carta-shrub',
+      pagina: 0, tinta: 0, extras: [], assinados: {}, ocultos: {}, ultimo: '', aviso: '', comp: 'story', compAlvo: 'carimbo', compVolta: '',
+      medida: '', oficio: 'laranja', esc: 'mirar', brinde: 'aproximar', arqPedido: false, pediuMestre: false, imprimindo: 0,
+      ptipo: 'Carta', fOnde: 'Sea Bar, Valencia', fQuando: '18/11/2026', fQuem: 'Marta Ortega, gerente del bar', fOque: 'Vermut de castaña en la carta de invierno.'
+    }, this.state || {});
+    const set = (o) => this.setState(o);
+    const ir = (tela, extra) => () => {
+      const o = Object.assign({ tela: tela, aviso: '' }, extra || {});
+      if (principais.indexOf(tela) >= 0) o.base = tela;
+      set(o);
+    };
+    const eu = s.visao === 'eu';
+    const publico = !eu;
+
+    const corTipo = { Casa: 'violeta', Jornada: 'ciano', Carta: 'laranja', Escuela: 'verde', Archivo: 'vermelho', Mentor: 'magenta', Brindis: 'amarelo', Grado: 'tinta' };
+    const slots = [{ x: 24, y: 330, r: -2 }, { x: 180, y: 392, r: 3 }, { x: 30, y: 448, r: -4 }];
+    const todos = this.baseCarimbos().map((c) => Object.assign({}, c)).concat(
+      s.extras.map((e, i) => Object.assign({}, e, slots[Math.min(i, slots.length - 1)], { pag: 0 }))
+    );
+    todos.forEach((c) => { if (s.assinados[c.id]) c.pendente = false; });
+    const parTinta = s.tinta % 2 === 1 ? 'b' : 'a';
+    const classe = (c, animar) => {
+      let k = 'carimbo forma-' + c.forma + ' cor-' + (corTipo[c.tipo] || 'tinta');
+      if (c.pendente) k += ' pendente';
+      if (animar) {
+        if (s.tinta > 0) k += ' bate-' + parTinta;
+        else if (c.id === s.ultimo) k += ' bate-a';
+      }
+      return k;
+    };
+    const visivel = (c) => eu || (!c.pendente && !s.ocultos[c.id]);
+
+    const paginas = [
+      { n: 9, temporada: 'Otoño 2026', meses: 'de septiembre a noviembre' },
+      { n: 8, temporada: 'Verano 2026', meses: 'de junio a agosto' },
+      { n: 7, temporada: 'Primavera 2026', meses: 'de marzo a mayo' }
+    ];
+    const pagIdx = Math.max(0, Math.min(paginas.length - 1, s.pagina));
+    const pag = paginas[pagIdx];
+    const pagItens = todos.filter((c) => c.pag === pagIdx && visivel(c)).map((c, i) => ({
+      tipo: c.tipo, titulo: c.titulo, linha: c.linha, x: c.x, y: c.y, r: c.r, delay: i * 140,
+      cls: classe(c, true),
+      aria: c.tipo + ': ' + c.titulo + (c.pendente ? ', esperando firma' : '') + '. Ver la prueba.',
+      abrir: ir('carimbo', { sel: c.id })
+    }));
+
+    const sel = todos.find((c) => c.id === s.sel) || todos[0];
+    const arqAssinado = !!s.assinados['arquivo-hanky'];
+
+    const adicionar = (novo, aviso) => {
+      if (s.extras.some((e) => e.id === novo.id)) {
+        set({ tela: 'paginas', base: 'paginas', pagina: 0, esc: 'mirar', brinde: 'aproximar', aviso: 'Ese sello ya está en la página 9.' });
+        return;
+      }
+      if (s.extras.length >= slots.length) {
+        set({ aviso: 'En el prototipo, la página 9 admite hasta tres sellos nuevos.' });
+        return;
+      }
+      set({ extras: s.extras.concat([novo]), ultimo: novo.id, tela: 'paginas', base: 'paginas', pagina: 0, tinta: 0, esc: 'mirar', brinde: 'aproximar', aviso: aviso });
+    };
+
+    const medidasBase = [
+      { id: 'anos', n: '12', rot: 'años de barra', titulo: '12 años: del primer al último sello de Casa', itens: ['Bar Cala, Valencia, de 2014 a 2017', 'Sea Bar, Valencia, desde 2022', 'Otras 5 casas en las páginas 1 a 6'] },
+      { id: 'casas', n: '7', rot: 'casas', titulo: '7 casas: un sello de Casa por cada una', itens: ['Sea Bar, Valencia, firmado por Marta Ortega', 'Bar Cala, Valencia, firmado por el dueño', 'Otras 5 en las páginas anteriores'] },
+      { id: 'fichas', n: '38', rot: 'fichas', titulo: '38 fichas en el Cuaderno, con autoría', itens: ['Shrub de jengibre, septiembre de 2026', 'Highball de higo, junio de 2026', 'Otras 36 en el Cuaderno'] },
+      { id: 'formadas', n: '9', rot: 'formados', titulo: '9 personas formadas: un sello de Mentor por cada una', itens: ['Ana Lima, primer sello en marzo de 2026', 'Otros 8 en las páginas anteriores'] }
+    ];
+    const medidas = medidasBase.map((m) => ({
+      n: m.n, rot: m.rot, aberta: s.medida === m.id,
+      pick: () => set({ medida: s.medida === m.id ? '' : m.id })
+    }));
+    const medidaAberta = medidasBase.find((m) => m.id === s.medida);
+
+    const ok = (r, t) => ({ r: r, t: t, cls: 'st ok' });
+    const falta = (r, t) => ({ r: r, t: t, cls: 'st falta' });
+    const meio = (r, t) => ({ r: r, t: t, cls: 'st meio' });
+    const oficiosBase = [
+      { id: 'amarelo', nome: 'Creación', cor: '#FACC15', escura: '#8A6A00', grau: 'Reserva', meses: 50, linhas: [ok('tiempo', '4 años y 2 meses'), ok('pruebas', '4 cócteles en carta y 38 fichas'), falta('siguiente', 'Solera: ha formado a 1 de 3 personas en Creación')] },
+      { id: 'magenta', nome: 'Hospitalidad', cor: '#D946EF', escura: '#A21CAF', grau: 'Solera', meses: 108, linhas: [ok('tiempo', '9 años'), ok('pruebas', '11 sellos'), ok('formó', '9 personas; firma como Solera')] },
+      { id: 'verde', nome: 'Preparación y fermentación', cor: '#10B981', escura: '#0B7A57', grau: 'Infusión', meses: 20, linhas: [falta('tiempo', '1 año y 8 meses; la Reserva pide 2 años'), ok('pruebas', '7 sellos'), falta('siguiente', 'Reserva: tiempo y 2 firmas')] },
+      { id: 'laranja', nome: 'Clásicos', cor: '#F97316', escura: '#B4520C', grau: 'Infusión', meses: 38, linhas: [
+        ok('tiempo', '3 años y 2 meses; la Reserva pide 2 años'),
+        ok('pruebas', '6 sellos, 3 de Carta'),
+        arqAssinado ? ok('archivo', 'Hanky Panky comprobado por 2 colegas') : meio('archivo', 'Hanky Panky: 1 de 2 colegas'),
+        s.pediuMestre ? meio('firman', '2 Reservas: solicitud enviada a Lucía Ferrer') : falta('firman', '0 de 2 Reservas en Clásicos')
+      ] },
+      { id: 'ciano', nome: 'Hielo y dilución', cor: '#06B6D4', escura: '#0784A0', grau: 'Gota', meses: 4, linhas: [falta('tiempo', '4 meses; la Infusión pide 6'), falta('pruebas', '2 de 3 sellos'), falta('siguiente', 'Infusión: un curso con práctica')] },
+      { id: 'vermelho', nome: 'Sin alcohol', cor: '#EF4444', escura: '#B02A2A', grau: 'Gota', meses: 1, linhas: [falta('tiempo', '1 mes'), ok('pruebas', '1 sello de Carta'), falta('siguiente', 'Infusión: 2 sellos más y 5 meses')] },
+      { id: 'violeta', nome: 'Coste y gestión', cor: '#8B5CF6', escura: '#5B36C2', grau: 'Infusión', meses: 30, linhas: [ok('tiempo', '2 años y 6 meses'), falta('pruebas', '4 de 6 sellos'), falta('siguiente', 'Reserva: una carta entera con el coste cerrado')] }
+    ];
+    const pedirReserva = ir('pedir', { ptipo: 'Grado', fOnde: 'Clásicos', fQuando: '18/11/2026', fQuem: 'Lucía Ferrer, Reserva en Clásicos', fOque: 'Firma para el grado Reserva en Clásicos.' });
+    const oficios = oficiosBase.map((o, i) => ({
+      n: '0' + (i + 1), nome: o.nome, grau: o.grau, cor: o.cor,
+      aberto: s.oficio === o.id,
+      pct: Math.min(100, Math.round((o.meses / 120) * 1000) / 10),
+      reguaAria: 'Tiempo en el oficio: ' + o.meses + ' meses en una regla de 0 a 10 años. Infusión desde 6 meses, Reserva desde 2 años, Solera desde 5 años.',
+      linhas: o.linhas,
+      podePedir: o.id === 'laranja' && eu && !s.pediuMestre,
+      pick: () => set({ oficio: s.oficio === o.id ? '' : o.id }),
+      pedir: pedirReserva
+    }));
+    const estiloPet = (o) => {
+      if (o.grau === 'Gota') return { fill: '#F3EBD8', stroke: o.escura, sw: '1.6', dash: '3 2' };
+      if (o.grau === 'Infusión') return { fill: 'url(#ht-' + o.id + ')', stroke: o.escura, sw: '1.2', dash: 'none' };
+      if (o.grau === 'Reserva') return { fill: o.cor, stroke: o.cor, sw: '0.6', dash: 'none' };
+      return { fill: o.cor, stroke: '#1C1A16', sw: '2.4', dash: 'none' };
+    };
+    const pet = {};
+    oficiosBase.forEach((o) => { pet[o.id] = Object.assign(estiloPet(o), { pick: ir('oficios', { oficio: o.id }) }); });
+
+    const tiposBase = ['Casa', 'Jornada', 'Carta', 'Escuela', 'Mentor', 'Grado'];
+    const tipos = tiposBase.map((t) => ({ t: t, on: s.ptipo === t, pick: () => set({ ptipo: t }) }));
+    const campo = (k) => (e) => { const o = {}; o[k] = e.target.value; set(o); };
+    const enviar = () => {
+      const formas = { Casa: 'redondo', Jornada: 'retangulo', Carta: 'oval', Escuela: 'retangulo', Mentor: 'oval', Grado: 'redondo' };
+      const partes = (s.fQuem || '').split(',');
+      const nome = (partes[0] || '').trim() || 'quien firma';
+      const papel = (partes.slice(1).join(',') || '').trim() || 'quien firma';
+      const novo = {
+        id: 'pedido-' + (s.extras.length + 1), tipo: s.ptipo,
+        titulo: ((s.fOnde || '').split(',')[0] || '').trim() || 'Sin título',
+        linha: s.fQuando || '', forma: formas[s.ptipo] || 'retangulo',
+        data: s.fQuando || '', onde: s.fOnde || '', assinou: nome, papel: papel, prova: s.fOque || '', pendente: true
+      };
+      if (s.ptipo === 'Grado' && s.extras.length < slots.length) set({ pediuMestre: true });
+      adicionar(novo, 'Solicitud enviada a ' + nome + '. El sello queda en discontinuo hasta la firma.');
+    };
+
+
+    const ehCarimboAlvo = s.compAlvo === 'carimbo';
+    const publicosCv = todos.filter((c) => !c.pendente && !s.ocultos[c.id]).sort((a, b) => (a.pag || 0) - (b.pag || 0)).slice(0, 5);
+    const tipoLi = !ehCarimboAlvo ? 'destaque' : (sel.tipo === 'Escuela' ? 'cert' : (sel.tipo === 'Casa' || sel.tipo === 'Jornada' ? 'exp' : 'post'));
+    const linkCarimbo = 'dropp.me/teo/' + sel.id;
+    const legendaComp = ehCarimboAlvo
+      ? 'Sello de ' + sel.tipo + ': ' + sel.titulo + '. Firmado por ' + sel.assinou + ', ' + sel.papel + ' (' + sel.data + '). La prueba está en dropp.me/teo.'
+      : 'Mi Pasaporte del Oficio: 12 años de barra, 7 casas, 38 fichas y 9 personas formadas. Cada número tiene una prueba firmada en dropp.me/teo.';
+    const liCfg = {
+      cert: { secao: 'Licencias y certificaciones', botao: 'Añadir al perfil de LinkedIn', aviso: 'En la app, LinkedIn se abre en Licencias y certificaciones, con los campos rellenos. Tú revisas y guardas.',
+        campos: [['Nombre', sel.tipo + ' · ' + sel.titulo + ', ' + sel.linha], ['Emisor', sel.onde], ['Expedición', sel.data], ['Credencial', linkCarimbo], ['Firmado por', sel.assinou + ', ' + sel.papel]] },
+      exp: { secao: 'Experiencia', botao: 'Añadir como experiencia', aviso: 'En la app, LinkedIn se abre en Experiencia, con los campos rellenos. Tú revisas y guardas.',
+        campos: [['Cargo', sel.tipo === 'Casa' ? 'Head bartender' : 'Guest bartender'], ['Empresa', sel.onde], ['Periodo', sel.tipo === 'Casa' ? sel.linha.split('·').pop().trim() : sel.data], ['Descripción', sel.prova], ['Prueba', linkCarimbo]] },
+      post: { secao: 'Publicación', botao: 'Publicar en LinkedIn', aviso: 'En la app, LinkedIn se abre con el post listo. No se publica nada sin que lo confirmes.',
+        campos: [['Texto', legendaComp], ['Enlace', linkCarimbo]] },
+      destaque: { secao: 'Destacados', botao: 'Añadir a Destacados', aviso: 'En la app, LinkedIn se abre en Destacados, con el enlace del pasaporte. Tú revisas y guardas.',
+        campos: [['Título', 'Pasaporte del Oficio · Teo Aranda'], ['Enlace', 'dropp.me/teo'], ['Descripción', '12 años de barra, 7 casas y 9 personas formadas. Cada número tiene una prueba firmada.']] }
+    }[tipoLi];
+    const shr = {
+      intro: ehCarimboAlvo ? 'El sello ' + sel.tipo + ' · ' + sel.titulo + ', firmado por ' + sel.assinou + '.' : 'Tu pasaporte: etiqueta, oficios y solo los sellos públicos.',
+      formatos: [['story', 'Story'], ['post', 'Post'], ['linkedin', 'LinkedIn'], ['cv', 'Currículum']].map((f) => ({ t: f[1], on: s.comp === f[0], pick: () => set({ comp: f[0], aviso: '' }) })),
+      story: s.comp === 'story', post: s.comp === 'post', linkedin: s.comp === 'linkedin', cv: s.comp === 'cv',
+      ehCarimbo: ehCarimboAlvo, ehPassaporte: !ehCarimboAlvo,
+      cls: classe(sel, false), tipo: sel.tipo, titulo: sel.titulo, linha: sel.linha,
+      spLinha: ehCarimboAlvo ? 'firmado por ' + sel.assinou + ' · ' + sel.data : '12 años · 7 casas · 9 formados',
+      legenda: legendaComp,
+      liSecao: liCfg.secao, liBotao: liCfg.botao, liCampos: liCfg.campos.map((x) => ({ k: x[0], v: x[1] })),
+      cvOficios: oficiosBase.map((o) => ({ t: o.nome, v: o.grau })),
+      cvCarimbos: publicosCv.map((c) => ({ t: c.tipo + ' · ' + c.titulo, v: c.data })),
+      abrirInsta: () => set({ aviso: 'En la app, Instagram se abre con la story lista y el enlace en el adhesivo.' }),
+      abrirShare: () => set({ aviso: 'En la app, se abre la hoja de compartir del móvil con la imagen y el texto.' }),
+      abrirLinkedin: () => set({ aviso: liCfg.aviso }),
+      baixarPdf: () => set({ aviso: 'Currículum en PDF listo: una página, solo con los sellos públicos.' })
+    };
+
+    const titulos = { carimbo: 'Prueba del sello', novo: 'Nuevo sello', pedir: 'Pedir sello', escanear: 'Escanear sello de la casa', brinde: 'Brindar', arquivo: 'Archivo', compartilhar: 'Compartir' };
+    const mostrarAbas = principais.indexOf(s.tela) >= 0;
+
+    return {
+      eu: eu,
+      publico: publico,
+      visaoEu: eu,
+      visaoPublico: publico,
+      verEu: () => set({ visao: 'eu', aviso: '' }),
+      verPublico: () => set({ visao: 'publico', tela: fluxos.indexOf(s.tela) >= 0 ? s.base : s.tela, aviso: '' }),
+      mostrarAbas: mostrarAbas,
+      mostrarVoltar: !mostrarAbas,
+      mostrarBanner: publico && (mostrarAbas || s.tela === 'carimbo'),
+      tituloTela: titulos[s.tela] || '',
+      voltar: s.tela === 'compartilhar' ? ir(s.compVolta || s.base || 'rotulo') : ir(s.base || 'rotulo'),
+      abaRotulo: s.tela === 'rotulo',
+      abaPaginas: s.tela === 'paginas',
+      abaOficios: s.tela === 'oficios',
+      irRotulo: ir('rotulo'),
+      irPaginas: ir('paginas'),
+      irOficios: ir('oficios'),
+      irClassicos: ir('oficios', { oficio: 'laranja' }),
+      irNovo: ir('novo'),
+      irPedir: ir('pedir'),
+      irEscanear: ir('escanear', { esc: 'mirar' }),
+      irBrinde: ir('brinde', { brinde: 'aproximar' }),
+      irArquivo: ir('arquivo'),
+      corpoRef: this._refCorpo || (this._refCorpo = (el) => { this._corpo = el; }),
+
+      tRotulo: s.tela === 'rotulo',
+      tPaginas: s.tela === 'paginas',
+      tCarimbo: s.tela === 'carimbo',
+      tOficios: s.tela === 'oficios',
+      tNovo: s.tela === 'novo',
+      tPedir: s.tela === 'pedir',
+      tEscanear: s.tela === 'escanear',
+      tBrinde: s.tela === 'brinde',
+      tArquivo: s.tela === 'arquivo',
+      tCompartilhar: s.tela === 'compartilhar',
+      shr: shr,
+      podeCompartilhar: eu && !sel.pendente,
+      selOculto: !!s.ocultos[sel.id],
+      irCompartilharPassaporte: () => set({ tela: 'compartilhar', compAlvo: 'passaporte', compVolta: 'rotulo', comp: 'story', aviso: '' }),
+      irCompartilharCarimbo: () => {
+        const oc = Object.assign({}, s.ocultos);
+        const estava = !!oc[sel.id];
+        oc[sel.id] = false;
+        set({ tela: 'compartilhar', compAlvo: 'carimbo', compVolta: 'carimbo', comp: 'story', ocultos: oc, aviso: estava ? 'El sello ha vuelto al enlace público para poder compartirlo.' : '' });
+      },
+
+      rotuloCls: 'papel rotulo' + (s.imprimindo === 0 ? '' : (s.imprimindo % 2 === 1 ? ' sai-a' : ' sai-b')),
+      pet: pet,
+      medidas: medidas,
+      temMedida: !!medidaAberta,
+      medidaTitulo: medidaAberta ? medidaAberta.titulo : '',
+      medidaItens: medidaAberta ? medidaAberta.itens.map((t) => ({ t: t })) : [],
+      imprimir: () => set({ imprimindo: s.imprimindo + 1, aviso: 'Etiqueta enviada a la impresora de la barra.' }),
+      copiar: () => {
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('https://dropp.me/teo').catch(() => {});
+        } catch (e) { }
+        set({ aviso: 'Enlace copiado: dropp.me/teo' });
+      },
+      proximoGrau: (arqAssinado ? 'Falta la firma de dos Reservas en Clásicos.' : 'Faltan la firma de dos Reservas en Clásicos y la segunda comprobación del Hanky Panky.'),
+
+      pagNumero: 'Página ' + pag.n + ' de 9',
+      pagTemporada: pag.temporada,
+      pagMeses: pag.meses,
+      pagN: pag.n,
+      pagAria: 'Página ' + pag.n + ', ' + pag.temporada + '. Sellos de la temporada.',
+      pagItens: pagItens,
+      rever: () => set({ tinta: s.tinta + 1 }),
+      semAnterior: pagIdx >= paginas.length - 1,
+      semProxima: pagIdx === 0,
+      rotAnterior: '← Página ' + (pag.n - 1),
+      rotProxima: pagIdx === 0 ? 'La más reciente' : 'Página ' + (pag.n + 1) + ' →',
+      anterior: () => set({ pagina: Math.min(paginas.length - 1, pagIdx + 1), tinta: 0, ultimo: '', aviso: '' }),
+      proxima: () => set({ pagina: Math.max(0, pagIdx - 1), tinta: 0, ultimo: '', aviso: '' }),
+
+      selCls: classe(sel, false),
+      selTipo: sel.tipo,
+      selTitulo: sel.titulo,
+      selLinha: sel.linha,
+      selData: sel.data,
+      selOnde: sel.onde,
+      selQuem: sel.assinou + ', ' + sel.papel,
+      selProva: sel.prova,
+      selEstado: sel.pendente ? 'esperando la firma de ' + sel.assinou : 'firmado por ' + sel.assinou,
+      selPendente: !!sel.pendente,
+      selAssinado: !sel.pendente,
+      selArquivo: !!sel.arquivo,
+      podeSimular: eu && !!sel.pendente,
+      simularRot: 'Simular: ' + sel.assinou + ' firmó',
+      podeOcultar: eu && !sel.pendente,
+      selVisivel: !s.ocultos[sel.id],
+      alternarVisivel: (e) => {
+        const o = Object.assign({}, s.ocultos);
+        o[sel.id] = !e.target.checked;
+        set({ ocultos: o, aviso: e.target.checked ? 'El sello vuelve a aparecer en el enlace público.' : 'El sello salió del enlace público. Sigue siendo válido.' });
+      },
+      assinar: () => {
+        const a = Object.assign({}, s.assinados);
+        a[sel.id] = true;
+        set({ assinados: a, ultimo: sel.id, tinta: 0, tela: 'paginas', base: 'paginas', pagina: sel.pag || 0, aviso: sel.assinou + ' firmó. El sello ya vale en tu pasaporte.' });
+      },
+      contestar: () => set({ aviso: 'Impugnación enviada a DROPP y a ' + sel.assinou + '.' }),
+
+      oficios: oficios,
+
+      tipos: tipos,
+      fOnde: s.fOnde,
+      fQuando: s.fQuando,
+      fQuem: s.fQuem,
+      fOque: s.fOque,
+      setOnde: campo('fOnde'),
+      setQuando: campo('fQuando'),
+      setQuem: campo('fQuem'),
+      setOque: campo('fOque'),
+      enviar: enviar,
+
+      escMirar: s.esc === 'mirar',
+      escOk: s.esc === 'reconhecido',
+      capturar: () => set({ esc: 'reconhecido' }),
+      registrarScan: () => adicionar({ id: 'scan-lume', tipo: 'Jornada', titulo: 'Taberna Lume', linha: 'VLC · 18/11/2026', forma: 'redondo', data: '18/11/2026', onde: 'Taberna Lume, Valencia', assinou: 'Taberna Lume', papel: 'cuenta verificada de la casa', prova: 'Sello de caucho de la casa, nº 014 de la red, fotografiado en el cuaderno de papel y confirmado por la cuenta de la casa.' }, 'Sello de la Taberna Lume registrado en la página 9.'),
+
+      brAproximar: s.brinde === 'aproximar',
+      brEncontrado: s.brinde === 'encontrado',
+      foneCls: s.brinde === 'encontrado' ? 'fone' : 'fone vazio',
+      foneOutro: s.brinde === 'encontrado' ? 'Elena Rostova' : 'otro móvil',
+      simularEncontro: () => set({ brinde: 'encontrado' }),
+      brindar: () => adicionar({ id: 'brinde-elena', tipo: 'Brindis', titulo: 'Elena R.', linha: 'VLC · 18/11/2026', forma: 'retangulo', data: '18/11/2026', onde: 'Valencia', assinou: 'Elena Rostova', papel: 'head bartender', prova: 'Encuentro en persona. Los dos acercaron los móviles y los dos pasaportes registraron el brindis.' }, 'Brindis registrado en los dos pasaportes.'),
+
+      arqSt: arqAssinado ? 'firmó' : (s.arqPedido ? 'recordatorio enviado' : 'esperando'),
+      arqStCls: 'st ' + (arqAssinado ? 'ok' : 'meio'),
+      arqPodePedir: eu && !arqAssinado && !s.arqPedido,
+      pedirConf: () => set({ arqPedido: true, aviso: 'Recordatorio enviado a Tomás Vidal.' }),
+
+      temAviso: !!s.aviso,
+      aviso: s.aviso,
+      fecharAviso: () => set({ aviso: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

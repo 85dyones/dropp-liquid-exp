@@ -1,0 +1,1347 @@
+<!doctype html>
+<html lang="es-ES">
+<head>
+<meta charset="utf-8">
+<title>Atlas · Escuela DROPP</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wdth,wght@62..125,400..800&amp;family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;display=swap">
+<style>
+body { margin: 0; }
+.app { width: 390px; height: 844px; box-sizing: border-box; display: flex; flex-direction: column; background-color: #EFE8D8; background-image: radial-gradient(rgba(90, 65, 30, 0.06) 1px, transparent 1.3px); background-size: 4px 4px; color: #1C1A16; font-family: Archivo, "Helvetica Neue", Arial, sans-serif; font-size: 15px; line-height: 1.45; position: relative; overflow: hidden; }
+.app * { box-sizing: border-box; }
+.app p, .app h2, .app h3, .app ul, .app ol, .app dl, .app dd { margin: 0; }
+button { font-family: inherit; color: #1C1A16; }
+.app :focus-visible { outline: 2px solid #A21CAF; outline-offset: 2px; }
+
+.topo { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 14px 10px; flex: none; }
+.marca { display: flex; align-items: center; gap: 8px; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 26px; line-height: 1; text-transform: uppercase; letter-spacing: 0.02em; }
+.marca svg { width: 22px; height: 26px; flex: none; }
+.semana { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11.5px; line-height: 1.3; letter-spacing: 0.04em; color: #5B5344; text-align: right; }
+.abas { display: flex; align-items: stretch; border-bottom: 1.5px solid #1C1A16; padding: 0 12px 0 6px; flex: none; }
+.aba { appearance: none; border: 0; background: transparent; padding: 0 10px; min-height: 46px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 125; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1.5px; color: #6A6151; }
+.aba[aria-pressed="true"] { color: #1C1A16; border-bottom-color: #D946EF; }
+.voltar-bar { display: flex; align-items: center; gap: 4px; padding: 6px 12px 6px 4px; border-bottom: 1.5px solid #1C1A16; min-height: 58px; flex: none; }
+.voltar { appearance: none; border: 0; background: transparent; min-height: 44px; padding: 0 12px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.voltar-bar h2 { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.02em; }
+
+.corpo { flex: 1; overflow-y: auto; padding: 14px 14px 92px; display: flex; flex-direction: column; gap: 14px; position: relative; }
+.corpo > * { flex: none; }
+.rot { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: #6A6151; }
+.titulo-bloco { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.05; text-transform: uppercase; letter-spacing: 0.01em; }
+.titulo-grande { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 36px; line-height: 0.95; text-transform: uppercase; }
+.nota { font-size: 13px; line-height: 1.45; color: #6A6151; }
+.papel { background-color: #FAF6EC; background-image: radial-gradient(rgba(90, 65, 30, 0.05) 1px, transparent 1.3px); background-size: 5px 5px; color: #1C1A16; position: relative; border: 1.5px solid #1C1A16; }
+.papel .nota, .papel .rot { color: #5B5344; }
+.papel.corte::before, .papel.corte::after { content: ""; position: absolute; width: 14px; height: 14px; opacity: 0.5; background: linear-gradient(#1C1A16, #1C1A16) center / 1px 100% no-repeat, linear-gradient(#1C1A16, #1C1A16) center / 100% 1px no-repeat; pointer-events: none; }
+.papel.corte::before { top: -8px; left: -8px; }
+.papel.corte::after { bottom: -8px; right: -8px; }
+.bloco { padding: 14px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 9px; border-radius: 4px; }
+.sec-cab { display: grid; gap: 4px; }
+.sec-rot { display: grid; gap: 3px; padding-top: 6px; }
+.btn { appearance: none; border: 1.5px solid #1C1A16; background: transparent; color: #1C1A16; min-height: 46px; padding: 0 14px; font-weight: 700; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-align: center; }
+.btn.cheio { background: #1C1A16; color: #F8F3E7; }
+.btn.largo { width: 100%; }
+.btn.peq { min-height: 40px; font-size: 13px; padding: 0 12px; }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.acoes { display: grid; gap: 8px; }
+.chk { list-style: none; padding: 0; display: grid; gap: 7px; font-size: 14px; line-height: 1.4; }
+.chk li { display: flex; gap: 8px; align-items: baseline; }
+.mono { font-family: "Courier Prime", "Courier New", monospace; }
+.st { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11.5px; line-height: 1.3; padding: 1px 6px; white-space: nowrap; flex: none; }
+.st.ok { background: #10B981; color: #1C1A16; }
+.st.meio { background: #FACC15; color: #1C1A16; }
+.st.falta { border: 1px solid currentColor; }
+.st.trava { border: 1px dashed currentColor; }
+.st.solto { white-space: normal; }
+.seg-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.seg-row.dois { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.seg { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 44px; padding: 6px; font-size: 13px; font-weight: 600; line-height: 1.2; cursor: pointer; display: grid; gap: 2px; align-content: center; justify-items: center; text-align: center; }
+.seg[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
+.seg-t { display: block; }
+.seg-s { display: block; font-family: "Courier Prime", "Courier New", monospace; font-weight: 400; font-size: 11px; }
+.lido { display: flex; gap: 8px; align-items: baseline; font-size: 13.5px; line-height: 1.4; }
+.fonte { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; line-height: 1.45; background: rgba(28, 26, 22, 0.06); padding: 8px 10px; }
+.porque { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 2px; font-size: 13.5px; line-height: 1.42; }
+.seta { font-weight: 700; }
+
+.tipos { display: flex; flex-wrap: wrap; gap: 6px; }
+.tipo-chip { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 38px; padding: 0 11px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+.tipo-n { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; }
+.tipo-chip[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
+.item { appearance: none; width: 100%; text-align: left; cursor: pointer; padding: 13px 14px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; border-radius: 4px; }
+.item:hover { background-color: #FFFDF6; }
+.item-nome { display: block; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 25px; line-height: 1.02; text-transform: uppercase; }
+.mat-nome { display: block; font-weight: 800; font-variation-settings: "wdth" 85; font-size: 18px; line-height: 1.2; }
+.item-linha { display: block; font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 12px; line-height: 1.4; border-top: 1px dotted rgba(28, 26, 22, 0.35); padding-top: 6px; }
+.item-pe { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+
+.plano-cab { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px; }
+.trilha { list-style: none; padding: 0; display: grid; }
+.trilha li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; padding: 7px 0; position: relative; }
+.trilha li:not(:last-child)::before { content: ""; position: absolute; left: 7px; top: 26px; bottom: -8px; width: 2px; background: rgba(28, 26, 22, 0.22); }
+.tr-m { display: block; width: 16px; height: 16px; border-radius: 50%; border: 2px solid #1C1A16; background: #FAF6EC; margin-top: 2px; }
+.trilha li[data-est="feito"] .tr-m { background: #1C1A16; }
+.trilha li[data-est="agora"] .tr-m { background: #D946EF; }
+.trilha li[data-est="trava"] .tr-l { opacity: 0.5; }
+.tr-l { display: grid; gap: 3px; min-width: 0; justify-items: start; }
+.tr-nome { font-weight: 700; font-size: 15px; line-height: 1.3; }
+.tr-sub { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; line-height: 1.4; color: #5B5344; }
+
+.preco { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.preco-v { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 48px; line-height: 1; }
+.preco-u { font-size: 14px; font-weight: 600; }
+.mais { font-weight: 800; }
+.aceite { appearance: none; border: 1.5px solid #1C1A16; background: transparent; width: 100%; min-height: 56px; padding: 10px 12px; display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; text-align: left; font-size: 13.5px; line-height: 1.4; font-weight: 500; cursor: pointer; }
+.aceite-box { display: grid; place-items: center; width: 20px; height: 20px; border: 2px solid #1C1A16; font-weight: 800; font-size: 13px; line-height: 1; }
+.aceite[aria-pressed="true"] .aceite-box { background: #1C1A16; color: #F8F3E7; }
+.regras-assin li { font-size: 13px; color: #5B5344; }
+.citacao { border-left: 3px solid #1C1A16; padding: 2px 0 2px 12px; font-size: 14px; line-height: 1.5; }
+.trecho { display: grid; gap: 10px; }
+.trecho-p { font-size: 15px; line-height: 1.55; }
+.continua { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; border-top: 1px dotted rgba(28, 26, 22, 0.35); padding-top: 8px; color: #5B5344; }
+.res-cab { display: flex; align-items: baseline; gap: 8px; }
+.big-pct { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 46px; line-height: 1; }
+.conta-l { display: block; }
+.campo { display: grid; gap: 6px; }
+
+.fatos { border-top: 1.5px solid #1C1A16; }
+.fatos div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(28, 26, 22, 0.18); font-size: 14px; line-height: 1.4; }
+.fatos dt { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6A6151; padding-top: 3px; }
+.encontros { list-style: none; padding: 0; display: grid; gap: 10px; }
+.encontros li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.en-d { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 22px; line-height: 1; }
+.en-l { display: grid; gap: 3px; font-size: 14px; line-height: 1.35; justify-items: start; }
+.en-onde { font-size: 12.5px; color: #5B5344; }
+.pago-linha { display: grid; gap: 4px; justify-items: start; }
+
+.regua-leitura { flex: none; padding: 14px 14px 6px; border-bottom: 1.5px solid #1C1A16; display: grid; gap: 4px; background: #EAE2D0; }
+.rl-cab { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
+.rl-l { display: grid; gap: 2px; min-width: 0; }
+.rl-med { display: block; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 50px; line-height: 1; letter-spacing: 0.01em; }
+.rl-uni { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #5B5344; }
+.rl-passo { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 12px; text-align: right; padding-bottom: 4px; }
+.rl-ticks { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.rl-linha { position: absolute; left: 10%; right: 10%; top: 21px; height: 2px; background: rgba(28, 26, 22, 0.22); }
+.rl-feito { position: absolute; left: 10%; top: 21px; height: 2px; background: #1C1A16; transition: width 280ms ease; }
+.rl-tick { appearance: none; border: 0; background: transparent; min-height: 54px; padding: 14px 0 4px; display: grid; justify-items: center; align-content: start; gap: 5px; cursor: pointer; position: relative; }
+.rl-dot { display: block; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #1C1A16; background: #EAE2D0; transition: transform 200ms ease, background 200ms ease; }
+.rl-tick[data-feito="true"] .rl-dot { background: #1C1A16; }
+.rl-tick[aria-current="true"] .rl-dot { background: #D946EF; transform: scale(1.35); }
+.rl-tk-m { display: block; font-family: "Courier Prime", "Courier New", monospace; font-size: 10.5px; line-height: 1.1; color: #5B5344; white-space: nowrap; }
+.rl-tick[aria-current="true"] .rl-tk-m { color: #1C1A16; font-weight: 700; }
+@keyframes desce-a { from { transform: translateY(-10px); opacity: 0.2; } to { transform: none; opacity: 1; } }
+@keyframes desce-b { from { transform: translateY(-10px); opacity: 0.2; } to { transform: none; opacity: 1; } }
+.sai-a { animation: desce-a 260ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.sai-b { animation: desce-b 260ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.passos-l { display: grid; }
+.passo-l { padding: 16px 0 24px; border-top: 1.5px solid #1C1A16; display: grid; gap: 8px; align-content: start; min-height: 236px; }
+.passo-num { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.06em; }
+.passo-l h3 { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 27px; line-height: 1.02; text-transform: uppercase; }
+.passo-tx { font-size: 15.5px; line-height: 1.5; }
+.passo-med { justify-self: start; font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 13px; background: rgba(28, 26, 22, 0.07); padding: 5px 8px; }
+
+.carimbo-area { display: grid; place-items: center; padding: 10px 0 4px; }
+.carimbo { display: grid; justify-items: center; gap: 2px; padding: 10px 20px 9px; border: 3px solid currentColor; outline: 1.5px solid currentColor; outline-offset: 3px; transform: rotate(-4deg); font-family: "Courier Prime", "Courier New", monospace; text-transform: uppercase; text-align: center; }
+.carimbo.verde { color: #0B7654; }
+.carimbo.vermelho { color: #B02A2A; border-radius: 50%; padding: 18px 22px; }
+.c-tipo { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; }
+.c-tit { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 26px; line-height: 1; letter-spacing: 0.02em; }
+.c-linha { font-size: 11px; }
+@keyframes bate { 0% { transform: rotate(-4deg) scale(1.3); opacity: 0; } 70% { transform: rotate(-4deg) scale(0.96); opacity: 1; } 100% { transform: rotate(-4deg) scale(1); opacity: 1; } }
+.carimbo.bate { animation: bate 220ms ease-out both; }
+
+.spec div { display: flex; justify-content: space-between; gap: 10px; padding: 6px 0; border-bottom: 1px dotted rgba(28, 26, 22, 0.35); font-size: 14.5px; line-height: 1.35; }
+.spec dd { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; white-space: nowrap; }
+.colegas { list-style: none; padding: 0; display: grid; }
+.colegas li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px dotted rgba(28, 26, 22, 0.35); }
+.cl-l { display: grid; gap: 1px; min-width: 0; }
+.colegas .btn { white-space: nowrap; flex: none; }
+.cl-nome { font-weight: 700; font-size: 14.5px; line-height: 1.3; }
+.cl-papel { font-size: 12px; color: #5B5344; }
+
+.ev { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border-radius: 4px; }
+.data-ev { display: grid; justify-items: center; align-content: start; gap: 1px; border-right: 1.5px solid #1C1A16; padding-right: 10px; }
+.data-n { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 32px; line-height: 1; }
+.data-k { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: #5B5344; }
+.ev-l { display: grid; gap: 5px; min-width: 0; justify-items: start; }
+.ev-tit { font-weight: 700; font-size: 16px; line-height: 1.3; }
+.ev-sub { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; color: #5B5344; }
+.ev-nota { font-size: 13.5px; line-height: 1.42; }
+.ev-acoes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 2px; }
+
+.aviso { position: absolute; left: 12px; right: 12px; bottom: 74px; background: #1C1A16; color: #F8F3E7; padding: 6px 6px 6px 14px; display: flex; gap: 8px; align-items: center; font-size: 14px; line-height: 1.35; font-weight: 600; z-index: 5; box-shadow: 0 10px 24px rgba(60, 45, 20, 0.35); }
+.aviso button { appearance: none; border: 0; background: transparent; color: #F8F3E7; min-height: 44px; padding: 0 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: underline; }
+.nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1.5px solid #1C1A16; background: #EFE8D8; position: relative; z-index: 6; flex: none; }
+.nav button { appearance: none; border: 0; background: transparent; min-height: 62px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 115; letter-spacing: 0.06em; color: #6A6151; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.nav button[aria-current="page"] { color: #1C1A16; }
+.nav button:disabled { cursor: not-allowed; }
+.nav button:disabled svg { opacity: 0.6; }
+.nav svg { width: 22px; height: 22px; }
+@media (prefers-reduced-motion: reduce) { .sai-a, .sai-b, .carimbo.bate { animation: none; } .rl-feito, .rl-dot { transition: none; } }
+</style>
+</helmet>
+<div class="app">
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <g id="gota-oficial">
+        <path d="M50 8 C50 8 36 28 32 46 C37 40 45 36 50 36 C55 36 63 40 68 46 C64 28 50 8 50 8 Z" fill="#FACC15"></path>
+        <path d="M32 46 C24 57 20 68 22 79 C25 80 29 80 34 78 C31 66 33 55 42 46 C38 45 35 45 32 46 Z" fill="#10B981"></path>
+        <path d="M22 79 C24 93 35 106 50 108 C46 98 46 88 50 78 C39 77 31 82 22 79 Z" fill="#06B6D4"></path>
+        <path d="M68 46 C76 57 80 68 78 79 C75 80 71 80 66 78 C69 66 67 55 58 46 C62 45 65 45 68 46 Z" fill="#F97316"></path>
+        <path d="M78 79 C76 93 65 106 50 108 C54 98 54 88 50 78 C61 77 69 82 78 79 Z" fill="#EF4444"></path>
+        <path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="#D946EF"></path>
+        <path d="M50 78 C44 86 44 95 50 106 C56 95 56 86 50 78 Z" fill="#8B5CF6"></path>
+      </g>
+    </defs>
+  </svg>
+
+  <sc-if value="{{principal}}" hint-placeholder-val="{{ true }}">
+    <div class="topo">
+      <p class="marca"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>Atlas</p>
+      <p class="semana">SEMANA 47<br>18/11/2026</p>
+    </div>
+    <div class="abas">
+      <sc-for list="{{abas}}" as="ab" hint-placeholder-count="3">
+        <button type="button" class="aba" aria-pressed="{{ab.on}}" onClick="{{ab.pick}}">{{ab.t}}</button>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{mostrarVoltar}}" hint-placeholder-val="{{ false }}">
+    <div class="voltar-bar">
+      <button type="button" class="voltar" onClick="{{voltar}}">← Volver</button>
+      <h2>{{tituloTela}}</h2>
+    </div>
+  </sc-if>
+  <sc-if value="{{tTecnica}}" hint-placeholder-val="{{ false }}">
+    <div class="regua-leitura">
+      <div class="rl-cab">
+        <div class="rl-l" aria-live="polite">
+          <b class="{{regua.cls}}">{{regua.m}}</b>
+          <span class="rl-uni">{{regua.u}}</span>
+        </div>
+        <span class="rl-passo">{{regua.passoTxt}}</span>
+      </div>
+      <div class="rl-ticks">
+        <span class="rl-linha"></span>
+        <span class="rl-feito" style="width: {{regua.fill}}%"></span>
+        <sc-for list="{{regua.ticks}}" as="tk" hint-placeholder-count="5">
+          <button type="button" class="rl-tick" aria-current="{{tk.atual}}" data-feito="{{tk.feito}}" aria-label="{{tk.aria}}" onClick="{{tk.ir}}"><span class="rl-dot"></span><span class="rl-tk-m">{{tk.m}}</span></button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <div class="corpo" ref="{{corpoRef}}">
+
+    <sc-if value="{{tEscola}}" hint-placeholder-val="{{ true }}">
+      <div class="sec-cab">
+        <p class="titulo-bloco">Escuela DROPP</p>
+        <p class="nota">Cursos de DROPP en grupo, con práctica en el bar. Quien termina se lleva el sello Escuela en el Pasaporte.</p>
+      </div>
+      <div class="papel bloco">
+        <div class="plano-cab"><span class="rot">{{esc.planoRot}}</span><span class="{{esc.planoStCls}}">{{esc.planoSt}}</span></div>
+        <p>{{esc.planoTxt}}</p>
+        <sc-if value="{{esc.gratis}}" hint-placeholder-val="{{ true }}">
+          <div class="acoes">
+            <button type="button" class="btn cheio largo" onClick="{{esc.serSocio}}">Hazte socio · 30 días gratis</button>
+            <sc-if value="{{esc.podePedir}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn largo" onClick="{{esc.pedirCasa}}">Pedir el Socio al Sea Bar</button></sc-if>
+            <sc-if value="{{esc.pedido}}" hint-placeholder-val="{{ false }}"><p class="lido"><span class="st ok">solicitado</span><span>{{esc.pedidoTxt}}</span></p></sc-if>
+          </div>
+        </sc-if>
+        <sc-if value="{{esc.socio}}" hint-placeholder-val="{{ false }}">
+          <button type="button" class="btn largo" onClick="{{esc.minhaAssin}}">Mi suscripción</button>
+        </sc-if>
+      </div>
+
+      <div class="papel corte bloco">
+        <div class="plano-cab"><span class="rot">Tu itinerario</span><span class="{{esc.trilhaStCls}}">{{esc.trilhaSt}}</span></div>
+        <ol class="trilha">
+          <sc-for list="{{esc.trilha}}" as="tr" hint-placeholder-count="3">
+            <li data-est="{{tr.est}}">
+              <span class="tr-m"></span>
+              <span class="tr-l">
+                <span class="tr-nome">{{tr.t}}</span>
+                <span class="tr-sub">{{tr.sub}}</span>
+                <sc-if value="{{tr.temAbrir}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn peq" onClick="{{tr.abrir}}">Ver el curso</button></sc-if>
+              </span>
+            </li>
+          </sc-for>
+        </ol>
+        <p class="nota">{{esc.trilhaTxt}}</p>
+        <sc-if value="{{esc.trilhaTrava}}" hint-placeholder-val="{{ true }}">
+          <button type="button" class="btn largo" onClick="{{esc.conhecerBarback}}">Conocer el plan con Barback</button>
+        </sc-if>
+      </div>
+
+      <div class="sec-rot"><span class="rot">Próximos cursos</span></div>
+      <sc-for list="{{esc.turmas}}" as="tm" hint-placeholder-count="3">
+        <button type="button" class="papel corte item" onClick="{{tm.abrir}}">
+          <span class="rot">{{tm.rot}}</span>
+          <span class="item-nome">{{tm.nome}}</span>
+          <span class="item-linha">{{tm.linha}}</span>
+          <sc-if value="{{tm.temPe}}" hint-placeholder-val="{{ false }}">
+            <span class="item-pe">
+              <sc-if value="{{tm.temPago}}" hint-placeholder-val="{{ false }}"><span class="st meio">{{tm.pagoT}}</span></sc-if>
+              <sc-if value="{{tm.temChip}}" hint-placeholder-val="{{ false }}"><span class="{{tm.chipCls}}">{{tm.chipT}}</span></sc-if>
+            </span>
+          </sc-if>
+        </button>
+      </sc-for>
+
+      <div class="sec-rot"><span class="rot">Biblioteca</span><p class="nota">{{esc.bibTxt}}</p></div>
+      <sc-for list="{{esc.materiais}}" as="mx" hint-placeholder-count="4">
+        <button type="button" class="papel item" onClick="{{mx.abrir}}">
+          <span class="rot">{{mx.rot}}</span>
+          <span class="mat-nome">{{mx.nome}}</span>
+          <span class="item-linha">{{mx.linha}}</span>
+          <sc-if value="{{mx.temChip}}" hint-placeholder-val="{{ false }}"><span class="item-pe"><span class="{{mx.chipCls}}">{{mx.chipT}}</span></span></sc-if>
+        </button>
+      </sc-for>
+
+      <div class="papel corte bloco">
+        <div class="plano-cab"><span class="rot">Crítica del mes</span><sc-if value="{{cr.trava}}" hint-placeholder-val="{{ true }}"><span class="st trava">para socios</span></sc-if></div>
+        <p>{{cr.txt}}</p>
+        <sc-if value="{{cr.aberta}}" hint-placeholder-val="{{ false }}">
+          <div class="campo">
+            <span class="rot">Qué cóctel</span>
+            <div class="seg-row">
+              <sc-for list="{{cr.fichas}}" as="fc" hint-placeholder-count="3">
+                <button type="button" class="seg" aria-pressed="{{fc.on}}" onClick="{{fc.pick}}">{{fc.t}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <button type="button" class="aceite" aria-pressed="{{cr.foto}}" onClick="{{cr.anexar}}"><span class="aceite-box">{{cr.fotoMarca}}</span><span>{{cr.fotoTxt}}</span></button>
+          <button type="button" class="btn cheio largo" onClick="{{cr.enviar}}" disabled="{{cr.semFoto}}">Enviar a la crítica</button>
+        </sc-if>
+        <sc-if value="{{cr.enviada}}" hint-placeholder-val="{{ false }}"><p class="lido"><span class="st ok">enviada</span><span>{{cr.enviadaTxt}}</span></p></sc-if>
+        <span class="rot">{{cr.exRot}}</span>
+        <p class="citacao">{{cr.exTxt}}</p>
+      </div>
+
+      <div class="papel bloco">
+        <span class="rot">{{av.rot}}</span>
+        <p class="ev-tit">{{av.tit}}</p>
+        <p class="ev-sub">{{av.sub}}</p>
+        <div class="ev-acoes">
+          <sc-if value="{{av.trava}}" hint-placeholder-val="{{ true }}"><span class="st trava">para socios</span></sc-if>
+          <sc-if value="{{av.salvo}}" hint-placeholder-val="{{ false }}"><span class="st ok">en tu agenda</span></sc-if>
+          <sc-if value="{{av.podeSalvar}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn peq" onClick="{{av.salvar}}">Guardar en la agenda</button></sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{tEstante}}" hint-placeholder-val="{{ false }}">
+      <div class="sec-cab">
+        <p class="titulo-bloco">Estante de la semana</p>
+        <p class="nota">Técnicas para el turno y el Archivo de los clásicos, elegidas a partir de tu Cuaderno y tu Pasaporte. Cada pieza dice por qué está aquí.</p>
+      </div>
+      <div class="tipos">
+        <sc-for list="{{tipos}}" as="tp" hint-placeholder-count="3">
+          <button type="button" class="tipo-chip" aria-pressed="{{tp.on}}" onClick="{{tp.pick}}"><span class="tipo-n">({{tp.n}})</span>{{tp.t}}</button>
+        </sc-for>
+      </div>
+      <sc-for list="{{itens}}" as="it" hint-placeholder-count="4">
+        <button type="button" class="papel corte item" onClick="{{it.abrir}}">
+          <span class="rot">{{it.rot}}</span>
+          <span class="item-nome">{{it.nome}}</span>
+          <sc-if value="{{it.temPorque}}" hint-placeholder-val="{{ true }}"><span class="porque"><span class="seta">→</span><span>{{it.porque}}</span></span></sc-if>
+          <span class="item-linha">{{it.linha}}</span>
+          <sc-if value="{{it.temChip}}" hint-placeholder-val="{{ false }}"><span class="item-pe"><span class="{{it.chipCls}}">{{it.chipT}}</span></span></sc-if>
+        </button>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{tAgenda}}" hint-placeholder-val="{{ false }}">
+      <div class="sec-cab">
+        <p class="titulo-bloco">Agenda del sector</p>
+        <p class="nota">Guest shifts, cursos de la Escuela y encuentros. Lo que guardas va al calendario del móvil y aparece en el Turno del día.</p>
+      </div>
+      <div class="tipos">
+        <sc-for list="{{filtrosAg}}" as="fa" hint-placeholder-count="4">
+          <button type="button" class="tipo-chip" aria-pressed="{{fa.on}}" onClick="{{fa.pick}}"><span class="tipo-n">({{fa.n}})</span>{{fa.t}}</button>
+        </sc-for>
+      </div>
+      <sc-for list="{{eventos}}" as="ev" hint-placeholder-count="4">
+        <div class="papel ev">
+          <div class="data-ev"><span class="data-k">{{ev.dia}}</span><b class="data-n">{{ev.d}}</b><span class="data-k">{{ev.m}}</span></div>
+          <div class="ev-l">
+            <span class="rot">{{ev.rot}}</span>
+            <span class="ev-tit">{{ev.tit}}</span>
+            <span class="ev-sub">{{ev.onde}}</span>
+            <span class="ev-nota">{{ev.nota}}</span>
+            <sc-if value="{{ev.temPago}}" hint-placeholder-val="{{ false }}"><span class="st meio">{{ev.pagoT}}</span></sc-if>
+            <div class="ev-acoes">
+              <sc-if value="{{ev.trava}}" hint-placeholder-val="{{ false }}"><span class="st trava">para socios</span></sc-if>
+              <sc-if value="{{ev.salvo}}" hint-placeholder-val="{{ false }}"><span class="st ok">{{ev.salvoTxt}}</span></sc-if>
+              <sc-if value="{{ev.podeSalvar}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn peq" onClick="{{ev.salvar}}">Guardar en la agenda</button></sc-if>
+              <sc-if value="{{ev.temTurma}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn peq" onClick="{{ev.verTurma}}">Ver el curso</button></sc-if>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{tTurma}}" hint-placeholder-val="{{ false }}">
+      <div class="sec-cab">
+        <span class="rot">{{tu.rot}}</span>
+        <p class="titulo-grande">{{tu.nome}}</p>
+      </div>
+      <sc-if value="{{tu.temPago}}" hint-placeholder-val="{{ false }}">
+        <div class="pago-linha"><span class="st meio">{{tu.pagoT}}</span><span class="nota">El patrocinio aparece siempre. La práctica se evalúa con la misma regla y la marca no firma sellos. Contenido de marca de bebida: solo para mayores de 18.</span></div>
+      </sc-if>
+      <p class="porque"><span class="seta">→</span><span>{{tu.porque}}</span></p>
+      <dl class="fatos">
+        <div><dt>Quién enseña</dt><dd>{{tu.quem}}</dd></div>
+        <div><dt>Acceso</dt><dd>{{tu.acesso}}</dd></div>
+        <div><dt>Cómo se prueba</dt><dd>{{tu.prova}}</dd></div>
+        <div><dt>Qué te llevas</dt><dd>{{tu.leva}}</dd></div>
+        <div><dt>Plazas</dt><dd>{{tu.vagas}}</dd></div>
+      </dl>
+      <div class="papel corte bloco">
+        <span class="rot">Encuentros</span>
+        <ul class="encontros">
+          <sc-for list="{{tu.encontros}}" as="en" hint-placeholder-count="3">
+            <li><b class="en-d">{{en.d}}</b><span class="en-l"><span>{{en.t}}</span><span class="en-onde">{{en.onde}}</span>
+              <sc-if value="{{en.temSt}}" hint-placeholder-val="{{ false }}"><span class="{{en.stCls}}">{{en.stT}}</span></sc-if>
+              <sc-if value="{{en.temBtn}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn peq" onClick="{{en.abrir}}">{{en.btnRot}}</button></sc-if>
+            </span></li>
+          </sc-for>
+        </ul>
+      </div>
+      <sc-if value="{{tu.podeEntrar}}" hint-placeholder-val="{{ true }}">
+        <button type="button" class="btn cheio largo" onClick="{{tu.entrar}}">Apuntarme al curso</button>
+      </sc-if>
+      <sc-if value="{{tu.precisaSocio}}" hint-placeholder-val="{{ false }}">
+        <div class="acoes">
+          <button type="button" class="btn cheio largo" onClick="{{tu.serSocio}}">Hazte socio para entrar · 30 días gratis</button>
+          <button type="button" class="btn largo" onClick="{{tu.avulso}}">Solo la práctica presencial · 39 €</button>
+        </div>
+        <p class="nota">La práctica presencial da el sello igual. Las clases online, la biblioteca y la crítica son para socios.</p>
+      </sc-if>
+      <sc-if value="{{tu.dentro}}" hint-placeholder-val="{{ false }}">
+        <p class="lido"><span class="st ok">en el curso</span><span>{{tu.dentroTxt}}</span></p>
+        <sc-if value="{{tu.podePratica}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn largo" onClick="{{tu.irPratica}}">Ver cómo queda la práctica del 08/12</button></sc-if>
+      </sc-if>
+      <sc-if value="{{tu.pratica}}" hint-placeholder-val="{{ false }}">
+        <div class="papel bloco">
+          <span class="rot">{{tu.praticaRot}}</span>
+          <p>{{tu.praticaTxt}}</p>
+          <div class="campo">
+            <span class="rot">{{tu.medidaRot}}</span>
+            <div class="seg-row">
+              <sc-for list="{{tu.opcoes}}" as="op" hint-placeholder-count="3">
+                <button type="button" class="seg" aria-pressed="{{op.on}}" onClick="{{op.pick}}">{{op.t}}</button>
+              </sc-for>
+            </div>
+          </div>
+          <p class="nota">{{tu.opTxt}}</p>
+          <ul class="colegas">
+            <sc-for list="{{tu.assinantes}}" as="cl" hint-placeholder-count="2">
+              <li>
+                <span class="cl-l"><span class="cl-nome">{{cl.nome}}</span><span class="cl-papel">{{cl.papel}}</span></span>
+                <sc-if value="{{cl.assinou}}" hint-placeholder-val="{{ false }}"><span class="st ok">{{cl.feitoT}}</span></sc-if>
+                <sc-if value="{{cl.pode}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn peq" onClick="{{cl.pedir}}">{{cl.pedirRot}}</button></sc-if>
+              </li>
+            </sc-for>
+          </ul>
+          <p class="nota">En el prototipo, la firma llega al momento; en la app, cada uno confirma en su móvil.</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{tu.aprovado}}" hint-placeholder-val="{{ false }}">
+        <div class="carimbo-area">
+          <div class="carimbo verde bate"><span class="c-tipo">{{tu.cTipo}}</span><b class="c-tit">{{tu.cTit}}</b><span class="c-linha">{{tu.cLinha}}</span></div>
+        </div>
+        <p class="nota">{{tu.aprovadoTxt}}</p>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tAula}}" hint-placeholder-val="{{ false }}">
+      <div class="sec-cab">
+        <span class="rot">{{au.rot}}</span>
+        <p class="titulo-grande">{{au.titulo}}</p>
+      </div>
+      <p>{{au.intro}}</p>
+      <div class="campo">
+        <span class="rot">Hielo</span>
+        <div class="seg-row dois">
+          <sc-for list="{{au.gelos}}" as="gl" hint-placeholder-count="2">
+            <button type="button" class="seg" aria-pressed="{{gl.on}}" onClick="{{gl.pick}}">{{gl.t}}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div class="campo">
+        <span class="rot">Tiempo removiendo</span>
+        <div class="seg-row">
+          <sc-for list="{{au.tempos}}" as="tq" hint-placeholder-count="3">
+            <button type="button" class="seg" aria-pressed="{{tq.on}}" onClick="{{tq.pick}}">{{tq.t}}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div class="papel corte bloco" aria-live="polite">
+        <span class="rot">Resultado</span>
+        <div class="res-cab"><b class="big-pct">{{au.pctTxt}}</b><span class="rl-uni">de agua en el cóctel</span></div>
+        <p class="fonte">
+          <sc-for list="{{au.conta}}" as="ct" hint-placeholder-count="3"><span class="conta-l">{{ct.t}}</span></sc-for>
+        </p>
+        <p>{{au.veredito}}</p>
+      </div>
+      <p class="nota">{{au.nota}}</p>
+      <button type="button" class="btn cheio largo" onClick="{{au.concluir}}" disabled="{{au.feita}}">{{au.concluirRot}}</button>
+    </sc-if>
+
+    <sc-if value="{{tMaterial}}" hint-placeholder-val="{{ false }}">
+      <div class="sec-cab">
+        <span class="rot">{{mt.rot}}</span>
+        <p class="titulo-bloco">{{mt.nome}}</p>
+        <p class="nota">{{mt.autor}}</p>
+      </div>
+      <div class="papel corte bloco trecho">
+        <sc-for list="{{mt.trecho}}" as="tc" hint-placeholder-count="2"><p class="trecho-p">{{tc.t}}</p></sc-for>
+        <p class="continua">{{mt.continua}}</p>
+      </div>
+      <sc-if value="{{mt.socio}}" hint-placeholder-val="{{ false }}">
+        <div class="acoes">
+          <button type="button" class="btn cheio largo" onClick="{{mt.guardar}}" disabled="{{mt.guardado}}">{{mt.guardarRot}}</button>
+          <button type="button" class="btn largo" onClick="{{mt.abrir}}">{{mt.abrirRot}}</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{mt.gratis}}" hint-placeholder-val="{{ true }}">
+        <button type="button" class="btn cheio largo" onClick="{{mt.serSocio}}">Hazte socio para leerlo todo · 30 días gratis</button>
+        <p class="nota">Sin ser socio, lees el principio de cada material.</p>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tPlano}}" hint-placeholder-val="{{ false }}">
+      <div class="sec-cab">
+        <span class="rot">Escuela DROPP</span>
+        <p class="titulo-grande">{{pl.titulo}}</p>
+      </div>
+      <div class="campo">
+        <span class="rot">Plan</span>
+        <div class="seg-row dois">
+          <sc-for list="{{pl.planos}}" as="pp" hint-placeholder-count="2">
+            <button type="button" class="seg" aria-pressed="{{pp.on}}" onClick="{{pp.pick}}"><span class="seg-t">{{pp.t}}</span><span class="seg-s">{{pp.s}}</span></button>
+          </sc-for>
+        </div>
+      </div>
+      <div class="campo">
+        <span class="rot">Cobro</span>
+        <div class="seg-row dois">
+          <sc-for list="{{pl.ciclos}}" as="cc" hint-placeholder-count="2">
+            <button type="button" class="seg" aria-pressed="{{cc.on}}" onClick="{{cc.pick}}"><span class="seg-t">{{cc.t}}</span><span class="seg-s">{{cc.s}}</span></button>
+          </sc-for>
+        </div>
+      </div>
+      <div class="papel corte bloco">
+        <div class="preco"><b class="preco-v">{{pl.valor}}</b><span class="preco-u">{{pl.unidade}}</span></div>
+        <p class="nota">{{pl.valorNota}}</p>
+        <ul class="chk">
+          <sc-for list="{{pl.inclui}}" as="ic" hint-placeholder-count="5">
+            <li><span class="mais">+</span><span>{{ic.t}}</span></li>
+          </sc-for>
+        </ul>
+      </div>
+      <ul class="chk regras-assin">
+        <sc-for list="{{pl.regras}}" as="rg" hint-placeholder-count="3">
+          <li><span class="st falta">{{rg.k}}</span><span>{{rg.t}}</span></li>
+        </sc-for>
+      </ul>
+      <sc-if value="{{pl.pedeAceite}}" hint-placeholder-val="{{ true }}">
+        <button type="button" class="aceite" aria-pressed="{{pl.aceito}}" onClick="{{pl.aceitar}}"><span class="aceite-box">{{pl.marca}}</span><span>Quiero usar la Escuela ya y sé que, al empezar, pierdo el derecho de desistimiento de 14 días.</span></button>
+      </sc-if>
+      <button type="button" class="btn cheio largo" onClick="{{pl.comecar}}" disabled="{{pl.bloqueado}}">{{pl.comecarRot}}</button>
+      <sc-if value="{{pl.mostraCasa}}" hint-placeholder-val="{{ true }}">
+        <div class="papel bloco">
+          <span class="rot">¿Te lo paga tu casa?</span>
+          <p>{{pl.casaTxt}}</p>
+          <sc-if value="{{pl.podePedir}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn largo" onClick="{{pl.pedirCasa}}">Pedir el Socio al Sea Bar</button></sc-if>
+          <sc-if value="{{pl.pedido}}" hint-placeholder-val="{{ false }}"><p class="lido"><span class="st ok">solicitado</span><span>{{pl.pedidoTxt}}</span></p></sc-if>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{tAssinatura}}" hint-placeholder-val="{{ false }}">
+      <div class="sec-cab">
+        <span class="rot">Escuela DROPP</span>
+        <p class="titulo-grande">{{ass.nome}}</p>
+      </div>
+      <dl class="fatos">
+        <sc-for list="{{ass.fatos}}" as="fx" hint-placeholder-count="5">
+          <div><dt>{{fx.k}}</dt><dd>{{fx.v}}</dd></div>
+        </sc-for>
+      </dl>
+      <sc-if value="{{ass.ativa}}" hint-placeholder-val="{{ true }}">
+        <div class="acoes">
+          <button type="button" class="btn largo" onClick="{{ass.trocar}}">{{ass.trocarRot}}</button>
+          <sc-if value="{{ass.podeCancelar}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn largo" onClick="{{ass.pedirCancel}}">Cancelar la suscripción</button></sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ass.confirmando}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">¿Cancelar?</span>
+          <p>{{ass.confTxt}}</p>
+          <div class="acoes">
+            <button type="button" class="btn cheio largo" onClick="{{ass.cancelar}}">Sí, cancelar</button>
+            <button type="button" class="btn largo" onClick="{{ass.manter}}">Mantener la suscripción</button>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ass.cancelada}}" hint-placeholder-val="{{ false }}">
+        <p class="lido"><span class="st falta">cancelada</span><span>{{ass.canceladaTxt}}</span></p>
+        <button type="button" class="btn largo" onClick="{{ass.reassinar}}">Volver a suscribirme</button>
+      </sc-if>
+      <p class="nota">En la app, cancelar está aquí, con un toque, igual que te suscribiste. La tienda lo confirma por correo.</p>
+    </sc-if>
+
+    <sc-if value="{{tTecnica}}" hint-placeholder-val="{{ false }}">
+      <div class="sec-cab">
+        <span class="rot">{{tec.rot}}</span>
+        <p class="titulo-grande">{{tec.nome}}</p>
+      </div>
+      <p class="porque"><span class="seta">→</span><span>{{tec.porque}}</span></p>
+      <p class="nota">{{tec.tempo}}</p>
+      <div class="passos-l">
+        <sc-for list="{{tec.passos}}" as="pz" hint-placeholder-count="5">
+          <section class="passo-l" data-passo="{{pz.i}}">
+            <span class="passo-num">{{pz.numTxt}}</span>
+            <h3>{{pz.t}}</h3>
+            <p class="passo-tx">{{pz.x}}</p>
+            <span class="passo-med">{{pz.l}}</span>
+          </section>
+        </sc-for>
+      </div>
+      <div class="papel corte bloco">
+        <span class="rot">Lo que sale mal</span>
+        <ul class="chk">
+          <sc-for list="{{tec.erros}}" as="er" hint-placeholder-count="2">
+            <li><span class="st falta">error</span><span>{{er.t}}</span></li>
+          </sc-for>
+        </ul>
+      </div>
+      <p class="fonte">{{tec.alem}}</p>
+      <div class="papel bloco">
+        <span class="rot">Escuela</span>
+        <p>{{tec.escolaTxt}}</p>
+        <sc-if value="{{tec.temCurso}}" hint-placeholder-val="{{ false }}">
+          <button type="button" class="btn largo" onClick="{{tec.irCurso}}">Ver el curso de la Escuela</button>
+        </sc-if>
+      </div>
+      <button type="button" class="btn cheio largo" onClick="{{tec.ligar}}" disabled="{{tec.ligada}}">{{tec.ligarRot}}</button>
+    </sc-if>
+
+    <sc-if value="{{tClassico}}" hint-placeholder-val="{{ false }}">
+      <div class="sec-cab">
+        <span class="rot">{{arq.rot}}</span>
+        <p class="titulo-grande">{{arq.nome}}</p>
+      </div>
+      <p>{{arq.historia}}</p>
+      <div class="papel corte bloco">
+        <span class="rot">Receta tal como se publicó</span>
+        <ul class="chk mono">
+          <sc-for list="{{arq.publicada}}" as="pb" hint-placeholder-count="4">
+            <li>{{pb.t}}</li>
+          </sc-for>
+        </ul>
+        <p class="nota">{{arq.pubNota}}</p>
+        <p class="nota">{{arq.fonteTxt}}</p>
+      </div>
+      <div class="papel bloco">
+        <span class="rot">En ml de hoy</span>
+        <dl class="spec">
+          <sc-for list="{{arq.ml}}" as="mq" hint-placeholder-count="4">
+            <div><dt>{{mq.i}}</dt><dd>{{mq.q}}</dd></div>
+          </sc-for>
+        </dl>
+        <p class="nota">{{arq.mudou}}</p>
+        <sc-if value="{{arq.temAlerg}}" hint-placeholder-val="{{ false }}"><p class="lido"><span class="st meio">alérgeno</span><span>{{arq.alerg}}</span></p></sc-if>
+      </div>
+      <div class="papel corte bloco">
+        <span class="rot">Tu registro</span>
+        <sc-if value="{{arq.semRegistro}}" hint-placeholder-val="{{ true }}">
+          <p>¿La hiciste con la receta? Regístrala y pide a dos colegas que la prueben y la comprueben.</p>
+          <button type="button" class="btn cheio largo" onClick="{{arq.registrar}}">La hice con la receta hoy</button>
+        </sc-if>
+        <sc-if value="{{arq.temRegistro}}" hint-placeholder-val="{{ false }}">
+          <p>{{arq.feitoTxt}}</p>
+          <ul class="colegas">
+            <sc-for list="{{arq.colegas}}" as="ag" hint-placeholder-count="2">
+              <li>
+                <span class="cl-l"><span class="cl-nome">{{ag.nome}}</span><span class="cl-papel">{{ag.papel}}</span></span>
+                <sc-if value="{{ag.assinou}}" hint-placeholder-val="{{ false }}"><span class="st ok">la comprobó</span></sc-if>
+                <sc-if value="{{ag.pode}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn peq" onClick="{{ag.pedir}}">{{ag.pedirRot}}</button></sc-if>
+              </li>
+            </sc-for>
+          </ul>
+          <sc-if value="{{arq.incompleto}}" hint-placeholder-val="{{ true }}"><p class="nota">{{arq.faltaTxt}}</p></sc-if>
+          <sc-if value="{{arq.completo}}" hint-placeholder-val="{{ false }}">
+            <div class="carimbo-area">
+              <div class="carimbo vermelho bate"><span class="c-tipo">Archivo</span><b class="c-tit">{{arq.nome}}</b><span class="c-linha">{{arq.autor}}</span></div>
+            </div>
+            <p class="nota">El sello del Archivo ha ido a tu Pasaporte.</p>
+          </sc-if>
+        </sc-if>
+      </div>
+      <p class="nota">El Archivo celebra el clásico. Nadie en el Archivo tiene nota.</p>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{temAviso}}" hint-placeholder-val="{{ false }}">
+    <div class="aviso" role="status">
+      <span style="flex: 1">{{aviso}}</span>
+      <button type="button" onClick="{{fecharAviso}}">Cerrar</button>
+    </div>
+  </sc-if>
+
+  <nav class="nav" aria-label="Áreas de DROPP">
+    <button type="button" disabled title="Fuera de este prototipo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>
+      Turno
+    </button>
+    <button type="button" disabled title="Fuera de este prototipo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17"></rect><path d="M8.5 8h7M8.5 12h7M8.5 16h4"></path></svg>
+      Cuaderno
+    </button>
+    <button type="button" disabled title="Fuera de este prototipo">
+      <svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>
+      Pasaporte
+    </button>
+    <button type="button" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 5.5h6a2 2 0 0 1 2 2V20a2 2 0 0 0-2-2H4zM20 5.5h-6a2 2 0 0 0-2 2V20a2 2 0 0 1 2-2h6z"></path></svg>
+      Atlas
+    </button>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"aba":{"editor":"enum","options":["escola","estante","agenda"],"default":"escola","section":"Prototipo"},"plano":{"editor":"enum","options":["gratis","socio","barback"],"default":"gratis","section":"Prototipo"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._chave = this._chaveTela();
+  }
+
+  _chaveTela() {
+    const st = this.state || {};
+    const p = this.props || {};
+    return [st.tela || 'principal', st.aba || p.aba || 'escola', st.tecSel || '', st.turmaSel || '', st.arqSel || '', st.matSel || ''].join('|');
+  }
+
+  componentDidUpdate() {
+    const chave = this._chaveTela();
+    if (this._chave !== undefined && this._chave !== chave && this._corpo) this._corpo.scrollTop = 0;
+    this._chave = chave;
+  }
+
+  _topoNoCorpo(sec, el) {
+    let y = 0, n = sec;
+    while (n && n !== el) { y += n.offsetTop; n = n.offsetParent; }
+    return y;
+  }
+
+  _medirPasso() {
+    const el = this._corpo;
+    if (!el || !el.querySelectorAll || (this.state || {}).tela !== 'tecnica') return;
+    const secs = el.querySelectorAll('[data-passo]');
+    if (!secs.length) return;
+    let atual = 0;
+    for (let i = 0; i < secs.length; i++) {
+      if (this._topoNoCorpo(secs[i], el) - el.scrollTop <= 150) atual = i;
+    }
+    if (atual !== ((this.state || {}).passo || 0)) this.setState({ passo: atual });
+  }
+
+  _irPasso(i) {
+    this.setState({ passo: i });
+    const el = this._corpo;
+    if (!el || !el.querySelectorAll) return;
+    const sec = el.querySelectorAll('[data-passo]')[i];
+    if (!sec) return;
+    const alvo = this._topoNoCorpo(sec, el) - 10;
+    const calmo = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollTo({ top: Math.max(0, alvo), behavior: calmo ? 'auto' : 'smooth' });
+  }
+
+  renderVals() {
+    const p = this.props || {};
+    const s = Object.assign({
+      aba: p.aba || 'escola', tela: 'principal', pilha: [], filtro: 'tudo', filtroAg: 'tudo',
+      tecSel: 'gelo', passo: 0, arqSel: 'hanky', turmaSel: 'gelo', matSel: 'mgelo',
+      plano: p.plano || 'gratis', escolha: 'socio', ciclo: 'mensal', aceito: false, cancelado: false, confirmando: false, pedidoCasa: false,
+      turmas: {}, aulas: {}, gelo: 'cubos', tempo: 30, opcao: '7', assin: [],
+      guardados: {}, critica: 'aberta', critFicha: 'negroni', foto: false, aoVivo: false,
+      ligadas: {}, registros: { hanky: { feito: '12/11/2026', conf: ['Elena Rostova'] } }, salvos: { brasa: true }, aviso: ''
+    }, this.state || {});
+    const set = (o) => this.setState(o);
+    const socio = s.plano === 'socio' || s.plano === 'barback';
+    const comBarback = s.plano === 'barback';
+    const ir = (tela, extra) => set(Object.assign({ tela: tela, pilha: (s.pilha || []).concat([s.tela]), confirmando: false, aviso: '' }, extra || {}));
+    const voltarDe = (extra) => { const pl = (s.pilha || []).slice(); const ant = pl.length ? pl.pop() : 'principal'; set(Object.assign({ tela: ant, pilha: pl, confirmando: false, aviso: '' }, extra || {})); };
+    const fmt = (n) => String(Math.round(n * 10) / 10).replace('.', ',');
+
+    const precos = {
+      socio: { nome: 'Socio DROPP', curto: 'Socio', mensal: '9,99 €', anual: '99 €', anualMes: '8,25 €' },
+      barback: { nome: 'Socio con Barback', curto: 'Con Barback', mensal: '19,99 €', anual: '199 €', anualMes: '16,58 €' }
+    };
+    const precoAtual = (pl, ciclo) => ciclo === 'anual' ? precos[pl].anual + ' al año' : precos[pl].mensal + ' al mes';
+
+    const tecnicas = [
+      { id: 'gelo', cod: 'AT-022', nome: 'Hielo claro en bloque', oficio: 'Hielo y dilución',
+        porque: 'Negroni, Boulevardier y Penicillin salen con hielo en bloque, que hoy se compra hecho a 0,10 € por dosis. Hecho en el bar, el bloque sale a la medida de tu vaso.',
+        linha: '10 L · −18 °C · 30 h · rinde 7 kg', tempo: 'Lectura de 5 minutos. Práctica de 30 horas, casi todas en el congelador.',
+        passos: [
+          { m: '10 L', u: 'agua filtrada', t: 'Llenar la nevera portátil', x: 'Usa una nevera portátil sin tapa y llénala hasta tres dedos del borde, con agua filtrada a temperatura ambiente.', l: 'nevera de 12 L · agua a 20 °C' },
+          { m: '−18 °C', u: 'congelador, sin tapa', t: 'Congelar de arriba abajo', x: 'Sin tapa, el frío entra solo por arriba. El aire y lo que enturbia el hielo bajan con el agua que aún no se ha congelado.', l: 'congelador a −18 °C' },
+          { m: '30 h', u: 'en el congelador', t: 'Sacarlo antes de que se congele el fondo', x: 'Entre 24 y 36 horas, según el congelador. Sácalo cuando aún quede agua en el fondo: ahí está lo turbio.', l: 'revisa a partir de 24 h' },
+          { m: '10 min', u: 'fuera del congelador', t: 'Dejar que el bloque se temple', x: 'Espera a que la superficie brille. El hielo demasiado frío se raja con el cuchillo.', l: 'en la barra · 10 min' },
+          { m: '7 kg', u: 'de hielo claro', t: 'Cortar', x: 'Marca con un cuchillo de sierra y golpea el lomo con un mazo de goma. De 10 L salen unos 7 kg de hielo claro; el resto va al hielo de servicio.', l: 'rinde cerca del 70%' }
+        ],
+        erros: ['Bloque turbio entero: la nevera portátil estaba tapada y el frío entró por los lados.', 'Se rajó al cortar: faltó templarlo.'],
+        alem: 'El método se llama congelación direccional: el hielo crece en una sola dirección.',
+        escolaTxt: 'Todavía no tienes sello en el oficio Hielo y dilución. El curso Hielo claro en la práctica, de la Escuela DROPP, termina con una práctica evaluada en el Sea Bar.', curso: 'gelo',
+        ligarRot: 'Vincular a las fichas con hielo en bloque', ligadaRot: 'Vinculada a las fichas del Cuaderno',
+        ligarAviso: 'Técnica vinculada a las fichas del Negroni, el Boulevardier y el Penicillin, en el Cuaderno.' },
+      { id: 'clarificar', cod: 'AT-014', nome: 'Clarificar sin centrífuga', oficio: 'Preparación y fermentación',
+        porque: 'El cordial de maracuyá (lote PF-001) sale cada semana. Aprendiste con centrífuga y el Sea Bar no tiene una. Esta es la versión por decantación.',
+        linha: '1 kg · 2 g de enzima · 4 °C · 12 h', tempo: 'Lectura de 4 minutos. Práctica de 13 horas, casi todas en la nevera.',
+        passos: [
+          { m: '1 kg', u: 'de puré', t: 'Pesar el puré', x: 'Puré de maracuyá colado, sin pepitas. Pesa en lugar de medir en jarra: la dosis de enzima va por peso.', l: 'báscula · 1.000 g' },
+          { m: '2 g', u: 'de pectinasa', t: 'Dosificar la enzima', x: 'Son el 0,2% del peso, 2 g por kilo. Mezcla con unas varillas durante 30 segundos.', l: '0,2% · 2 g por kg' },
+          { m: '30 min', u: 'en reposo', t: 'Dejar que actúe', x: 'A temperatura ambiente, cerca de 22 °C. No lo calientes: el calor le quita el aroma fresco a la fruta.', l: '22 °C · 30 min' },
+          { m: '4 °C', u: 'durante 12 horas', t: 'Decantar en la nevera', x: 'Usa un recipiente alto y estrecho. La pulpa baja y el líquido limpio queda arriba.', l: 'nevera · 12 h' },
+          { m: '600 ml', u: 'de rendimiento', t: 'Sifonar y filtrar', x: 'Saca el líquido de arriba con un tubo fino y pásalo por un filtro de café. Rinde cerca del 60%; apunta tu rendimiento en el Cuaderno.', l: 'rinde cerca del 60%' }
+        ],
+        erros: ['Sigue turbio a las 12 h: poca enzima o frasco caducado. Revisa la fecha.', 'Sabe a papel: no se lavó el filtro con agua caliente antes.'],
+        alem: 'Para ir más allá: Liquid Intelligence, de Dave Arnold (2014), tiene un capítulo sobre clarificación.',
+        escolaTxt: 'Ya tienes el sello Escuela · Clarificación, de julio de 2026, firmado por Irene Soler. Aquí no hay curso nuevo: la técnica es para el día a día.', curso: '',
+        ligarRot: 'Vincular a la ficha del cordial de maracuyá', ligadaRot: 'Vinculada a la ficha del cordial',
+        ligarAviso: 'Técnica vinculada a la ficha de preparación del cordial de maracuyá, en el Cuaderno.' }
+    ];
+
+    const classicos = [
+      { id: 'hanky', cod: 'ARQ-031', nome: 'Hanky Panky', autor: 'Ada Coleman', linha: 'Ada Coleman · American Bar del Savoy, Londres',
+        historia: 'Creado por Ada Coleman, head bartender del American Bar del Savoy, en Londres, para el actor Charles Hawtrey.',
+        publicada: ['1 parte de ginebra seca', '1 parte de vermut italiano', '2 dashes de Fernet-Branca'],
+        pubNota: 'Agítalo bien, cuélalo en copa de cóctel y exprime la piel de naranja por encima.',
+        ml: [['Gin London Dry', '45 ml'], ['Vermut rosso', '45 ml'], ['Fernet-Branca', '2 dashes'], ['Piel de naranja', '1']],
+        mudou: 'Nada esencial. La ficha de la casa, en el Cuaderno, sigue el libro: agitado, no removido.',
+        fonte: 'The Savoy Cocktail Book, de Harry Craddock (1930).', alerg: '',
+        porque: 'Tu registro del 12/11 espera a un colega: falta Tomás Vidal.',
+        colegas: [{ nome: 'Elena Rostova', papel: 'bartender del Sea Bar' }, { nome: 'Tomás Vidal', papel: 'head bartender de la Casa Ostra, Lisboa' }], pedirRot: 'Recordar a' },
+      { id: 'japanese', cod: 'ARQ-007', nome: 'Japanese Cocktail', autor: 'Jerry Thomas', linha: 'Jerry Thomas · Nueva York, 1862',
+        historia: 'Está en el primer manual de bar publicado en Estados Unidos. Según la historia más aceptada, el nombre recuerda a la primera delegación japonesa que visitó Nueva York, en 1860.',
+        publicada: ['1 cucharada de jarabe de orgeat', '½ cucharadita de bitters (Bogart\'s, en el libro)', '1 copa de vino de brandy', '1 o 2 pieles de limón'],
+        pubNota: 'Hielo hasta un tercio del vaso y remover bien con la cuchara.',
+        ml: [['Brandy (coñac)', '60 ml'], ['Orgeat de la casa', '15 ml'], ['Bitters aromático', '2,5 ml'], ['Piel de limón', '1 o 2']],
+        mudou: 'La copa de vino del libro medía unos 60 ml. El bitters de la época ya no se hace como entonces; usa un bitters aromático.',
+        fonte: 'How to Mix Drinks, or The Bon-Vivant\'s Companion, de Jerry Thomas (1862).', alerg: 'almendra, en el orgeat',
+        porque: 'Lleva orgeat, y el Cuaderno tiene la ficha de preparación (lote ORG). Alérgeno: almendra.',
+        colegas: [{ nome: 'Elena Rostova', papel: 'bartender del Sea Bar' }, { nome: 'Ana Lima', papel: 'bartender del Sea Bar' }, { nome: 'Marta Ortega', papel: 'gerente del Sea Bar' }], pedirRot: 'Pedir a' },
+      { id: 'corpse', cod: 'ARQ-019', nome: 'Corpse Reviver No. 2', autor: 'Harry Craddock', linha: 'Harry Craddock · American Bar del Savoy, 1930',
+        historia: 'Lo publicó Harry Craddock, que sucedió a Ada Coleman en el American Bar del Savoy.',
+        publicada: ['¼ de zumo de limón', '¼ de Kina Lillet', '¼ de Cointreau', '¼ de ginebra seca', '1 dash de absenta'],
+        pubNota: 'Agitar y colar en copa de cóctel.',
+        ml: [['Gin London Dry', '22,5 ml'], ['Cointreau', '22,5 ml'], ['Lillet Blanc', '22,5 ml'], ['Zumo de limón', '22,5 ml'], ['Absenta', '1 dash']],
+        mudou: 'El Kina Lillet dejó de fabricarse en 1986. El Lillet Blanc de hoy es menos amargo; hay casas que usan un aperitivo con quinina en su lugar.',
+        fonte: 'The Savoy Cocktail Book, de Harry Craddock (1930).', alerg: '',
+        porque: 'Hay Lillet Blanc parado en el almacén desde octubre.',
+        colegas: [{ nome: 'Elena Rostova', papel: 'bartender del Sea Bar' }, { nome: 'Ana Lima', papel: 'bartender del Sea Bar' }, { nome: 'Marta Ortega', papel: 'gerente del Sea Bar' }], pedirRot: 'Pedir a' },
+      { id: 'crusta', cod: 'ARQ-002', nome: 'Brandy Crusta', autor: 'Joseph Santini', linha: 'Joseph Santini · Nueva Orleans, década de 1850',
+        historia: 'Lo creó Joseph Santini en Nueva Orleans y lo publicó Jerry Thomas en 1862. El borde de azúcar y la piel entera del limón dentro de la copa son la firma del cóctel.',
+        publicada: ['1 cucharada de jarabe de goma', '2 dashes de bitters', '1 copa de vino de brandy', '1 dash de curaçao', 'un poco de zumo de limón'],
+        pubNota: 'Borde de azúcar y la piel de medio limón en espiral dentro de la copa. Remover con hielo y colar.',
+        ml: [['Brandy (coñac)', '60 ml'], ['Jarabe simple', '15 ml'], ['Zumo de limón', '5 ml'], ['Curaçao', '1 dash'], ['Bitters aromático', '2 dashes']],
+        mudou: 'Las versiones de hoy suelen subir el curaçao y el limón. La página del Archivo enseña el libro; la ficha de la casa puede cambiar y dice qué cambia.',
+        fonte: 'How to Mix Drinks, de Jerry Thomas (1862).', alerg: '',
+        porque: '',
+        colegas: [{ nome: 'Elena Rostova', papel: 'bartender del Sea Bar' }, { nome: 'Ana Lima', papel: 'bartender del Sea Bar' }, { nome: 'Marta Ortega', papel: 'gerente del Sea Bar' }], pedirRot: 'Pedir a' }
+    ];
+
+    const turmas = [
+      { id: 'gelo', cod: 'ESC-07', nome: 'Hielo claro en la práctica', oficio: 'Hielo y dilución', inicio: '01/12', livres: 3, total: 12, pago: '',
+        porque: 'Va junto con la técnica AT-022 y da el sello que te falta en el oficio Hielo y dilución.',
+        porqueBarback: 'Te lo sugiere el Barback: Hielo y dilución es el oficio sin sello en tu Pasaporte, y Negroni, Boulevardier y Penicillin salen con hielo en bloque comprado hecho.',
+        quem: 'Irene Soler, grado Reserva en Hielo y dilución',
+        prova: 'Haces un bloque de 10 L en tu bar. La instructora lo corta, revisa la transparencia y firma; un colega lo comprueba con ella.',
+        leva: 'Sello Escuela · Hielo claro, en el oficio Hielo y dilución.',
+        encontros: [
+          { id: 'a1', d: '01/12', t: 'Clase 1 · Cuánto diluye tu hielo', onde: 'En la app, cuando quieras · ejercicio con tu ficha' },
+          { id: 'a2', d: '04/12', t: 'Clase 2 · Corte del bloque, en directo', onde: 'Viernes, 11h · online, con Irene' },
+          { id: 'pr', d: '08/12', t: 'Práctica evaluada', onde: 'Martes, 16h · Sea Bar, Valencia' }
+        ],
+        temAula: true, carimbo: { tipo: 'Escuela', tit: 'Hielo claro', linha: 'práctica aprobada' } },
+      { id: 'custo', cod: 'ESC-14', nome: 'Coste por dosis y carta que paga', oficio: 'Coste y gestión', inicio: '12/01', livres: 8, total: 12, pago: '',
+        porque: 'El Campari subió un 11% el 12/11, y el Negroni de la casa ya cuesta el 23% del precio, por encima del objetivo del 22%.',
+        porqueBarback: 'Te lo sugiere el Barback: Coste y gestión es el siguiente oficio sin sello, y el coste del Negroni pasó del objetivo del 22% en noviembre.',
+        quem: 'Pablo Ferrer, grado Reserva en Coste y gestión',
+        prova: 'Revisas el coste de la carta de tu casa en el Cuaderno. El instructor revisa las fichas y firma; un colega lo comprueba con él.',
+        leva: 'Sello Escuela · Coste por dosis, en el oficio Coste y gestión.',
+        encontros: [
+          { id: 'a1', d: '12/01', t: 'Clase 1 · El coste que esconde la ficha', onde: 'En la app, cuando quieras · ejercicio con tus fichas' },
+          { id: 'a2', d: '15/01', t: 'Clase 2 · Ingeniería de carta, en directo', onde: 'Viernes, 11h · online, con Pablo' },
+          { id: 'pr', d: '20/01', t: 'Práctica evaluada', onde: 'Miércoles · en tu casa, con la carta revisada' }
+        ],
+        temAula: false, carimbo: { tipo: 'Escuela', tit: 'Coste por dosis', linha: 'práctica aprobada' } },
+      { id: 'semalcool', cod: 'ESC-11', nome: 'Carta sin alcohol que vende', oficio: 'Sin alcohol', inicio: '03/12', livres: 5, total: 20, pago: 'Aperitivos Ejemplo',
+        porque: 'La carta de invierno del Sea Bar tiene un solo cóctel sin alcohol, y sale poco.',
+        porqueBarback: '',
+        quem: 'Equipo de formación de Aperitivos Ejemplo; la práctica la evalúa Irene Soler',
+        prova: 'Creas un cóctel sin alcohol con el coste por dosis calculado en el Cuaderno. La instructora lo prueba y firma.',
+        leva: 'Sello Escuela · Sin alcohol, en el oficio Sin alcohol.',
+        encontros: [{ id: 'pr', d: '03/12', t: 'Encuentro único, con práctica', onde: 'Jueves, 19h · Ruzafa, Valencia' }],
+        temAula: false, carimbo: { tipo: 'Escuela', tit: 'Sin alcohol', linha: 'práctica aprobada' } }
+    ];
+
+    const materiais = [
+      { id: 'mgelo', nome: 'Hielo claro: congelación direccional', tipo: 'Monografía · 18 páginas', oficio: 'Hielo y dilución', autor: 'Irene Soler',
+        trecho: ['Sin tapa, el frío entra solo por arriba. El hielo crece hacia abajo y empuja el aire y las sales hacia el agua que aún no se ha congelado.', 'En un congelador a −18 °C, una nevera portátil de 12 L tarda de 24 a 36 horas. El fondo turbio es lo que sobra, y es lo que descartas.'], abrirRot: 'Abrir las 18 páginas' },
+      { id: 'mlima', nome: 'Cordial de lima: PNT', tipo: 'Ficha técnica · 4 páginas', oficio: 'Preparación y fermentación', autor: 'Equipo DROPP',
+        trecho: ['Procedimiento normalizado de trabajo para el lote de 3 L: pesos, orden de los pasos, caducidad y qué revisar antes de servir.', 'La última página trae la etiqueta lista para el Cuaderno, con el alérgeno y el lote.'], abrirRot: 'Abrir las 4 páginas' },
+      { id: 'mcarta', nome: 'Escandallo de la carta de invierno', tipo: 'Hoja de cálculo · plantilla', oficio: 'Coste y gestión', autor: 'Pablo Ferrer',
+        trecho: ['Coste por dosis de cada cóctel, el objetivo de la casa y el precio que cuadra la cuenta.', 'Se abre directamente en el Cuaderno, con tus fichas en lugar de los ejemplos.'], abrirRot: 'Abrir en el Cuaderno' },
+      { id: 'mcorte', nome: 'Corte del bloque, en 4 tomas', tipo: 'Clase grabada · 12 min', oficio: 'Hielo y dilución', autor: 'Irene Soler',
+        trecho: ['Marcar, templar, golpear el lomo del cuchillo y separar los cubos para el vaso bajo.', 'Grabada en el Sea Bar, con el congelador y la nevera portátil de la técnica AT-022.'], abrirRot: 'Ver la clase de 12 minutos' }
+    ];
+
+    const fichasCrit = [{ id: 'negroni', t: 'Negroni' }, { id: 'boulevardier', t: 'Boulevardier' }, { id: 'penicillin', t: 'Penicillin' }];
+
+    const estadoT = (id) => s.turmas[id] || 'aberta';
+    const naTurma = (id) => estadoT(id) !== 'aberta';
+    const vagasTxt = (tm) => naTurma(tm.id) ? (tm.livres - 1) + ' plazas libres de ' + tm.total + ' · la tuya está reservada' : tm.livres + ' plazas libres de ' + tm.total;
+    const reg = (id) => s.registros[id] || null;
+
+    const abrirTurma = (id) => ir('turma', { turmaSel: id });
+    const abrirPlano = (escolha) => ir('plano', { escolha: escolha, ciclo: s.ciclo || 'mensal', aceito: false });
+
+    const pedirCasa = () => set({ pedidoCasa: true, aviso: 'En la app, la solicitud va a Marta Ortega, gerente del Sea Bar. Si la aprueba, la Escuela se abre sin coste para ti.' });
+    const pedidoTxt = 'Solicitud enviada a Marta Ortega, gerente del Sea Bar. El plan de la casa tiene 2 plazas de socio, y 1 está libre.';
+
+    // Escuela
+    const geloEst = estadoT('gelo');
+    const passoGelo = geloEst === 'aprovado'
+      ? { t: 'Hielo claro en la práctica', sub: 'sello Escuela · diciembre de 2026 · Irene Soler', est: 'feito' }
+      : { t: 'Hielo claro en la práctica', sub: naTurma('gelo') ? 'estás en el curso · práctica el 08/12' : 'curso del 01/12 · 3 plazas libres', est: 'agora' };
+    const passosTrilha = [
+      { t: 'Clarificación', sub: 'sello Escuela · julio de 2026 · Irene Soler', est: 'feito', turma: '' },
+      Object.assign({ turma: 'gelo' }, passoGelo),
+      { t: 'Coste por dosis y carta que paga', sub: naTurma('custo') ? 'estás en el curso · empieza el 12/01' : 'curso del 12/01 · 8 plazas libres', est: geloEst === 'aprovado' ? 'agora' : 'depois', turma: 'custo' }
+    ];
+    const trilha = passosTrilha.map((tr) => {
+      const livre = comBarback || tr.est === 'feito';
+      return { t: tr.t, sub: livre ? tr.sub : 'en el plan con Barback', est: livre ? tr.est : 'trava', temAbrir: comBarback && !!tr.turma, abrir: () => abrirTurma(tr.turma || 'gelo') };
+    });
+
+    const turmaLista = turmas.map((tm) => {
+      const e = estadoT(tm.id);
+      let chip = null;
+      if (e === 'aprovado') chip = { t: 'sello en el Pasaporte', cls: 'st ok' };
+      else if (e !== 'aberta') chip = { t: 'estás dentro', cls: 'st ok' };
+      else if (!tm.pago && !socio) chip = { t: 'para socios', cls: 'st trava' };
+      else if (tm.pago) chip = { t: 'abierto a todos', cls: 'st falta' };
+      return {
+        rot: (tm.pago ? 'Curso patrocinado' : 'Curso') + ' · ' + tm.cod + ' · ' + tm.oficio, nome: tm.nome,
+        linha: 'empieza el ' + tm.inicio + ' · ' + tm.encontros.length + (tm.encontros.length > 1 ? ' encuentros' : ' encuentro') + ' · ' + (naTurma(tm.id) ? 'estás dentro' : tm.livres + ' plazas libres'),
+        temPago: !!tm.pago, pagoT: tm.pago ? 'Pagado por ' + tm.pago : '',
+        temChip: !!chip, chipT: chip ? chip.t : '', chipCls: chip ? chip.cls : 'st', temPe: !!chip || !!tm.pago,
+        abrir: () => abrirTurma(tm.id)
+      };
+    });
+
+    const nGuard = materiais.filter((m) => s.guardados[m.id]).length;
+    const materialLista = materiais.map((m) => {
+      const chip = !socio ? { t: 'vista previa · para socios', cls: 'st trava' } : (s.guardados[m.id] ? { t: 'en tu estante', cls: 'st ok' } : null);
+      return { rot: m.tipo, nome: m.nome, linha: 'de ' + m.autor + ' · ' + m.oficio, temChip: !!chip, chipT: chip ? chip.t : '', chipCls: chip ? chip.cls : 'st', abrir: () => ir('material', { matSel: m.id }) };
+    });
+
+    const planoNome = socio ? precos[s.plano].nome : 'Plan Gratis';
+    const esc = {
+      gratis: !socio, socio: socio,
+      planoRot: planoNome,
+      planoSt: socio ? (s.cancelado ? 'cancelada' : 'prueba gratis') : 'gratis',
+      planoStCls: socio ? (s.cancelado ? 'st falta' : 'st ok') : 'st falta',
+      planoTxt: !socio
+        ? 'La Escuela es de los socios: cursos con práctica, la biblioteca entera, una crítica al mes y una clase en directo. Son 30 días gratis y después 9,99 € al mes.'
+        : (s.cancelado
+          ? 'Suscripción cancelada. Sigues siendo socio hasta el 18/12; los sellos, las fichas y tu estante se quedan.'
+          : 'Prueba gratis hasta el 18/12. Te avisamos el 03/12, quince días antes del primer cobro de ' + precoAtual(s.plano, s.ciclo) + '.'),
+      serSocio: () => abrirPlano('socio'),
+      podePedir: !s.pedidoCasa, pedido: !!s.pedidoCasa, pedidoTxt: pedidoTxt, pedirCasa: pedirCasa,
+      minhaAssin: () => ir('assinatura'),
+      trilha: trilha,
+      trilhaSt: comBarback ? 'Barback' : 'vista previa',
+      trilhaStCls: comBarback ? 'st ok' : 'st trava',
+      trilhaTxt: comBarback
+        ? 'Lo arma el Barback a partir de tu Pasaporte y de los cursos que has hecho. Cada paso dice de dónde viene.'
+        : 'Con el Barback personal, el itinerario se arma solo a partir de tu Pasaporte y de los cursos que has hecho.',
+      trilhaTrava: !comBarback,
+      conhecerBarback: () => abrirPlano('barback'),
+      turmas: turmaLista,
+      bibTxt: socio
+        ? (nGuard ? 'En tu estante: ' + nGuard + (nGuard === 1 ? ' material' : ' materiales') + ', para leer sin conexión.' : 'Guarda en tu estante lo que quieras leer sin conexión.')
+        : 'Los socios lo leen todo y lo guardan en su propio estante. Sin ser socio, lees el principio de cada uno.',
+      materiais: materialLista
+    };
+
+    const fichaAtual = fichasCrit.find((f) => f.id === s.critFicha) || fichasCrit[0];
+    const cr = {
+      trava: !socio,
+      txt: !socio
+        ? 'Una vez al mes, los socios envían un cóctel y reciben la crítica escrita de un instructor.'
+        : (s.critica === 'enviada' ? 'Este mes ya está. La próxima crítica se abre el 01/12.' : 'Envía un cóctel antes del 30/11: la ficha y una foto. Irene Soler responde por escrito en 5 días como máximo.'),
+      aberta: socio && s.critica !== 'enviada', enviada: socio && s.critica === 'enviada',
+      fichas: fichasCrit.map((f) => ({ t: f.t, on: f.id === fichaAtual.id, pick: () => set({ critFicha: f.id }) })),
+      foto: !!s.foto, fotoMarca: s.foto ? '✓' : '', semFoto: !s.foto,
+      fotoTxt: s.foto ? 'Foto del ' + fichaAtual.t + ' adjunta.' : 'Adjuntar la foto del cóctel',
+      anexar: () => set({ foto: !s.foto, aviso: s.foto ? '' : 'En el prototipo, la foto entra hecha; en la app, se abre la cámara.' }),
+      enviar: () => { if (!s.foto) return; set({ critica: 'enviada', aviso: 'Enviado. La ficha del ' + fichaAtual.t + ' ha ido con la foto.' }); },
+      enviadaTxt: 'Enviado el 18/11: ' + fichaAtual.t + '. Irene Soler responde por escrito antes del 23/11.',
+      exRot: 'Ejemplo · una crítica de octubre, sobre un Penicillin',
+      exTxt: 'El jengibre desaparece después del segundo sorbo: el jarabe salió con miel y jengibre a partes iguales, y la ficha pide 2 de miel por 1 de jengibre. El agua en el cóctel fue del 27%, frente al 22% de la ficha; con hielo en bloque y 10 segundos menos, llega. Los 7,5 ml de Islay por encima están bien.'
+    };
+
+    const av = {
+      rot: 'Clase en directo del mes · jueves, 10/12, 18h', tit: 'Carta de invierno: qué entra y por qué', sub: 'con Pablo Ferrer · 45 minutos · online',
+      trava: !socio, salvo: socio && !!s.aoVivo, podeSalvar: socio && !s.aoVivo,
+      salvar: () => set({ aoVivo: true, aviso: 'Guardado. La clase del 10/12 va al calendario del móvil y aparece en el Turno del día.' })
+    };
+
+    // Estante
+    const chipArq = (a) => {
+      const r = reg(a.id);
+      if (!r) return null;
+      if (r.conf.length >= 2) return { t: 'sello en el Pasaporte', cls: 'st ok' };
+      return { t: r.conf.length === 1 ? 'falta 1 colega' : 'faltan 2 colegas', cls: 'st meio' };
+    };
+    const naEstante = [];
+    tecnicas.forEach((t) => naEstante.push({ tipo: 'tecnica', rot: 'Técnica · ' + t.cod + ' · ' + t.oficio, nome: t.nome, porque: t.porque, linha: t.linha,
+      chip: s.ligadas[t.id] ? { t: 'vinculada al Cuaderno', cls: 'st ok' } : (t.id === 'clarificar' || (t.id === 'gelo' && estadoT('gelo') === 'aprovado') ? { t: 'ya tienes el sello Escuela', cls: 'st falta' } : null), abrir: () => ir('tecnica', { tecSel: t.id, passo: 0 }) }));
+    classicos.forEach((a) => naEstante.push({ tipo: 'classico', rot: 'Archivo · ' + a.cod, nome: a.nome, porque: a.porque, linha: a.linha,
+      chip: chipArq(a), abrir: () => ir('classico', { arqSel: a.id }) }));
+    const contaTipo = (tp) => naEstante.filter((i) => tp === 'tudo' || i.tipo === tp).length;
+    const tipos = [{ id: 'tudo', t: 'todo' }, { id: 'tecnica', t: 'técnicas' }, { id: 'classico', t: 'clásicos del Archivo' }].map((tp) => ({
+      t: tp.t, n: contaTipo(tp.id), on: s.filtro === tp.id, pick: () => set({ filtro: tp.id, aviso: '' })
+    }));
+    const itens = naEstante.filter((i) => s.filtro === 'tudo' || i.tipo === s.filtro).map((i) => ({
+      rot: i.rot, nome: i.nome, temPorque: !!i.porque, porque: i.porque, linha: i.linha,
+      temChip: !!i.chip, chipT: i.chip ? i.chip.t : '', chipCls: i.chip ? i.chip.cls : 'st', abrir: i.abrir
+    }));
+
+    // Agenda
+    const eventosBase = [
+      { id: 'brasa', d: '26', m: 'nov', dia: 'jue', diaL: 'jueves', h: '21h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Brasa en el Sea Bar', onde: 'Sea Bar, Valencia', nota: 'Tú recibes. El equipo del Brasa se lleva el sello Jornada; tú estuviste allí el 14/11.' },
+      { id: 'g1', d: '01', m: 'dic', dia: 'mar', diaL: 'martes', h: 'cuando quieras', tipo: 'escola', tipoT: 'Curso', tit: 'Hielo claro en la práctica · clase 1', onde: 'En la app', nota: 'Ejercicio con tu ficha del Negroni.', turma: 'gelo' },
+      { id: 'apex', d: '03', m: 'dic', dia: 'jue', diaL: 'jueves', h: '19h', tipo: 'escola', tipoT: 'Curso patrocinado', tit: 'Carta sin alcohol que vende', onde: 'Ruzafa, Valencia', nota: 'Encuentro único, con práctica. Abierto a todos.', turma: 'semalcool', pago: 'Aperitivos Ejemplo' },
+      { id: 'g2', d: '04', m: 'dic', dia: 'vie', diaL: 'viernes', h: '11h', tipo: 'escola', tipoT: 'Curso · en directo', tit: 'Hielo claro en la práctica · clase 2', onde: 'Online, con Irene Soler', nota: 'Corte del bloque, con preguntas al final.', turma: 'gelo' },
+      { id: 'g3', d: '08', m: 'dic', dia: 'mar', diaL: 'martes', h: '16h', tipo: 'escola', tipoT: 'Curso', tit: 'Hielo claro en la práctica · práctica evaluada', onde: 'Sea Bar, Valencia', nota: 'Termina con el sello Escuela · Hielo claro.', turma: 'gelo' },
+      { id: 'viv', d: '10', m: 'dic', dia: 'jue', diaL: 'jueves', h: '18h', tipo: 'escola', tipoT: 'Clase en directo del mes', tit: 'Carta de invierno: qué entra y por qué', onde: 'Online, con Pablo Ferrer · 45 min', nota: 'Para socios de la Escuela.', aoVivo: true },
+      { id: 'troca', d: '13', m: 'dic', dia: 'dom', diaL: 'domingo', h: '17h', tipo: 'encontro', tipoT: 'Encuentro', tit: 'Intercambio de fichas de invierno', onde: 'Ruzafa, Valencia', nota: 'Bartenders de Valencia intercambian fichas personales. Cada uno trae una y se lleva otra.' },
+      { id: 'ostra', d: '14', m: 'dic', dia: 'lun', diaL: 'lunes', h: '20h', tipo: 'guest', tipoT: 'Guest shift', tit: 'El Sea Bar en la Casa Ostra', onde: 'Casa Ostra, Lisboa', nota: 'Invitación de Tomás Vidal. Da el sello Jornada.' }
+    ];
+    const contaAg = (tp) => eventosBase.filter((e) => tp === 'tudo' || e.tipo === tp).length;
+    const filtrosAg = [{ id: 'tudo', t: 'todo' }, { id: 'guest', t: 'guest shifts' }, { id: 'escola', t: 'Escuela' }, { id: 'encontro', t: 'encuentros' }].map((f) => ({
+      t: f.t, n: contaAg(f.id), on: s.filtroAg === f.id, pick: () => set({ filtroAg: f.id, aviso: '' })
+    }));
+    const eventos = eventosBase.filter((e) => s.filtroAg === 'tudo' || e.tipo === s.filtroAg).map((e) => {
+      let salvo = !!s.salvos[e.id], salvoTxt = 'en tu agenda', podeSalvar = !salvo, trava = false;
+      if (e.turma) { salvo = naTurma(e.turma); salvoTxt = 'en el curso · en tu agenda'; podeSalvar = false; }
+      if (e.aoVivo) { salvo = socio && !!s.aoVivo; podeSalvar = socio && !s.aoVivo; trava = !socio; }
+      return {
+        d: e.d, m: e.m, dia: e.dia, rot: e.tipoT + ' · ' + e.h, tit: e.tit, onde: e.onde, nota: e.nota,
+        temPago: !!e.pago, pagoT: e.pago ? 'Pagado por ' + e.pago : '',
+        salvo: salvo, salvoTxt: salvoTxt, podeSalvar: podeSalvar, trava: trava,
+        salvar: () => {
+          if (e.aoVivo) { av.salvar(); return; }
+          const sv = Object.assign({}, s.salvos); sv[e.id] = true;
+          set({ salvos: sv, aviso: 'Guardado. Va al calendario del móvil y aparece en el Turno del ' + e.diaL + ' ' + e.d + '/' + (e.m === 'nov' ? '11' : '12') + '.' });
+        },
+        temTurma: !!e.turma, verTurma: () => abrirTurma(e.turma)
+      };
+    });
+
+    // Técnica
+    const t = tecnicas.find((x) => x.id === s.tecSel) || tecnicas[0];
+    const passo = Math.max(0, Math.min(t.passos.length - 1, s.passo || 0));
+    const pa = t.passos[passo];
+    const regua = {
+      m: pa.m, u: pa.u, cls: passo % 2 ? 'rl-med sai-a' : 'rl-med sai-b',
+      passoTxt: 'paso ' + (passo + 1) + ' de ' + t.passos.length,
+      fill: Math.round(passo / (t.passos.length - 1) * 80),
+      ticks: t.passos.map((x, i) => ({ m: x.m, atual: i === passo, feito: i < passo, aria: 'Paso ' + (i + 1) + ': ' + x.t + ', ' + x.m, ir: () => this._irPasso(i) }))
+    };
+    const escolaTec = (tx) => {
+      if (!tx.curso) return tx.escolaTxt;
+      const e = estadoT(tx.curso);
+      if (e === 'aprovado') return 'Ya tienes el sello Escuela · Hielo claro, firmado por Irene Soler.';
+      if (e !== 'aberta') return 'Estás en el curso Hielo claro en la práctica. La práctica evaluada es el 08/12, en el Sea Bar.';
+      return tx.escolaTxt;
+    };
+    const tec = {
+      rot: 'Técnica · ' + t.cod + ' · ' + t.oficio, nome: t.nome, porque: t.porque, tempo: t.tempo,
+      passos: t.passos.map((x, i) => ({ i: i, numTxt: 'PASO ' + (i + 1) + ' DE ' + t.passos.length, t: x.t, x: x.x, l: x.l })),
+      erros: t.erros.map((e) => ({ t: e })), alem: t.alem, escolaTxt: escolaTec(t),
+      temCurso: !!t.curso, irCurso: () => abrirTurma(t.curso),
+      ligada: !!s.ligadas[t.id], ligarRot: s.ligadas[t.id] ? t.ligadaRot : t.ligarRot,
+      ligar: () => { if (s.ligadas[t.id]) return; const lg = Object.assign({}, s.ligadas); lg[t.id] = true; set({ ligadas: lg, aviso: t.ligarAviso }); }
+    };
+
+    // Curso
+    const tc = turmas.find((x) => x.id === s.turmaSel) || turmas[0];
+    const et = estadoT(tc.id);
+    const mudaTurma = (estado, extra) => { const ts = Object.assign({}, s.turmas); ts[tc.id] = estado; set(Object.assign({ turmas: ts }, extra || {})); };
+    const aula1 = !!s.aulas['gelo-a1'];
+    const opcoesRend = [
+      { id: '6', t: '6 kg', txt: '6 kg de 10 L: 60%. Lo turbio subió más de lo esperado; Irene mirará la tapa de la nevera portátil.' },
+      { id: '7', t: '7 kg', txt: '7 kg de 10 L: 70%, el rendimiento de la técnica AT-022.' },
+      { id: '8', t: '8 kg', txt: '8 kg de 10 L: 80%. Fondo pequeño y bloque claro entero.' }
+    ];
+    const opAtual = opcoesRend.find((o) => o.id === s.opcao) || opcoesRend[1];
+    const assinantesBase = [
+      { nome: 'Irene Soler', papel: 'instructora · grado Reserva en Hielo y dilución', pedirRot: 'Pedir la firma', feitoT: 'firmó' },
+      { nome: 'Elena Rostova', papel: 'colega del Sea Bar', pedirRot: 'Pedir la comprobación', feitoT: 'lo comprobó' }
+    ];
+    const assinados = s.assin || [];
+    const encontrosTu = tc.encontros.map((en) => {
+      let temSt = false, stT = '', stCls = 'st', temBtn = false, btnRot = '', abrir = () => {};
+      if (et !== 'aberta') {
+        if (tc.temAula && en.id === 'a1') {
+          if (aula1) { temSt = true; stT = 'hecha'; stCls = 'st ok'; }
+          else { temBtn = true; btnRot = 'Hacer la clase 1'; abrir = () => ir('aula'); }
+        } else if (en.id === 'pr' && et === 'aprovado') { temSt = true; stT = 'aprobada'; stCls = 'st ok'; }
+        else if (et === 'aprovado') { temSt = true; stT = 'hecha'; stCls = 'st ok'; }
+        else { temSt = true; stT = 'en tu agenda'; stCls = 'st falta'; }
+      }
+      return { d: en.d, t: en.t, onde: en.onde, temSt: temSt, stT: stT, stCls: stCls, temBtn: temBtn, btnRot: btnRot, abrir: abrir };
+    });
+    const tu = {
+      rot: (tc.pago ? 'Curso patrocinado' : 'Curso') + ' · ' + tc.cod + ' · ' + tc.oficio, nome: tc.nome,
+      temPago: !!tc.pago, pagoT: tc.pago ? 'Pagado por ' + tc.pago : '',
+      porque: comBarback && tc.porqueBarback ? tc.porqueBarback : tc.porque,
+      quem: tc.quem,
+      acesso: tc.pago ? 'Abierto a todos, lo paga la marca.' : (socio ? 'Incluido en tu plan de socio.' : 'Incluido en el Socio. Sin ser socio, solo la práctica presencial, por 39 €.'),
+      prova: tc.prova, leva: tc.leva, vagas: vagasTxt(tc),
+      encontros: encontrosTu,
+      podeEntrar: et === 'aberta' && (socio || !!tc.pago),
+      entrar: () => mudaTurma('dentro', { aviso: tc.encontros.length > 1 ? 'Ya estás en el curso. Las ' + tc.encontros.length + ' fechas han ido a tu agenda y aparecerán en el Turno.' : 'Ya estás en el curso. El encuentro ha ido a tu agenda y aparecerá en el Turno.' }),
+      precisaSocio: et === 'aberta' && !socio && !tc.pago,
+      serSocio: () => abrirPlano('socio'),
+      avulso: () => set({ aviso: 'En la app, la práctica presencial suelta se paga con Bizum o tarjeta, fuera de la tienda. Da el sello igual.' }),
+      dentro: et === 'dentro',
+      dentroTxt: tc.temAula ? (aula1 ? 'Clase 1 hecha. La clase 2 es en directo el 04/12 y la práctica, el 08/12.' : 'Empieza por la clase 1: es un ejercicio con tu ficha del Negroni.') : (tc.encontros.length > 1 ? 'Las fechas están en tu agenda. La clase 1 se abre el ' + tc.inicio + '.' : 'El encuentro del ' + tc.inicio + ' está en tu agenda.'),
+      podePratica: et === 'dentro' && tc.temAula && aula1,
+      irPratica: () => mudaTurma('pratica', { assin: [], aviso: '' }),
+      pratica: et === 'pratica',
+      praticaRot: 'Práctica del 08/12 · Sea Bar', praticaTxt: 'Bloque de 10 L hecho en tu congelador. Irene lo corta delante de ti y revisa el fondo; Elena lo comprueba con ella.',
+      medidaRot: '¿Cuánto hielo claro salió?',
+      opcoes: opcoesRend.map((o) => ({ t: o.t, on: o.id === opAtual.id, pick: () => set({ opcao: o.id }) })),
+      opTxt: opAtual.txt,
+      assinantes: assinantesBase.map((a) => {
+        const assinou = assinados.indexOf(a.nome) >= 0;
+        return {
+          nome: a.nome, papel: a.papel, assinou: assinou, pode: !assinou, feitoT: a.feitoT, pedirRot: a.pedirRot,
+          pedir: () => {
+            if (assinados.indexOf(a.nome) >= 0) return;
+            const novo = assinados.concat([a.nome]);
+            if (novo.length >= 2) mudaTurma('aprovado', { assin: novo, aviso: a.nome + ' ' + a.feitoT + '. El sello Escuela · ' + tc.carimbo.tit + ' ha ido a tu Pasaporte.' });
+            else set({ assin: novo, aviso: a.nome + ' ' + a.feitoT + '. Falta ' + (a.nome === 'Irene Soler' ? 'la comprobación de Elena.' : 'la firma de Irene.') });
+          }
+        };
+      }),
+      aprovado: et === 'aprovado',
+      cTipo: tc.carimbo.tipo, cTit: tc.carimbo.tit, cLinha: tc.carimbo.linha,
+      aprovadoTxt: 'Firmado por Irene Soler y comprobado por Elena Rostova. Registro de la práctica: ' + opAtual.t + '. El sello ha ido a tu Pasaporte, en el oficio ' + tc.oficio + '.'
+    };
+
+    // Clase
+    const tabela = { cubos: { 15: 18, 30: 25, 45: 30 }, bloco: { 15: 12, 30: 18, 45: 22 } };
+    const pct = tabela[s.gelo][s.tempo];
+    const agua = 90 * pct / 100;
+    const veredito = pct === 22
+      ? 'Como en la ficha. Con hielo en bloque, remueve 45 segundos.'
+      : (pct > 22
+        ? (pct - 22) + (pct - 22 === 1 ? ' punto' : ' puntos') + ' por encima de la ficha: el cóctel llega aguado. ' + (s.gelo === 'cubos' ? 'Con cubitos, remueve menos o cambia al bloque.' : 'Remueve menos.')
+        : (22 - pct) + (22 - pct === 1 ? ' punto' : ' puntos') + ' por debajo de la ficha: el cóctel llega fuerte y poco frío. Remueve más.');
+    const au = {
+      rot: 'Clase 1 de 3 · ESC-07 · Hielo y dilución', titulo: 'Cuánto diluye tu hielo',
+      intro: 'Usa tu ficha del Negroni de la casa: 30 ml de ginebra, 30 ml de Campari y 30 ml de vermut, 90 ml en total. La ficha pide un 22% de agua: 19,8 ml.',
+      gelos: [{ id: 'cubos', t: 'Cubitos de servicio' }, { id: 'bloco', t: 'Bloque claro' }].map((g) => ({ t: g.t, on: s.gelo === g.id, pick: () => set({ gelo: g.id }) })),
+      tempos: [15, 30, 45].map((x) => ({ t: x + ' s', on: s.tempo === x, pick: () => set({ tempo: x }) })),
+      pctTxt: pct + '%',
+      conta: [
+        { t: 'Agua: 90 ml × ' + (pct / 100).toFixed(2).replace('.', ',') + ' = ' + fmt(agua) + ' ml' },
+        { t: 'En el vaso: 90 ml + ' + fmt(agua) + ' ml = ' + fmt(90 + agua) + ' ml' },
+        { t: 'Ficha: 22% · 19,8 ml de agua' }
+      ],
+      veredito: veredito,
+      nota: 'Valores del ejercicio, medidos por Irene en el Sea Bar con el hielo de la casa. En la app, mides con tu báscula y revisas tu ficha.',
+      feita: aula1, concluirRot: aula1 ? 'Clase 1 terminada' : 'Terminar la clase 1',
+      concluir: () => {
+        if (aula1) return;
+        const al = Object.assign({}, s.aulas); al['gelo-a1'] = true;
+        voltarDe({ aulas: al, aviso: 'Clase 1 terminada. El agua del ' + pct + '% ha ido como nota a la ficha del Negroni, en el Cuaderno.' });
+      }
+    };
+
+    // Material
+    const m = materiais.find((x) => x.id === s.matSel) || materiais[0];
+    const guardado = !!s.guardados[m.id];
+    const mt = {
+      rot: m.tipo + ' · ' + m.oficio, nome: m.nome, autor: 'de ' + m.autor,
+      trecho: m.trecho.map((x) => ({ t: x })),
+      continua: socio ? 'sigue en el material completo' : 'vista previa · el resto es para socios',
+      socio: socio, gratis: !socio,
+      guardado: guardado, guardarRot: guardado ? 'En tu estante' : 'Guardar en mi estante',
+      guardar: () => { if (guardado) return; const gd = Object.assign({}, s.guardados); gd[m.id] = true; set({ guardados: gd, aviso: 'Guardado en tu estante. Se queda en el móvil para leer sin conexión.' }); },
+      abrirRot: m.abrirRot,
+      abrir: () => set({ aviso: m.id === 'mcarta' ? 'En la app, la hoja se abre en el Cuaderno, con tus fichas en lugar de los ejemplos.' : 'En la app, el material se abre en el lector de DROPP y se queda guardado en el móvil.' }),
+      serSocio: () => abrirPlano('socio')
+    };
+
+    // Plan
+    const escolha = s.escolha === 'barback' ? 'barback' : 'socio';
+    const ciclo = s.ciclo === 'anual' ? 'anual' : 'mensal';
+    const incluiSocio = ['Cursos con práctica evaluada y sello Escuela', 'La biblioteca entera: monografías, fichas técnicas y clases grabadas', 'Una crítica al mes, escrita por un instructor', 'Una clase en directo al mes', 'Fichas sin límite y exportación en PDF'];
+    const incluiBarback = ['Todo lo del Socio', 'Barback personal: rutina, descansos y los ingresos del mes sumados', 'Precio de un extra antes de aceptarlo: en el Turno, la oferta de 120 € por 5 horas pasó a 180 €', 'Eventos por tu cuenta: presupuesto, compras y etiquetas a partir de las fichas', 'Tu itinerario de estudio, armado a partir del Pasaporte', 'Ofertas de trabajo y competiciones que encajan con tus oficios'];
+    const novo = !socio;
+    const mesmoPlano = socio && !s.cancelado && s.plano === escolha;
+    const upgrade = socio && !s.cancelado && s.plano === 'socio' && escolha === 'barback';
+    const pl = {
+      titulo: escolha === 'barback' ? 'Socio con Barback' : 'Hazte socio',
+      planos: ['socio', 'barback'].map((k) => ({ t: precos[k].curto, s: precos[k].mensal + ' al mes', on: escolha === k, pick: () => set({ escolha: k }) })),
+      ciclos: [{ id: 'mensal', t: 'Mensual', s: precos[escolha].mensal + ' al mes' }, { id: 'anual', t: 'Anual', s: '2 meses gratis' }].map((c) => ({ t: c.t, s: c.s, on: ciclo === c.id, pick: () => set({ ciclo: c.id }) })),
+      valor: ciclo === 'anual' ? precos[escolha].anual : precos[escolha].mensal,
+      unidade: ciclo === 'anual' ? 'al año' : 'al mes',
+      valorNota: (ciclo === 'anual' ? 'Sale a ' + precos[escolha].anualMes + ' al mes. ' : '') + 'IVA incluido. ' + (socio ? 'Tu prueba gratis dura hasta el 18/12.' : 'Los primeros 30 días son gratis.'),
+      inclui: (escolha === 'barback' ? incluiBarback : incluiSocio).map((x) => ({ t: x })),
+      regras: [
+        { k: 'aviso', t: 'Te avisamos el 03/12, quince días antes del primer cobro.' },
+        { k: 'cancelar', t: 'Cancelar está en Mi suscripción, con un toque, igual que te suscribiste.' },
+        { k: 'tienda', t: 'El cobro pasa por la App Store o Google Play.' }
+      ],
+      pedeAceite: novo, aceito: !!s.aceito, marca: s.aceito ? '✓' : '',
+      aceitar: () => set({ aceito: !s.aceito }),
+      bloqueado: mesmoPlano || (novo && !s.aceito),
+      comecarRot: mesmoPlano ? 'Este es tu plan' : (s.cancelado && socio ? 'Volver a suscribirme' : (upgrade ? 'Pasar al plan con Barback' : (socio ? 'Volver al Socio, sin el Barback' : 'Empezar 30 días gratis'))),
+      comecar: () => {
+        if (mesmoPlano || (novo && !s.aceito)) return;
+        let msg = 'En la app, la suscripción pasa por la App Store o Google Play. No se cobra nada hasta el 18/12; te avisamos el 03/12.';
+        if (s.cancelado && socio) msg = 'Suscripción recuperada. El primer cobro sigue siendo el 18/12, con aviso el 03/12.';
+        else if (upgrade) msg = 'En la app, el cambio pasa por la tienda. El Barback personal empieza hoy y la diferencia entra en el próximo cobro.';
+        else if (socio && !s.cancelado) msg = 'A partir del próximo cobro, ' + precoAtual('socio', ciclo) + '. El Barback personal sigue hasta el 18/12.';
+        voltarDe({ plano: escolha, ciclo: ciclo, cancelado: false, aviso: msg });
+      },
+      casaTxt: escolha === 'barback'
+        ? 'El Sea Bar tiene el Plan Casa, que incluye el Socio para 2 personas y tiene 1 plaza libre. El Barback personal es tuyo, va contigo de casa en casa y no entra en el plan de la casa.'
+        : 'El Sea Bar tiene el Plan Casa, que incluye el Socio para 2 personas del equipo. Una de las plazas está libre.',
+      mostraCasa: !socio,
+      podePedir: !s.pedidoCasa, pedido: !!s.pedidoCasa, pedidoTxt: pedidoTxt, pedirCasa: pedirCasa
+    };
+
+    // Suscripción
+    const planoAssin = socio ? s.plano : 'socio';
+    const ass = {
+      nome: precos[planoAssin].nome,
+      fatos: [
+        { k: 'Plan', v: precos[planoAssin].nome + ' · ' + (s.ciclo === 'anual' ? 'anual' : 'mensual') },
+        { k: 'Precio', v: precoAtual(planoAssin, s.ciclo) + ', IVA incluido' },
+        { k: 'Prueba', v: 'gratis hasta el 18/12/2026' },
+        { k: 'Aviso', v: s.cancelado ? 'ninguno: no hay próximo cobro' : 'el 03/12, quince días antes del cobro' },
+        { k: 'Cobro', v: s.cancelado ? 'cancelado' : 'por la App Store, el 18/12' }
+      ],
+      ativa: socio && !s.cancelado && !s.confirmando,
+      trocarRot: s.plano === 'barback' ? 'Volver al Socio, sin el Barback' : 'Pasar al plan con Barback',
+      trocar: () => abrirPlano(s.plano === 'barback' ? 'socio' : 'barback'),
+      podeCancelar: true,
+      pedirCancel: () => set({ confirmando: true, aviso: '' }),
+      confirmando: socio && !s.cancelado && !!s.confirmando,
+      confTxt: 'Sigues siendo socio hasta el 18/12 y no se cobra nada. Los sellos, las fichas y lo que hay en tu estante se quedan contigo.',
+      cancelar: () => set({ cancelado: true, confirmando: false, aviso: 'Suscripción cancelada. Sigues siendo socio hasta el 18/12.' }),
+      manter: () => set({ confirmando: false }),
+      cancelada: socio && !!s.cancelado,
+      canceladaTxt: 'Socio hasta el 18/12. No se cobrará nada.',
+      reassinar: () => abrirPlano(s.plano === 'barback' ? 'barback' : 'socio')
+    };
+
+    // Archivo
+    const a = classicos.find((x) => x.id === s.arqSel) || classicos[0];
+    const ra = reg(a.id);
+    const conf = ra ? ra.conf : [];
+    const arq = {
+      rot: 'Archivo · ' + a.cod, nome: a.nome, autor: a.autor, historia: a.historia,
+      publicada: a.publicada.map((x) => ({ t: x })), pubNota: a.pubNota, fonteTxt: 'Fuente: ' + a.fonte,
+      ml: a.ml.map((x) => ({ i: x[0], q: x[1] })), mudou: a.mudou, temAlerg: !!a.alerg, alerg: a.alerg,
+      semRegistro: !ra, temRegistro: !!ra,
+      registrar: () => { const rg = Object.assign({}, s.registros); rg[a.id] = { feito: '18/11/2026', conf: [] }; set({ registros: rg, aviso: 'Registro hecho. Ahora pide a dos colegas que la prueben y la comprueben.' }); },
+      feitoTxt: ra ? 'Hecho con la receta el ' + ra.feito + ', en el Sea Bar.' : '',
+      colegas: a.colegas.map((cl) => {
+        const assinou = conf.indexOf(cl.nome) >= 0;
+        return {
+          nome: cl.nome, papel: cl.papel, assinou: assinou, pode: !assinou && conf.length < 2,
+          pedirRot: a.pedirRot + ' ' + cl.nome.split(' ')[0],
+          pedir: () => {
+            if (!ra || conf.indexOf(cl.nome) >= 0 || conf.length >= 2) return;
+            const rg = Object.assign({}, s.registros);
+            const nv = conf.concat([cl.nome]);
+            rg[a.id] = { feito: ra.feito, conf: nv };
+            set({ registros: rg, aviso: nv.length >= 2 ? cl.nome + ' la comprobó. El sello del Archivo · ' + a.nome + ' ha ido a tu Pasaporte.' : cl.nome + ' la comprobó. Falta un colega.' });
+          }
+        };
+      }),
+      incompleto: !!ra && conf.length < 2, completo: !!ra && conf.length >= 2,
+      faltaTxt: (conf.length === 1 ? 'Falta un colega.' : 'Faltan dos colegas.') + ' En el prototipo, la comprobación llega al momento; en la app, el colega confirma en su móvil.'
+    };
+
+    const titulos = { tecnica: 'Técnica · ' + t.cod, turma: 'Curso · ' + tc.cod, aula: 'Clase 1 · ESC-07', material: 'Biblioteca', plano: 'Escuela DROPP', assinatura: 'Mi suscripción', classico: 'Archivo · ' + a.cod };
+    const principal = s.tela === 'principal';
+
+    return {
+      principal: principal,
+      mostrarVoltar: !principal,
+      tituloTela: titulos[s.tela] || '',
+      voltar: () => voltarDe(),
+      abas: [{ id: 'estante', t: 'Estante' }, { id: 'escola', t: 'Escuela' }, { id: 'agenda', t: 'Agenda' }].map((ab) => ({ t: ab.t, on: s.aba === ab.id, pick: () => set({ aba: ab.id, aviso: '' }) })),
+      corpoRef: this._refCorpo || (this._refCorpo = (el) => {
+        if (this._corpo && this._ouvinte && this._corpo.removeEventListener) this._corpo.removeEventListener('scroll', this._ouvinte);
+        this._corpo = el;
+        if (el && el.addEventListener) {
+          this._ouvinte = this._ouvinte || (() => this._medirPasso());
+          el.addEventListener('scroll', this._ouvinte, { passive: true });
+        }
+      }),
+
+      tEscola: principal && s.aba === 'escola',
+      tEstante: principal && s.aba === 'estante',
+      tAgenda: principal && s.aba === 'agenda',
+      tTurma: s.tela === 'turma',
+      tAula: s.tela === 'aula',
+      tMaterial: s.tela === 'material',
+      tPlano: s.tela === 'plano',
+      tAssinatura: s.tela === 'assinatura',
+      tTecnica: s.tela === 'tecnica',
+      tClassico: s.tela === 'classico',
+
+      esc: esc,
+      cr: cr,
+      av: av,
+      tipos: tipos,
+      itens: itens,
+      filtrosAg: filtrosAg,
+      eventos: eventos,
+      regua: regua,
+      tec: tec,
+      tu: tu,
+      au: au,
+      mt: mt,
+      pl: pl,
+      ass: ass,
+      arq: arq,
+
+      temAviso: !!s.aviso,
+      aviso: s.aviso,
+      fecharAviso: () => set({ aviso: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>
