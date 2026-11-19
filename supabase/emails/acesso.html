@@ -1,0 +1,23 @@
+{{ if eq .Data.lang "pt" }}
+<div style="background:#EFE8D8;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;color:#1C1A16">
+  <div style="max-width:480px;margin:0 auto;background:#FAF6EC;border:1.5px solid #1C1A16;padding:24px">
+    <p style="margin:0;font-size:24px;font-weight:bold;letter-spacing:2px">DROPP</p>
+    <p style="margin:2px 0 22px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6A6151">Liquid Experience</p>
+    <p style="margin:0 0 8px;font-size:16px;line-height:1.4">Seu código para entrar na Escola:</p>
+    <p style="margin:0 0 22px;font-family:'Courier New',Courier,monospace;font-size:34px;font-weight:bold;letter-spacing:8px">{{ .Token }}</p>
+    <p style="margin:0 0 22px;font-size:14px;line-height:1.5">Digite o código no app. Ou <a href="{{ .ConfirmationURL }}" style="color:#1C1A16;font-weight:bold">entre pelo link</a>: você entra no navegador onde abrir.</p>
+    <p style="margin:0;font-size:12px;line-height:1.5;color:#6A6151">Se não foi você que pediu, ignore este e-mail. Ninguém entra sem o código ou o link.</p>
+  </div>
+</div>
+{{ else }}
+<div style="background:#EFE8D8;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;color:#1C1A16">
+  <div style="max-width:480px;margin:0 auto;background:#FAF6EC;border:1.5px solid #1C1A16;padding:24px">
+    <p style="margin:0;font-size:24px;font-weight:bold;letter-spacing:2px">DROPP</p>
+    <p style="margin:2px 0 22px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6A6151">Liquid Experience</p>
+    <p style="margin:0 0 8px;font-size:16px;line-height:1.4">Tu código para entrar en la Escuela:</p>
+    <p style="margin:0 0 22px;font-family:'Courier New',Courier,monospace;font-size:34px;font-weight:bold;letter-spacing:8px">{{ .Token }}</p>
+    <p style="margin:0 0 22px;font-size:14px;line-height:1.5">Escríbelo en la app. O <a href="{{ .ConfirmationURL }}" style="color:#1C1A16;font-weight:bold">entra con el enlace</a>: entrarás en el navegador donde lo abras.</p>
+    <p style="margin:0;font-size:12px;line-height:1.5;color:#6A6151">Si no lo has pedido tú, ignora este correo. Nadie entra sin el código o el enlace.</p>
+  </div>
+</div>
+{{ end }}

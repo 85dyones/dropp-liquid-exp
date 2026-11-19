@@ -5,7 +5,7 @@ import type { FonteEscola } from './tipos';
 
 let promessa: Promise<FonteEscola> | null = null;
 
-// O campo do código de 6 dígitos só aparece quando o e-mail traz o código: isso pede SMTP próprio no
+// O campo do código do e-mail (8 dígitos no dropp-escola) só aparece quando o e-mail traz o código: isso pede SMTP próprio no
 // Supabase e um modelo de e-mail com {{ .Token }}. Até lá, VITE_LOGIN_POR_CODIGO fica sem valor.
 export const LOGIN_POR_CODIGO = import.meta.env.VITE_LOGIN_POR_CODIGO === '1';
 
