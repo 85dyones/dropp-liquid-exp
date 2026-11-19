@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "tokens": "node scripts/tokens.mjs",
-    "dev": "npm run tokens && vite",
-    "build": "npm run tokens && tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "dev": "npm run tokens && npm run prototipos && vite",
+    "build": "npm run tokens && npm run prototipos && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "prototipos": "node scripts/prototipos.mjs"
   },
   "dependencies": {
     "react": "18.3.1",

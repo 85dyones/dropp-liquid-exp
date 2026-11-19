@@ -48,6 +48,7 @@ button { font-family: inherit; color: inherit; }
   border-top: var(--borda-tinta) solid var(--tinta);
 }
 .nav-marca { display: none; }
+.nav-prototipos { display: none; }
 .nav-item {
   appearance: none; border: 0; background: transparent; cursor: pointer;
   min-height: var(--alvo-nav);
@@ -155,6 +156,7 @@ button { font-family: inherit; color: inherit; }
     border-top: 0; border-right: var(--borda-tinta) solid var(--tinta);
   }
   .nav-marca { display: grid; justify-items: center; gap: 4px; padding: 4px 0 18px; }
+  .nav-prototipos { display: flex; align-items: center; justify-content: center; min-height: var(--alvo-toque); margin-top: auto; padding: 8px 4px; font: 600 12px/1.25 var(--font-texto); text-align: center; color: var(--tinta); }
   .nav-gota { width: 30px; height: 36px; }
   .nav-nome { font: 400 18px/1 var(--font-display); letter-spacing: 0.04em; }
   .nav-esp { display: none; }

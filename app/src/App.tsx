@@ -34,6 +34,7 @@ export function App() {
             <span>{t.areas[a]}</span>
           </button>
         ))}
+        <a className="nav-prototipos" href={`${import.meta.env.BASE_URL}prototipos/`}>{t.prototipos}</a>
       </nav>
 
       <header className="topo">

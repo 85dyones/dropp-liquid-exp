@@ -16,5 +16,6 @@ dist/
 # Configuração local do editor
 .claude/
 
-# Gerado pelo app a partir do tokens.json
+# Gerado pelo app a partir do tokens.json e dos protótipos
 /app/src/estilo/tokens.css
+/app/public/prototipos-dados/
