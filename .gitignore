@@ -12,3 +12,9 @@ node_modules/
 dist/
 .vite/
 *.log
+
+# Configuração local do editor
+.claude/
+
+# Gerado pelo app a partir do tokens.json
+/app/src/estilo/tokens.css
