@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { ROTAS, T, type Lang } from '../i18n/textos';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = T[lang].precos;
+---
+<Base lang={lang} rota="precos" titulo={t.titulo} descricao={t.meta}>
+  <section class="faixa">
+    <div class="dentro abre" style="grid-template-columns:1fr; padding-bottom:24px">
+      <div class="abre-texto">
+        <h1 class="titulo-1">{t.titulo}</h1>
+        <p class="lide">{t.lide}</p>
+      </div>
+    </div>
+  </section>
+  <section class="faixa">
+    <div class="dentro" style="padding-bottom:72px">
+      <div class="tabela-rolar">
+        <table>
+          <thead><tr>{t.cab.map((c) => <th scope="col">{c}</th>)}</tr></thead>
+          <tbody>{t.linhas.map((l) => <tr><td>{l[0]}</td><td>{l[1]}</td><td>{l[2]}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p class="nota" style="margin-top:14px">{t.nota}</p>
+      <div class="botoes" style="margin-top:28px">
+        <a class="botao botao--cheio" href={ROTAS.escola[lang]}>{T[lang].inicio.escolaCta}</a>
+        <a class="botao" href={ROTAS.contato[lang]}>{T[lang].inicio.cta2}</a>
+      </div>
+    </div>
+  </section>
+</Base>

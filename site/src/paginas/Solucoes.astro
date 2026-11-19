@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Celular from '../components/Celular.astro';
+import { ALTS } from '../i18n/alts';
+import { ROTAS, T, type Lang } from '../i18n/textos';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = T[lang].solucoes;
+---
+<Base lang={lang} rota="solucoes" titulo={t.titulo} descricao={t.meta}>
+  <section class="faixa">
+    <div class="dentro abre" style="grid-template-columns:1fr">
+      <div class="abre-texto">
+        <h1 class="titulo-1">{t.titulo}</h1>
+        <p class="lide">{t.lide}</p>
+      </div>
+    </div>
+  </section>
+  <section class="faixa">
+    <div class="dentro blocos">
+      {t.blocos.map((b) => (
+        <article class="bloco" id={b.id} aria-labelledby={`t-${b.id}`}>
+          <div class="par-texto">
+            <h2 class="titulo-2" id={`t-${b.id}`}>{b.titulo}</h2>
+            <ul class="lista">{b.itens.map((i) => <li>{i}</li>)}</ul>
+          </div>
+          <Celular tela={b.tela} lang={lang} alt={ALTS[b.tela][lang]} />
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="fim">
+    <div class="dentro">
+      <h2 class="titulo-2">{T[lang].inicio.fimTit}</h2>
+      <div class="botoes">
+        <a class="botao" href={ROTAS.precos[lang]}>{T[lang].nav.precos}</a>
+        <a class="botao" href={ROTAS.contato[lang]}>{T[lang].inicio.fimCta}</a>
+      </div>
+    </div>
+  </section>
+</Base>

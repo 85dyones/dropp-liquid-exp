@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Celular from '../components/Celular.astro';
+import { ALTS } from '../i18n/alts';
+import { ROTAS, T, type Lang } from '../i18n/textos';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = T[lang].sobre;
+---
+<Base lang={lang} rota="sobre" titulo={t.titulo} descricao={t.meta}>
+  <section class="faixa">
+    <div class="dentro abre">
+      <div class="abre-texto">
+        <h1 class="titulo-1">{t.titulo}</h1>
+        <p class="lide">{t.lide}</p>
+      </div>
+      <Celular tela="passaporte" lang={lang} alt={ALTS.passaporte[lang]} prioridade />
+    </div>
+  </section>
+  <section class="faixa" aria-labelledby="t-principios">
+    <div class="dentro secao">
+      <h2 class="titulo-2" id="t-principios">{t.principiosTit}</h2>
+      <dl class="principios">{t.principios.map((p) => <div><dt>{p.t}</dt><dd>{p.d}</dd></div>)}</dl>
+    </div>
+  </section>
+  <section class="faixa" aria-labelledby="t-onde">
+    <div class="dentro secao">
+      <h2 class="titulo-2" id="t-onde">{t.ondeTit}</h2>
+      <p class="lide" style="margin-top:16px">{t.onde}</p>
+      <div class="botoes" style="margin-top:24px"><a class="botao botao--cheio" href={ROTAS.contato[lang]}>{T[lang].inicio.fimCta}</a></div>
+    </div>
+  </section>
+</Base>

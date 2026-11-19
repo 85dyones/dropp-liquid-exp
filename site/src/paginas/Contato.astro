@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTATO } from '../config';
+import { T, type Lang } from '../i18n/textos';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = T[lang].contato;
+---
+<Base lang={lang} rota="contato" titulo={t.titulo} descricao={t.meta}>
+  <section class="faixa">
+    <div class="dentro abre" style="grid-template-columns:1fr">
+      <div class="abre-texto">
+        <h1 class="titulo-1">{t.titulo}</h1>
+        <p class="lide">{t.lide}</p>
+        <form class="form" id="contato" data-email={CONTATO.email} data-assunto={t.assunto}>
+          <label class="campo">{t.nome}<input name="nome" autocomplete="name" required /></label>
+          <label class="campo">{t.email}<input name="email" type="email" autocomplete="email" required /></label>
+          <label class="campo">{t.perfil}
+            <select name="perfil">{t.perfis.map((p) => <option>{p}</option>)}</select>
+          </label>
+          <label class="campo">{t.mensagem}<textarea name="mensagem" required></textarea></label>
+          <div class="botoes"><button class="botao botao--cheio" type="submit">{t.enviar}</button></div>
+          <p class="nota">{t.pendente}</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+<script>
+  // Sem servidor por enquanto: o envio abre o e-mail de quem escreve com a mensagem pronta.
+  const form = document.getElementById('contato') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const d = new FormData(form);
+    const corpo = `${d.get('mensagem')}\n\n${d.get('nome')} · ${d.get('perfil')} · ${d.get('email')}`;
+    const para = form.dataset.email || '';
+    window.location.href = `mailto:${para}?subject=${encodeURIComponent(form.dataset.assunto || '')}&body=${encodeURIComponent(corpo)}`;
+  });
+</script>

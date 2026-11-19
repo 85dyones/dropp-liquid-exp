@@ -1,0 +1,16 @@
+{
+  "name": "dropp-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "tokens": "node scripts/tokens.mjs",
+    "dev": "npm run tokens && astro dev --port 4321",
+    "build": "npm run tokens && astro build",
+    "preview": "astro preview --port 4321",
+    "telas": "node scripts/capturar-telas.mjs"
+  },
+  "dependencies": {
+    "astro": "7.4.5"
+  }
+}

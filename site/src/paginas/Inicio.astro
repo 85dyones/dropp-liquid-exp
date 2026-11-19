@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import Celular from '../components/Celular.astro';
+import { ALTS } from '../i18n/alts';
+import { LINKS, ROTAS, T, type Lang } from '../i18n/textos';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = T[lang].inicio;
+---
+<Base lang={lang} rota="inicio" titulo={t.titulo} descricao={t.meta}>
+  <section class="faixa">
+    <div class="dentro abre">
+      <div class="abre-texto">
+        <h1 class="titulo-1">{t.titulo}</h1>
+        <p class="lide">{t.lide}</p>
+        <div class="botoes">
+          <a class="botao botao--cheio" href={LINKS.prototipos}>{t.cta1}</a>
+          <a class="botao" href={ROTAS.contato[lang]}>{t.cta2}</a>
+        </div>
+        <p class="nota">{T[lang].rodape.piloto}</p>
+      </div>
+      <Celular tela="turno" lang={lang} alt={ALTS.turno[lang]} prioridade />
+    </div>
+  </section>
+
+  <section class="faixa" aria-labelledby="t-areas">
+    <div class="dentro secao">
+      <h2 class="titulo-2" id="t-areas">{t.areasTit}</h2>
+      <p class="lide" style="margin-top:12px">{t.areasLide}</p>
+      <div class="areas">
+        {t.areas.map((a) => (
+          <article class="area">
+            <Celular tela={a.id} lang={lang} alt={ALTS[a.id][lang]} />
+            <h3>{a.nome}</h3>
+            <p>{a.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="faixa" aria-labelledby="t-barback">
+    <div class="dentro secao par par--inverso">
+      <div class="par-texto">
+        <h2 class="titulo-2" id="t-barback">{t.barbackTit}</h2>
+        <p class="lide">{t.barbackLide}</p>
+        <ol class="passos">
+          {t.barback.map((b) => <li><h3>{b.t}</h3><p>{b.d}</p></li>)}
+        </ol>
+      </div>
+      <Celular tela="voz" lang={lang} alt={ALTS.voz[lang]} />
+    </div>
+  </section>
+
+  <section class="faixa" aria-labelledby="t-escola">
+    <div class="dentro secao par">
+      <div class="par-texto">
+        <h2 class="titulo-2" id="t-escola">{t.escolaTit}</h2>
+        <p class="lide">{t.escolaTexto}</p>
+        <p class="preco">{t.escolaPreco}</p>
+        <div class="botoes"><a class="botao botao--cheio" href={ROTAS.escola[lang]}>{t.escolaCta}</a></div>
+      </div>
+      <Celular tela="escola" lang={lang} alt={ALTS.escola[lang]} />
+    </div>
+  </section>
+
+  <section class="faixa" aria-labelledby="t-casa">
+    <div class="dentro secao par par--inverso">
+      <div class="par-texto">
+        <h2 class="titulo-2" id="t-casa">{t.casaTit}</h2>
+        <p class="lide">{t.casaTexto}</p>
+        <p class="preco">{t.casaPreco}</p>
+        <div class="botoes"><a class="botao" href={ROTAS.solucoes[lang]}>{t.casaCta}</a></div>
+      </div>
+      <Celular tela="lote" lang={lang} alt={ALTS.lote[lang]} />
+    </div>
+  </section>
+
+  <section class="faixa" aria-labelledby="t-nao">
+    <div class="dentro secao">
+      <h2 class="titulo-2" id="t-nao">{t.naoTit}</h2>
+      <ul class="lista" style="margin-top:24px">{t.nao.map((n) => <li>{n}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="fim" aria-labelledby="t-fim">
+    <div class="dentro">
+      <h2 class="titulo-2" id="t-fim">{t.fimTit}</h2>
+      <a class="botao" href={ROTAS.contato[lang]}>{t.fimCta}</a>
+    </div>
+  </section>
+</Base>

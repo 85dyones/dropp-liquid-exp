@@ -1,0 +1,78 @@
+---
+import '../styles/tokens.css';
+import '../styles/site.css';
+import Gota from '../components/Gota.astro';
+import { LINKS, ROTAS, T, type Lang } from '../i18n/textos';
+
+interface Props { lang: Lang; rota: keyof typeof ROTAS; titulo: string; descricao: string }
+const { lang, rota, titulo, descricao } = Astro.props;
+const t = T[lang];
+const outra: Lang = lang === 'es' ? 'pt' : 'es';
+const itens = ['solucoes', 'escola', 'precos', 'sobre', 'contato'] as const;
+const atual = Astro.url.pathname.replace(/\/?$/, '/');
+const tituloPagina = rota === 'inicio' ? 'DROPP · Liquid Experience' : `${titulo} · DROPP`;
+---
+<!doctype html>
+<html lang={t.lang}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#EFE8D8" />
+  <title>{tituloPagina}</title>
+  <meta name="description" content={descricao} />
+  <link rel="alternate" hreflang="es" href={new URL(ROTAS[rota].es, Astro.site)} />
+  <link rel="alternate" hreflang="pt" href={new URL(ROTAS[rota].pt, Astro.site)} />
+  <link rel="preload" href="/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/archivo-variavel.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="icon" href="/gota.svg" type="image/svg+xml" />
+  <meta property="og:title" content={tituloPagina} />
+  <meta property="og:description" content={descricao} />
+  <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'pt_BR'} />
+</head>
+<body>
+  <a class="pular" href="#conteudo">{lang === 'es' ? 'Saltar al contenido' : 'Pular para o conteúdo'}</a>
+  <header class="topo">
+    <div class="topo-dentro">
+      <a class="marca" href={ROTAS.inicio[lang]} aria-label="DROPP Liquid Experience">
+        <Gota class="marca-gota" />
+        <span class="marca-texto"><span class="marca-nome">DROPP</span><span class="marca-esp">Liquid Experience</span></span>
+      </a>
+      <nav class="nav-larga" aria-label={t.nav.menu}>
+        <ul>
+          {itens.map((i) => (
+            <li><a href={ROTAS[i][lang]} aria-current={atual === ROTAS[i][lang] ? 'page' : undefined}>{t.nav[i]}</a></li>
+          ))}
+          <li><a href={ROTAS[rota][outra]} hreflang={outra} lang={outra}>{t.nav.outra}</a></li>
+        </ul>
+        <a class="botao botao--cheio" href={LINKS.prototipos}>{t.nav.probar}</a>
+      </nav>
+      <details class="menu">
+        <summary>{t.nav.menu}</summary>
+        <nav aria-label={t.nav.menu}>
+          <ul>
+            {itens.map((i) => (
+              <li><a href={ROTAS[i][lang]} aria-current={atual === ROTAS[i][lang] ? 'page' : undefined}>{t.nav[i]}</a></li>
+            ))}
+            <li><a href={ROTAS[rota][outra]} hreflang={outra} lang={outra}>{t.nav.outra}</a></li>
+          </ul>
+          <a class="botao botao--cheio" href={LINKS.prototipos}>{t.nav.probar}</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+  <main id="conteudo">
+    <slot />
+  </main>
+  <footer class="rodape">
+    <div class="rodape-dentro">
+      <p class="marca marca--rodape"><Gota class="marca-gota" /><span class="marca-texto"><span class="marca-nome">DROPP</span><span class="marca-esp">Liquid Experience</span></span></p>
+      <ul class="rodape-links">
+        {itens.map((i) => <li><a href={ROTAS[i][lang]}>{t.nav[i]}</a></li>)}
+        <li><a href={LINKS.prototipos}>{t.rodape.prototipos}</a></li>
+        <li><a href={ROTAS[rota][outra]} hreflang={outra}>{t.nav.outra}</a></li>
+      </ul>
+      <p class="rodape-nota">{t.rodape.piloto} {t.rodape.ficticio}</p>
+    </div>
+  </footer>
+</body>
+</html>

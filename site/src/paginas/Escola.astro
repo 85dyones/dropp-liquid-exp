@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import Celular from '../components/Celular.astro';
+import { ALTS } from '../i18n/alts';
+import { LINKS, ROTAS, T, type Lang } from '../i18n/textos';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = T[lang].escola;
+---
+<Base lang={lang} rota="escola" titulo={t.titulo} descricao={t.meta}>
+  <section class="faixa">
+    <div class="dentro abre">
+      <div class="abre-texto">
+        <h1 class="titulo-1">{t.titulo}</h1>
+        <p class="lide">{t.lide}</p>
+        <div class="botoes">
+          <a class="botao botao--cheio" href={LINKS.prototipo(lang === 'es' ? 'escola-es' : 'escola-pt')}>{t.cta}</a>
+          <a class="botao" href={ROTAS.contato[lang]}>{T[lang].inicio.cta2}</a>
+        </div>
+      </div>
+      <Celular tela="escola" lang={lang} alt={ALTS.escola[lang]} prioridade />
+    </div>
+  </section>
+
+  <section class="faixa" aria-labelledby="t-como">
+    <div class="dentro secao">
+      <h2 class="titulo-2" id="t-como">{t.comoTit}</h2>
+      <ol class="passos">{t.como.map((c) => <li><h3>{c.t}</h3><p>{c.d}</p></li>)}</ol>
+    </div>
+  </section>
+
+  <section class="faixa" aria-labelledby="t-comunidade">
+    <div class="dentro secao">
+      <h2 class="titulo-2" id="t-comunidade">{t.comunidadeTit}</h2>
+      <dl class="principios">
+        {t.comunidade.map((c) => <div><dt>{c.t}</dt><dd>{c.d}</dd></div>)}
+      </dl>
+      <p class="lide" style="margin-top:28px"><strong>{t.quemTit}.</strong> {t.quem}</p>
+    </div>
+  </section>
+
+  <section class="faixa" aria-labelledby="t-planos">
+    <div class="dentro secao">
+      <h2 class="titulo-2" id="t-planos">{t.planosTit}</h2>
+      <div class="planos">
+        {t.planos.map((p) => (
+          <article class="plano">
+            <h3>{p.nome}</h3>
+            <p class="valor">{p.preco}</p>
+            <p class="nota">{p.alt}</p>
+            <ul>{p.itens.map((i) => <li>{i}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+      <p class="nota" style="margin-top:16px">{T[lang].precos.nota}</p>
+      <h3 class="titulo-3" style="margin-top:36px">{t.regrasTit}</h3>
+      <ul class="lista" style="margin-top:12px">{t.regras.map((r) => <li>{r}</li>)}</ul>
+    </div>
+  </section>
+</Base>

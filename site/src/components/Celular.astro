@@ -1,0 +1,10 @@
+---
+// Uma tela real do protótipo numa moldura de celular.
+import type { Lang } from '../i18n/textos';
+interface Props { tela: string; lang: Lang; alt: string; class?: string; prioridade?: boolean }
+const { tela, lang, alt, class: classe, prioridade = false } = Astro.props;
+---
+<figure class:list={['celular', classe]}>
+  <img src={`/telas/${lang}/${tela}.webp`} width="780" height="1688" alt={alt}
+    loading={prioridade ? 'eager' : 'lazy'} decoding="async" {...(prioridade ? { fetchpriority: 'high' } : {})} />
+</figure>
