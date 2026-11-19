@@ -148,6 +148,14 @@ button { font-family: inherit; color: #1C1A16; }
 .topo-acoes { display: flex; gap: 6px; align-items: center; }
 .icone-btn { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 44px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 13px; cursor: pointer; }
 .icone-btn svg { width: 18px; height: 18px; flex: none; }
+.prep-lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.prep { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; align-items: start; padding: 12px 14px; border-radius: 4px; }
+.prep.feito { border-style: dashed; }
+.prep-l { display: grid; gap: 3px; min-width: 0; }
+.prep-nome { font-weight: 700; font-size: 15px; line-height: 1.3; }
+.prep-qtd { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 26px; line-height: 1; }
+.prep-fim { grid-column: 1 / -1; }
+.prep .btn { justify-self: start; }
 .lote-conf { display: block; font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11.5px; color: #0B7654; }
 .lido { display: flex; gap: 8px; align-items: baseline; font-size: 13.5px; line-height: 1.4; }
 .etq-pe-dir { display: grid; gap: 8px; justify-items: end; text-align: right; min-width: 0; }
@@ -229,6 +237,20 @@ button { font-family: inherit; color: #1C1A16; }
 
   <div class="corpo" ref="{{corpoRef}}">
     <sc-if value="{{tLotes}}" hint-placeholder-val="{{ true }}">
+      <div class="sec-cab">
+        <p class="titulo-bloco">Para preparar hoje</p>
+        <p class="nota">{{prepResumo}}</p>
+      </div>
+      <ul class="prep-lista">
+        <sc-for list="{{prepLista}}" as="pl" hint-placeholder-count="2">
+          <li class="{{pl.cls}}">
+            <span class="prep-l"><span class="prep-nome">{{pl.nome}}</span><span class="nota">{{pl.origem}}</span></span>
+            <span class="prep-qtd">{{pl.qtd}}</span>
+            <sc-if value="{{pl.feito}}" hint-placeholder-val="{{ false }}"><p class="lido prep-fim"><span class="st ok">feito</span><span>{{pl.feitoTxt}}</span></p></sc-if>
+            <sc-if value="{{pl.aFazer}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn prep-fim" onClick="{{pl.fazer}}">Fazer o lote</button></sc-if>
+          </li>
+        </sc-for>
+      </ul>
       <div class="sec-cab">
         <p class="titulo-bloco">Lotes da casa</p>
         <p class="nota">{{lotesResumo}}</p>
@@ -354,7 +376,7 @@ button { font-family: inherit; color: #1C1A16; }
       <p class="nota">O lote sai da ficha de preparo da casa: as quantidades, a validade e os alérgenos vêm dela.</p>
       <div class="campo">
         <span class="rot" id="lbl-prep">Qual preparo</span>
-        <div class="seg-row" role="group" aria-labelledby="lbl-prep">
+        <div class="seg-row quatro" role="group" aria-labelledby="lbl-prep">
           <sc-for list="{{preparos}}" as="pp" hint-placeholder-count="3">
             <button type="button" class="seg" aria-pressed="{{pp.on}}" onClick="{{pp.pick}}">{{pp.t}}</button>
           </sc-for>
@@ -785,7 +807,7 @@ class Component extends DCLogic {
     const s = Object.assign({
       aba: p.aba || 'lotes', tela: 'principal', loteSel: 'PF-001', fichaSel: 'negroni', dono: 'casa',
       perdaAberta: false, perdaQtd: 0, perdaMotivo: '', perdas: {}, baixados: {}, criados: [], conferidos: {}, sumidos: {}, vazios: {}, lidoAgora: '', volta: '',
-      novoPrep: 'lim', novoL: 3, imprimindo: 0,
+      novoPrep: 'lim', novoL: 3, imprimindo: 0, prepFeitos: {},
       doses: 40, dil: 20, garrafa: 'campari', dose: 30, aviso: '',
       calcSel: 'batch', oferta: 120, prepH: 1, desloc: 4, insSeus: 15, irpf: 15, convidados: 60, horasEv: 3, ritmo: 1, cartaEv: ['negroni', 'penicillin', 'shrub']
     }, this.state || {});
@@ -966,7 +988,14 @@ class Component extends DCLogic {
       { id: 'mel', t: 'Xarope de mel', nome: 'Xarope de mel 2:1', prefixo: 'MEL', prox: 6, dias: 14, custoL: 6.10, aler: 'nenhum', temp: 'manter a 4 °C', tec: 'Brix 55°', ingTxt: 'Mel de laranjeira, água.',
         ing: [['Mel de laranjeira', 670, 'g'], ['Água quente', 335, 'ml']] },
       { id: 'org', t: 'Orgeat', prefixo: 'ORG', prox: 12, dias: 7, custoL: 4.80, aler: 'amêndoa (fruto de casca rija)', temp: 'manter a 4 °C', tec: 'Brix 55°', ingTxt: 'Amêndoa torrada, açúcar, água, água de flor de laranjeira.',
-        ing: [['Amêndoa torrada', 300, 'g'], ['Água', 600, 'ml'], ['Açúcar', 500, 'g'], ['Água de flor de laranjeira', 5, 'ml']] }
+        ing: [['Amêndoa torrada', 300, 'g'], ['Água', 600, 'ml'], ['Açúcar', 500, 'g'], ['Água de flor de laranjeira', 5, 'ml']] },
+      { id: 'sim', t: 'Xarope simples', nome: 'Xarope simples 1:1', prefixo: 'SIM', prox: 14, dias: 30, custoL: 0.74, aler: 'nenhum', temp: 'manter a 4 °C', tec: 'Brix 50°', ingTxt: 'Açúcar, água.',
+        ing: [['Açúcar', 615, 'g'], ['Água', 615, 'ml']] }
+    ];
+    // A lista de preparo do dia: o cordial do recado aceito no Turno às 17:00 e o xarope que o Barback pôs às 16:45.
+    const prepItens = [
+      { id: 'lim', nome: "Cordial de limão", L: 3, origem: "Recado do Barback aceito no Turno, às 17:00: sexta com 140 reservas. Era 2 L." },
+      { id: 'sim', nome: "Xarope simples 1:1", L: 2, origem: "O Barback pôs sozinho às 16:45: estava em 0,4 L, abaixo do mínimo." }
     ];
     const prep = preparosBase.find((x) => x.id === s.novoPrep) || preparosBase[0];
     const prepNome = prep.nome || prep.t;
@@ -977,8 +1006,22 @@ class Component extends DCLogic {
         id: novoId, nome: prepNome, recip: 'Garrafa #' + (6 + s.criados.length), feito: 0, vence: prep.dias, total: L * 1000, rest: L * 1000,
         tec: prep.tec, custoMl: prep.custoL / 1000, custoTxt: euro(prep.custoL / 1000 * 20) + ' por 20 ml', aler: prep.aler, ing: prep.ingTxt, temp: prep.temp, tipo: 'novo', prefixo: prep.prefixo
       };
-      set({ criados: s.criados.concat([novo]), tela: 'lote', loteSel: novoId, imprimindo: s.imprimindo + 1, perdaAberta: false, perdaQtd: 0, perdaMotivo: '', aviso: 'Lote ' + novoId + ' criado. No app, a etiqueta sai agora na térmica do balcão.' });
+      const pf = Object.assign({}, s.prepFeitos);
+      if (prepItens.some((it) => it.id === prep.id) && !pf[prep.id]) pf[prep.id] = { id: novoId, L: L };
+      set({ criados: s.criados.concat([novo]), prepFeitos: pf, tela: 'lote', loteSel: novoId, imprimindo: s.imprimindo + 1, perdaAberta: false, perdaQtd: 0, perdaMotivo: '', aviso: 'Lote ' + novoId + ' criado. No app, a etiqueta sai agora na térmica do balcão.' });
     };
+
+    const prepLista = prepItens.map((it) => {
+      const f = s.prepFeitos[it.id];
+      return {
+        nome: it.nome, origem: it.origem, qtd: (f ? f.L : it.L) + ' L',
+        cls: 'papel prep' + (f ? ' feito' : ''), feito: !!f, aFazer: !f,
+        feitoTxt: f ? 'Lote ' + f.id + ' · ' + f.L + ' L, feito agora. Está nos lotes abaixo.' : '',
+        fazer: () => set({ tela: 'novo', novoPrep: it.id, novoL: it.L, aviso: '' })
+      };
+    });
+    const faltam = prepItens.filter((it) => !s.prepFeitos[it.id]).length;
+    const prepResumo = faltam === 0 ? 'Tudo feito: cada item virou lote com etiqueta.' : (faltam === 1 ? '1 item' : faltam + ' itens') + ' a fazer. O que o Turno pede vira lote com etiqueta.';
 
     const meta = 22;
     const fichasCasa = [
@@ -1157,6 +1200,8 @@ class Component extends DCLogic {
       esvaziar: esvaziar,
 
       lotesResumo: lotesResumoConf,
+      prepResumo: prepResumo,
+      prepLista: prepLista,
       lotes: ativos,
       sel: sel,
       etqCls: 'etiqueta' + (s.imprimindo === 0 ? '' : (s.imprimindo % 2 === 1 ? ' sai-a' : ' sai-b')),

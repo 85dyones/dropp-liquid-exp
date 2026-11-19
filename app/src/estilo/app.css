@@ -113,6 +113,23 @@ button { font-family: inherit; color: inherit; }
 .gf-lote { font: 12px var(--font-medida); color: var(--tinta-suave); }
 .garrafas .dp-st { white-space: normal; text-align: right; max-width: 19ch; }
 
+/* Caderno: lista de preparo do dia (o que o Turno pede vira lote) */
+.preparo { display: grid; gap: 8px; }
+.preparo li { grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 8px 12px; }
+.preparo li[data-feito="true"] { border-style: dashed; }
+.pp-l { display: grid; gap: 3px; min-width: 0; }
+.pp-nome { font-weight: 700; font-size: 15px; line-height: 1.3; }
+.pp-origem { font-size: 13px; line-height: 1.4; color: var(--tinta-cartao); }
+.pp-qtd { font: 400 26px/1 var(--font-display); }
+.pp-fim { grid-column: 1 / -1; }
+
+/* Link de ação: leva de uma área a outra, com alvo de toque inteiro */
+.link-acao {
+  appearance: none; border: 0; background: transparent; color: var(--tinta); cursor: pointer;
+  min-height: var(--alvo-toque); padding: 0 2px; justify-self: start;
+  font: 600 14px var(--font-texto); text-decoration: underline; text-underline-offset: 3px;
+}
+
 /* Caderno: fichas */
 .fichas { display: grid; gap: 8px; }
 .fichas li { grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; }

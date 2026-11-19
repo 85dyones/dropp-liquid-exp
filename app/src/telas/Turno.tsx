@@ -3,9 +3,11 @@ import { Botao, Icone, Papel, Recado, ReguaLote, Selo } from '../ds/componentes'
 import type { Textos } from '../textos';
 import { Agenda, Secao } from './comum';
 
-export function Turno({ t, avisar }: { t: Textos; avisar: (txt: string) => void }) {
+export function Turno({ t, avisar, escolhas, escolher, verCaderno }: {
+  t: Textos; avisar: (txt: string) => void;
+  escolhas: Record<string, number>; escolher: (id: string, i: number) => void; verCaderno: () => void;
+}) {
   const [dono, setDono] = useState<'casa' | 'meu'>('casa');
-  const [escolhas, setEscolhas] = useState<Record<string, number>>({});
   const tt = t.turno;
   const recados = dono === 'casa' ? tt.recadosCasa : tt.recadosMeu;
   const lotesHoje = [t.caderno.lotes[1], t.caderno.lotes[0]];
@@ -32,13 +34,16 @@ export function Turno({ t, avisar }: { t: Textos; avisar: (txt: string) => void 
                 {e === undefined ? (
                   <div className="dp-linha-btns">
                     {r.opcoes.map((o, i) => (
-                      <Botao key={o.t} cheio={i === 0} onClick={() => setEscolhas({ ...escolhas, [r.id]: i })}>
+                      <Botao key={o.t} cheio={i === 0} onClick={() => escolher(r.id, i)}>
                         <span>{o.t}</span>{o.efeito ? <small className="efeito">{o.efeito}</small> : null}
                       </Botao>
                     ))}
                   </div>
                 ) : (
-                  <p className="feito-linha"><Selo>{t.feito}</Selo><span>{r.opcoes[e].feito}</span></p>
+                  <>
+                    <p className="feito-linha"><Selo>{t.feito}</Selo><span>{r.opcoes[e].feito}</span></p>
+                    {r.opcoes[e].caderno ? <button type="button" className="link-acao" onClick={verCaderno}>{tt.verCaderno}</button> : null}
+                  </>
                 )}
               </Recado>
             );

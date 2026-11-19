@@ -254,7 +254,7 @@ button { font-family: inherit; color: #1C1A16; }
           <span class="rot">O Barback já fez, sozinho</span>
           <ul class="chk">
             <li><span class="st bb">16:40</span><span>Mandou para o Iker, que começa hoje, as 12 fichas da carta e um teste de 10 perguntas.</span></li>
-            <li><span class="st bb">16:45</span><span>O xarope simples estava abaixo do mínimo (0,4 L): pôs 2 L na lista de preparo.</span></li>
+            <li><span class="st bb">16:45</span><span>O xarope simples estava abaixo do mínimo (0,4 L): pôs 2 L na lista de preparo do Caderno.</span></li>
           </ul>
           <div class="ja-pe">
             <p class="nota">Dentro do limite da cadeira Operação. Tudo fica no livro de turno.</p>
@@ -497,8 +497,8 @@ class Component extends DCLogic {
         linhas: [['por quê', 'Sexta com 140 reservas e um grupo de 20 às 22h.'], ['custa', '+ €4,20 de limão e 25 min de preparo'], ['evita', 'Na sexta 13/11 o cordial acabou às 23:10 e o Gimlet saiu da carta.']],
         fonte: 'Reservas do sistema (140, com um grupo de 20 às 22h) e livro de turno das últimas 4 sextas: média de 2,6 L.',
         opcoes: [
-          { t: 'Fazer 3 L', efeito: '+ €4,20', feito: 'Na lista de preparo: 3 L de cordial de limão.' },
-          { t: 'Manter 2 L', efeito: 'pode faltar', feito: 'Mantido em 2 L. Se acabar antes da meia-noite, entra na nota de fechamento.' }
+          { t: 'Fazer 3 L', efeito: '+ €4,20', feito: 'Na lista de preparo do Caderno, em Lotes: 3 L de cordial de limão, no lugar de 2.' },
+          { t: 'Manter 2 L', efeito: 'pode faltar', feito: 'Mantido em 2 L na lista de preparo do Caderno. Se acabar antes da meia-noite, entra na nota de fechamento.' }
         ] },
       { id: 'negroni', cad: 'fin', titulo: 'O Negroni da casa passou da meta: de 22% para 23% de custo.',
         linhas: [['por quê', 'O Campari subiu 11% na nota de 12/11.'], ['meta', 'A casa trabalha com até 22% de custo.'], ['vende', '312 Negronis em outubro']],
@@ -660,7 +660,7 @@ class Component extends DCLogic {
       { r: 'livro', t: 'Registrar a nota no livro de turno.' },
       { r: 'estoque', t: 'Dar baixa no lote ' + melLote + ' e em 2 coupes.' },
       { r: 'rascunho', t: 'Pedido de compra: 2 kg de mel e 6 coupes. Só sai com o seu ok.' },
-      { r: 'amanhã', t: 'Pôr 1,5 L de xarope de mel 2:1 na lista de preparo.' },
+      { r: 'amanhã', t: 'Pôr 1,5 L de xarope de mel 2:1 na lista de preparo de amanhã, no Caderno.' },
       { r: 'destaque', t: especial + ' como destaque da noite: ' + especialN + ' saídas no PDV.' }
     ];
     const humores = ['Tranquilo', 'Puxado', 'Pesado'].map((t) => ({ t: t, on: s.humor === t, pick: () => set({ humor: s.humor === t ? '' : t }) }));
@@ -669,7 +669,7 @@ class Component extends DCLogic {
     const hoje = [];
     if (opSozinho) {
       hoje.push({ h: '16:40', cad: 'op', t: 'Fichas da carta e teste de 10 perguntas enviados ao Iker, que começa hoje.', quem: 'Barback, sozinho · regra de quem chega' });
-      hoje.push({ h: '16:45', cad: 'op', t: 'Xarope simples abaixo do mínimo (0,4 L): 2 L na lista de preparo.', quem: 'Barback, sozinho · limite de preparo' });
+      hoje.push({ h: '16:45', cad: 'op', t: 'Xarope simples abaixo do mínimo (0,4 L): 2 L na lista de preparo do Caderno.', quem: 'Barback, sozinho · limite de preparo' });
     }
     const horaDec = { cordial: '17:04', negroni: '17:06', guest: '17:09' };
     recadosCasa.forEach((r) => {
@@ -702,7 +702,7 @@ class Component extends DCLogic {
       op: {
         observa: 'Só avisa: o cordial de maracujá vence em 2 dias.',
         sugere: 'Traz a decisão pronta: faça 3 L de cordial, e não 2.',
-        ok: 'Com um toque seu, põe na lista de preparo e avisa o time.',
+        ok: 'Com um toque seu, põe na lista de preparo do Caderno e avisa o time.',
         sozinho: 'Repõe o preparo abaixo do mínimo e prepara quem chega. O que muda pelas reservas ainda pede o seu ok.'
       },
       fin: {

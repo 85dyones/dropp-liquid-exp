@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Aviso, Gota, Icone } from './ds/componentes';
 import { TEXTOS, type Area, type Lang } from './textos';
 import { Turno } from './telas/Turno';
-import { Caderno } from './telas/Caderno';
+import { Caderno, type AbaCaderno, type Feito } from './telas/Caderno';
 import { Passaporte } from './telas/Passaporte';
 import { Atlas } from './telas/Atlas';
 
@@ -18,6 +18,10 @@ export function App() {
   const [lang, setLang] = useState<Lang>('pt');
   const [balcao, setBalcao] = useState(false);
   const [aviso, setAviso] = useState('');
+  // O que você decide no Turno e o que já virou lote ficam aqui, para valer nas duas áreas.
+  const [escolhas, setEscolhas] = useState<Record<string, number>>({});
+  const [feitos, setFeitos] = useState<Feito[]>([]);
+  const [cadernoAba, setCadernoAba] = useState<AbaCaderno>('conferir');
   const t = TEXTOS[lang];
 
   useEffect(() => {
@@ -26,8 +30,10 @@ export function App() {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', balcao ? '#171410' : '#EFE8D8');
   }, [t.lang, balcao]);
 
-  const irPara = (a: Area) => { setArea(a); setAviso(''); window.scrollTo({ top: 0 }); };
+  const irPara = (a: Area, aba: AbaCaderno = 'conferir') => { setCadernoAba(aba); setArea(a); setAviso(''); window.scrollTo({ top: 0 }); };
   const avisar = (txt: string) => setAviso(txt);
+  const escolher = (id: string, i: number) => setEscolhas((e) => ({ ...e, [id]: i }));
+  const fazer = (novo: Feito) => setFeitos((f) => (f.some((x) => x.id === novo.id) ? f : [...f, novo]));
 
   return (
     <div className="app">
@@ -58,8 +64,8 @@ export function App() {
       </header>
 
       <main className="conteudo" key={`${area}-${lang}`}>
-        {area === 'turno' && <Turno t={t} avisar={avisar} />}
-        {area === 'caderno' && <Caderno t={t} lang={lang} avisar={avisar} />}
+        {area === 'turno' && <Turno t={t} avisar={avisar} escolhas={escolhas} escolher={escolher} verCaderno={() => irPara('caderno', 'lotes')} />}
+        {area === 'caderno' && <Caderno t={t} lang={lang} avisar={avisar} abaInicial={cadernoAba} escolhas={escolhas} feitos={feitos} fazer={fazer} />}
         {area === 'passaporte' && <Passaporte t={t} avisar={avisar} />}
         {area === 'atlas' && <Atlas t={t} lang={lang} avisar={avisar} />}
       </main>

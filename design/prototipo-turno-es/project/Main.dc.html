@@ -254,7 +254,7 @@ button { font-family: inherit; color: #1C1A16; }
           <span class="rot">Lo que el Barback ya hizo solo</span>
           <ul class="chk">
             <li><span class="st bb">16:40</span><span>Envió a Iker, que empieza hoy, las 12 fichas de la carta y un test de 10 preguntas.</span></li>
-            <li><span class="st bb">16:45</span><span>El jarabe simple estaba bajo el mínimo (0,4 L): puso 2 L en la lista de preparación.</span></li>
+            <li><span class="st bb">16:45</span><span>El jarabe simple estaba bajo el mínimo (0,4 L): puso 2 L en la lista de preparación del Cuaderno.</span></li>
           </ul>
           <div class="ja-pe">
             <p class="nota">Dentro del límite del frente de Operación. Todo queda en el libro de turno.</p>
@@ -497,8 +497,8 @@ class Component extends DCLogic {
         linhas: [['por qué', 'Viernes con 140 reservas y un grupo de 20 a las 22:00.'], ['cuesta', '+ 4,20 € de lima y 25 min de preparación'], ['evita', 'El viernes 13/11 el cordial se acabó a las 23:10 y el Gimlet salió de la carta.']],
         fonte: 'Reservas del sistema (140, con un grupo de 20 a las 22:00) y libro de turno de los últimos 4 viernes: media de 2,6 L.',
         opcoes: [
-          { t: 'Hacer 3 L', efeito: '+ 4,20 €', feito: 'En la lista de preparación: 3 L de cordial de lima.' },
-          { t: 'Mantener 2 L', efeito: 'puede faltar', feito: 'Se mantiene en 2 L. Si se acaba antes de medianoche, entra en la nota de cierre.' }
+          { t: 'Hacer 3 L', efeito: '+ 4,20 €', feito: 'En la lista de preparación del Cuaderno, en Lotes: 3 L de cordial de lima, en lugar de 2.' },
+          { t: 'Mantener 2 L', efeito: 'puede faltar', feito: 'Se mantiene en 2 L en la lista de preparación del Cuaderno. Si se acaba antes de medianoche, entra en la nota de cierre.' }
         ] },
       { id: 'negroni', cad: 'fin', titulo: 'El Negroni de la casa superó la meta: del 22% al 23% de coste.',
         linhas: [['por qué', 'El Campari subió un 11% en la factura del 12/11.'], ['meta', 'La casa trabaja con un coste de hasta el 22%.'], ['vende', '312 Negronis en octubre']],
@@ -660,7 +660,7 @@ class Component extends DCLogic {
       { r: 'libro', t: 'Registrar la nota en el libro de turno.' },
       { r: 'stock', t: 'Dar de baja el lote ' + melLote + ' y 2 coupes.' },
       { r: 'borrador', t: 'Pedido de compra: 2 kg de miel y 6 coupes. Solo sale con tu ok.' },
-      { r: 'mañana', t: 'Poner 1,5 L de jarabe de miel 2:1 en la lista de preparación.' },
+      { r: 'mañana', t: 'Poner 1,5 L de jarabe de miel 2:1 en la lista de preparación de mañana, en el Cuaderno.' },
       { r: 'destacado', t: especial + ' como destacado de la noche: ' + especialN + ' salidas en el TPV.' }
     ];
     const humores = ['Tranquilo', 'Movido', 'Duro'].map((t) => ({ t: t, on: s.humor === t, pick: () => set({ humor: s.humor === t ? '' : t }) }));
@@ -669,7 +669,7 @@ class Component extends DCLogic {
     const hoje = [];
     if (opSozinho) {
       hoje.push({ h: '16:40', cad: 'op', t: 'Fichas de la carta y test de 10 preguntas enviados a Iker, que empieza hoy.', quem: 'Barback, solo · regla de quien llega' });
-      hoje.push({ h: '16:45', cad: 'op', t: 'Jarabe simple bajo el mínimo (0,4 L): 2 L en la lista de preparación.', quem: 'Barback, solo · límite de preparación' });
+      hoje.push({ h: '16:45', cad: 'op', t: 'Jarabe simple bajo el mínimo (0,4 L): 2 L en la lista de preparación del Cuaderno.', quem: 'Barback, solo · límite de preparación' });
     }
     const horaDec = { cordial: '17:04', negroni: '17:06', guest: '17:09' };
     recadosCasa.forEach((r) => {
@@ -702,7 +702,7 @@ class Component extends DCLogic {
       op: {
         observa: 'Solo avisa: el cordial de maracuyá caduca en 2 días.',
         sugere: 'Trae la decisión lista: haz 3 L de cordial, no 2.',
-        ok: 'Con un toque tuyo, lo pone en la lista de preparación y avisa al equipo.',
+        ok: 'Con un toque tuyo, lo pone en la lista de preparación del Cuaderno y avisa al equipo.',
         sozinho: 'Repone la preparación bajo el mínimo y prepara a quien llega. Lo que cambia por las reservas sigue pidiendo tu ok.'
       },
       fin: {

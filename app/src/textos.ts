@@ -8,7 +8,8 @@ export type Area = 'turno' | 'caderno' | 'passaporte' | 'atlas';
 export type RecadoDado = {
   id: string; cad: Cadeira; titulo: string;
   linhas: Array<[string, string]>; fonte: string;
-  opcoes: Array<{ t: string; efeito: string; feito: string }>;
+  // caderno: a decisão mexe na lista de preparo, e a linha ganha o link "Ver no Caderno".
+  opcoes: Array<{ t: string; efeito: string; feito: string; caderno?: boolean }>;
 };
 export type LoteDado = { rotulo: string; tempo: string; tinta: Tinta; nome: string; pct: number; feito: string; vence: string; tec: string; descricao: string };
 export type GarrafaDado = { recip: string; nome: string; lote: string; estado: Estado; st: string };
@@ -52,8 +53,8 @@ export const TEXTOS = {
           linhas: [['por quê', 'Sexta com 140 reservas e um grupo de 20 às 22h.'], ['custa', '+ €4,20 de limão e 25 min de preparo'], ['evita', 'Na sexta 13/11 o cordial acabou às 23:10 e o Gimlet saiu da carta.']],
           fonte: 'Reservas do sistema (140, com um grupo de 20 às 22h) e livro de turno das últimas 4 sextas: média de 2,6 L.',
           opcoes: [
-            { t: 'Fazer 3 L', efeito: '+ €4,20', feito: 'Na lista de preparo: 3 L de cordial de limão.' },
-            { t: 'Manter 2 L', efeito: 'pode faltar', feito: 'Mantido em 2 L. Se acabar antes da meia-noite, entra na nota de fechamento.' }
+            { t: 'Fazer 3 L', efeito: '+ €4,20', feito: 'Na lista de preparo do Caderno: 3 L de cordial de limão, no lugar de 2.', caderno: true },
+            { t: 'Manter 2 L', efeito: 'pode faltar', feito: 'Mantido em 2 L na lista de preparo do Caderno. Se acabar antes da meia-noite, entra na nota de fechamento.', caderno: true }
           ] },
         { id: 'negroni', cad: 'fin', titulo: 'O Negroni da casa passou da meta: de 22% para 23% de custo.',
           linhas: [['por quê', 'O Campari subiu 11% na nota de 12/11.'], ['meta', 'A casa trabalha com até 22% de custo.'], ['vende', '312 Negronis em outubro']],
@@ -101,12 +102,34 @@ export const TEXTOS = {
       servicoTxt: 'Silêncio, só voz. Pergunte uma medida ou avise o que acabou; o Barback responde pela ficha.',
       falar: 'Falar com o Barback',
       falarAviso: 'No app, o Barback escuta só enquanto você segura o botão.',
+      verCaderno: 'Ver no Caderno',
       agenda: 'Próximos dias',
       agendaItens: agendaPt
     },
     caderno: {
       abas: { lotes: 'Lotes', conferir: 'Conferir', fichas: 'Fichas' },
       lotesTit: 'Lotes contados pelo tempo',
+      preparo: {
+        tit: 'Para preparar hoje',
+        nota: (faltam: number) => (faltam === 0 ? 'Tudo feito: cada item virou lote com etiqueta.' : `${faltam === 1 ? '1 item' : faltam + ' itens'} a fazer. O que o Turno pede vira lote com etiqueta.`),
+        fazer: 'Fazer o lote',
+        feito: 'feito',
+        feitoTxt: (lote: string) => `Lote ${lote}, feito agora. Está nos lotes abaixo.`,
+        criado: (lote: string) => `Lote ${lote} criado. No app, a etiqueta sai agora na térmica do balcão.`,
+        cordial: 'Cordial de limão',
+        cordialOrigem: {
+          pendente: 'Rotina de sexta: 2 L. No Turno, o Barback sugere 3 L.',
+          aceito: 'Recado do Barback aceito no Turno, às 17:00: sexta com 140 reservas. Era 2 L.',
+          mantido: 'Rotina de sexta: 2 L, mantida no Turno.'
+        },
+        simples: 'Xarope simples 1:1',
+        simplesOrigem: 'O Barback pôs sozinho às 16:45: estava em 0,4 L, abaixo do mínimo.',
+        garrafa: 'Garrafa',
+        pronto: 'Pronto agora',
+        feitoHoje: 'feito hoje',
+        vence: (d: string) => `vence ${d}`,
+        descricao: (dias: number) => `Feito agora, vence em ${dias} dias`
+      },
       lotes: [
         { rotulo: 'PF-001 · Garrafa #2', tempo: 'Vence em 2 dias', tinta: 'laranja', nome: 'Cordial de maracujá', pct: 60, feito: 'feito 17/11', vence: 'vence 22/11', tec: 'Brix 52° · pH 3,1 · 700 de 2.500 ml', descricao: 'Feito há 3 dias, vence em 2' },
         { rotulo: 'MEL-005 · Garrafa #5', tempo: 'Acaba hoje', tinta: 'vermelho', nome: 'Xarope de mel 2:1', pct: 21, feito: 'feito 17/11', vence: 'vence 01/12', tec: 'Brix 55° · restam 200 de 1.000 ml · saem 400 ml por noite', descricao: 'Restam 200 ml e saem 400 ml por noite' },
@@ -205,8 +228,8 @@ export const TEXTOS = {
           linhas: [['por qué', 'Viernes con 140 reservas y un grupo de 20 a las 22:00.'], ['cuesta', '+ 4,20 € de lima y 25 min de preparación'], ['evita', 'El viernes 13/11 el cordial se acabó a las 23:10 y el Gimlet salió de la carta.']],
           fonte: 'Reservas del sistema (140, con un grupo de 20 a las 22:00) y libro de turno de los últimos 4 viernes: media de 2,6 L.',
           opcoes: [
-            { t: 'Hacer 3 L', efeito: '+ 4,20 €', feito: 'En la lista de preparación: 3 L de cordial de lima.' },
-            { t: 'Mantener 2 L', efeito: 'puede faltar', feito: 'Se mantiene en 2 L. Si se acaba antes de medianoche, entra en la nota de cierre.' }
+            { t: 'Hacer 3 L', efeito: '+ 4,20 €', feito: 'En la lista de preparación del Cuaderno: 3 L de cordial de lima, en lugar de 2.', caderno: true },
+            { t: 'Mantener 2 L', efeito: 'puede faltar', feito: 'Se mantiene en 2 L en la lista de preparación del Cuaderno. Si se acaba antes de medianoche, entra en la nota de cierre.', caderno: true }
           ] },
         { id: 'negroni', cad: 'fin', titulo: 'El Negroni de la casa superó la meta: del 22% al 23% de coste.',
           linhas: [['por qué', 'El Campari subió un 11% en la factura del 12/11.'], ['meta', 'La casa trabaja con un coste de hasta el 22%.'], ['vende', '312 Negronis en octubre']],
@@ -254,12 +277,34 @@ export const TEXTOS = {
       servicoTxt: 'Silencio, solo voz. Pregunta una medida o avisa de lo que se acabó; el Barback responde con la ficha.',
       falar: 'Hablar con el Barback',
       falarAviso: 'En la app, el Barback solo escucha mientras mantienes pulsado el botón.',
+      verCaderno: 'Ver en el Cuaderno',
       agenda: 'Próximos dias',
       agendaItens: agendaEs
     },
     caderno: {
       abas: { lotes: 'Lotes', conferir: 'Comprobar', fichas: 'Fichas' },
       lotesTit: 'Lotes contados por el tiempo',
+      preparo: {
+        tit: 'Para preparar hoy',
+        nota: (faltam: number) => (faltam === 0 ? 'Todo hecho: cada elemento se convirtió en lote con etiqueta.' : `${faltam === 1 ? 'Queda 1 elemento' : 'Quedan ' + faltam + ' elementos'}. Lo que pide el Turno se convierte en lote con etiqueta.`),
+        fazer: 'Hacer el lote',
+        feito: 'hecho',
+        feitoTxt: (lote: string) => `Lote ${lote}, hecho ahora. Está en los lotes de abajo.`,
+        criado: (lote: string) => `Lote ${lote} creado. En la app, la etiqueta sale ahora en la térmica de la barra.`,
+        cordial: 'Cordial de lima',
+        cordialOrigem: {
+          pendente: 'Rutina del viernes: 2 L. En el Turno, el Barback sugiere 3 L.',
+          aceito: 'Recado del Barback aceptado en el Turno a las 17:00: viernes con 140 reservas. Eran 2 L.',
+          mantido: 'Rutina del viernes: 2 L, mantenida en el Turno.'
+        },
+        simples: 'Jarabe simple 1:1',
+        simplesOrigem: 'El Barback lo puso solo a las 16:45: estaba en 0,4 L, bajo el mínimo.',
+        garrafa: 'Botella',
+        pronto: 'Listo ahora',
+        feitoHoje: 'hecho hoy',
+        vence: (d: string) => `caduca ${d}`,
+        descricao: (dias: number) => `Hecho ahora, caduca en ${dias} días`
+      },
       lotes: [
         { rotulo: 'PF-001 · Botella #2', tempo: 'Caduca en 2 días', tinta: 'laranja', nome: 'Cordial de maracuyá', pct: 60, feito: 'hecho 17/11', vence: 'caduca 22/11', tec: 'Brix 52° · pH 3,1 · 700 de 2.500 ml', descricao: 'Hecho hace 3 días, caduca en 2' },
         { rotulo: 'MEL-005 · Botella #5', tempo: 'Se acaba hoy', tinta: 'vermelho', nome: 'Jarabe de miel 2:1', pct: 21, feito: 'hecho 17/11', vence: 'caduca 01/12', tec: 'Brix 55° · quedan 200 de 1.000 ml · salen 400 ml por noche', descricao: 'Quedan 200 ml y salen 400 ml por noche' },
