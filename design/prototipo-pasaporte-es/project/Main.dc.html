@@ -23,21 +23,21 @@ button { font-family: inherit; color: #1C1A16; }
 .marca { display: flex; align-items: center; gap: 8px; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 26px; line-height: 1; text-transform: uppercase; letter-spacing: 0.02em; }
 .marca svg { width: 22px; height: 26px; flex: none; }
 .visao { display: flex; border: 1.5px solid #1C1A16; }
-.visao button { appearance: none; border: 0; background: transparent; padding: 0 11px; min-height: 34px; font-size: 12px; font-weight: 600; cursor: pointer; }
+.visao button { appearance: none; border: 0; background: transparent; padding: 0 11px; min-height: 44px; font-size: 12px; font-weight: 600; cursor: pointer; }
 .visao button[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
 .abas { display: flex; align-items: stretch; border-bottom: 1.5px solid #1C1A16; padding: 0 12px 0 6px; }
-.aba { appearance: none; border: 0; background: transparent; padding: 0 9px; min-height: 46px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 125; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1.5px; color: #6E6555; }
+.aba { appearance: none; border: 0; background: transparent; padding: 0 9px; min-height: 46px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 125; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1.5px; color: #6A6151; }
 .aba[aria-pressed="true"] { color: #1C1A16; border-bottom-color: #D946EF; }
-.mais { margin-left: auto; align-self: center; appearance: none; border: 0; background: #1C1A16; color: #F8F3E7 !important; font-weight: 700; font-size: 13px; padding: 0 12px; min-height: 38px; cursor: pointer; }
+.mais { margin-left: auto; align-self: center; appearance: none; border: 0; background: #1C1A16; color: #F8F3E7 !important; font-weight: 700; font-size: 13px; padding: 0 12px; min-height: 44px; cursor: pointer; }
 .voltar-bar { display: flex; align-items: center; gap: 4px; padding: 6px 12px 6px 4px; border-bottom: 1.5px solid #1C1A16; min-height: 58px; }
 .voltar { appearance: none; border: 0; background: transparent; min-height: 44px; padding: 0 12px; font-weight: 600; font-size: 14px; cursor: pointer; }
 .voltar-bar h2 { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.02em; }
 
 .corpo { flex: 1; overflow-y: auto; padding: 14px 14px 92px; display: flex; flex-direction: column; gap: 14px; }
 .banner { background: #D946EF; color: #1C1A16; padding: 10px 12px; font-size: 13px; line-height: 1.4; font-weight: 600; }
-.rot { font-family: Archivo, Arial, sans-serif; font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: #6E6555; }
+.rot { font-family: Archivo, Arial, sans-serif; font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: #6A6151; }
 .titulo-bloco { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.05; text-transform: uppercase; letter-spacing: 0.01em; }
-.nota { font-size: 13px; line-height: 1.45; color: #6E6555; }
+.nota { font-size: 13px; line-height: 1.45; color: #6A6151; }
 .papel { background-color: #FAF6EC; background-image: radial-gradient(rgba(90, 65, 30, 0.05) 1px, transparent 1.3px); background-size: 5px 5px; color: #1C1A16; position: relative; border: 1.5px solid #1C1A16; }
 .papel .nota, .papel .rot { color: #5B5344; }
 .papel.corte::before, .papel.corte::after { content: ""; position: absolute; width: 14px; height: 14px; opacity: 0.5; background: linear-gradient(#1C1A16, #1C1A16) center / 1px 100% no-repeat, linear-gradient(#1C1A16, #1C1A16) center / 100% 1px no-repeat; pointer-events: none; }
@@ -45,7 +45,7 @@ button { font-family: inherit; color: #1C1A16; }
 .papel.corte::after { bottom: 6px; right: 6px; }
 .bloco { padding: 14px; display: grid; gap: 9px; border-radius: 4px; }
 .linha-btns { display: flex; flex-wrap: wrap; gap: 8px; }
-.btn { appearance: none; border: 1.5px solid #1C1A16; background: transparent; color: #1C1A16; min-height: 46px; padding: 0 14px; font-weight: 700; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn { appearance: none; border: 1.5px solid #1C1A16; background: transparent; color: #1C1A16; min-height: 46px; padding: 6px 14px; font-weight: 700; font-size: 14px; line-height: 1.3; text-align: center; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 .btn.cheio { background: #1C1A16; color: #F8F3E7; }
 .papel .btn { border-color: #1C1A16; color: #1C1A16; }
 .papel .btn.cheio { background: #1C1A16; color: #F8F3E7; }
@@ -99,20 +99,20 @@ button { font-family: inherit; color: #1C1A16; }
 .folha-n { position: absolute; right: 26px; bottom: 8px; font-family: "Courier Prime", "Courier New", monospace; font-size: 11px; color: #5B5344; }
 .slot { position: absolute; }
 .carimbo { appearance: none; background: transparent; cursor: pointer; border: 2.5px solid currentColor; outline: 1px solid currentColor; outline-offset: -7px; display: grid; align-content: center; justify-items: center; gap: 2px; text-align: center; padding: 11px 16px; min-height: 66px; min-width: 120px;
-  font-family: Archivo, Arial, sans-serif; font-weight: 700; font-variation-settings: "wdth" 120; text-transform: uppercase; letter-spacing: 0.14em; font-size: 9.5px; line-height: 1.15; opacity: 0.93; filter: url(#tinta-gasta); }
+  font-family: Archivo, Arial, sans-serif; font-weight: 700; font-variation-settings: "wdth" 120; text-transform: uppercase; letter-spacing: 0.14em; font-size: 9.5px; line-height: 1.15; filter: url(#tinta-gasta); }
 .carimbo b { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 17px; letter-spacing: 0.03em; }
 .carimbo small { font-family: "Courier Prime", "Courier New", monospace; font-weight: 400; font-size: 10px; text-transform: none; letter-spacing: 0; font-style: italic; }
 .forma-redondo { border-radius: 50%; width: 106px; height: 106px; min-width: 0; padding: 10px; }
 .forma-oval { border-radius: 999px; padding: 11px 22px; }
 .cor-violeta { color: #5B36C2; }
-.cor-ciano { color: #0784A0; }
-.cor-laranja { color: #B4520C; }
-.cor-verde { color: #0B7A57; }
+.cor-ciano { color: #067088; }
+.cor-laranja { color: #A74C0B; }
+.cor-verde { color: #0B7654; }
 .cor-vermelho { color: #B02A2A; }
 .cor-magenta { color: #A21CAF; }
-.cor-amarelo { color: #8A6A00; }
+.cor-amarelo { color: #806300; }
 .cor-tinta { color: #1C1A16; }
-.carimbo.pendente { border-style: dashed; outline-style: dashed; opacity: 0.75; filter: none; }
+.carimbo.pendente { border-style: dashed; outline-style: dashed; filter: none; }
 button.carimbo:hover { background: rgba(28, 26, 22, 0.06); }
 button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; }
 @keyframes batea { 0% { transform: scale(1.45); opacity: 0; } 70% { opacity: 1; } 100% { transform: scale(1); } }
@@ -123,7 +123,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
 .palco { display: grid; place-items: center; height: 220px; flex: none; border-radius: 4px; }
 .fatos { border-top: 1.5px solid #1C1A16; }
 .fatos div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 9px 0; border-bottom: 1px solid rgba(28, 26, 22, 0.18); font-size: 14px; line-height: 1.4; }
-.fatos dt { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6E6555; padding-top: 3px; }
+.fatos dt { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6A6151; padding-top: 3px; }
 .toggle { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 14px; cursor: pointer; }
 .toggle input { width: 20px; height: 20px; accent-color: #D946EF; margin: 0; }
 
@@ -137,21 +137,21 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
 .oficio:last-child { border-bottom: 0; }
 .faixa { appearance: none; width: 100%; border: 0; background: transparent; display: grid; grid-template-columns: 12px 22px 13px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 10px 10px; min-height: 48px; text-align: left; cursor: pointer; }
 .faixa:hover { background: rgba(28, 26, 22, 0.05); }
-.faixa .seta { color: #1C1A16; font-size: 11px; visibility: hidden; }
+.faixa .seta { width: 0; height: 0; justify-self: center; border-left: 7px solid #1C1A16; border-top: 5px solid transparent; border-bottom: 5px solid transparent; visibility: hidden; }
 .faixa[aria-expanded="true"] .seta { visibility: visible; }
-.faixa .n { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 12px; color: #6E6555; }
+.faixa .n { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 12px; color: #6A6151; }
 .faixa .pet { width: 13px; height: 13px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); }
 .faixa .t { font-weight: 600; font-variation-settings: "wdth" 112; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.2; }
 .faixa[aria-expanded="true"] { background: rgba(28, 26, 22, 0.05); }
 .faixa[aria-expanded="true"] .t { font-weight: 800; }
-.faixa .g { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; color: #6E6555; white-space: nowrap; }
+.faixa .g { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; color: #6A6151; white-space: nowrap; }
 .barril { padding: 4px 12px 14px; display: grid; gap: 10px; }
 .regua { position: relative; height: 46px; }
 .trilho { position: absolute; left: 0; right: 0; top: 10px; height: 10px; border: 1px solid #1C1A16; }
 .enchido { position: absolute; left: 0; top: 0; bottom: 0; }
 .limiar { position: absolute; top: -4px; bottom: -4px; width: 1.5px; background: #1C1A16; }
 .marca-t { position: absolute; top: 2px; width: 2px; height: 26px; background: #1C1A16; transform: translateX(-1px); }
-.ticks { position: absolute; left: 0; right: 0; top: 28px; font-family: "Courier Prime", "Courier New", monospace; font-size: 10px; color: #6E6555; }
+.ticks { position: absolute; left: 0; right: 0; top: 28px; font-family: "Courier Prime", "Courier New", monospace; font-size: 10px; color: #6A6151; }
 .ticks span { position: absolute; white-space: nowrap; }
 .barril .chk { font-family: "Courier Prime", "Courier New", monospace; font-size: 12.5px; }
 
@@ -161,7 +161,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
 .campo input, .campo textarea { font: inherit; font-size: 15px; color: #1C1A16; border: 1.5px solid #1C1A16; background: #F3EBD8; min-height: 44px; padding: 9px 10px; width: 100%; border-radius: 0; }
 .campo textarea { resize: vertical; }
 .seg-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
-.seg { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 40px; padding: 0 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.seg { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 44px; padding: 0 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
 .seg[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
 .visor { position: relative; height: 300px; flex: none; background: #080F0C; display: grid; place-items: center; overflow: hidden; border-radius: 4px; }
 .canto-v { position: absolute; width: 34px; height: 34px; border-color: #ECE3CE; border-style: solid; border-width: 0; }
@@ -175,7 +175,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
 .fisico small { font-family: "Courier Prime", "Courier New", monospace; font-size: 10px; letter-spacing: 0.02em; }
 .cena { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 22px 0 14px; }
 .fone { width: 92px; height: 164px; border: 2px solid #1C1A16; border-radius: 18px; display: grid; place-items: center; text-align: center; padding: 8px; font-family: "Courier Prime", "Courier New", monospace; font-size: 11px; line-height: 1.3; }
-.fone.vazio { border-style: dashed; color: #6E6555; }
+.fone.vazio { border-style: dashed; color: #6A6151; }
 .titulo-grande { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 46px; line-height: 0.95; text-transform: uppercase; }
 
 .seg-row.quatro { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -203,7 +203,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
 .aviso { position: absolute; left: 12px; right: 12px; bottom: 74px; background: #1C1A16; color: #F8F3E7; padding: 6px 6px 6px 14px; display: flex; gap: 8px; align-items: center; font-size: 14px; line-height: 1.35; font-weight: 600; z-index: 5; box-shadow: 0 10px 24px rgba(60, 45, 20, 0.35); }
 .aviso button { appearance: none; border: 0; background: transparent; color: #F8F3E7; min-height: 44px; padding: 0 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: underline; }
 .nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1.5px solid #1C1A16; background: #EFE8D8; position: relative; z-index: 6; }
-.nav button { appearance: none; border: 0; background: transparent; min-height: 62px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 115; letter-spacing: 0.06em; color: #7A7060; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.nav button { appearance: none; border: 0; background: transparent; min-height: 62px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 115; letter-spacing: 0.06em; color: #6A6151; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
 .nav button[aria-current="page"] { color: #1C1A16; }
 .nav button:disabled { cursor: not-allowed; }
 .nav svg { width: 22px; height: 22px; }
@@ -269,25 +269,25 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
       <div class="{{rotuloCls}}">
         <div class="arco">
           <span class="wordmark"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg><b>Dropp</b></span>
-          <span class="esp">Liquid experience</span>
+          <span class="esp">Liquid Experience</span>
         </div>
         <div class="rot-miolo">
-          <p class="rot-secao"><span>Pasaporte del oficio</span></p>
-          <div class="rot-num"><span>Nº 0942</span><span>LOTE TA-2014</span></div>
+          <p class="rot-secao"><span>Pasaporte del Oficio</span></p>
+          <div class="rot-num"><span>Nº 0318</span><span>LOTE TA-2014</span></div>
           <div class="janela">
-            <svg viewBox="16 4 68 108" role="img" aria-label="La gota de Teo: cada pétalo es un oficio, impreso según el grado. Toca un pétalo para abrir el oficio.">
-              <path d="M50 8 C50 8 36 28 32 46 C37 40 45 36 50 36 C55 36 63 40 68 46 C64 28 50 8 50 8 Z" fill="{{pet.amarelo.fill}}" stroke="{{pet.amarelo.stroke}}" stroke-width="{{pet.amarelo.sw}}" stroke-dasharray="{{pet.amarelo.dash}}" onClick="{{pet.amarelo.pick}}"></path>
-              <path d="M32 46 C24 57 20 68 22 79 C25 80 29 80 34 78 C31 66 33 55 42 46 C38 45 35 45 32 46 Z" fill="{{pet.verde.fill}}" stroke="{{pet.verde.stroke}}" stroke-width="{{pet.verde.sw}}" stroke-dasharray="{{pet.verde.dash}}" onClick="{{pet.verde.pick}}"></path>
-              <path d="M22 79 C24 93 35 106 50 108 C46 98 46 88 50 78 C39 77 31 82 22 79 Z" fill="{{pet.ciano.fill}}" stroke="{{pet.ciano.stroke}}" stroke-width="{{pet.ciano.sw}}" stroke-dasharray="{{pet.ciano.dash}}" onClick="{{pet.ciano.pick}}"></path>
-              <path d="M68 46 C76 57 80 68 78 79 C75 80 71 80 66 78 C69 66 67 55 58 46 C62 45 65 45 68 46 Z" fill="{{pet.laranja.fill}}" stroke="{{pet.laranja.stroke}}" stroke-width="{{pet.laranja.sw}}" stroke-dasharray="{{pet.laranja.dash}}" onClick="{{pet.laranja.pick}}"></path>
-              <path d="M78 79 C76 93 65 106 50 108 C54 98 54 88 50 78 C61 77 69 82 78 79 Z" fill="{{pet.vermelho.fill}}" stroke="{{pet.vermelho.stroke}}" stroke-width="{{pet.vermelho.sw}}" stroke-dasharray="{{pet.vermelho.dash}}" onClick="{{pet.vermelho.pick}}"></path>
-              <path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="{{pet.magenta.fill}}" stroke="{{pet.magenta.stroke}}" stroke-width="{{pet.magenta.sw}}" stroke-dasharray="{{pet.magenta.dash}}" onClick="{{pet.magenta.pick}}"></path>
-              <path d="M50 78 C44 86 44 95 50 106 C56 95 56 86 50 78 Z" fill="{{pet.violeta.fill}}" stroke="{{pet.violeta.stroke}}" stroke-width="{{pet.violeta.sw}}" stroke-dasharray="{{pet.violeta.dash}}" onClick="{{pet.violeta.pick}}"></path>
+            <svg viewBox="16 4 68 108" role="group" aria-label="La gota de Teo: cada pétalo es un oficio, impreso según el grado.">
+              <path d="M50 8 C50 8 36 28 32 46 C37 40 45 36 50 36 C55 36 63 40 68 46 C64 28 50 8 50 8 Z" fill="{{pet.amarelo.fill}}" stroke="{{pet.amarelo.stroke}}" stroke-width="{{pet.amarelo.sw}}" stroke-dasharray="{{pet.amarelo.dash}}" role="button" tabindex="0" aria-label="{{pet.amarelo.aria}}" onClick="{{pet.amarelo.pick}}" onKeyDown="{{pet.amarelo.tecla}}"></path>
+              <path d="M32 46 C24 57 20 68 22 79 C25 80 29 80 34 78 C31 66 33 55 42 46 C38 45 35 45 32 46 Z" fill="{{pet.verde.fill}}" stroke="{{pet.verde.stroke}}" stroke-width="{{pet.verde.sw}}" stroke-dasharray="{{pet.verde.dash}}" role="button" tabindex="0" aria-label="{{pet.verde.aria}}" onClick="{{pet.verde.pick}}" onKeyDown="{{pet.verde.tecla}}"></path>
+              <path d="M22 79 C24 93 35 106 50 108 C46 98 46 88 50 78 C39 77 31 82 22 79 Z" fill="{{pet.ciano.fill}}" stroke="{{pet.ciano.stroke}}" stroke-width="{{pet.ciano.sw}}" stroke-dasharray="{{pet.ciano.dash}}" role="button" tabindex="0" aria-label="{{pet.ciano.aria}}" onClick="{{pet.ciano.pick}}" onKeyDown="{{pet.ciano.tecla}}"></path>
+              <path d="M68 46 C76 57 80 68 78 79 C75 80 71 80 66 78 C69 66 67 55 58 46 C62 45 65 45 68 46 Z" fill="{{pet.laranja.fill}}" stroke="{{pet.laranja.stroke}}" stroke-width="{{pet.laranja.sw}}" stroke-dasharray="{{pet.laranja.dash}}" role="button" tabindex="0" aria-label="{{pet.laranja.aria}}" onClick="{{pet.laranja.pick}}" onKeyDown="{{pet.laranja.tecla}}"></path>
+              <path d="M78 79 C76 93 65 106 50 108 C54 98 54 88 50 78 C61 77 69 82 78 79 Z" fill="{{pet.vermelho.fill}}" stroke="{{pet.vermelho.stroke}}" stroke-width="{{pet.vermelho.sw}}" stroke-dasharray="{{pet.vermelho.dash}}" role="button" tabindex="0" aria-label="{{pet.vermelho.aria}}" onClick="{{pet.vermelho.pick}}" onKeyDown="{{pet.vermelho.tecla}}"></path>
+              <path d="M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z" fill="{{pet.magenta.fill}}" stroke="{{pet.magenta.stroke}}" stroke-width="{{pet.magenta.sw}}" stroke-dasharray="{{pet.magenta.dash}}" role="button" tabindex="0" aria-label="{{pet.magenta.aria}}" onClick="{{pet.magenta.pick}}" onKeyDown="{{pet.magenta.tecla}}"></path>
+              <path d="M50 78 C44 86 44 95 50 106 C56 95 56 86 50 78 Z" fill="{{pet.violeta.fill}}" stroke="{{pet.violeta.stroke}}" stroke-width="{{pet.violeta.sw}}" stroke-dasharray="{{pet.violeta.dash}}" role="button" tabindex="0" aria-label="{{pet.violeta.aria}}" onClick="{{pet.violeta.pick}}" onKeyDown="{{pet.violeta.tecla}}"></path>
             </svg>
-            <p class="nota">toca un pétalo para abrir el oficio</p>
+            <p class="nota">toca un pétalo o elige en la lista de oficios</p>
           </div>
           <p class="rot-nome">Teo Aranda</p>
-          <p class="rot-cargo">head bartender · Sea Bar, Valencia</p>
+          <p class="rot-cargo">head bartender · Bar Salitre, Valencia</p>
           <div class="cantos" role="group" aria-label="Medidas. Toca una para ver su prueba.">
             <sc-for list="{{medidas}}" as="m" hint-placeholder-count="4">
               <button type="button" class="canto" aria-pressed="{{m.aberta}}" onClick="{{m.pick}}"><span class="c-n">{{m.n}}</span><span class="c-rot">{{m.rot}}</span></button>
@@ -324,10 +324,9 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
           <div><button type="button" class="btn" onClick="{{irPaginas}}">Abrir la página 9</button></div>
         </div>
         <div class="papel corte bloco">
-          <span class="rot">Próximo grado</span>
-          <p class="titulo-bloco">Reserva en Clásicos</p>
+          <p class="titulo-bloco">Próximo grado: Reserva en Clásicos</p>
           <p class="nota">{{proximoGrau}}</p>
-          <div><button type="button" class="btn" onClick="{{irClassicos}}">Ver la barrica</button></div>
+          <div><button type="button" class="btn" onClick="{{irClassicos}}">Ver el oficio</button></div>
         </div>
       </sc-if>
       <sc-if value="{{publico}}" hint-placeholder-val="{{ false }}">
@@ -387,7 +386,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
       </sc-if>
       <sc-if value="{{podeSimular}}" hint-placeholder-val="{{ false }}">
         <button type="button" class="btn cheio largo" onClick="{{assinar}}">{{simularRot}}</button>
-        <p class="nota">Botón solo del prototipo. En el producto, la firma llega cuando la persona aprueba la solicitud.</p>
+        <p class="nota">Botón solo del prototipo. En la app, la firma llega cuando la persona aprueba la solicitud.</p>
       </sc-if>
       <sc-if value="{{podeOcultar}}" hint-placeholder-val="{{ true }}">
         <label class="toggle"><input type="checkbox" checked="{{selVisivel}}" onChange="{{alternarVisivel}}"> Mostrar este sello en el enlace público</label>
@@ -413,7 +412,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
         <sc-for list="{{oficios}}" as="o" hint-placeholder-count="7">
           <li class="oficio">
             <button type="button" class="faixa" aria-expanded="{{o.aberto}}" onClick="{{o.pick}}">
-              <span class="seta" aria-hidden="true">▶</span>
+              <span class="seta" aria-hidden="true"></span>
               <span class="n">{{o.n}}</span>
               <span class="pet" style="background: {{o.cor}}" aria-hidden="true"></span>
               <span class="t">{{o.nome}}</span>
@@ -437,7 +436,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
                   </sc-for>
                 </ul>
                 <sc-if value="{{o.podePedir}}" hint-placeholder-val="{{ false }}">
-                  <button type="button" class="btn cheio largo" onClick="{{o.pedir}}">Pedir firma a una Reserva</button>
+                  <button type="button" class="btn cheio largo" onClick="{{o.pedir}}">Pedir la firma de alguien con grado Reserva</button>
                 </sc-if>
               </div>
             </sc-if>
@@ -450,7 +449,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
       <p class="nota">Nadie sella su propio pasaporte. Elige cómo llega la prueba.</p>
       <button type="button" class="papel corte opcao" onClick="{{irPedir}}"><strong>Pedir a quien lo vio</strong><span class="nota">Casa, guest shift, cóctel en carta, curso, mentoría o grado. La otra persona firma.</span></button>
       <button type="button" class="papel corte opcao" onClick="{{irEscanear}}"><strong>Escanear el sello de la casa</strong><span class="nota">El sello de caucho que la casa asociada estampó en tu cuaderno de papel.</span></button>
-      <button type="button" class="papel corte opcao" onClick="{{irBrinde}}"><strong>Brindar con alguien aquí</strong><span class="nota">Acercad los móviles. Solo vale en persona.</span></button>
+      <button type="button" class="papel corte opcao" onClick="{{irBrinde}}"><strong>Brindar con alguien aquí</strong><span class="nota">Acerca los móviles. Solo vale en persona.</span></button>
       <button type="button" class="papel corte opcao" onClick="{{irArquivo}}"><strong>Registrar un clásico del Archivo</strong><span class="nota">Hecho con la receta original y comprobado por dos colegas.</span></button>
     </sc-if>
 
@@ -482,9 +481,8 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
       </sc-if>
       <sc-if value="{{escOk}}" hint-placeholder-val="{{ false }}">
         <div class="papel corte bloco">
-          <span class="rot">Reconocido</span>
           <p class="titulo-bloco">Taberna Lume, Valencia</p>
-          <p class="nota">Sello nº 014 de la red, estampado hoy, 18/11/2026, en tu guest shift. La casa lo confirma desde su cuenta.</p>
+          <p class="nota">Sello reconocido: nº 014 de la red, estampado hoy, 20/11/2026, en tu guest shift. La casa lo confirma desde su cuenta.</p>
         </div>
         <button type="button" class="btn cheio largo" onClick="{{registrarScan}}">Registrar en el pasaporte</button>
       </sc-if>
@@ -503,9 +501,8 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
       </sc-if>
       <sc-if value="{{brEncontrado}}" hint-placeholder-val="{{ false }}">
         <div class="papel corte bloco">
-          <span class="rot">Al otro lado</span>
-          <p class="titulo-bloco">Elena Rostova</p>
-          <p class="nota">Head bartender en Valencia. Aún no habíais brindado.</p>
+          <p class="titulo-bloco">Lara Gil</p>
+          <p class="nota">Head bartender de la Taberna Lume, Valencia. Aún no habíais brindado.</p>
         </div>
         <button type="button" class="btn cheio largo" onClick="{{brindar}}">Brindar</button>
       </sc-if>
@@ -521,7 +518,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
       <sc-if value="{{shr.story}}" hint-placeholder-val="{{ true }}">
         <div class="previa">
           <div class="story" role="img" aria-label="{{shr.legenda}}">
-            <span class="sp-topo">Pasaporte del oficio</span>
+            <span class="sp-topo">Pasaporte del Oficio</span>
             <div class="sp-centro">
               <sc-if value="{{shr.ehCarimbo}}" hint-placeholder-val="{{ true }}"><div class="sp-carimbo"><span class="{{shr.cls}}"><span>{{shr.tipo}}</span><b>{{shr.titulo}}</b><small>{{shr.linha}}</small></span></div></sc-if>
               <sc-if value="{{shr.ehPassaporte}}" hint-placeholder-val="{{ false }}"><svg class="sp-gota" viewBox="16 4 68 108" aria-hidden="true"><use href="#gota-oficial"></use></svg></sc-if>
@@ -538,7 +535,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
       <sc-if value="{{shr.post}}" hint-placeholder-val="{{ false }}">
         <div class="previa">
           <div class="post" role="img" aria-label="{{shr.legenda}}">
-            <span class="sp-topo">Pasaporte del oficio</span>
+            <span class="sp-topo">Pasaporte del Oficio</span>
             <div class="sp-centro">
               <sc-if value="{{shr.ehCarimbo}}" hint-placeholder-val="{{ true }}"><div class="sp-carimbo"><span class="{{shr.cls}}"><span>{{shr.tipo}}</span><b>{{shr.titulo}}</b><small>{{shr.linha}}</small></span></div></sc-if>
               <sc-if value="{{shr.ehPassaporte}}" hint-placeholder-val="{{ false }}"><svg class="sp-gota" viewBox="16 4 68 108" aria-hidden="true"><use href="#gota-oficial"></use></svg></sc-if>
@@ -567,7 +564,7 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
         <div class="previa">
           <div class="cv">
             <span class="cv-nome">Teo Aranda</span>
-            <span class="cv-sub">head bartender · Sea Bar, Valencia · dropp.me/teo</span>
+            <span class="cv-sub">head bartender · Bar Salitre, Valencia · dropp.me/teo</span>
             <span class="cv-sec">Oficios</span>
             <ul class="cv-lista">
               <sc-for list="{{shr.cvOficios}}" as="co" hint-placeholder-count="7">
@@ -607,9 +604,9 @@ button.carimbo:focus-visible { outline: 2px solid #1C1A16; outline-offset: 3px; 
       </div>
       <div class="papel corte bloco">
         <span class="rot">Tu registro</span>
-        <p>Hecho con la receta el 12/11/2026, en el Sea Bar.</p>
+        <p>Hecho con la receta el 12/11/2026, en el Bar Salitre.</p>
         <ul class="chk">
-          <li><span class="st ok">firmó</span><span>Elena Rostova lo probó y lo comprobó</span></li>
+          <li><span class="st ok">firmó</span><span>Elena Quintana lo probó y lo comprobó</span></li>
           <li><span class="{{arqStCls}}">{{arqSt}}</span><span>Tomás Vidal, segundo colega</span></li>
         </ul>
       </div>
@@ -668,16 +665,16 @@ class Component extends DCLogic {
   baseCarimbos() {
     return [
       { id: 'jornada-brasa', pag: 0, x: 24, y: 24, r: 3, tipo: 'Jornada', titulo: 'Bar Brasa', linha: 'Madrid · 14/11/2026', forma: 'retangulo', data: '14/11/2026', onde: 'Bar Brasa, Madrid', assinou: 'Lucía Ferrer', papel: 'head bartender anfitriona', prova: 'Guest shift de una noche, con seis cócteles de autor en la carta del evento.' },
-      { id: 'carta-shrub', pag: 0, x: 160, y: 122, r: -3, tipo: 'Carta', titulo: 'Shrub de jengibre', linha: 'carta de otoño', forma: 'oval', data: 'septiembre de 2026', onde: 'Sea Bar, Valencia', assinou: 'Marta Ortega', papel: 'gerente del bar', prova: 'Estuvo 11 semanas en carta y salió 1.240 veces en el TPV de la casa.' },
-      { id: 'brinde-tomas', pag: 0, x: 28, y: 218, r: -4, tipo: 'Brindis', titulo: 'Tomás V.', linha: 'Lisboa · 21/09', forma: 'retangulo', data: '21/09/2026', onde: 'Lisboa', assinou: 'Tomás Vidal', papel: 'bartender de Casa Ostra', prova: 'Encuentro en persona. Los dos acercaron los móviles y los dos pasaportes registraron el brindis.' },
-      { id: 'arquivo-hanky', pag: 0, x: 214, y: 252, r: 5, tipo: 'Archivo', titulo: 'Hanky Panky', linha: 'Ada Coleman', forma: 'redondo', data: '12/11/2026', onde: 'Sea Bar, Valencia', assinou: 'Tomás Vidal', papel: 'segundo colega de la comprobación', prova: 'Hecho con la receta del Savoy. Elena Rostova lo probó y lo comprobó; falta un colega.', pendente: true, arquivo: true },
+      { id: 'carta-shrub', pag: 0, x: 160, y: 122, r: -3, tipo: 'Carta', titulo: 'Shrub de jengibre', linha: 'carta de otoño', forma: 'oval', data: 'septiembre de 2026', onde: 'Bar Salitre, Valencia', assinou: 'Nuria Calvo', papel: 'gerente del bar', prova: 'Estuvo 11 semanas en carta y salió 1.240 veces en el TPV de la casa.' },
+      { id: 'brinde-tomas', pag: 0, x: 28, y: 218, r: -4, tipo: 'Brindis', titulo: 'Tomás V.', linha: 'Lisboa · 21/09', forma: 'retangulo', data: '21/09/2026', onde: 'Lisboa', assinou: 'Tomás Vidal', papel: 'head bartender de Casa Ostra', prova: 'Encuentro en persona. Los dos acercaron los móviles y los dos pasaportes registraron el brindis.' },
+      { id: 'arquivo-hanky', pag: 0, x: 214, y: 252, r: 5, tipo: 'Archivo', titulo: 'Hanky Panky', linha: 'Ada Coleman', forma: 'redondo', data: '12/11/2026', onde: 'Bar Salitre, Valencia', assinou: 'Tomás Vidal', papel: 'segundo colega de la comprobación', prova: 'Hecho con la receta del Savoy. Elena Quintana lo probó y lo comprobó; falta un colega.', pendente: true, arquivo: true },
       { id: 'escola-pectinase', pag: 1, x: 26, y: 30, r: 4, tipo: 'Escuela', titulo: 'Clarificación', linha: 'práctica aprobada', forma: 'retangulo', data: 'julio de 2026', onde: 'Escuela de coctelería, Valencia', assinou: 'Irene Soler', papel: 'instructora', prova: 'Curso con prueba práctica: clarificar zumo de maracuyá con pectinasa y centrífuga.' },
-      { id: 'jornada-ostra', pag: 1, x: 214, y: 70, r: -5, tipo: 'Jornada', titulo: 'Casa Ostra', linha: 'Lisboa · 22/08', forma: 'redondo', data: '22/08/2026', onde: 'Casa Ostra, Lisboa', assinou: 'Tomás Vidal', papel: 'head bartender anfitrión', prova: 'Dos noches de guest shift con la carta de verano del Sea Bar.' },
-      { id: 'carta-figo', pag: 1, x: 60, y: 250, r: 2, tipo: 'Carta', titulo: 'Highball de higo', linha: 'carta de verano', forma: 'oval', data: 'junio de 2026', onde: 'Sea Bar, Valencia', assinou: 'Marta Ortega', papel: 'gerente del bar', prova: 'Nueve semanas en carta y 860 salidas en el TPV.' },
+      { id: 'jornada-ostra', pag: 1, x: 214, y: 70, r: -5, tipo: 'Jornada', titulo: 'Casa Ostra', linha: 'Lisboa · 22/08', forma: 'redondo', data: '22/08/2026', onde: 'Casa Ostra, Lisboa', assinou: 'Tomás Vidal', papel: 'head bartender anfitrión', prova: 'Dos noches de guest shift con la carta de verano del Bar Salitre.' },
+      { id: 'carta-figo', pag: 1, x: 60, y: 250, r: 2, tipo: 'Carta', titulo: 'Highball de higo', linha: 'carta de verano', forma: 'oval', data: 'junio de 2026', onde: 'Bar Salitre, Valencia', assinou: 'Nuria Calvo', papel: 'gerente del bar', prova: 'Nueve semanas en carta y 860 salidas en el TPV.' },
       { id: 'brinde-ines', pag: 1, x: 190, y: 384, r: -3, tipo: 'Brindis', titulo: 'Inés R.', linha: 'Madrid · 03/07', forma: 'retangulo', data: '03/07/2026', onde: 'Madrid', assinou: 'Inés Ruiz', papel: 'bartender', prova: 'Encuentro en persona durante una visita al Bar Brasa.' },
-      { id: 'mentor-ana', pag: 2, x: 30, y: 40, r: -3, tipo: 'Mentor', titulo: 'Ana Lima', linha: 'primer sello', forma: 'oval', data: 'marzo de 2026', onde: 'Sea Bar, Valencia', assinou: 'Ana Lima', papel: 'bartender formada por Teo', prova: 'Ana recibió su primer sello, de Casa, con Teo como mentor. Es ella quien firma el sello de Mentor.' },
-      { id: 'casa-seabar', pag: 2, x: 200, y: 170, r: 6, tipo: 'Casa', titulo: 'Sea Bar', linha: 'VLC · desde 2022', forma: 'redondo', data: 'reconfirmado en marzo de 2026', onde: 'Sea Bar, Valencia', assinou: 'Marta Ortega', papel: 'gerente del bar', prova: 'Trabaja en la casa desde marzo de 2022. La casa reconfirma el vínculo una vez al año.' },
-      { id: 'carta-vermute', pag: 2, x: 40, y: 320, r: 3, tipo: 'Carta', titulo: 'Vermut de la casa', linha: 'carta de primavera', forma: 'oval', data: 'abril de 2026', onde: 'Sea Bar, Valencia', assinou: 'Marta Ortega', papel: 'gerente del bar', prova: 'Doce semanas en carta y 2.010 copas servidas.' }
+      { id: 'mentor-ana', pag: 2, x: 30, y: 40, r: -3, tipo: 'Mentor', titulo: 'Ana Lima', linha: 'primer sello', forma: 'oval', data: 'marzo de 2026', onde: 'Bar Salitre, Valencia', assinou: 'Ana Lima', papel: 'bartender formada por Teo', prova: 'Ana recibió su primer sello, de Casa, con Teo como mentor. Es ella quien firma el sello de Mentor.' },
+      { id: 'casa-seabar', pag: 2, x: 200, y: 170, r: 6, tipo: 'Casa', titulo: 'Bar Salitre', linha: 'VLC · desde 2022', forma: 'redondo', data: 'reconfirmado en marzo de 2026', onde: 'Bar Salitre, Valencia', assinou: 'Nuria Calvo', papel: 'gerente del bar', prova: 'Trabaja en la casa desde marzo de 2022. La casa reconfirma el vínculo una vez al año.' },
+      { id: 'carta-vermute', pag: 2, x: 40, y: 320, r: 3, tipo: 'Carta', titulo: 'Vermut de la casa', linha: 'carta de primavera', forma: 'oval', data: 'abril de 2026', onde: 'Bar Salitre, Valencia', assinou: 'Nuria Calvo', papel: 'gerente del bar', prova: 'Doce semanas en carta y 2.010 copas servidas.' }
     ];
   }
 
@@ -693,7 +690,7 @@ class Component extends DCLogic {
       sel: p.carimbo || 'carta-shrub',
       pagina: 0, tinta: 0, extras: [], assinados: {}, ocultos: {}, ultimo: '', aviso: '', comp: 'story', compAlvo: 'carimbo', compVolta: '',
       medida: '', oficio: 'laranja', esc: 'mirar', brinde: 'aproximar', arqPedido: false, pediuMestre: false, imprimindo: 0,
-      ptipo: 'Carta', fOnde: 'Sea Bar, Valencia', fQuando: '18/11/2026', fQuem: 'Marta Ortega, gerente del bar', fOque: 'Vermut de castaña en la carta de invierno.'
+      ptipo: 'Carta', fOnde: 'Bar Salitre, Valencia', fQuando: '20/11/2026', fQuem: 'Nuria Calvo, gerente del bar', fOque: 'Vermut de castaña en la carta de invierno.'
     }, this.state || {});
     const set = (o) => this.setState(o);
     const ir = (tela, extra) => () => {
@@ -752,8 +749,8 @@ class Component extends DCLogic {
     };
 
     const medidasBase = [
-      { id: 'anos', n: '12', rot: 'años de barra', titulo: '12 años: del primer al último sello de Casa', itens: ['Bar Cala, Valencia, de 2014 a 2017', 'Sea Bar, Valencia, desde 2022', 'Otras 5 casas en las páginas 1 a 6'] },
-      { id: 'casas', n: '7', rot: 'casas', titulo: '7 casas: un sello de Casa por cada una', itens: ['Sea Bar, Valencia, firmado por Marta Ortega', 'Bar Cala, Valencia, firmado por el dueño', 'Otras 5 en las páginas anteriores'] },
+      { id: 'anos', n: '12', rot: 'años de barra', titulo: '12 años: del primer al último sello de Casa', itens: ['Bar Cala, Valencia, de 2014 a 2017', 'Bar Salitre, Valencia, desde 2022', 'Otras 5 casas en las páginas 1 a 6'] },
+      { id: 'casas', n: '7', rot: 'casas', titulo: '7 casas: un sello de Casa por cada una', itens: ['Bar Salitre, Valencia, firmado por Nuria Calvo', 'Bar Cala, Valencia, firmado por el dueño', 'Otras 5 en las páginas anteriores'] },
       { id: 'fichas', n: '38', rot: 'fichas', titulo: '38 fichas en el Cuaderno, con autoría', itens: ['Shrub de jengibre, septiembre de 2026', 'Highball de higo, junio de 2026', 'Otras 36 en el Cuaderno'] },
       { id: 'formadas', n: '9', rot: 'formados', titulo: '9 personas formadas: un sello de Mentor por cada una', itens: ['Ana Lima, primer sello en marzo de 2026', 'Otros 8 en las páginas anteriores'] }
     ];
@@ -767,20 +764,20 @@ class Component extends DCLogic {
     const falta = (r, t) => ({ r: r, t: t, cls: 'st falta' });
     const meio = (r, t) => ({ r: r, t: t, cls: 'st meio' });
     const oficiosBase = [
-      { id: 'amarelo', nome: 'Creación', cor: '#FACC15', escura: '#8A6A00', grau: 'Reserva', meses: 50, linhas: [ok('tiempo', '4 años y 2 meses'), ok('pruebas', '4 cócteles en carta y 38 fichas'), falta('siguiente', 'Solera: ha formado a 1 de 3 personas en Creación')] },
+      { id: 'amarelo', nome: 'Creación', cor: '#FACC15', escura: '#806300', grau: 'Reserva', meses: 50, linhas: [ok('tiempo', '4 años y 2 meses'), ok('pruebas', '4 cócteles en carta y 38 fichas'), falta('siguiente', 'Solera: pide 5 años en el oficio y 3 personas formadas; ha formado a 1')] },
       { id: 'magenta', nome: 'Hospitalidad', cor: '#D946EF', escura: '#A21CAF', grau: 'Solera', meses: 108, linhas: [ok('tiempo', '9 años'), ok('pruebas', '11 sellos'), ok('formó', '9 personas; firma como Solera')] },
-      { id: 'verde', nome: 'Preparación y fermentación', cor: '#10B981', escura: '#0B7A57', grau: 'Infusión', meses: 20, linhas: [falta('tiempo', '1 año y 8 meses; la Reserva pide 2 años'), ok('pruebas', '7 sellos'), falta('siguiente', 'Reserva: tiempo y 2 firmas')] },
-      { id: 'laranja', nome: 'Clásicos', cor: '#F97316', escura: '#B4520C', grau: 'Infusión', meses: 38, linhas: [
+      { id: 'verde', nome: 'Preparación y fermentación', cor: '#10B981', escura: '#0B7654', grau: 'Infusión', meses: 20, linhas: [falta('tiempo', '1 año y 8 meses; la Reserva pide 2 años'), ok('pruebas', '7 sellos'), falta('siguiente', 'Reserva: tiempo y 2 firmas')] },
+      { id: 'laranja', nome: 'Clásicos', cor: '#F97316', escura: '#A74C0B', grau: 'Infusión', meses: 38, linhas: [
         ok('tiempo', '3 años y 2 meses; la Reserva pide 2 años'),
         ok('pruebas', '6 sellos, 3 de Carta'),
         arqAssinado ? ok('archivo', 'Hanky Panky comprobado por 2 colegas') : meio('archivo', 'Hanky Panky: 1 de 2 colegas'),
         s.pediuMestre ? meio('firman', '2 Reservas: solicitud enviada a Lucía Ferrer') : falta('firman', '0 de 2 Reservas en Clásicos')
       ] },
-      { id: 'ciano', nome: 'Hielo y dilución', cor: '#06B6D4', escura: '#0784A0', grau: 'Gota', meses: 4, linhas: [falta('tiempo', '4 meses; la Infusión pide 6'), falta('pruebas', '2 de 3 sellos'), falta('siguiente', 'Infusión: un curso con práctica')] },
+      { id: 'ciano', nome: 'Hielo y dilución', cor: '#06B6D4', escura: '#067088', grau: 'Gota', meses: 4, linhas: [falta('tiempo', '4 meses; la Infusión pide 6'), falta('pruebas', '2 de 3 sellos'), falta('siguiente', 'Infusión: un curso con práctica')] },
       { id: 'vermelho', nome: 'Sin alcohol', cor: '#EF4444', escura: '#B02A2A', grau: 'Gota', meses: 1, linhas: [falta('tiempo', '1 mes'), ok('pruebas', '1 sello de Carta'), falta('siguiente', 'Infusión: 2 sellos más y 5 meses')] },
       { id: 'violeta', nome: 'Coste y gestión', cor: '#8B5CF6', escura: '#5B36C2', grau: 'Infusión', meses: 30, linhas: [ok('tiempo', '2 años y 6 meses'), falta('pruebas', '4 de 6 sellos'), falta('siguiente', 'Reserva: una carta entera con el coste cerrado')] }
     ];
-    const pedirReserva = ir('pedir', { ptipo: 'Grado', fOnde: 'Clásicos', fQuando: '18/11/2026', fQuem: 'Lucía Ferrer, Reserva en Clásicos', fOque: 'Firma para el grado Reserva en Clásicos.' });
+    const pedirReserva = ir('pedir', { ptipo: 'Grado', fOnde: 'Clásicos', fQuando: '20/11/2026', fQuem: 'Lucía Ferrer, Reserva en Clásicos', fOque: 'Firma para el grado Reserva en Clásicos.' });
     const oficios = oficiosBase.map((o, i) => ({
       n: '0' + (i + 1), nome: o.nome, grau: o.grau, cor: o.cor,
       aberto: s.oficio === o.id,
@@ -798,7 +795,14 @@ class Component extends DCLogic {
       return { fill: o.cor, stroke: '#1C1A16', sw: '2.4', dash: 'none' };
     };
     const pet = {};
-    oficiosBase.forEach((o) => { pet[o.id] = Object.assign(estiloPet(o), { pick: ir('oficios', { oficio: o.id }) }); });
+    oficiosBase.forEach((o) => {
+      const abrir = ir('oficios', { oficio: o.id });
+      pet[o.id] = Object.assign(estiloPet(o), {
+        aria: o.nome + ', ' + o.grau,
+        pick: abrir,
+        tecla: (e) => { if (e && (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar')) { if (e.preventDefault) e.preventDefault(); abrir(); } }
+      });
+    });
 
     const tiposBase = ['Casa', 'Jornada', 'Carta', 'Escuela', 'Mentor', 'Grado'];
     const tipos = tiposBase.map((t) => ({ t: t, on: s.ptipo === t, pick: () => set({ ptipo: t }) }));
@@ -815,7 +819,7 @@ class Component extends DCLogic {
         data: s.fQuando || '', onde: s.fOnde || '', assinou: nome, papel: papel, prova: s.fOque || '', pendente: true
       };
       if (s.ptipo === 'Grado' && s.extras.length < slots.length) set({ pediuMestre: true });
-      adicionar(novo, 'Solicitud enviada a ' + nome + '. El sello queda en discontinuo hasta la firma.');
+      adicionar(novo, 'En la app, la solicitud va a ' + nome + '. El sello queda en discontinuo hasta la firma.');
     };
 
 
@@ -824,7 +828,7 @@ class Component extends DCLogic {
     const tipoLi = !ehCarimboAlvo ? 'destaque' : (sel.tipo === 'Escuela' ? 'cert' : (sel.tipo === 'Casa' || sel.tipo === 'Jornada' ? 'exp' : 'post'));
     const linkCarimbo = 'dropp.me/teo/' + sel.id;
     const legendaComp = ehCarimboAlvo
-      ? 'Sello de ' + sel.tipo + ': ' + sel.titulo + '. Firmado por ' + sel.assinou + ', ' + sel.papel + ' (' + sel.data + '). La prueba está en dropp.me/teo.'
+      ? 'Sello de ' + sel.tipo + ': ' + sel.titulo.replace(/\.$/, '') + '. Firmado por ' + sel.assinou + ', ' + sel.papel + ' (' + sel.data + '). La prueba está en dropp.me/teo.'
       : 'Mi Pasaporte del Oficio: 12 años de barra, 7 casas, 38 fichas y 9 personas formadas. Cada número tiene una prueba firmada en dropp.me/teo.';
     const liCfg = {
       cert: { secao: 'Licencias y certificaciones', botao: 'Añadir al perfil de LinkedIn', aviso: 'En la app, LinkedIn se abre en Licencias y certificaciones, con los campos rellenos. Tú revisas y guardas.',
@@ -850,7 +854,7 @@ class Component extends DCLogic {
       abrirInsta: () => set({ aviso: 'En la app, Instagram se abre con la story lista y el enlace en el adhesivo.' }),
       abrirShare: () => set({ aviso: 'En la app, se abre la hoja de compartir del móvil con la imagen y el texto.' }),
       abrirLinkedin: () => set({ aviso: liCfg.aviso }),
-      baixarPdf: () => set({ aviso: 'Currículum en PDF listo: una página, solo con los sellos públicos.' })
+      baixarPdf: () => set({ aviso: 'En la app, el currículum se descarga en PDF: una página, solo con los sellos públicos.' })
     };
 
     const titulos = { carimbo: 'Prueba del sello', novo: 'Nuevo sello', pedir: 'Pedir sello', escanear: 'Escanear sello de la casa', brinde: 'Brindar', arquivo: 'Archivo', compartilhar: 'Compartir' };
@@ -909,14 +913,14 @@ class Component extends DCLogic {
       temMedida: !!medidaAberta,
       medidaTitulo: medidaAberta ? medidaAberta.titulo : '',
       medidaItens: medidaAberta ? medidaAberta.itens.map((t) => ({ t: t })) : [],
-      imprimir: () => set({ imprimindo: s.imprimindo + 1, aviso: 'Etiqueta enviada a la impresora de la barra.' }),
+      imprimir: () => set({ imprimindo: s.imprimindo + 1, aviso: 'En la app, la etiqueta va a la impresora de la barra.' }),
       copiar: () => {
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('https://dropp.me/teo').catch(() => {});
         } catch (e) { }
         set({ aviso: 'Enlace copiado: dropp.me/teo' });
       },
-      proximoGrau: (arqAssinado ? 'Falta la firma de dos Reservas en Clásicos.' : 'Faltan la firma de dos Reservas en Clásicos y la segunda comprobación del Hanky Panky.'),
+      proximoGrau: (arqAssinado ? 'Faltan las firmas de dos personas con grado Reserva en Clásicos.' : 'Faltan las firmas de dos personas con grado Reserva en Clásicos y la segunda comprobación del Hanky Panky.'),
 
       pagNumero: 'Página ' + pag.n + ' de 9',
       pagTemporada: pag.temporada,
@@ -958,7 +962,7 @@ class Component extends DCLogic {
         a[sel.id] = true;
         set({ assinados: a, ultimo: sel.id, tinta: 0, tela: 'paginas', base: 'paginas', pagina: sel.pag || 0, aviso: sel.assinou + ' firmó. El sello ya vale en tu pasaporte.' });
       },
-      contestar: () => set({ aviso: 'Impugnación enviada a DROPP y a ' + sel.assinou + '.' }),
+      contestar: () => set({ aviso: 'En la app, la impugnación va a DROPP y a ' + sel.assinou + '.' }),
 
       oficios: oficios,
 
@@ -976,19 +980,19 @@ class Component extends DCLogic {
       escMirar: s.esc === 'mirar',
       escOk: s.esc === 'reconhecido',
       capturar: () => set({ esc: 'reconhecido' }),
-      registrarScan: () => adicionar({ id: 'scan-lume', tipo: 'Jornada', titulo: 'Taberna Lume', linha: 'VLC · 18/11/2026', forma: 'redondo', data: '18/11/2026', onde: 'Taberna Lume, Valencia', assinou: 'Taberna Lume', papel: 'cuenta verificada de la casa', prova: 'Sello de caucho de la casa, nº 014 de la red, fotografiado en el cuaderno de papel y confirmado por la cuenta de la casa.' }, 'Sello de la Taberna Lume registrado en la página 9.'),
+      registrarScan: () => adicionar({ id: 'scan-lume', tipo: 'Jornada', titulo: 'Taberna Lume', linha: 'VLC · 20/11/2026', forma: 'redondo', data: '20/11/2026', onde: 'Taberna Lume, Valencia', assinou: 'Taberna Lume', papel: 'cuenta verificada de la casa', prova: 'Sello de caucho de la casa, nº 014 de la red, fotografiado en el cuaderno de papel y confirmado por la cuenta de la casa.' }, 'Sello de la Taberna Lume registrado en la página 9.'),
 
       brAproximar: s.brinde === 'aproximar',
       brEncontrado: s.brinde === 'encontrado',
       foneCls: s.brinde === 'encontrado' ? 'fone' : 'fone vazio',
-      foneOutro: s.brinde === 'encontrado' ? 'Elena Rostova' : 'otro móvil',
+      foneOutro: s.brinde === 'encontrado' ? 'Lara Gil' : 'otro móvil',
       simularEncontro: () => set({ brinde: 'encontrado' }),
-      brindar: () => adicionar({ id: 'brinde-elena', tipo: 'Brindis', titulo: 'Elena R.', linha: 'VLC · 18/11/2026', forma: 'retangulo', data: '18/11/2026', onde: 'Valencia', assinou: 'Elena Rostova', papel: 'head bartender', prova: 'Encuentro en persona. Los dos acercaron los móviles y los dos pasaportes registraron el brindis.' }, 'Brindis registrado en los dos pasaportes.'),
+      brindar: () => adicionar({ id: 'brinde-lara', tipo: 'Brindis', titulo: 'Lara G.', linha: 'VLC · 20/11/2026', forma: 'retangulo', data: '20/11/2026', onde: 'Taberna Lume, Valencia', assinou: 'Lara Gil', papel: 'head bartender de la Taberna Lume', prova: 'Encuentro en persona en la Taberna Lume. Los dos acercaron los móviles y los dos pasaportes registraron el brindis.' }, 'Brindis registrado en la página 9. En la app, también entra en el pasaporte de Lara.'),
 
       arqSt: arqAssinado ? 'firmó' : (s.arqPedido ? 'recordatorio enviado' : 'esperando'),
       arqStCls: 'st ' + (arqAssinado ? 'ok' : 'meio'),
       arqPodePedir: eu && !arqAssinado && !s.arqPedido,
-      pedirConf: () => set({ arqPedido: true, aviso: 'Recordatorio enviado a Tomás Vidal.' }),
+      pedirConf: () => set({ arqPedido: true, aviso: 'En la app, el recordatorio va a Tomás Vidal.' }),
 
       temAviso: !!s.aviso,
       aviso: s.aviso,

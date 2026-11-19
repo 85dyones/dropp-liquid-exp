@@ -22,7 +22,7 @@ button { font-family: inherit; color: #1C1A16; }
 .marca { display: flex; align-items: center; gap: 8px; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 26px; line-height: 1; text-transform: uppercase; letter-spacing: 0.02em; }
 .marca svg { width: 22px; height: 26px; flex: none; }
 .visao { display: flex; border: 1.5px solid #1C1A16; }
-.visao button { appearance: none; border: 0; background: transparent; padding: 0 14px; min-height: 38px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.visao button { appearance: none; border: 0; background: transparent; padding: 0 14px; min-height: 44px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
 .visao button[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
 .relogio { display: grid; gap: 6px; padding: 0 14px 12px; border-bottom: 1.5px solid #1C1A16; flex: none; }
 .horas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
@@ -37,10 +37,10 @@ button { font-family: inherit; color: #1C1A16; }
 
 .corpo { flex: 1; overflow-y: auto; padding: 14px 14px 92px; display: flex; flex-direction: column; gap: 14px; }
 .corpo > * { flex: none; }
-.rot { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: #6E6555; }
+.rot { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: #6A6151; }
 .titulo-bloco { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.05; text-transform: uppercase; letter-spacing: 0.01em; }
 .titulo-grande { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 40px; line-height: 0.95; text-transform: uppercase; }
-.nota { font-size: 13px; line-height: 1.45; color: #6E6555; }
+.nota { font-size: 13px; line-height: 1.45; color: #6A6151; }
 .papel { background-color: #FAF6EC; background-image: radial-gradient(rgba(90, 65, 30, 0.05) 1px, transparent 1.3px); background-size: 5px 5px; color: #1C1A16; position: relative; border: 1.5px solid #1C1A16; }
 .papel .nota, .papel .rot { color: #5B5344; }
 .papel.corte::before, .papel.corte::after { content: ""; position: absolute; width: 14px; height: 14px; opacity: 0.5; background: linear-gradient(#1C1A16, #1C1A16) center / 1px 100% no-repeat, linear-gradient(#1C1A16, #1C1A16) center / 100% 1px no-repeat; pointer-events: none; }
@@ -53,6 +53,8 @@ button { font-family: inherit; color: #1C1A16; }
 .btn.largo { width: 100%; }
 .chk { list-style: none; padding: 0; display: grid; gap: 8px; font-size: 14px; line-height: 1.4; }
 .chk li { display: flex; gap: 8px; align-items: baseline; }
+.fixas { list-style: disc; padding-left: 20px; font-size: 14px; line-height: 1.4; }
+.fixas li + li { margin-top: 8px; }
 .st { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11.5px; line-height: 1.3; padding: 1px 6px; white-space: nowrap; flex: none; }
 .st.ok { background: #10B981; color: #0F1C17; }
 .st.meio { background: #FACC15; color: #1C1A16; }
@@ -102,7 +104,7 @@ button { font-family: inherit; color: #1C1A16; }
 .fonte-linha { font-family: "Courier Prime", "Courier New", monospace; font-size: 11.5px; line-height: 1.4; color: #5B5344; }
 .fala .btn { justify-self: start; margin-top: 4px; }
 .mic-area { display: grid; justify-items: center; gap: 8px; padding: 6px 0; }
-.mic { appearance: none; width: 92px; height: 92px; border-radius: 50%; border: 2px solid #1C1A16; background: #FAF6EC; display: grid; place-items: center; cursor: pointer; box-shadow: 0 0 0 7px rgba(217, 70, 239, 0.2); }
+.mic { appearance: none; width: 92px; height: 92px; border-radius: 50%; border: 2px solid #1C1A16; background: #FAF6EC; display: grid; place-items: center; cursor: pointer; }
 .mic svg { width: 34px; height: 34px; }
 .sugestoes { display: grid; gap: 6px; }
 .sugestao { appearance: none; border: 1.5px dashed #1C1A16; background: transparent; min-height: 44px; padding: 8px 12px; text-align: left; font-size: 14px; cursor: pointer; }
@@ -139,7 +141,7 @@ button { font-family: inherit; color: #1C1A16; }
 .aviso { position: absolute; left: 12px; right: 12px; bottom: 74px; background: #1C1A16; color: #F8F3E7; padding: 6px 6px 6px 14px; display: flex; gap: 8px; align-items: center; font-size: 14px; line-height: 1.35; font-weight: 600; z-index: 5; box-shadow: 0 10px 24px rgba(60, 45, 20, 0.35); }
 .aviso button { appearance: none; border: 0; background: transparent; color: #F8F3E7; min-height: 44px; padding: 0 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: underline; }
 .nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1.5px solid #1C1A16; background: #EFE8D8; position: relative; z-index: 6; flex: none; }
-.nav button { appearance: none; border: 0; background: transparent; min-height: 62px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 115; letter-spacing: 0.06em; color: #6E6555; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.nav button { appearance: none; border: 0; background: transparent; min-height: 62px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 115; letter-spacing: 0.06em; color: #6A6151; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
 .nav button[aria-current="page"] { color: #1C1A16; }
 .nav button:disabled { cursor: not-allowed; }
 .nav button:disabled svg { opacity: 0.6; }
@@ -216,9 +218,9 @@ button { font-family: inherit; color: #1C1A16; }
             </sc-for>
           </dl>
           <sc-if value="{{r.temCartaz}}" hint-placeholder-val="{{ false }}">
-            <div class="cartaz" role="img" aria-label="Vista previa de la story: el Sea Bar recibe al Bar Brasa, guest shift el jueves 26/11 a las 21h.">
+            <div class="cartaz" role="img" aria-label="Vista previa de la story: el Bar Salitre recibe al Bar Brasa, guest shift el jueves 26/11 a las 21h.">
               <svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>
-              <span class="rot">Sea Bar recibe</span>
+              <span class="rot">Bar Salitre recibe</span>
               <b>Bar Brasa</b>
               <span class="mono">guest shift · jueves 26/11 · 21h</span>
               <span class="lema">Meet · <span class="y">Share</span> · Enjoy</span>
@@ -251,7 +253,7 @@ button { font-family: inherit; color: #1C1A16; }
         <div class="papel corte bloco">
           <span class="rot">Lo que el Barback ya hizo solo</span>
           <ul class="chk">
-            <li><span class="st bb">16:40</span><span>Envió a Ana, que empieza hoy, las 12 fichas de la carta y un test de 10 preguntas.</span></li>
+            <li><span class="st bb">16:40</span><span>Envió a Iker, que empieza hoy, las 12 fichas de la carta y un test de 10 preguntas.</span></li>
             <li><span class="st bb">16:45</span><span>El jarabe simple estaba bajo el mínimo (0,4 L): puso 2 L en la lista de preparación.</span></li>
           </ul>
           <div class="ja-pe">
@@ -277,7 +279,7 @@ button { font-family: inherit; color: #1C1A16; }
       <sc-if value="{{meu}}" hint-placeholder-val="{{ false }}">
         <div class="papel corte bloco">
           <span class="rot">Va contigo</span>
-          <p class="nota">Solo tú ves este Barback. Si dejas el Sea Bar, te llevas el pasaporte, las fichas personales y tus ingresos. La casa se queda con sus fichas y sus lotes.</p>
+          <p class="nota">Solo tú ves este Barback. Si dejas el Bar Salitre, te llevas el pasaporte, las fichas personales y tus ingresos. La casa se queda con sus fichas y sus lotes.</p>
         </div>
       </sc-if>
     </sc-if>
@@ -403,12 +405,12 @@ button { font-family: inherit; color: #1C1A16; }
       </sc-for>
       <div class="papel corte bloco">
         <span class="rot">Reglas que no cambian</span>
-        <ul class="chk">
-          <li><span class="st ok">siempre</span><span>La base de datos calcula, la IA explica. Ningún número es inventado.</span></li>
-          <li><span class="st ok">siempre</span><span>Sin ficha, no hay respuesta: si la ficha no existe, dice que no lo sabe.</span></li>
-          <li><span class="st ok">siempre</span><span>Hasta tres recados por turno, todos antes del servicio.</span></li>
-          <li><span class="st ok">siempre</span><span>Durante el servicio, solo habla cuando alguien pregunta o avisa.</span></li>
-          <li><span class="st ok">siempre</span><span>La ficha de la casa se queda en la casa. El pasaporte guarda la autoría, no la receta.</span></li>
+        <ul class="fixas">
+          <li>La base de datos calcula, la IA explica. Ningún número es inventado.</li>
+          <li>Sin ficha, no hay respuesta: si la ficha no existe, dice que no lo sabe.</li>
+          <li>Hasta tres recados por turno, todos antes del servicio.</li>
+          <li>Durante el servicio, solo habla cuando alguien pregunta o avisa.</li>
+          <li>La ficha de la casa se queda en la casa. El pasaporte guarda la autoría, no la receta.</li>
         </ul>
       </div>
     </sc-if>
@@ -485,57 +487,57 @@ class Component extends DCLogic {
     };
     const nivelNome = { observa: 'Observa', sugere: 'Sugiere', ok: 'Lo hace con tu ok', sozinho: 'Lo hace solo, con límite' };
     const limites = {
-      op: 'Cambiar la cantidad por la previsión pide tu ok.',
+      op: 'Cambiar la cantidad por las reservas pide tu ok.',
       fin: 'El precio nunca cambia sin tu ok.',
       mkt: 'Una invitación nueva siempre pide tu ok.'
     };
 
     const recadosCasa = [
       { id: 'cordial', cad: 'op', titulo: 'Haz 3 L de cordial de lima, no 2.',
-        linhas: [['por qué', 'Viernes con 140 reservas y 27 °C a las 21h.'], ['cuesta', '+ 4,20 € de lima y 25 min de preparación'], ['evita', 'El viernes 13/11 el cordial se acabó a las 23:10 y el Gimlet salió de la carta.']],
-        fonte: 'Reservas del sistema (140), previsión del tiempo para las 21h y libro de turno de los últimos 4 viernes: media de 2,6 L.',
+        linhas: [['por qué', 'Viernes con 140 reservas y un grupo de 20 a las 22:00.'], ['cuesta', '+ 4,20 € de lima y 25 min de preparación'], ['evita', 'El viernes 13/11 el cordial se acabó a las 23:10 y el Gimlet salió de la carta.']],
+        fonte: 'Reservas del sistema (140, con un grupo de 20 a las 22:00) y libro de turno de los últimos 4 viernes: media de 2,6 L.',
         opcoes: [
-          { t: 'Hacer 3 L', efeito: '+ 4,20 €', feito: 'En la lista de preparación: 3 L de cordial de lima.' },
+          { t: 'Hacer 3 L', efeito: '+ 4,20 €', feito: 'En la lista de preparación: 3 L de cordial de lima.' },
           { t: 'Mantener 2 L', efeito: 'puede faltar', feito: 'Se mantiene en 2 L. Si se acaba antes de medianoche, entra en la nota de cierre.' }
         ] },
       { id: 'negroni', cad: 'fin', titulo: 'El Negroni de la casa superó la meta: del 22% al 23% de coste.',
         linhas: [['por qué', 'El Campari subió un 11% en la factura del 12/11.'], ['meta', 'La casa trabaja con un coste de hasta el 22%.'], ['vende', '312 Negronis en octubre']],
         fonte: 'Factura del proveedor del 12/11, ficha del Negroni del 02/11 y 312 ventas en octubre en el TPV. Valores ilustrativos.',
         opcoes: [
-          { t: 'Subir 0,50 € el precio', efeito: 'coste 22%', feito: 'Precio actualizado en el TPV desde hoy: 9,50 €. El coste vuelve al 22%. Midiendo las ventas 4 semanas frente a octubre.' },
-          { t: 'Cambiar el vermut de la casa', efeito: 'coste 21%', feito: 'Ficha del Negroni actualizada con el vermut B y enviada al equipo. Coste 21%.' },
+          { t: 'Subir 0,50 € el precio', efeito: 'coste 22%', feito: 'Precio actualizado en el TPV desde hoy: 9,50 €. El coste vuelve al 22%. Midiendo las ventas 4 semanas frente a octubre.' },
+          { t: 'Cambiar el vermut de la casa', efeito: 'coste 21%', feito: 'Ficha del Negroni actualizada con el vermut B. Coste 21%.' },
           { t: 'Dejarlo como está', efeito: 'coste 23%', feito: 'Se mantiene. El Barback avisa si el coste pasa del 25%.' }
         ] },
       { id: 'guest', cad: 'mkt', titulo: 'El jueves hay guest shift del Bar Brasa aquí. ¿Invito a quien ya brindó con la casa?', cartaz: true,
-        linhas: [['quién', '46 personas brindaron con el Sea Bar en los últimos 6 meses'], ['cuesta', 'nada: 46 mensajes y 1 story']],
+        linhas: [['quién', '46 personas brindaron con el Bar Salitre en los últimos 6 meses'], ['cuesta', 'nada: 46 mensajes y 1 story']],
         fonte: 'Brindis registrados en los pasaportes de los últimos 6 meses. El diseño usa el nombre de los cócteles del evento, nunca la receta.',
         opcoes: [
-          { t: 'Invitación y story', efeito: '46 + 1', feito: 'Invitación enviada a 46 personas y story programada para el jueves a las 18:00. Las respuestas entran en el libro de turno.' },
-          { t: 'Solo la story', efeito: '1 story', feito: 'Story programada para el jueves a las 18:00. No se envió ninguna invitación.' },
+          { t: 'Invitación y story', efeito: '46 + 1', feito: 'Invitación a las 46 personas y story del jueves a las 18:00, aprobadas. Las respuestas entran en el libro de turno.' },
+          { t: 'Solo la story', efeito: '1 story', feito: 'Solo la story del jueves a las 18:00, aprobada. Ninguna invitación.' },
           { t: 'Ahora no', efeito: '', feito: 'No se envió nada. El Barback no vuelve a sugerirlo para este evento.' }
         ] }
     ];
     const recadosMeu = [
       { id: 'folga', cad: 'op', titulo: 'Llevas 9 noches sin librar. ¿Pido el martes, 24/11?',
-        linhas: [['horario', 'El martes el Sea Bar tiene 2 personas más en la barra.'], ['extras', 'Ningún extra el martes.']],
-        fonte: 'Tu horario en el Sea Bar y tu agenda de extras.',
+        linhas: [['horario', 'El martes el Bar Salitre tiene 2 personas más en la barra.'], ['extras', 'Ningún extra el martes.']],
+        fonte: 'Tu horario en el Bar Salitre y tu agenda de extras.',
         opcoes: [
-          { t: 'Pedir el día libre', efeito: '', feito: 'Petición enviada a Marta Ortega, gerente del bar. La respuesta aparecerá aquí.' },
+          { t: 'Pedir el día libre', efeito: '', feito: 'En la app, la petición va a Nuria Calvo, gerente del bar, y la respuesta aparece aquí.' },
           { t: 'Ahora no', efeito: '', feito: 'Vale. El Barback vuelve a avisar dentro de 3 noches.' }
         ] },
-      { id: 'freela', cad: 'fin', titulo: 'Extra de evento el sábado: cobra 180 €, no 120 €.',
-        linhas: [['por qué', 'Tu noche en el Sea Bar rinde 151 € de media, con propinas.'], ['incluye', '5 horas y 2 cócteles de autor']],
+      { id: 'freela', cad: 'fin', titulo: 'Extra de evento el sábado: cobra 180 €, no 120 €.',
+        linhas: [['por qué', 'Tu noche en el Bar Salitre rinde 151 € de media, con propinas.'], ['incluye', '5 horas y 2 cócteles de autor']],
         fonte: 'Tus registros de septiembre a noviembre. Valores ilustrativos.',
         opcoes: [
-          { t: 'Responder 180 €', efeito: '+ 60 €', feito: 'Respuesta enviada al organizador con 180 € y lo que incluye.' },
-          { t: 'Aceptar 120 €', efeito: '', feito: 'Aceptación enviada. El extra entró en tu agenda del sábado.' },
+          { t: 'Responder 180 €', efeito: '+ 60 €', feito: 'En la app, la respuesta va al organizador con 180 € y lo que incluye.' },
+          { t: 'Aceptar 120 €', efeito: '', feito: 'En la app, la aceptación va al organizador y el extra entra en tu agenda del sábado.' },
           { t: 'Lo escribo yo', efeito: '', feito: 'Borrador abierto con los números al lado. No se envió nada.' }
         ] },
       { id: 'residencia', cad: 'mkt', titulo: 'Casa Ostra abrió una residencia de 2 semanas en Clásicos.',
         linhas: [['piden', 'Grado Infusión en Clásicos'], ['tú', 'Infusión, con 3 años y 2 meses en el oficio']],
         fonte: 'Vacante publicada el 17/11 y tu Pasaporte, solo con los sellos públicos.',
         opcoes: [
-          { t: 'Presentarme con el pasaporte', efeito: '', feito: 'Candidatura enviada con el enlace dropp.me/teo. Solo aparecen los sellos públicos.' },
+          { t: 'Presentarme con el pasaporte', efeito: '', feito: 'En la app, la candidatura va con el enlace dropp.me/teo; solo aparecen los sellos públicos.' },
           { t: 'Guardar', efeito: '', feito: 'Guardada en tu lista de vacantes. Cierra el 30/11.' }
         ] }
     ];
@@ -616,7 +618,7 @@ class Component extends DCLogic {
       { quem: 'Tú, por voz', t: '¿Cuánto Campari lleva el Boulevardier de la casa?', cls: 'fala voce' },
       { quem: 'Barback', t: '30 ml.', fonte: 'Ficha del Boulevardier, actualizada el 02/11.', cls: 'fala bb' },
       { quem: 'Tú, por voz', t: 'Se acabó el hielo en bola.', cls: 'fala voce' },
-      { quem: 'Barback', t: 'He avisado a sala y he puesto 2 bolsas en el pedido de mañana.', fonte: 'Regla de reposición: el hielo entra solo en el pedido, hasta 30 €.', cls: 'fala bb' }
+      { quem: 'Barback', t: 'He avisado a sala y he puesto 2 bolsas en el pedido de mañana.', fonte: 'Regla de reposición: el hielo entra solo en el pedido, hasta 30 €.', cls: 'fala bb' }
     ];
     s.perguntas.forEach((id) => {
       const d = perguntasDef[id];
@@ -666,7 +668,7 @@ class Component extends DCLogic {
     const opSozinho = s.niveis.op === 'sozinho';
     const hoje = [];
     if (opSozinho) {
-      hoje.push({ h: '16:40', cad: 'op', t: 'Fichas de la carta y test de 10 preguntas enviados a Ana, que empieza hoy.', quem: 'Barback, solo · regla de quien llega' });
+      hoje.push({ h: '16:40', cad: 'op', t: 'Fichas de la carta y test de 10 preguntas enviados a Iker, que empieza hoy.', quem: 'Barback, solo · regla de quien llega' });
       hoje.push({ h: '16:45', cad: 'op', t: 'Jarabe simple bajo el mínimo (0,4 L): 2 L en la lista de preparación.', quem: 'Barback, solo · límite de preparación' });
     }
     const horaDec = { cordial: '17:04', negroni: '17:06', guest: '17:09' };
@@ -685,7 +687,7 @@ class Component extends DCLogic {
     }
     const ontem = [
       { h: '17:02', cad: 'op', t: 'El cordial de maracuyá caducaba en 3 días: entró en el especial de la noche.', quem: 'decidido por Teo · Operación' },
-      { h: '23:40', cad: 'op', t: 'Pregunta sin ficha: Mezcal Mule. Ficha abierta para que Marta la revise.', quem: 'Barback · sin ficha, no hay respuesta' },
+      { h: '23:40', cad: 'op', t: 'Pregunta sin ficha: Mezcal Mule. Ficha abierta para que Nuria la revise.', quem: 'Barback · sin ficha, no hay respuesta' },
       { h: '01:25', cad: 'op', t: 'Nota de turno: terraza llena a las 23h, faltó una persona más en la barra.', quem: 'nota por voz de Lucas Moreno' }
     ];
     const comCor = (e) => ({ h: e.h, t: e.t, quem: e.quem, cor: cadeiras[e.cad].cor });
@@ -698,10 +700,10 @@ class Component extends DCLogic {
     const curto = { observa: 'Observa', sugere: 'Sugiere', ok: 'Con ok', sozinho: 'Solo' };
     const exemplos = {
       op: {
-        observa: 'Solo avisa: el cordial de maracuyá caduca en 3 días.',
+        observa: 'Solo avisa: el cordial de maracuyá caduca en 2 días.',
         sugere: 'Trae la decisión lista: haz 3 L de cordial, no 2.',
         ok: 'Con un toque tuyo, lo pone en la lista de preparación y avisa al equipo.',
-        sozinho: 'Repone la preparación bajo el mínimo y prepara a quien llega. Lo que cambia por la previsión sigue pidiendo tu ok.'
+        sozinho: 'Repone la preparación bajo el mínimo y prepara a quien llega. Lo que cambia por las reservas sigue pidiendo tu ok.'
       },
       fin: {
         observa: 'Solo avisa: el Campari subió un 11% en la última factura.',
@@ -733,8 +735,8 @@ class Component extends DCLogic {
     }));
 
     const fato = casa
-      ? { rot: 'Viernes, 20/11 · Sea Bar, Valencia', n: '140 reservas', sub: '27 °C a las 21h', base: 'Estimación según los últimos 4 viernes y la previsión del tiempo. Puede cambiar.' }
-      : { rot: 'Tus ingresos de noviembre, hasta hoy', n: '1.940 €', sub: 'sueldo, propinas y 1 extra', base: 'Suma de lo que registraste. El Barback no ve tu cuenta del banco.' };
+      ? { rot: 'Viernes, 20/11 · Bar Salitre, Valencia', n: '140 reservas', sub: 'con un grupo de 20 a las 22:00', base: 'Reservas del sistema a las 17:00. Puede cambiar hasta el servicio.' }
+      : { rot: 'Tus ingresos de noviembre, hasta hoy', n: '1.940 €', sub: 'sueldo, propinas y 1 extra', base: 'Suma de lo que registraste. El Barback no ve tu cuenta del banco.' };
     const titulos = { livro: 'Libro de turno', regras: 'Qué puede hacer el Barback' };
 
     return {
@@ -767,13 +769,13 @@ class Component extends DCLogic {
       recados: recados,
       jaFez: casa && opSozinho,
       semJaFez: casa && !opSozinho,
-      avisoOpTxt: 'Con Operación en ' + nivelNome[s.niveis.op] + ', el Barback no repone nada solo. Hoy solo avisa: el jarabe simple está bajo el mínimo y Ana empieza hoy.',
+      avisoOpTxt: 'Con Operación en ' + nivelNome[s.niveis.op] + ', el Barback no repone nada solo. Hoy solo avisa: el jarabe simple está bajo el mínimo y Iker empieza hoy.',
       formiga: () => set({ aviso: 'Psst: toda casa tiene una Hormiga, que repone todo antes de que nadie lo pida.' }),
       irLivro: () => set({ tela: 'livro', aviso: '' }),
       irRegras: () => set({ tela: 'regras', aviso: '' }),
 
       falas: falas,
-      falar: () => set({ aviso: sugestoes.length ? 'En el producto, mantienes pulsado y hablas. Aquí, toca una de las preguntas de abajo.' : 'En el producto, mantienes pulsado y hablas. Las preguntas de este prototipo se acabaron.' }),
+      falar: () => set({ aviso: sugestoes.length ? 'En la app, mantienes pulsado y hablas. Aquí, toca una de las preguntas de abajo.' : 'En la app, mantienes pulsado y hablas. Las preguntas de este prototipo se acabaron.' }),
       temSugestoes: sugestoes.length > 0,
       sugestoes: sugestoes,
 

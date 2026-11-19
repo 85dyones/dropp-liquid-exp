@@ -10,7 +10,7 @@
 <style id="pagina"></style>
 <style>
 /* Etiqueta térmica 100 × 50 mm, só tinta preta (a térmica não imprime cor).
-   Regra do cliente: o bar primeiro, o DROPP depois. ?lang=pt|es  ?formato=termica|a4  ?check=1 */
+   Regra da DROPP: o bar primeiro, o DROPP depois. ?lang=pt|es  ?formato=termica|a4  ?check=1 */
 :root { --tinta: #121212; --papel: #FFFFFF; --mesa: #EFE8D8; --apagado: #5B5344; }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
@@ -188,7 +188,7 @@ var lang = params.get('lang') === 'es' ? 'es' : 'pt';
 var formatoFolha = params.get('formato') || 'tela';
 var T = {
   pt: {
-    titulo: 'Etiquetas de lote', cidade: 'Valência · barra principal', lote: 'Lote', feito: 'Feito', vence: 'Vence', revisar: 'Revisar', por: 'por Teo A.', alerg: 'Alérgenos', ler: 'Leia no DROPP para dar baixa, registrar perda ou reimprimir',
+    titulo: 'Etiquetas de lote', cidade: 'Valência · balcão principal', lote: 'Lote', feito: 'Feito', vence: 'Vence', revisar: 'Revisar', por: 'por Teo A.', alerg: 'Alérgenos', ler: 'Leia no DROPP para dar baixa, registrar perda ou reimprimir',
     intro: 'Etiquetas térmicas de 100 × 50 mm, só em preto. O QR guarda o texto do lote: qualquer celular lê, mesmo sem internet. No DROPP, a primeira linha abre o lote para conferir, dar baixa ou registrar perda.',
     lotes: [
       { id: 'PF-001', nome: 'Cordial de maracujá', rec: 'Garrafa #2', feito: '17/11/2026', fim: '22/11/2026', temp: 'manter a 4 °C', ing: 'Maracujá, açúcar de cana, ácido málico, água.', al: 'nenhum' },
@@ -236,7 +236,7 @@ T.lotes.forEach(function (l) {
   var lado = mat.n + 8;
   html += '<div class="item"><div class="etq" aria-label="' + esc(l.nome) + ', lote ' + l.id + '">' +
     '<div class="esq">' +
-      '<div class="cab"><b>SEA BAR</b><span>' + esc(T.cidade) + '</span></div>' +
+      '<div class="cab"><b>BAR SALITRE</b><span>' + esc(T.cidade) + '</span></div>' +
       '<div class="nome">' + esc(l.nome) + '</div>' +
       '<div class="id">' + T.lote + ' ' + l.id + ' · ' + esc(l.rec) + '</div>' +
       '<div class="hr"></div>' +

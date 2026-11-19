@@ -17,7 +17,7 @@ Redesign e protótipos da plataforma de trabalho do bartender, em quatro áreas:
 ## Como abrir
 
 - O app: `cd app`, `npm install` e `npm run dev`, depois abra http://localhost:5173. Ele lê os tokens, o CSS e as fontes direto de `design/sistema-de-design/`; para mudar uma cor, edite o `tokens.json` de lá. Abaixo de 760 px de largura vale o layout de celular, de 760 px a 1199 px o de tablet de balcão (trilho à esquerda e duas colunas), e a partir de 1200 px o de desktop (três colunas).
-- Cada protótipo é um canvas de Design: `project/canvas.json` descreve a prancheta de 390 × 844 e `project/Main.dc.html` tem a tela e a lógica. Ele roda no editor de canvas que o gerou.
+- Cada protótipo é um canvas de Design: `project/canvas.json` descreve a prancheta de 390 × 844 e `project/Main.dc.html` tem a tela e a lógica. Abra o `Main.dc.html` no editor de canvas para navegar pela tela.
 - A página de etiquetas abre direto no navegador: `design/etiquetas/etiquetas-lote.html?lang=pt&formato=termica`. Troque para `lang=es` ou `formato=a4`; com `&check=1`, ela lê de volta todos os QR impressos.
 
 ## Regras que valem em tudo
@@ -25,7 +25,7 @@ Redesign e protótipos da plataforma de trabalho do bartender, em quatro áreas:
 - Abaixo de "DROPP" vai só "Liquid Experience". Títulos de seção ficam numa linha separada.
 - Nenhuma nota, nível numérico ou ranking de pessoas. A prova é o carimbo assinado.
 - Em português, "perda" e "€9,00"; em espanhol, "merma", "Botella #" e "9,00 €".
-- Bares, pessoas, marcas, preços e números das telas são fictícios e ilustrativos.
+- Bares, pessoas, preços e números das telas são fictícios e ilustrativos. As marcas de bebida aparecem só como ingrediente.
 
 ## Licenças
 

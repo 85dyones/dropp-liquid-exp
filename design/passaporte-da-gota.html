@@ -59,6 +59,7 @@ a { color: inherit; text-underline-offset: 3px; }
 .tintas i { flex: 1; }
 
 /* abertura */
+.dataline { font: 400 0.9rem/1.4 var(--mono); color: var(--apagado); }
 .abre { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(20px, 3vw, 44px); align-items: start; }
 @media (max-width: 940px) { .abre { grid-template-columns: 1fr; } }
 .abre-texto { display: grid; gap: 20px; align-content: start; min-width: 0; padding-top: 6px; }
@@ -142,8 +143,8 @@ a { color: inherit; text-underline-offset: 3px; }
 .barril ul { list-style: none; padding: 0; display: grid; gap: 6px; font: 400 0.8rem/1.35 var(--mono); }
 .barril li { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 8px; }
 .st { font-weight: 700; }
-.st.ok { color: #0B7A57; }
-.st.falta { color: #8A6A00; }
+.st.ok { color: #0B7654; }
+.st.falta { color: #806300; }
 
 /* seções */
 section { display: grid; gap: 22px; }
@@ -251,7 +252,7 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
 <div class="cartao">
   <div class="abre">
     <div class="abre-texto">
-      <p class="espacada linha-assinatura">DROPP Liquid Experience · direção 03</p>
+      <p class="dataline">20/11/2026 · Passaporte do Ofício, a direção escolhida</p>
       <h1><span class="l1">Sete pétalas, sete ofícios.</span><span class="l2">Uma gota sua.</span></h1>
       <p class="lide">A gota da DROPP tem sete pétalas de cor. No passaporte, cada pétala é um ofício do bartender, e ela se enche conforme o grau: Gota, Infusão, Reserva e Solera. A gota de cada pessoa sai diferente, e a marca vira a identidade de quem usa o app.</p>
       <p class="corpo-mono">O resto do conceito fica igual: carimbos assinados, brinde, Arquivo e temporadas. O visual é o de um rótulo antigo, na linha da Stone Groove, impresso com as sete tintas da gota.</p>
@@ -264,7 +265,7 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
       <div class="tintas" aria-hidden="true"><i style="background: var(--amarelo)"></i><i style="background: var(--laranja)"></i><i style="background: var(--vermelho)"></i><i style="background: var(--magenta)"></i><i style="background: var(--violeta)"></i><i style="background: var(--ciano)"></i><i style="background: var(--verde)"></i></div>
     </div>
 
-    <div class="celular" aria-label="Exemplo da tela Rótulo na direção 03">
+    <div class="celular" aria-label="Exemplo da tela Rótulo">
       <div class="tela">
         <div class="tela-topo">
           <span class="marca-app"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>Passaporte</span>
@@ -275,14 +276,14 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
           <div class="rotulo">
             <div class="arco">
               <span class="wordmark"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg><b>Dropp</b></span>
-              <span class="espacada">Liquid experience</span>
+              <span class="espacada">Liquid Experience</span>
             </div>
             <div class="rot-miolo">
               <p class="rot-secao"><span>Passaporte do ofício</span></p>
-              <div class="rot-num"><span>Nº 0942</span><span>LOTE TA-2014</span></div>
+              <div class="rot-num"><span>Nº 0318</span><span>LOTE TA-2014</span></div>
               <div class="janela"><svg id="gota-pessoal" viewBox="16 4 68 108" role="group" aria-label="A gota do Teo: cada pétala é um ofício, preenchida conforme o grau. Toque numa pétala."></svg></div>
               <p class="rot-nome">Teo Aranda</p>
-              <p class="rot-cargo">head bartender · Sea Bar, Valência</p>
+              <p class="rot-cargo">head bartender · Bar Salitre, Valência</p>
               <div class="cantos"><span><b>12</b>anos de balcão</span><span><b>7</b>casas</span><span><b>38</b>fichas</span><span><b>9</b>formados</span></div>
               <p class="fita"><span>Meet</span> · <span>Share</span> · <span>Enjoy</span></p>
               <p class="rot-pe"><span>dropp.me/teo</span><span>el bar primero</span></p>
@@ -302,7 +303,6 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
 
 <section aria-labelledby="t-conversa">
   <div class="sec-cab">
-    <p class="espacada" style="color: var(--apagado)">Como tudo conversa</p>
     <h2 id="t-conversa">A marca por cima, o rótulo por baixo</h2>
     <p>São quatro camadas, da marca ao detalhe. <strong>A gota e as cores dela nunca mudam</strong>; o rótulo indie é o papel onde elas são impressas.</p>
   </div>
@@ -317,7 +317,6 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
 <div class="cartao">
   <section aria-labelledby="t-escala">
     <div class="sec-cab">
-      <p class="espacada linha-assinatura">A escala própria</p>
       <h2 id="t-escala">Da primeira gota à solera</h2>
       <p>Os nomes misturam a marca, o bar e a adega. <strong>Gota</strong> é a marca. <strong>Infusão</strong> e <strong>Reserva</strong> são o tempo que o sabor leva para entrar e para assentar. <strong>Solera</strong> vem de Jerez, onde o vinho novo entra por cima e desce até a fileira mais velha; no passaporte, é o grau de quem forma os novos.</p>
     </div>
@@ -335,7 +334,7 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
         </ul>
       </div>
       <div>
-        <h3>O que mudou desde a direção 02</h3>
+        <h3>O que mudou desde a direção anterior</h3>
         <p>Saíram os nomes da tequila (Blanco a Extra Añejo) e a escala de cor do líquido envelhecido. A cor passou a ser da marca e do ofício.</p>
         <p>O número grande do rótulo deixou de ser a idade. Agora o centro do rótulo é a gota pessoal, e os 12 anos de balcão ficam nos cantos, com casas, fichas e formados.</p>
         <p>Os ofícios passam de seis para sete, um por pétala: entram <b>Criação</b> e <b>Gelo e diluição</b> (que substitui Gelo).</p>
@@ -347,7 +346,6 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
 <div class="cartao">
   <section aria-labelledby="t-petalas">
     <div class="sec-cab">
-      <p class="espacada linha-assinatura">Sete pétalas</p>
       <h2 id="t-petalas">Qual pétala é qual ofício</h2>
       <p>A posição na gota conta uma pequena história do balcão. <strong>Proposta para discutir com a DROPP</strong>; trocar um ofício de pétala não muda o sistema.</p>
     </div>
@@ -370,7 +368,6 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
 
 <section aria-labelledby="t-indie">
   <div class="sec-cab">
-    <p class="espacada" style="color: var(--apagado)">Mais indie</p>
     <h2 id="t-indie">Rótulo antigo, tinta vibrante</h2>
     <p>Da Stone Groove vem a gramática do rótulo antigo. <strong>A vibração vem da DROPP</strong>: tintas chapadas e saturadas sobre papel gasto, como numa serigrafia ou risografia.</p>
   </div>
@@ -385,7 +382,7 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
       <li><b>Retícula</b><span>A textura do grau Infusão e do fundo da janela do rótulo</span></li>
       <li><b>Blocos de cor</b><span>Faixas com as sete tintas da gota, no lugar do vermelho, amarelo e azul da Stone Groove</span></li>
       <li><b>Arco, fita e cantos</b><span>A gota oficial no arco, "Meet · Share · Enjoy" na fita, números nos cantos</span></li>
-      <li><b>Catálogo e faixas</b><span>Nº do passaporte, lote, ofícios como faixas 01 a 07 com ▶</span></li>
+      <li><b>Catálogo e faixas</b><span>Nº do passaporte, lote, ofícios como faixas 01 a 07</span></li>
       <li><b>Marcas de corte</b><span>O "+" de gráfica nos cantos de páginas e cartões</span></li>
     </ul>
   </div>
@@ -394,7 +391,6 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
 <div class="cartao">
   <section aria-labelledby="t-sistema">
     <div class="sec-cab">
-      <p class="espacada linha-assinatura">O sistema</p>
       <h2 id="t-sistema">Tintas, letras e carimbos</h2>
       <p>Dez cores: as sete da gota, o papel creme do fundo, o papel claro dos cartões e a tinta preta. <strong>Texto nunca vai em amarelo, verde ou ciano sobre o papel</strong>; essas tintas ficam em áreas chapadas, pétalas e carimbos.</p>
     </div>
@@ -412,13 +408,13 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
     </div>
     <div class="tipos">
       <div><span class="d">Hanky Panky</span><small>Anton · títulos, nome no rótulo. Sai se a DROPP tiver fonte oficial</small></div>
-      <div><span class="e">Liquid experience</span><small>Archivo largo · rótulos espaçados, abas, assinatura</small></div>
+      <div><span class="e">Liquid Experience</span><small>Archivo largo · rótulos espaçados, abas, assinatura</small></div>
       <div><span class="m">2 dashes de Fernet-Branca</span><small>Courier Prime · fichas, provas, catálogo</small></div>
     </div>
     <div class="selos" aria-label="Carimbos nas tintas da gota">
-      <div class="selo" style="--cor: #0B7A57; --r: -6deg"><small>Jornada</small><b>Bar Brasa</b><em>Madri · 14/11</em></div>
+      <div class="selo" style="--cor: #0B7654; --r: -6deg"><small>Jornada</small><b>Bar Brasa</b><em>Madri · 14/11</em></div>
       <div class="selo ret" style="--cor: #A21CAF; --r: 3deg"><small>Arquivo · ARQ-031</small><b>Hanky Panky</b><em>Ada Coleman</em></div>
-      <div class="selo" style="--cor: #B4520C; --r: 5deg"><small>Brinde</small><b>Elena R.</b><em>VLC · 18/11</em></div>
+      <div class="selo" style="--cor: #A74C0B; --r: 5deg"><small>Brinde</small><b>Lara G.</b><em>VLC · 20/11</em></div>
       <div class="selo ret" style="--cor: #5B36C2; --r: -3deg"><small>Carta · outono 2026</small><b>Shrub de gengibre</b><em>1.240 saídas</em></div>
     </div>
     <div class="duas">
@@ -446,15 +442,14 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
 
 <section aria-labelledby="t-proximo">
   <div class="sec-cab">
-    <p class="espacada" style="color: var(--apagado)">Nos protótipos</p>
     <h2 id="t-proximo">O que mudou nas telas</h2>
-    <p>A direção 03 foi aprovada e já está nas duas versões do protótipo, em <a href="https://claude.ai/artifact/KFsm6jF5yfTk6CCxfH1n1B">português</a> e em <a href="https://claude.ai/artifact/X6UzZ6rqgNv8j2becL9Upr">espanhol</a>. <strong>Fluxos, carimbos e regras de confiança continuam iguais.</strong></p>
+    <p>A direção foi aprovada e já está nas duas versões do protótipo, em <a href="https://claude.ai/artifact/KFsm6jF5yfTk6CCxfH1n1B">português</a> e em <a href="https://claude.ai/artifact/X6UzZ6rqgNv8j2becL9Upr">espanhol</a>. <strong>Fluxos, carimbos e regras de confiança continuam iguais.</strong></p>
   </div>
   <ol class="proximo">
     <li><span><b>Topo do app:</b> a gota oficial ao lado do nome, em todas as telas.</span></li>
     <li><span><b>Fundo:</b> papel creme com grão no lugar do verde-garrafa escuro. O preto fica no arco do rótulo, na fita e nos botões cheios.</span></li>
     <li><span><b>Rótulo:</b> o arco leva só a marca, DROPP e Liquid Experience; "Passaporte do Ofício" vem numa linha própria, como título. Depois, a gota pessoal no centro, cantos com anos, casas, fichas e formados, fita "Meet · Share · Enjoy".</span></li>
-    <li><span><b>Ofícios:</b> sete faixas com a cor da pétala; cada uma abre o barril com a régua de tempo e o que falta.</span></li>
+    <li><span><b>Ofícios:</b> sete faixas com a cor da pétala; cada uma abre o ofício com a régua de tempo e o que falta.</span></li>
     <li><span><b>Graus:</b> Gota, Infusão, Reserva e Solera no lugar de Aprendiz, Oficial e Mestre.</span></li>
     <li><span><b>Páginas e carimbos:</b> papel com grão, carimbos nas tintas da gota, marcas de corte nos cantos.</span></li>
   </ol>
@@ -462,7 +457,7 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
     <li><b>A DROPP tem manual de marca, a gota em vetor e uma fonte oficial?</b> A gota aqui foi tirada do código das telas do Stitch.</li>
     <li><b>A marca aceita que a gota mude de pessoa para pessoa?</b> A gota oficial nunca muda; a pessoal é uma versão dela feita de dados.</li>
   </ol>
-  <p class="fontes">Fontes: a gota e as cores vêm de <code>code 5.html</code> do protótipo do cliente; <a href="https://www.awwwards.com/sites/stone-groove-spirits">Stone Groove Spirits no Awwwards</a>; <a href="https://www.diffordsguide.com/g/1084/tequila/classifications">Difford's Guide</a>; <a href="https://www.sherrynotes.com/2013/background/sherry-solera-system/">SherryNotes</a>. Consultadas em 18/11/2026. Bares, pessoas e números do exemplo são fictícios, exceto o Sea Bar, que vem do protótipo do cliente.</p>
+  <p class="fontes">Fontes: a gota e as cores vêm das telas originais da DROPP; <a href="https://www.awwwards.com/sites/stone-groove-spirits">Stone Groove Spirits no Awwwards</a>; <a href="https://www.diffordsguide.com/g/1084/tequila/classifications">Difford's Guide</a>; <a href="https://www.sherrynotes.com/2013/background/sherry-solera-system/">SherryNotes</a>. Consultadas em 18/11/2026. Bares, pessoas e números do exemplo são fictícios. As marcas de bebida aparecem só como ingrediente.</p>
 </section>
 
 </main>
@@ -483,11 +478,11 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
   var papel = '#F3EBD8', tinta = '#1C1A16';
 
   var oficios = [
-    { id: 'amarelo', nome: 'Criação', cor: '#FACC15', escura: '#8A6A00', grau: 'Reserva', meses: 50, linhas: [['ok', 'tempo', '4 anos e 2 meses'], ['ok', 'provas', '4 drinks em carta, 38 fichas'], ['falta', 'próximo', 'Solera: formou 1 de 3 pessoas em Criação']] },
+    { id: 'amarelo', nome: 'Criação', cor: '#FACC15', escura: '#806300', grau: 'Reserva', meses: 50, linhas: [['ok', 'tempo', '4 anos e 2 meses'], ['ok', 'provas', '4 drinks em carta, 38 fichas'], ['falta', 'próximo', 'Solera: 5 anos no ofício e 3 pessoas formadas em Criação; ele formou 1']] },
     { id: 'magenta', nome: 'Hospitalidade', cor: '#D946EF', escura: '#A21CAF', grau: 'Solera', meses: 108, linhas: [['ok', 'tempo', '9 anos'], ['ok', 'provas', '11 carimbos'], ['ok', 'formou', '9 pessoas; assina como Solera']] },
-    { id: 'verde', nome: 'Preparo e fermentação', cor: '#10B981', escura: '#0B7A57', grau: 'Infusão', meses: 20, linhas: [['falta', 'tempo', '1 ano e 8 meses; a Reserva pede 2 anos'], ['ok', 'provas', '7 carimbos'], ['falta', 'próximo', 'Reserva: tempo e 2 assinaturas']] },
-    { id: 'laranja', nome: 'Clássicos', cor: '#F97316', escura: '#B4520C', grau: 'Infusão', meses: 38, linhas: [['ok', 'tempo', '3 anos e 2 meses'], ['ok', 'provas', '6 carimbos, 3 de Carta'], ['falta', 'próximo', 'Reserva: faltam 2 assinaturas de Reservas']] },
-    { id: 'ciano', nome: 'Gelo e diluição', cor: '#06B6D4', escura: '#0784A0', grau: 'Gota', meses: 4, linhas: [['falta', 'tempo', '4 meses; a Infusão pede 6'], ['falta', 'provas', '2 de 3 carimbos'], ['falta', 'próximo', 'Infusão: um curso com prática']] },
+    { id: 'verde', nome: 'Preparo e fermentação', cor: '#10B981', escura: '#0B7654', grau: 'Infusão', meses: 20, linhas: [['falta', 'tempo', '1 ano e 8 meses; a Reserva pede 2 anos'], ['ok', 'provas', '7 carimbos'], ['falta', 'próximo', 'Reserva: tempo e 2 assinaturas']] },
+    { id: 'laranja', nome: 'Clássicos', cor: '#F97316', escura: '#A74C0B', grau: 'Infusão', meses: 38, linhas: [['ok', 'tempo', '3 anos e 2 meses'], ['ok', 'provas', '6 carimbos, 3 de Carta'], ['falta', 'próximo', 'Reserva: faltam 2 assinaturas de Reservas']] },
+    { id: 'ciano', nome: 'Gelo e diluição', cor: '#06B6D4', escura: '#067088', grau: 'Gota', meses: 4, linhas: [['falta', 'tempo', '4 meses; a Infusão pede 6'], ['falta', 'provas', '2 de 3 carimbos'], ['falta', 'próximo', 'Infusão: um curso com prática']] },
     { id: 'vermelho', nome: 'Sem álcool', cor: '#EF4444', escura: '#B02A2A', grau: 'Gota', meses: 1, linhas: [['falta', 'tempo', '1 mês'], ['ok', 'provas', '1 carimbo de Carta'], ['falta', 'próximo', 'Infusão: mais 2 carimbos e 5 meses']] },
     { id: 'violeta', nome: 'Custo e gestão', cor: '#8B5CF6', escura: '#5B36C2', grau: 'Infusão', meses: 30, linhas: [['ok', 'tempo', '2 anos e 6 meses'], ['falta', 'provas', '4 de 6 carimbos'], ['falta', 'próximo', 'Reserva: uma carta inteira com custo fechado']] }
   ];
@@ -537,8 +532,8 @@ td:nth-child(2) { font-family: var(--display); font-size: 1.15rem; text-transfor
       var li = document.createElement('li');
       var bt = document.createElement('button'); bt.type = 'button'; bt.className = 'faixa';
       bt.setAttribute('aria-pressed', o.id === atual ? 'true' : 'false');
-      bt.setAttribute('aria-label', o.nome + ', ' + o.grau + '. Ver o barril.');
-      var seta = document.createElement('span'); seta.className = 'seta'; seta.textContent = '▶'; seta.setAttribute('aria-hidden', 'true');
+      bt.setAttribute('aria-label', o.nome + ', ' + o.grau + '. Ver o ofício.');
+      var seta = document.createElement('span'); seta.className = 'seta'; seta.textContent = '›'; seta.setAttribute('aria-hidden', 'true');
       var n = document.createElement('span'); n.className = 'n'; n.textContent = '0' + (i + 1);
       var cor = document.createElement('span'); cor.className = 'cor'; cor.style.setProperty('--c', o.cor); cor.setAttribute('aria-hidden', 'true');
       var t = document.createElement('span'); t.className = 't'; t.textContent = o.nome;

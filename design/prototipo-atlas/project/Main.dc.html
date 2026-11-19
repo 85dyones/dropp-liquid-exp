@@ -22,7 +22,7 @@ button { font-family: inherit; color: #1C1A16; }
 .marca svg { width: 22px; height: 26px; flex: none; }
 .semana { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; font-size: 11.5px; line-height: 1.3; letter-spacing: 0.04em; color: #5B5344; text-align: right; }
 .abas { display: flex; align-items: stretch; border-bottom: 1.5px solid #1C1A16; padding: 0 12px 0 6px; flex: none; }
-.aba { appearance: none; border: 0; background: transparent; padding: 0 10px; min-height: 46px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 125; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1.5px; color: #6E6555; }
+.aba { appearance: none; border: 0; background: transparent; padding: 0 10px; min-height: 46px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 125; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -1.5px; color: #6A6151; }
 .aba[aria-pressed="true"] { color: #1C1A16; border-bottom-color: #D946EF; }
 .voltar-bar { display: flex; align-items: center; gap: 4px; padding: 6px 12px 6px 4px; border-bottom: 1.5px solid #1C1A16; min-height: 58px; flex: none; }
 .voltar { appearance: none; border: 0; background: transparent; min-height: 44px; padding: 0 12px; font-weight: 600; font-size: 14px; cursor: pointer; }
@@ -30,10 +30,10 @@ button { font-family: inherit; color: #1C1A16; }
 
 .corpo { flex: 1; overflow-y: auto; padding: 14px 14px 92px; display: flex; flex-direction: column; gap: 14px; position: relative; }
 .corpo > * { flex: none; }
-.rot { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: #6E6555; }
+.rot { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10.5px; line-height: 1.3; letter-spacing: 0.22em; text-transform: uppercase; color: #6A6151; }
 .titulo-bloco { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 21px; line-height: 1.05; text-transform: uppercase; letter-spacing: 0.01em; }
 .titulo-grande { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 36px; line-height: 0.95; text-transform: uppercase; }
-.nota { font-size: 13px; line-height: 1.45; color: #6E6555; }
+.nota { font-size: 13px; line-height: 1.45; color: #6A6151; }
 .papel { background-color: #FAF6EC; background-image: radial-gradient(rgba(90, 65, 30, 0.05) 1px, transparent 1.3px); background-size: 5px 5px; color: #1C1A16; position: relative; border: 1.5px solid #1C1A16; }
 .papel .nota, .papel .rot { color: #5B5344; }
 .papel.corte::before, .papel.corte::after { content: ""; position: absolute; width: 14px; height: 14px; opacity: 0.5; background: linear-gradient(#1C1A16, #1C1A16) center / 1px 100% no-repeat, linear-gradient(#1C1A16, #1C1A16) center / 100% 1px no-repeat; pointer-events: none; }
@@ -44,7 +44,7 @@ button { font-family: inherit; color: #1C1A16; }
 .btn { appearance: none; border: 1.5px solid #1C1A16; background: transparent; color: #1C1A16; min-height: 46px; padding: 0 14px; font-weight: 700; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
 .btn.cheio { background: #1C1A16; color: #F8F3E7; }
 .btn.largo { width: 100%; }
-.btn.peq { min-height: 40px; font-size: 13px; padding: 0 12px; }
+.btn.peq { min-height: 44px; font-size: 13px; padding: 0 12px; }
 .btn:disabled { opacity: 0.35; cursor: not-allowed; }
 .chk { list-style: none; padding: 0; display: grid; gap: 7px; font-size: 14px; line-height: 1.4; }
 .chk li { display: flex; gap: 8px; align-items: baseline; }
@@ -61,7 +61,7 @@ button { font-family: inherit; color: #1C1A16; }
 .fonte { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; line-height: 1.45; background: rgba(28, 26, 22, 0.06); padding: 8px 10px; }
 
 .tipos { display: flex; flex-wrap: wrap; gap: 6px; }
-.tipo-chip { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 38px; padding: 0 11px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+.tipo-chip { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 44px; padding: 0 11px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
 .tipo-n { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; }
 .tipo-chip[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
 .item { appearance: none; width: 100%; text-align: left; cursor: pointer; padding: 13px 14px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; border-radius: 4px; }
@@ -101,7 +101,7 @@ button { font-family: inherit; color: #1C1A16; }
 
 .fatos { border-top: 1.5px solid #1C1A16; }
 .fatos div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(28, 26, 22, 0.18); font-size: 14px; line-height: 1.4; }
-.fatos dt { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6E6555; padding-top: 3px; }
+.fatos dt { font-weight: 600; font-variation-settings: "wdth" 125; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #6A6151; padding-top: 3px; }
 .encontros { list-style: none; padding: 0; display: grid; gap: 8px; }
 .encontros li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 10px; align-items: baseline; }
 .en-d { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 22px; line-height: 1; }
@@ -112,8 +112,8 @@ button { font-family: inherit; color: #1C1A16; }
 
 .carimbo-area { display: grid; place-items: center; padding: 10px 0 4px; }
 .carimbo { display: grid; justify-items: center; gap: 2px; padding: 10px 20px 9px; border: 3px solid currentColor; outline: 1.5px solid currentColor; outline-offset: 3px; transform: rotate(-4deg); font-family: "Courier Prime", "Courier New", monospace; text-transform: uppercase; text-align: center; }
-.carimbo.verde { color: #047857; }
-.carimbo.vermelho { color: #B91C1C; border-radius: 50%; padding: 18px 22px; }
+.carimbo.verde { color: #0B7654; }
+.carimbo.vermelho { color: #B02A2A; border-radius: 50%; padding: 18px 22px; }
 .c-tipo { font-size: 11px; font-weight: 700; letter-spacing: 0.22em; }
 .c-tit { font-family: Anton, Impact, "Arial Narrow", sans-serif; font-weight: 400; font-size: 26px; line-height: 1; letter-spacing: 0.02em; }
 .c-linha { font-size: 11px; }
@@ -142,7 +142,7 @@ button { font-family: inherit; color: #1C1A16; }
 .aviso { position: absolute; left: 12px; right: 12px; bottom: 74px; background: #1C1A16; color: #F8F3E7; padding: 6px 6px 6px 14px; display: flex; gap: 8px; align-items: center; font-size: 14px; line-height: 1.35; font-weight: 600; z-index: 5; box-shadow: 0 10px 24px rgba(60, 45, 20, 0.35); }
 .aviso button { appearance: none; border: 0; background: transparent; color: #F8F3E7; min-height: 44px; padding: 0 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: underline; }
 .nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1.5px solid #1C1A16; background: #EFE8D8; position: relative; z-index: 6; flex: none; }
-.nav button { appearance: none; border: 0; background: transparent; min-height: 62px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 115; letter-spacing: 0.06em; color: #6E6555; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.nav button { appearance: none; border: 0; background: transparent; min-height: 62px; font-size: 11px; font-weight: 600; font-variation-settings: "wdth" 115; letter-spacing: 0.06em; color: #6A6151; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
 .nav button[aria-current="page"] { color: #1C1A16; }
 .nav button:disabled { cursor: not-allowed; }
 .nav button:disabled svg { opacity: 0.6; }
@@ -168,7 +168,7 @@ button { font-family: inherit; color: #1C1A16; }
   <sc-if value="{{principal}}" hint-placeholder-val="{{ true }}">
     <div class="topo">
       <p class="marca"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>Atlas</p>
-      <p class="semana">SEMANA 47<br>18/11/2026</p>
+      <p class="semana">Sexta, 20/11/2026</p>
     </div>
     <div class="abas">
       <sc-for list="{{abas}}" as="ab" hint-placeholder-count="3">
@@ -351,6 +351,7 @@ button { font-family: inherit; color: #1C1A16; }
             </div>
           </div>
           <p class="nota">{{cur.opTxt}}</p>
+          <p class="nota">No protótipo, a assinatura chega na hora; no app, cada um confirma no próprio celular.</p>
         </div>
         <button type="button" class="btn cheio largo" onClick="{{cur.assinar}}">{{cur.assinarRot}}</button>
       </sc-if>
@@ -498,7 +499,7 @@ class Component extends DCLogic {
       aba: p.aba || 'estante', tela: 'principal', filtro: 'tudo', filtroAg: 'tudo', volta: '',
       tecSel: 'gelo', passo: 0, cursoSel: 'gelo', arqSel: 'hanky',
       cursos: {}, opcao: {}, ligadas: {},
-      registros: { hanky: { feito: '12/11/2026', conf: ['Elena Rostova'] } },
+      registros: { hanky: { feito: '12/11/2026', conf: ['Elena Quintana'] } },
       salvos: { brasa: true }, aviso: ''
     }, this.state || {});
     const set = (o) => this.setState(o);
@@ -516,11 +517,11 @@ class Component extends DCLogic {
         ],
         erros: ['Bloco turvo por inteiro: a caixa estava tampada e o frio entrou pelos lados.', 'Rachou ao cortar: faltou temperar.'],
         alem: 'O nome do método é congelamento direcional: o gelo cresce numa direção só.',
-        escolaTxt: 'Você ainda não tem carimbo no ofício Gelo e diluição. O curso Gelo claro na prática termina com uma prática avaliada no Sea Bar.', curso: 'gelo',
+        escolaTxt: 'Em Gelo e diluição você está no grau Gota, com 2 de 3 carimbos. O curso Gelo claro na prática dá o terceiro, com uma prática avaliada no Bar Salitre.', curso: 'gelo',
         ligarRot: 'Ligar às fichas com gelo em bloco', ligadaRot: 'Ligada às fichas do Caderno',
         ligarAviso: 'Técnica ligada às fichas do Negroni, do Boulevardier e do Penicillin, no Caderno.' },
       { id: 'clarificar', cod: 'AT-014', nome: 'Clarificar sem centrífuga', oficio: 'Preparo e fermentação',
-        porque: 'O cordial de maracujá (lote PF-001) sai toda semana. Você aprendeu com centrífuga, e o Sea Bar não tem uma. Esta é a versão por decantação.',
+        porque: 'O cordial de maracujá (lote PF-001) sai toda semana. Você aprendeu com centrífuga, e o Bar Salitre não tem uma. Esta é a versão por decantação.',
         linha: '1 kg · 2 g de enzima · 4 °C · 12 h', tempo: 'Leitura de 4 minutos. Prática de 13 horas, quase toda na geladeira.',
         passos: [
           { m: '1 kg', u: 'de purê', t: 'Pesar o purê', x: 'Purê de maracujá coado, sem sementes. Pese em vez de medir na jarra: a dose da enzima vai pelo peso.', l: 'balança · 1.000 g' },
@@ -538,24 +539,24 @@ class Component extends DCLogic {
 
     const cursos = [
       { id: 'gelo', cod: 'ESC-07', nome: 'Gelo claro na prática', oficio: 'Gelo e diluição', tipo: 'Curso com prática',
-        porque: 'Vem junto com a técnica AT-022 e dá o carimbo que falta no ofício Gelo e diluição.',
-        quem: 'Irene Soler, da Escola de coquetelaria de Valência', paga: 'Inscrição de €60, sem patrocínio.', pago: '',
-        prova: 'Você faz um bloco de 10 L no seu bar. A instrutora corta, confere a transparência e assina.',
+        porque: 'Vem junto com a técnica AT-022. Em Gelo e diluição você está no grau Gota, com 2 de 3 carimbos: a prática dá o terceiro, que, com 6 meses no ofício, abre o grau Infusão.',
+        quem: 'Irene Soler, grau Reserva em Gelo e diluição', paga: 'Incluído no plano Sócio. Sem ser sócio, só a prática presencial, por €39.', pago: '', preco: 'no Sócio, ou €39 só a prática', praticaOnde: 'no Bar Salitre',
+        prova: 'Você faz um bloco de 10 L no seu bar. A instrutora corta, confere a transparência e assina; um colega confere com ela.',
         leva: 'Carimbo Escola · Gelo claro, no ofício Gelo e diluição.',
-        encontros: [{ d: '01/12', t: 'Terça, 10h · teoria e corte', onde: 'Escola de coquetelaria, Valência' }, { d: '08/12', t: 'Terça, 16h · prática avaliada', onde: 'Sea Bar, Valência' }],
-        avancarRot: 'Ver como fica em 08/12', praticaRot: 'Prática de 08/12 · Sea Bar',
-        praticaTxt: 'Bloco de 10 L feito no seu freezer. A Irene corta na sua frente e confere o fundo.',
+        encontros: [{ d: '01/12', t: 'Aula 1 · Quanto o seu gelo dilui', onde: 'No app, quando quiser · exercício com a sua ficha' }, { d: '04/12', t: 'Aula 2 · Corte do bloco, ao vivo', onde: 'Sexta, 11h · online, com a Irene' }, { d: '08/12', t: 'Prática avaliada', onde: 'Terça, 16h · Bar Salitre, Valência' }],
+        avancarRot: 'Ver como fica em 08/12', praticaRot: 'Prática de 08/12 · Bar Salitre',
+        praticaTxt: 'Bloco de 10 L feito no seu freezer. A Irene corta na sua frente e confere o fundo; a Elena confere com ela.',
         medidaRot: 'Quanto rendeu de gelo claro?',
         opcoes: [{ id: '6', t: '6 kg', txt: '6 kg de 10 L: 60%. O turvo subiu mais que o esperado; a Irene vai olhar a tampa da caixa.' },
           { id: '7', t: '7 kg', txt: '7 kg de 10 L: 70%, o rendimento da técnica AT-022.' },
           { id: '8', t: '8 kg', txt: '8 kg de 10 L: 80%. Fundo pequeno e bloco inteiro claro.' }],
-        assina: 'Irene Soler', carimbo: { tipo: 'Escola', tit: 'Gelo claro', linha: 'prática aprovada' } },
+        assina: 'Irene Soler', confere: 'Elena Quintana', carimbo: { tipo: 'Escola', tit: 'Gelo claro', linha: 'prática aprovada' } },
       { id: 'semalcool', cod: 'ESC-11', nome: 'Carta sem álcool que vende', oficio: 'Sem álcool', tipo: 'Curso patrocinado',
-        porque: 'A carta de inverno do Sea Bar tem só um drink sem álcool, e ele sai pouco.',
-        quem: 'Equipe de formação da Aperitivos Exemplo; a prática é avaliada por Irene Soler, da Escola', paga: 'Gratuito para quem trabalha em bar.', pago: 'Aperitivos Exemplo',
+        porque: 'A carta de inverno do Bar Salitre tem só um drink sem álcool, e ele sai pouco.',
+        quem: 'Equipe de formação da Aperitivos Exemplo; a prática é avaliada por Irene Soler, da Escola', paga: 'Gratuito para quem trabalha em bar.', pago: 'Aperitivos Exemplo', preco: 'gratuito', praticaOnde: 'em Ruzafa',
         prova: 'Você cria um drink sem álcool com custo por dose calculado no Caderno. A instrutora prova e assina.',
         leva: 'Carimbo Escola · Sem álcool, no ofício Sem álcool.',
-        encontros: [{ d: '03/12', t: 'Quinta, 19h · encontro único, com prática', onde: 'Ruzafa, Valência' }],
+        encontros: [{ d: '03/12', t: 'Encontro único, com prática', onde: 'Quinta, 19h · Ruzafa, Valência' }],
         avancarRot: 'Ver como fica em 03/12', praticaRot: 'Prática de 03/12 · Ruzafa',
         praticaTxt: 'Seu drink sem álcool, com a ficha e o custo por dose do Caderno.',
         medidaRot: 'Custo por dose do seu drink',
@@ -574,7 +575,7 @@ class Component extends DCLogic {
         mudou: 'Nada essencial. A ficha da casa, no Caderno, segue o livro: batido, não mexido.',
         fonte: 'The Savoy Cocktail Book, de Harry Craddock (1930).', alerg: '',
         porque: 'Seu registro de 12/11 espera um colega: falta Tomás Vidal.',
-        colegas: [{ nome: 'Elena Rostova', papel: 'bartender do Sea Bar' }, { nome: 'Tomás Vidal', papel: 'head bartender da Casa Ostra, Lisboa' }], pedirRot: 'Lembrar' },
+        colegas: [{ nome: 'Elena Quintana', papel: 'bartender do Bar Salitre' }, { nome: 'Tomás Vidal', papel: 'head bartender da Casa Ostra, Lisboa' }], pedirRot: 'Lembrar' },
       { id: 'japanese', cod: 'ARQ-007', nome: 'Japanese Cocktail', autor: 'Jerry Thomas', linha: 'Jerry Thomas · Nova York, 1862',
         historia: 'Está no primeiro manual de bar publicado nos Estados Unidos. Segundo a história mais aceita, o nome lembra a primeira delegação japonesa a visitar Nova York, em 1860.',
         publicada: ['1 colher de sopa de xarope de orgeat', '½ colher de chá de bitters (Bogart\'s, no livro)', '1 taça de vinho de brandy', '1 ou 2 cascas de limão'],
@@ -583,7 +584,7 @@ class Component extends DCLogic {
         mudou: 'A taça de vinho do livro media cerca de 60 ml. O bitters da época não é mais feito como era; use um bitters aromático.',
         fonte: 'How to Mix Drinks, or The Bon-Vivant\'s Companion, de Jerry Thomas (1862).', alerg: 'amêndoa, no orgeat',
         porque: 'Leva orgeat, e o Caderno tem a ficha de preparo (lote ORG). Alérgeno: amêndoa.',
-        colegas: [{ nome: 'Elena Rostova', papel: 'bartender do Sea Bar' }, { nome: 'Ana Lima', papel: 'bartender do Sea Bar' }, { nome: 'Marta Ortega', papel: 'gerente do Sea Bar' }], pedirRot: 'Pedir' },
+        colegas: [{ nome: 'Elena Quintana', papel: 'bartender do Bar Salitre' }, { nome: 'Ana Lima', papel: 'bartender do Bar Salitre' }, { nome: 'Nuria Calvo', papel: 'gerente do Bar Salitre' }], pedirRot: 'Pedir' },
       { id: 'corpse', cod: 'ARQ-019', nome: 'Corpse Reviver No. 2', autor: 'Harry Craddock', linha: 'Harry Craddock · American Bar do Savoy, 1930',
         historia: 'Publicado por Harry Craddock, que sucedeu Ada Coleman no American Bar do Savoy.',
         publicada: ['¼ de suco de limão', '¼ de Kina Lillet', '¼ de Cointreau', '¼ de gim seco', '1 dash de absinto'],
@@ -592,7 +593,7 @@ class Component extends DCLogic {
         mudou: 'O Kina Lillet saiu de linha em 1986. O Lillet Blanc de hoje é menos amargo; há casas que usam um aperitivo com quinino no lugar.',
         fonte: 'The Savoy Cocktail Book, de Harry Craddock (1930).', alerg: '',
         porque: 'Tem Lillet Blanc parado no estoque desde outubro.',
-        colegas: [{ nome: 'Elena Rostova', papel: 'bartender do Sea Bar' }, { nome: 'Ana Lima', papel: 'bartender do Sea Bar' }, { nome: 'Marta Ortega', papel: 'gerente do Sea Bar' }], pedirRot: 'Pedir' },
+        colegas: [{ nome: 'Elena Quintana', papel: 'bartender do Bar Salitre' }, { nome: 'Ana Lima', papel: 'bartender do Bar Salitre' }, { nome: 'Nuria Calvo', papel: 'gerente do Bar Salitre' }], pedirRot: 'Pedir' },
       { id: 'crusta', cod: 'ARQ-002', nome: 'Brandy Crusta', autor: 'Joseph Santini', linha: 'Joseph Santini · Nova Orleans, década de 1850',
         historia: 'Criado por Joseph Santini em Nova Orleans e publicado por Jerry Thomas em 1862. A borda de açúcar e a casca inteira do limão dentro da taça são a assinatura do drink.',
         publicada: ['1 colher de sopa de xarope de goma', '2 dashes de bitters', '1 taça de vinho de brandy', '1 dash de curaçao', 'um pouco de suco de limão'],
@@ -601,21 +602,21 @@ class Component extends DCLogic {
         mudou: 'Versões de hoje costumam aumentar o curaçao e o limão. A página do Arquivo mostra o livro; a ficha da casa pode mudar e diz o quê.',
         fonte: 'How to Mix Drinks, de Jerry Thomas (1862).', alerg: '',
         porque: '',
-        colegas: [{ nome: 'Elena Rostova', papel: 'bartender do Sea Bar' }, { nome: 'Ana Lima', papel: 'bartender do Sea Bar' }, { nome: 'Marta Ortega', papel: 'gerente do Sea Bar' }], pedirRot: 'Pedir' }
+        colegas: [{ nome: 'Elena Quintana', papel: 'bartender do Bar Salitre' }, { nome: 'Ana Lima', papel: 'bartender do Bar Salitre' }, { nome: 'Nuria Calvo', papel: 'gerente do Bar Salitre' }], pedirRot: 'Pedir' }
     ];
 
     const eventosBase = [
-      { id: 'brasa', d: '26', m: 'nov', dia: 'qui', h: '21h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Brasa no Sea Bar', onde: 'Sea Bar, Valência', nota: 'Você recebe. A equipe do Brasa leva o carimbo Jornada; você esteve lá em 14/11.' },
-      { id: 'esc1', d: '01', m: 'dez', dia: 'ter', h: '10h', tipo: 'curso', tipoT: 'Curso', tit: 'Gelo claro na prática · encontro 1', onde: 'Escola de coquetelaria, Valência', nota: 'Teoria e corte.', curso: 'gelo' },
+      { id: 'brasa', d: '26', m: 'nov', dia: 'qui', h: '21h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Brasa no Bar Salitre', onde: 'Bar Salitre, Valência', nota: 'Você recebe. A equipe do Brasa leva o carimbo Jornada; você esteve lá em 14/11.' },
+      { id: 'esc1', d: '01', m: 'dez', dia: 'ter', h: 'quando quiser', tipo: 'curso', tipoT: 'Curso', tit: 'Gelo claro na prática · aula 1', onde: 'No app', nota: 'Exercício com a sua ficha do Negroni.', curso: 'gelo' },
       { id: 'apex', d: '03', m: 'dez', dia: 'qui', h: '19h', tipo: 'curso', tipoT: 'Curso patrocinado', tit: 'Carta sem álcool que vende', onde: 'Ruzafa, Valência', nota: 'Encontro único, com prática.', curso: 'semalcool', pago: 'Aperitivos Exemplo' },
-      { id: 'esc2', d: '08', m: 'dez', dia: 'ter', h: '16h', tipo: 'curso', tipoT: 'Curso', tit: 'Gelo claro na prática · prática avaliada', onde: 'Sea Bar, Valência', nota: 'Termina com o carimbo Escola · Gelo claro.', curso: 'gelo' },
+      { id: 'esc2', d: '04', m: 'dez', dia: 'sex', h: '11h', tipo: 'curso', tipoT: 'Curso · ao vivo', tit: 'Gelo claro na prática · aula 2', onde: 'Online, com Irene Soler', nota: 'Corte do bloco, com perguntas no fim.', curso: 'gelo' },
+      { id: 'esc3', d: '08', m: 'dez', dia: 'ter', h: '16h', tipo: 'curso', tipoT: 'Curso', tit: 'Gelo claro na prática · prática avaliada', onde: 'Bar Salitre, Valência', nota: 'Termina com o carimbo Escola · Gelo claro, com duas assinaturas.', curso: 'gelo' },
       { id: 'troca', d: '13', m: 'dez', dia: 'dom', h: '17h', tipo: 'encontro', tipoT: 'Encontro', tit: 'Troca de fichas de inverno', onde: 'Ruzafa, Valência', nota: 'Bartenders de Valência trocam fichas pessoais. Cada um leva uma e volta com outra.' },
-      { id: 'ostra', d: '14', m: 'dez', dia: 'seg', h: '20h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Sea Bar na Casa Ostra', onde: 'Casa Ostra, Lisboa', nota: 'Convite de Tomás Vidal. Dá o carimbo Jornada.' }
+      { id: 'ostra', d: '14', m: 'dez', dia: 'seg', h: '20h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Salitre na Casa Ostra', onde: 'Casa Ostra, Lisboa', nota: 'Convite de Tomás Vidal. Dá o carimbo Jornada.' }
     ];
 
     const estadoCurso = (id) => s.cursos[id] || 'aberto';
     const reg = (id) => s.registros[id] || null;
-    const completo = (id) => !!reg(id) && reg(id).conf.length >= 2;
 
     const abrirTec = (id) => set({ tela: 'tecnica', tecSel: id, passo: 0, volta: '', aviso: '' });
     const abrirCurso = (id, volta) => set({ tela: 'curso', cursoSel: id, volta: volta || '', aviso: '' });
@@ -634,11 +635,12 @@ class Component extends DCLogic {
       return { t: r.conf.length === 1 ? 'falta 1 colega' : 'faltam 2 colegas', cls: 'st meio' };
     };
 
+    const datasTxt = (ds) => ds.length > 1 ? ds.slice(0, -1).join(', ') + ' e ' + ds[ds.length - 1] : ds[0];
     const naEstante = [];
     tecnicas.forEach((t) => naEstante.push({ tipo: 'tecnica', rot: 'Técnica · ' + t.cod + ' · ' + t.oficio, nome: t.nome, porque: t.porque, linha: t.linha,
       chip: s.ligadas[t.id] ? { t: 'ligada ao Caderno', cls: 'st ok' } : (t.id === 'clarificar' ? { t: 'você já tem o carimbo Escola', cls: 'st falta' } : null), pago: '', abrir: () => abrirTec(t.id) }));
     cursos.forEach((c) => naEstante.push({ tipo: 'curso', rot: c.tipo + ' · ' + c.cod + ' · ' + c.oficio, nome: c.nome, porque: c.porque,
-      linha: c.encontros.map((e) => e.d).join(' e ') + ' · ' + (c.pago ? 'gratuito' : '€60'), chip: chipCurso(c), pago: c.pago, abrir: () => abrirCurso(c.id, '') }));
+      linha: datasTxt(c.encontros.map((e) => e.d)) + ' · ' + c.preco, chip: chipCurso(c), pago: c.pago, abrir: () => abrirCurso(c.id, '') }));
     classicos.filter((a) => a.porque).forEach((a) => naEstante.push({ tipo: 'classico', rot: 'Arquivo · ' + a.cod, nome: a.nome, porque: a.porque, linha: a.linha,
       chip: chipArq(a), pago: '', abrir: () => abrirArq(a.id) }));
 
@@ -689,7 +691,7 @@ class Component extends DCLogic {
       if (!cc) return tx.escolaTxt;
       const e = estadoCurso(cc.id);
       if (e === 'aprovado') return 'Você já tem o carimbo ' + cc.carimbo.tipo + ' · ' + cc.carimbo.tit + ', assinado por ' + cc.assina + '.';
-      if (e === 'inscrito' || e === 'pratica') return 'Você está inscrito em ' + cc.nome + '. A prática avaliada é em ' + cc.encontros[cc.encontros.length - 1].d + ', no ' + cc.encontros[cc.encontros.length - 1].onde.split(',')[0] + '.';
+      if (e === 'inscrito' || e === 'pratica') return 'Você está inscrito em ' + cc.nome + '. A prática avaliada é em ' + cc.encontros[cc.encontros.length - 1].d + ', ' + cc.praticaOnde + '.';
       return tx.escolaTxt;
     };
     const tec = {
@@ -706,22 +708,23 @@ class Component extends DCLogic {
     const opSel = s.opcao[c.id] || c.opcoes[1].id;
     const opAtual = c.opcoes.find((o) => o.id === opSel) || c.opcoes[1];
     const mudaCurso = (estado, extra) => { const cs = Object.assign({}, s.cursos); cs[c.id] = estado; set(Object.assign({ cursos: cs }, extra || {})); };
+    const nEnc = ['', 'um', 'dois', 'três'][c.encontros.length] || String(c.encontros.length);
     const cur = {
       rot: c.tipo + ' · ' + c.cod + ' · ' + c.oficio, nome: c.nome, porque: c.porque,
       temPago: !!c.pago, pagoT: c.pago ? 'Pago por ' + c.pago : '',
       quem: c.quem, paga: c.paga, prova: c.prova, leva: c.leva,
       encontros: c.encontros,
       aberto: ec === 'aberto', inscrito: ec === 'inscrito', pratica: ec === 'pratica', aprovado: ec === 'aprovado',
-      inscrever: () => mudaCurso('inscrito', { aviso: c.encontros.length > 1 ? 'Inscrição feita. Os dois encontros entraram na sua agenda e vão aparecer no Turno.' : 'Inscrição feita. O encontro entrou na sua agenda e vai aparecer no Turno.' }),
-      inscritoTxt: c.encontros.length > 1 ? 'Os dois encontros estão na sua agenda.' : 'O encontro está na sua agenda.',
+      inscrever: () => mudaCurso('inscrito', { aviso: c.encontros.length > 1 ? 'Inscrição feita. Os ' + nEnc + ' encontros entraram na sua agenda e vão aparecer no Turno.' : 'Inscrição feita. O encontro entrou na sua agenda e vai aparecer no Turno.' }),
+      inscritoTxt: c.encontros.length > 1 ? 'Os ' + nEnc + ' encontros estão na sua agenda.' : 'O encontro está na sua agenda.',
       avancarRot: c.avancarRot, avancar: () => mudaCurso('pratica', { aviso: '' }),
       praticaRot: c.praticaRot, praticaTxt: c.praticaTxt, medidaRot: c.medidaRot,
       opcoes: c.opcoes.map((o) => ({ t: o.t, on: o.id === opAtual.id, pick: () => { const op = Object.assign({}, s.opcao); op[c.id] = o.id; set({ opcao: op }); } })),
       opTxt: opAtual.txt,
-      assinarRot: 'Pedir a assinatura da ' + c.assina.split(' ')[0],
-      assinar: () => mudaCurso('aprovado', { aviso: c.assina + ' assinou. O carimbo ' + c.carimbo.tipo + ' · ' + c.carimbo.tit + ' foi para o seu Passaporte.' }),
+      assinarRot: c.confere ? 'Pedir as assinaturas da ' + c.assina.split(' ')[0] + ' e da ' + c.confere.split(' ')[0] : 'Pedir a assinatura da ' + c.assina.split(' ')[0],
+      assinar: () => mudaCurso('aprovado', { aviso: c.assina + ' assinou' + (c.confere ? ' e ' + c.confere + ' conferiu' : '') + '. O carimbo ' + c.carimbo.tipo + ' · ' + c.carimbo.tit + ' foi para o seu Passaporte.' }),
       cTipo: c.carimbo.tipo, cTit: c.carimbo.tit, cLinha: c.carimbo.linha,
-      aprovadoTxt: 'Assinado por ' + c.assina + '. Registro da prática: ' + opAtual.t + '. O carimbo foi para o seu Passaporte, no ofício ' + c.oficio + '.'
+      aprovadoTxt: 'Assinado por ' + c.assina + (c.confere ? ' e conferido por ' + c.confere : '') + '. Registro da prática: ' + opAtual.t + '. O carimbo foi para o seu Passaporte, no ofício ' + c.oficio + '.'
     };
 
     const a = classicos.find((x) => x.id === s.arqSel) || classicos[0];
@@ -732,8 +735,8 @@ class Component extends DCLogic {
       publicada: a.publicada.map((x) => ({ t: x })), pubNota: a.pubNota, fonteTxt: 'Fonte: ' + a.fonte,
       ml: a.ml.map((x) => ({ i: x[0], q: x[1] })), mudou: a.mudou, temAlerg: !!a.alerg, alerg: a.alerg,
       semRegistro: !ra, temRegistro: !!ra,
-      registrar: () => { const rg = Object.assign({}, s.registros); rg[a.id] = { feito: '18/11/2026', conf: [] }; set({ registros: rg, aviso: 'Registro feito. Agora peça a dois colegas que provem e confiram.' }); },
-      feitoTxt: ra ? 'Feito pela receita em ' + ra.feito + ', no Sea Bar.' : '',
+      registrar: () => { const rg = Object.assign({}, s.registros); rg[a.id] = { feito: '20/11/2026', conf: [] }; set({ registros: rg, aviso: 'Registro feito. Agora peça a dois colegas que provem e confiram.' }); },
+      feitoTxt: ra ? 'Feito pela receita em ' + ra.feito + ', no Bar Salitre.' : '',
       colegas: a.colegas.map((cl) => {
         const assinou = conf.indexOf(cl.nome) >= 0;
         return {

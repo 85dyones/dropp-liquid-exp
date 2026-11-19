@@ -6,7 +6,7 @@ A ideia que segura tudo: o DROPP parece **papel de trabalho de bar**. Etiqueta t
 
 ## A marca
 
-**A gota.** Sete pétalas, sete ofícios, sete cores. O desenho é o oficial do cliente e não se altera: não redesenhe, não recolora, não separe as pétalas, não troque a ordem.
+**A gota.** Sete pétalas, sete ofícios, sete cores. O desenho é o oficial da DROPP e não se altera: não redesenhe, não recolora, não separe as pétalas, não troque a ordem.
 
 | Pétala | Cor | Ofício |
 |---|---|---|
@@ -60,7 +60,7 @@ As três são de licença livre (SIL OFL 1.1) e vêm em `fonts/`, no recorte lat
 O mesmo sistema no escuro, para o turno da noite, quando a tela clara ofusca atrás do balcão. É um tema de tokens (`data-theme="balcao"`), não outra tela.
 
 - O papel vira carvão (#171410), a tinta vira creme (#EFE8D8), os cartões ficam um tom acima (#221E18).
-- As tintas de carimbo e de texto colorido clareiam para manter o contraste (`tinta-verde` #0B7654 → #34D399, e assim por diante).
+- As tintas de carimbo e de texto colorido clareiam para manter o contraste (`tinta-verde` #0B7654 → #6DCEA5, e assim por diante).
 - Não mudam: as sete cores da gota, a etiqueta térmica e o visor da câmera.
 - Liga sozinho na hora do turno da noite e pode ser fixado pela pessoa.
 

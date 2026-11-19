@@ -42,10 +42,11 @@ button { font-family: inherit; color: #1C1A16; }
 .bloco { padding: 14px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 9px; border-radius: 4px; }
 .sec-cab { display: grid; gap: 4px; }
 .sec-rot { display: grid; gap: 3px; padding-top: 6px; }
+.sec-tit { font-weight: 800; font-size: 20px; line-height: 1.2; }
 .btn { appearance: none; border: 1.5px solid #1C1A16; background: transparent; color: #1C1A16; min-height: 46px; padding: 0 14px; font-weight: 700; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-align: center; }
 .btn.cheio { background: #1C1A16; color: #F8F3E7; }
 .btn.largo { width: 100%; }
-.btn.peq { min-height: 40px; font-size: 13px; padding: 0 12px; }
+.btn.peq { min-height: 44px; font-size: 13px; padding: 0 12px; }
 .btn:disabled { opacity: 0.35; cursor: not-allowed; }
 .acoes { display: grid; gap: 8px; }
 .chk { list-style: none; padding: 0; display: grid; gap: 7px; font-size: 14px; line-height: 1.4; }
@@ -69,7 +70,7 @@ button { font-family: inherit; color: #1C1A16; }
 .seta { font-weight: 700; }
 
 .tipos { display: flex; flex-wrap: wrap; gap: 6px; }
-.tipo-chip { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 38px; padding: 0 11px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+.tipo-chip { appearance: none; border: 1.5px solid #1C1A16; background: transparent; min-height: 44px; padding: 0 11px; font-size: 13px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
 .tipo-n { font-family: "Courier Prime", "Courier New", monospace; font-weight: 700; }
 .tipo-chip[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
 .item { appearance: none; width: 100%; text-align: left; cursor: pointer; padding: 13px 14px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; border-radius: 4px; }
@@ -86,7 +87,8 @@ button { font-family: inherit; color: #1C1A16; }
 .tr-m { display: block; width: 16px; height: 16px; border-radius: 50%; border: 2px solid #1C1A16; background: #FAF6EC; margin-top: 2px; }
 .trilha li[data-est="feito"] .tr-m { background: #1C1A16; }
 .trilha li[data-est="agora"] .tr-m { background: #D946EF; }
-.trilha li[data-est="trava"] .tr-l { opacity: 0.5; }
+.trilha li[data-est="trava"] .tr-m { border-style: dashed; border-color: #6A6151; background: transparent; }
+.trilha li[data-est="trava"] .tr-nome, .trilha li[data-est="trava"] .tr-sub { color: #6A6151; }
 .tr-l { display: grid; gap: 3px; min-width: 0; justify-items: start; }
 .tr-nome { font-weight: 700; font-size: 15px; line-height: 1.3; }
 .tr-sub { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; line-height: 1.4; color: #5B5344; }
@@ -202,7 +204,7 @@ button { font-family: inherit; color: #1C1A16; }
   <sc-if value="{{principal}}" hint-placeholder-val="{{ true }}">
     <div class="topo">
       <p class="marca"><svg viewBox="0 0 100 120" aria-hidden="true"><use href="#gota-oficial"></use></svg>Atlas</p>
-      <p class="semana">SEMANA 47<br>18/11/2026</p>
+      <p class="semana">Viernes, 20/11/2026</p>
     </div>
     <div class="abas">
       <sc-for list="{{abas}}" as="ab" hint-placeholder-count="3">
@@ -248,7 +250,7 @@ button { font-family: inherit; color: #1C1A16; }
         <sc-if value="{{esc.gratis}}" hint-placeholder-val="{{ true }}">
           <div class="acoes">
             <button type="button" class="btn cheio largo" onClick="{{esc.serSocio}}">Hazte socio · 30 días gratis</button>
-            <sc-if value="{{esc.podePedir}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn largo" onClick="{{esc.pedirCasa}}">Pedir el Socio al Sea Bar</button></sc-if>
+            <sc-if value="{{esc.podePedir}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn largo" onClick="{{esc.pedirCasa}}">Pedir el Socio al Bar Salitre</button></sc-if>
             <sc-if value="{{esc.pedido}}" hint-placeholder-val="{{ false }}"><p class="lido"><span class="st ok">solicitado</span><span>{{esc.pedidoTxt}}</span></p></sc-if>
           </div>
         </sc-if>
@@ -277,7 +279,7 @@ button { font-family: inherit; color: #1C1A16; }
         </sc-if>
       </div>
 
-      <div class="sec-rot"><span class="rot">Próximos cursos</span></div>
+      <div class="sec-rot"><h2 class="sec-tit">Próximos cursos</h2></div>
       <sc-for list="{{esc.turmas}}" as="tm" hint-placeholder-count="3">
         <button type="button" class="papel corte item" onClick="{{tm.abrir}}">
           <span class="rot">{{tm.rot}}</span>
@@ -292,7 +294,7 @@ button { font-family: inherit; color: #1C1A16; }
         </button>
       </sc-for>
 
-      <div class="sec-rot"><span class="rot">Biblioteca</span><p class="nota">{{esc.bibTxt}}</p></div>
+      <div class="sec-rot"><h2 class="sec-tit">Biblioteca</h2><p class="nota">{{esc.bibTxt}}</p></div>
       <sc-for list="{{esc.materiais}}" as="mx" hint-placeholder-count="4">
         <button type="button" class="papel item" onClick="{{mx.abrir}}">
           <span class="rot">{{mx.rot}}</span>
@@ -517,7 +519,6 @@ button { font-family: inherit; color: #1C1A16; }
 
     <sc-if value="{{tPlano}}" hint-placeholder-val="{{ false }}">
       <div class="sec-cab">
-        <span class="rot">Escuela DROPP</span>
         <p class="titulo-grande">{{pl.titulo}}</p>
       </div>
       <div class="campo">
@@ -558,7 +559,7 @@ button { font-family: inherit; color: #1C1A16; }
         <div class="papel bloco">
           <span class="rot">¿Te lo paga tu casa?</span>
           <p>{{pl.casaTxt}}</p>
-          <sc-if value="{{pl.podePedir}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn largo" onClick="{{pl.pedirCasa}}">Pedir el Socio al Sea Bar</button></sc-if>
+          <sc-if value="{{pl.podePedir}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn largo" onClick="{{pl.pedirCasa}}">Pedir el Socio al Bar Salitre</button></sc-if>
           <sc-if value="{{pl.pedido}}" hint-placeholder-val="{{ false }}"><p class="lido"><span class="st ok">solicitado</span><span>{{pl.pedidoTxt}}</span></p></sc-if>
         </div>
       </sc-if>
@@ -566,7 +567,6 @@ button { font-family: inherit; color: #1C1A16; }
 
     <sc-if value="{{tAssinatura}}" hint-placeholder-val="{{ false }}">
       <div class="sec-cab">
-        <span class="rot">Escuela DROPP</span>
         <p class="titulo-grande">{{ass.nome}}</p>
       </div>
       <dl class="fatos">
@@ -771,7 +771,7 @@ class Component extends DCLogic {
       plano: p.plano || 'gratis', escolha: 'socio', ciclo: 'mensal', aceito: false, cancelado: false, confirmando: false, pedidoCasa: false,
       turmas: {}, aulas: {}, gelo: 'cubos', tempo: 30, opcao: '7', assin: [],
       guardados: {}, critica: 'aberta', critFicha: 'negroni', foto: false, aoVivo: false,
-      ligadas: {}, registros: { hanky: { feito: '12/11/2026', conf: ['Elena Rostova'] } }, salvos: { brasa: true }, aviso: ''
+      ligadas: {}, registros: { hanky: { feito: '12/11/2026', conf: ['Elena Quintana'] } }, salvos: { brasa: true }, aviso: ''
     }, this.state || {});
     const set = (o) => this.setState(o);
     const socio = s.plano === 'socio' || s.plano === 'barback';
@@ -799,11 +799,11 @@ class Component extends DCLogic {
         ],
         erros: ['Bloque turbio entero: la nevera portátil estaba tapada y el frío entró por los lados.', 'Se rajó al cortar: faltó templarlo.'],
         alem: 'El método se llama congelación direccional: el hielo crece en una sola dirección.',
-        escolaTxt: 'Todavía no tienes sello en el oficio Hielo y dilución. El curso Hielo claro en la práctica, de la Escuela DROPP, termina con una práctica evaluada en el Sea Bar.', curso: 'gelo',
+        escolaTxt: 'En Hielo y dilución estás en el grado Gota, con 2 de 3 sellos. El curso Hielo claro en la práctica, de la Escuela DROPP, te da el tercero, con una práctica evaluada en el Bar Salitre.', curso: 'gelo',
         ligarRot: 'Vincular a las fichas con hielo en bloque', ligadaRot: 'Vinculada a las fichas del Cuaderno',
         ligarAviso: 'Técnica vinculada a las fichas del Negroni, el Boulevardier y el Penicillin, en el Cuaderno.' },
       { id: 'clarificar', cod: 'AT-014', nome: 'Clarificar sin centrífuga', oficio: 'Preparación y fermentación',
-        porque: 'El cordial de maracuyá (lote PF-001) sale cada semana. Aprendiste con centrífuga y el Sea Bar no tiene una. Esta es la versión por decantación.',
+        porque: 'El cordial de maracuyá (lote PF-001) sale cada semana. Aprendiste con centrífuga y el Bar Salitre no tiene una. Esta es la versión por decantación.',
         linha: '1 kg · 2 g de enzima · 4 °C · 12 h', tempo: 'Lectura de 4 minutos. Práctica de 13 horas, casi todas en la nevera.',
         passos: [
           { m: '1 kg', u: 'de puré', t: 'Pesar el puré', x: 'Puré de maracuyá colado, sin pepitas. Pesa en lugar de medir en jarra: la dosis de enzima va por peso.', l: 'báscula · 1.000 g' },
@@ -828,7 +828,7 @@ class Component extends DCLogic {
         mudou: 'Nada esencial. La ficha de la casa, en el Cuaderno, sigue el libro: agitado, no removido.',
         fonte: 'The Savoy Cocktail Book, de Harry Craddock (1930).', alerg: '',
         porque: 'Tu registro del 12/11 espera a un colega: falta Tomás Vidal.',
-        colegas: [{ nome: 'Elena Rostova', papel: 'bartender del Sea Bar' }, { nome: 'Tomás Vidal', papel: 'head bartender de la Casa Ostra, Lisboa' }], pedirRot: 'Recordar a' },
+        colegas: [{ nome: 'Elena Quintana', papel: 'bartender del Bar Salitre' }, { nome: 'Tomás Vidal', papel: 'head bartender de la Casa Ostra, Lisboa' }], pedirRot: 'Recordar a' },
       { id: 'japanese', cod: 'ARQ-007', nome: 'Japanese Cocktail', autor: 'Jerry Thomas', linha: 'Jerry Thomas · Nueva York, 1862',
         historia: 'Está en el primer manual de bar publicado en Estados Unidos. Según la historia más aceptada, el nombre recuerda a la primera delegación japonesa que visitó Nueva York, en 1860.',
         publicada: ['1 cucharada de jarabe de orgeat', '½ cucharadita de bitters (Bogart\'s, en el libro)', '1 copa de vino de brandy', '1 o 2 pieles de limón'],
@@ -837,7 +837,7 @@ class Component extends DCLogic {
         mudou: 'La copa de vino del libro medía unos 60 ml. El bitters de la época ya no se hace como entonces; usa un bitters aromático.',
         fonte: 'How to Mix Drinks, or The Bon-Vivant\'s Companion, de Jerry Thomas (1862).', alerg: 'almendra, en el orgeat',
         porque: 'Lleva orgeat, y el Cuaderno tiene la ficha de preparación (lote ORG). Alérgeno: almendra.',
-        colegas: [{ nome: 'Elena Rostova', papel: 'bartender del Sea Bar' }, { nome: 'Ana Lima', papel: 'bartender del Sea Bar' }, { nome: 'Marta Ortega', papel: 'gerente del Sea Bar' }], pedirRot: 'Pedir a' },
+        colegas: [{ nome: 'Elena Quintana', papel: 'bartender del Bar Salitre' }, { nome: 'Ana Lima', papel: 'bartender del Bar Salitre' }, { nome: 'Nuria Calvo', papel: 'gerente del Bar Salitre' }], pedirRot: 'Pedir a' },
       { id: 'corpse', cod: 'ARQ-019', nome: 'Corpse Reviver No. 2', autor: 'Harry Craddock', linha: 'Harry Craddock · American Bar del Savoy, 1930',
         historia: 'Lo publicó Harry Craddock, que sucedió a Ada Coleman en el American Bar del Savoy.',
         publicada: ['¼ de zumo de limón', '¼ de Kina Lillet', '¼ de Cointreau', '¼ de ginebra seca', '1 dash de absenta'],
@@ -846,7 +846,7 @@ class Component extends DCLogic {
         mudou: 'El Kina Lillet dejó de fabricarse en 1986. El Lillet Blanc de hoy es menos amargo; hay casas que usan un aperitivo con quinina en su lugar.',
         fonte: 'The Savoy Cocktail Book, de Harry Craddock (1930).', alerg: '',
         porque: 'Hay Lillet Blanc parado en el almacén desde octubre.',
-        colegas: [{ nome: 'Elena Rostova', papel: 'bartender del Sea Bar' }, { nome: 'Ana Lima', papel: 'bartender del Sea Bar' }, { nome: 'Marta Ortega', papel: 'gerente del Sea Bar' }], pedirRot: 'Pedir a' },
+        colegas: [{ nome: 'Elena Quintana', papel: 'bartender del Bar Salitre' }, { nome: 'Ana Lima', papel: 'bartender del Bar Salitre' }, { nome: 'Nuria Calvo', papel: 'gerente del Bar Salitre' }], pedirRot: 'Pedir a' },
       { id: 'crusta', cod: 'ARQ-002', nome: 'Brandy Crusta', autor: 'Joseph Santini', linha: 'Joseph Santini · Nueva Orleans, década de 1850',
         historia: 'Lo creó Joseph Santini en Nueva Orleans y lo publicó Jerry Thomas en 1862. El borde de azúcar y la piel entera del limón dentro de la copa son la firma del cóctel.',
         publicada: ['1 cucharada de jarabe de goma', '2 dashes de bitters', '1 copa de vino de brandy', '1 dash de curaçao', 'un poco de zumo de limón'],
@@ -855,25 +855,25 @@ class Component extends DCLogic {
         mudou: 'Las versiones de hoy suelen subir el curaçao y el limón. La página del Archivo enseña el libro; la ficha de la casa puede cambiar y dice qué cambia.',
         fonte: 'How to Mix Drinks, de Jerry Thomas (1862).', alerg: '',
         porque: '',
-        colegas: [{ nome: 'Elena Rostova', papel: 'bartender del Sea Bar' }, { nome: 'Ana Lima', papel: 'bartender del Sea Bar' }, { nome: 'Marta Ortega', papel: 'gerente del Sea Bar' }], pedirRot: 'Pedir a' }
+        colegas: [{ nome: 'Elena Quintana', papel: 'bartender del Bar Salitre' }, { nome: 'Ana Lima', papel: 'bartender del Bar Salitre' }, { nome: 'Nuria Calvo', papel: 'gerente del Bar Salitre' }], pedirRot: 'Pedir a' }
     ];
 
     const turmas = [
       { id: 'gelo', cod: 'ESC-07', nome: 'Hielo claro en la práctica', oficio: 'Hielo y dilución', inicio: '01/12', livres: 3, total: 12, pago: '',
-        porque: 'Va junto con la técnica AT-022 y da el sello que te falta en el oficio Hielo y dilución.',
-        porqueBarback: 'Te lo sugiere el Barback: Hielo y dilución es el oficio sin sello en tu Pasaporte, y Negroni, Boulevardier y Penicillin salen con hielo en bloque comprado hecho.',
+        porque: 'Va junto con la técnica AT-022. En Hielo y dilución estás en el grado Gota, con 2 de 3 sellos: la práctica te da el tercero, que, con 6 meses en el oficio, abre el grado Infusión.',
+        porqueBarback: 'Te lo sugiere el Barback: en Hielo y dilución estás en el grado Gota, con 2 de 3 sellos y 4 meses, y el grado Infusión pide un curso con práctica y 6 meses. Negroni, Boulevardier y Penicillin salen con hielo en bloque comprado hecho.',
         quem: 'Irene Soler, grado Reserva en Hielo y dilución',
         prova: 'Haces un bloque de 10 L en tu bar. La instructora lo corta, revisa la transparencia y firma; un colega lo comprueba con ella.',
         leva: 'Sello Escuela · Hielo claro, en el oficio Hielo y dilución.',
         encontros: [
           { id: 'a1', d: '01/12', t: 'Clase 1 · Cuánto diluye tu hielo', onde: 'En la app, cuando quieras · ejercicio con tu ficha' },
           { id: 'a2', d: '04/12', t: 'Clase 2 · Corte del bloque, en directo', onde: 'Viernes, 11h · online, con Irene' },
-          { id: 'pr', d: '08/12', t: 'Práctica evaluada', onde: 'Martes, 16h · Sea Bar, Valencia' }
+          { id: 'pr', d: '08/12', t: 'Práctica evaluada', onde: 'Martes, 16h · Bar Salitre, Valencia' }
         ],
         temAula: true, carimbo: { tipo: 'Escuela', tit: 'Hielo claro', linha: 'práctica aprobada' } },
       { id: 'custo', cod: 'ESC-14', nome: 'Coste por dosis y carta que paga', oficio: 'Coste y gestión', inicio: '12/01', livres: 8, total: 12, pago: '',
         porque: 'El Campari subió un 11% el 12/11, y el Negroni de la casa ya cuesta el 23% del precio, por encima del objetivo del 22%.',
-        porqueBarback: 'Te lo sugiere el Barback: Coste y gestión es el siguiente oficio sin sello, y el coste del Negroni pasó del objetivo del 22% en noviembre.',
+        porqueBarback: 'Te lo sugiere el Barback: en Coste y gestión estás en el grado Infusión, con 4 de 6 sellos, y el grado Reserva pide una carta entera con el coste cerrado. El coste del Negroni pasó del objetivo del 22% en noviembre.',
         quem: 'Pablo Ferrer, grado Reserva en Coste y gestión',
         prova: 'Revisas el coste de la carta de tu casa en el Cuaderno. El instructor revisa las fichas y firma; un colega lo comprueba con él.',
         leva: 'Sello Escuela · Coste por dosis, en el oficio Coste y gestión.',
@@ -884,7 +884,7 @@ class Component extends DCLogic {
         ],
         temAula: false, carimbo: { tipo: 'Escuela', tit: 'Coste por dosis', linha: 'práctica aprobada' } },
       { id: 'semalcool', cod: 'ESC-11', nome: 'Carta sin alcohol que vende', oficio: 'Sin alcohol', inicio: '03/12', livres: 5, total: 20, pago: 'Aperitivos Ejemplo',
-        porque: 'La carta de invierno del Sea Bar tiene un solo cóctel sin alcohol, y sale poco.',
+        porque: 'La carta de invierno del Bar Salitre tiene un solo cóctel sin alcohol, y sale poco.',
         porqueBarback: '',
         quem: 'Equipo de formación de Aperitivos Ejemplo; la práctica la evalúa Irene Soler',
         prova: 'Creas un cóctel sin alcohol con el coste por dosis calculado en el Cuaderno. La instructora lo prueba y firma.',
@@ -901,7 +901,7 @@ class Component extends DCLogic {
       { id: 'mcarta', nome: 'Escandallo de la carta de invierno', tipo: 'Hoja de cálculo · plantilla', oficio: 'Coste y gestión', autor: 'Pablo Ferrer',
         trecho: ['Coste por dosis de cada cóctel, el objetivo de la casa y el precio que cuadra la cuenta.', 'Se abre directamente en el Cuaderno, con tus fichas en lugar de los ejemplos.'], abrirRot: 'Abrir en el Cuaderno' },
       { id: 'mcorte', nome: 'Corte del bloque, en 4 tomas', tipo: 'Clase grabada · 12 min', oficio: 'Hielo y dilución', autor: 'Irene Soler',
-        trecho: ['Marcar, templar, golpear el lomo del cuchillo y separar los cubos para el vaso bajo.', 'Grabada en el Sea Bar, con el congelador y la nevera portátil de la técnica AT-022.'], abrirRot: 'Ver la clase de 12 minutos' }
+        trecho: ['Marcar, templar, golpear el lomo del cuchillo y separar los cubos para el vaso bajo.', 'Grabada en el Bar Salitre, con el congelador y la nevera portátil de la técnica AT-022.'], abrirRot: 'Ver la clase de 12 minutos' }
     ];
 
     const fichasCrit = [{ id: 'negroni', t: 'Negroni' }, { id: 'boulevardier', t: 'Boulevardier' }, { id: 'penicillin', t: 'Penicillin' }];
@@ -914,8 +914,8 @@ class Component extends DCLogic {
     const abrirTurma = (id) => ir('turma', { turmaSel: id });
     const abrirPlano = (escolha) => ir('plano', { escolha: escolha, ciclo: s.ciclo || 'mensal', aceito: false });
 
-    const pedirCasa = () => set({ pedidoCasa: true, aviso: 'En la app, la solicitud va a Marta Ortega, gerente del Sea Bar. Si la aprueba, la Escuela se abre sin coste para ti.' });
-    const pedidoTxt = 'Solicitud enviada a Marta Ortega, gerente del Sea Bar. El plan de la casa tiene 2 plazas de socio, y 1 está libre.';
+    const pedirCasa = () => set({ pedidoCasa: true, aviso: 'En la app, la solicitud va a Nuria Calvo, gerente del Bar Salitre. Si la aprueba, la Escuela se abre sin coste para ti.' });
+    const pedidoTxt = 'Solicitud enviada a Nuria Calvo, gerente del Bar Salitre. El plan de la casa tiene 2 plazas de socio, y 1 está libre.';
 
     // Escuela
     const geloEst = estadoT('gelo');
@@ -963,8 +963,8 @@ class Component extends DCLogic {
       planoTxt: !socio
         ? 'La Escuela es de los socios: cursos con práctica, la biblioteca entera, una crítica al mes y una clase en directo. Son 30 días gratis y después 9,99 € al mes.'
         : (s.cancelado
-          ? 'Suscripción cancelada. Sigues siendo socio hasta el 18/12; los sellos, las fichas y tu estante se quedan.'
-          : 'Prueba gratis hasta el 18/12. Te avisamos el 03/12, quince días antes del primer cobro de ' + precoAtual(s.plano, s.ciclo) + '.'),
+          ? 'Suscripción cancelada. Sigues siendo socio hasta el 20/12; los sellos, las fichas y tu estante se quedan.'
+          : 'Prueba gratis hasta el 20/12. Te avisamos el 05/12, quince días antes del primer cobro de ' + precoAtual(s.plano, s.ciclo) + '.'),
       serSocio: () => abrirPlano('socio'),
       podePedir: !s.pedidoCasa, pedido: !!s.pedidoCasa, pedidoTxt: pedidoTxt, pedirCasa: pedirCasa,
       minhaAssin: () => ir('assinatura'),
@@ -994,8 +994,8 @@ class Component extends DCLogic {
       foto: !!s.foto, fotoMarca: s.foto ? '✓' : '', semFoto: !s.foto,
       fotoTxt: s.foto ? 'Foto del ' + fichaAtual.t + ' adjunta.' : 'Adjuntar la foto del cóctel',
       anexar: () => set({ foto: !s.foto, aviso: s.foto ? '' : 'En el prototipo, la foto entra hecha; en la app, se abre la cámara.' }),
-      enviar: () => { if (!s.foto) return; set({ critica: 'enviada', aviso: 'Enviado. La ficha del ' + fichaAtual.t + ' ha ido con la foto.' }); },
-      enviadaTxt: 'Enviado el 18/11: ' + fichaAtual.t + '. Irene Soler responde por escrito antes del 23/11.',
+      enviar: () => { if (!s.foto) return; set({ critica: 'enviada', aviso: 'En la app, la ficha del ' + fichaAtual.t + ' va con la foto a Irene Soler, que responde por escrito antes del 25/11.' }); },
+      enviadaTxt: 'Enviado el 20/11: ' + fichaAtual.t + '. Irene Soler responde por escrito antes del 25/11.',
       exRot: 'Ejemplo · una crítica de octubre, sobre un Penicillin',
       exTxt: 'El jengibre desaparece después del segundo sorbo: el jarabe salió con miel y jengibre a partes iguales, y la ficha pide 2 de miel por 1 de jengibre. El agua en el cóctel fue del 27%, frente al 22% de la ficha; con hielo en bloque y 10 segundos menos, llega. Los 7,5 ml de Islay por encima están bien.'
     };
@@ -1029,14 +1029,14 @@ class Component extends DCLogic {
 
     // Agenda
     const eventosBase = [
-      { id: 'brasa', d: '26', m: 'nov', dia: 'jue', diaL: 'jueves', h: '21h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Brasa en el Sea Bar', onde: 'Sea Bar, Valencia', nota: 'Tú recibes. El equipo del Brasa se lleva el sello Jornada; tú estuviste allí el 14/11.' },
+      { id: 'brasa', d: '26', m: 'nov', dia: 'jue', diaL: 'jueves', h: '21h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Brasa en el Bar Salitre', onde: 'Bar Salitre, Valencia', nota: 'Tú recibes. El equipo del Brasa se lleva el sello Jornada; tú estuviste allí el 14/11.' },
       { id: 'g1', d: '01', m: 'dic', dia: 'mar', diaL: 'martes', h: 'cuando quieras', tipo: 'escola', tipoT: 'Curso', tit: 'Hielo claro en la práctica · clase 1', onde: 'En la app', nota: 'Ejercicio con tu ficha del Negroni.', turma: 'gelo' },
       { id: 'apex', d: '03', m: 'dic', dia: 'jue', diaL: 'jueves', h: '19h', tipo: 'escola', tipoT: 'Curso patrocinado', tit: 'Carta sin alcohol que vende', onde: 'Ruzafa, Valencia', nota: 'Encuentro único, con práctica. Abierto a todos.', turma: 'semalcool', pago: 'Aperitivos Ejemplo' },
       { id: 'g2', d: '04', m: 'dic', dia: 'vie', diaL: 'viernes', h: '11h', tipo: 'escola', tipoT: 'Curso · en directo', tit: 'Hielo claro en la práctica · clase 2', onde: 'Online, con Irene Soler', nota: 'Corte del bloque, con preguntas al final.', turma: 'gelo' },
-      { id: 'g3', d: '08', m: 'dic', dia: 'mar', diaL: 'martes', h: '16h', tipo: 'escola', tipoT: 'Curso', tit: 'Hielo claro en la práctica · práctica evaluada', onde: 'Sea Bar, Valencia', nota: 'Termina con el sello Escuela · Hielo claro.', turma: 'gelo' },
+      { id: 'g3', d: '08', m: 'dic', dia: 'mar', diaL: 'martes', h: '16h', tipo: 'escola', tipoT: 'Curso', tit: 'Hielo claro en la práctica · práctica evaluada', onde: 'Bar Salitre, Valencia', nota: 'Termina con el sello Escuela · Hielo claro.', turma: 'gelo' },
       { id: 'viv', d: '10', m: 'dic', dia: 'jue', diaL: 'jueves', h: '18h', tipo: 'escola', tipoT: 'Clase en directo del mes', tit: 'Carta de invierno: qué entra y por qué', onde: 'Online, con Pablo Ferrer · 45 min', nota: 'Para socios de la Escuela.', aoVivo: true },
       { id: 'troca', d: '13', m: 'dic', dia: 'dom', diaL: 'domingo', h: '17h', tipo: 'encontro', tipoT: 'Encuentro', tit: 'Intercambio de fichas de invierno', onde: 'Ruzafa, Valencia', nota: 'Bartenders de Valencia intercambian fichas personales. Cada uno trae una y se lleva otra.' },
-      { id: 'ostra', d: '14', m: 'dic', dia: 'lun', diaL: 'lunes', h: '20h', tipo: 'guest', tipoT: 'Guest shift', tit: 'El Sea Bar en la Casa Ostra', onde: 'Casa Ostra, Lisboa', nota: 'Invitación de Tomás Vidal. Da el sello Jornada.' }
+      { id: 'ostra', d: '14', m: 'dic', dia: 'lun', diaL: 'lunes', h: '20h', tipo: 'guest', tipoT: 'Guest shift', tit: 'El Bar Salitre en la Casa Ostra', onde: 'Casa Ostra, Lisboa', nota: 'Invitación de Tomás Vidal. Da el sello Jornada.' }
     ];
     const contaAg = (tp) => eventosBase.filter((e) => tp === 'tudo' || e.tipo === tp).length;
     const filtrosAg = [{ id: 'tudo', t: 'todo' }, { id: 'guest', t: 'guest shifts' }, { id: 'escola', t: 'Escuela' }, { id: 'encontro', t: 'encuentros' }].map((f) => ({
@@ -1073,7 +1073,7 @@ class Component extends DCLogic {
       if (!tx.curso) return tx.escolaTxt;
       const e = estadoT(tx.curso);
       if (e === 'aprovado') return 'Ya tienes el sello Escuela · Hielo claro, firmado por Irene Soler.';
-      if (e !== 'aberta') return 'Estás en el curso Hielo claro en la práctica. La práctica evaluada es el 08/12, en el Sea Bar.';
+      if (e !== 'aberta') return 'Estás en el curso Hielo claro en la práctica. La práctica evaluada es el 08/12, en el Bar Salitre.';
       return tx.escolaTxt;
     };
     const tec = {
@@ -1098,7 +1098,7 @@ class Component extends DCLogic {
     const opAtual = opcoesRend.find((o) => o.id === s.opcao) || opcoesRend[1];
     const assinantesBase = [
       { nome: 'Irene Soler', papel: 'instructora · grado Reserva en Hielo y dilución', pedirRot: 'Pedir la firma', feitoT: 'firmó' },
-      { nome: 'Elena Rostova', papel: 'colega del Sea Bar', pedirRot: 'Pedir la comprobación', feitoT: 'lo comprobó' }
+      { nome: 'Elena Quintana', papel: 'colega del Bar Salitre', pedirRot: 'Pedir la comprobación', feitoT: 'lo comprobó' }
     ];
     const assinados = s.assin || [];
     const encontrosTu = tc.encontros.map((en) => {
@@ -1131,7 +1131,7 @@ class Component extends DCLogic {
       podePratica: et === 'dentro' && tc.temAula && aula1,
       irPratica: () => mudaTurma('pratica', { assin: [], aviso: '' }),
       pratica: et === 'pratica',
-      praticaRot: 'Práctica del 08/12 · Sea Bar', praticaTxt: 'Bloque de 10 L hecho en tu congelador. Irene lo corta delante de ti y revisa el fondo; Elena lo comprueba con ella.',
+      praticaRot: 'Práctica del 08/12 · Bar Salitre', praticaTxt: 'Bloque de 10 L hecho en tu congelador. Irene lo corta delante de ti y revisa el fondo; Elena lo comprueba con ella.',
       medidaRot: '¿Cuánto hielo claro salió?',
       opcoes: opcoesRend.map((o) => ({ t: o.t, on: o.id === opAtual.id, pick: () => set({ opcao: o.id }) })),
       opTxt: opAtual.txt,
@@ -1149,7 +1149,7 @@ class Component extends DCLogic {
       }),
       aprovado: et === 'aprovado',
       cTipo: tc.carimbo.tipo, cTit: tc.carimbo.tit, cLinha: tc.carimbo.linha,
-      aprovadoTxt: 'Firmado por Irene Soler y comprobado por Elena Rostova. Registro de la práctica: ' + opAtual.t + '. El sello ha ido a tu Pasaporte, en el oficio ' + tc.oficio + '.'
+      aprovadoTxt: 'Firmado por Irene Soler y comprobado por Elena Quintana. Registro de la práctica: ' + opAtual.t + '. El sello ha ido a tu Pasaporte, en el oficio ' + tc.oficio + '.'
     };
 
     // Clase
@@ -1173,7 +1173,7 @@ class Component extends DCLogic {
         { t: 'Ficha: 22% · 19,8 ml de agua' }
       ],
       veredito: veredito,
-      nota: 'Valores del ejercicio, medidos por Irene en el Sea Bar con el hielo de la casa. En la app, mides con tu báscula y revisas tu ficha.',
+      nota: 'Valores del ejercicio, medidos por Irene en el Bar Salitre con el hielo de la casa. En la app, mides con tu báscula y revisas tu ficha.',
       feita: aula1, concluirRot: aula1 ? 'Clase 1 terminada' : 'Terminar la clase 1',
       concluir: () => {
         if (aula1) return;
@@ -1211,10 +1211,10 @@ class Component extends DCLogic {
       ciclos: [{ id: 'mensal', t: 'Mensual', s: precos[escolha].mensal + ' al mes' }, { id: 'anual', t: 'Anual', s: '2 meses gratis' }].map((c) => ({ t: c.t, s: c.s, on: ciclo === c.id, pick: () => set({ ciclo: c.id }) })),
       valor: ciclo === 'anual' ? precos[escolha].anual : precos[escolha].mensal,
       unidade: ciclo === 'anual' ? 'al año' : 'al mes',
-      valorNota: (ciclo === 'anual' ? 'Sale a ' + precos[escolha].anualMes + ' al mes. ' : '') + 'IVA incluido. ' + (socio ? 'Tu prueba gratis dura hasta el 18/12.' : 'Los primeros 30 días son gratis.'),
+      valorNota: (ciclo === 'anual' ? 'Sale a ' + precos[escolha].anualMes + ' al mes. ' : '') + 'IVA incluido. ' + (socio ? 'Tu prueba gratis dura hasta el 20/12.' : 'Los primeros 30 días son gratis.'),
       inclui: (escolha === 'barback' ? incluiBarback : incluiSocio).map((x) => ({ t: x })),
       regras: [
-        { k: 'aviso', t: 'Te avisamos el 03/12, quince días antes del primer cobro.' },
+        { k: 'aviso', t: 'Te avisamos el 05/12, quince días antes del primer cobro.' },
         { k: 'cancelar', t: 'Cancelar está en Mi suscripción, con un toque, igual que te suscribiste.' },
         { k: 'tienda', t: 'El cobro pasa por la App Store o Google Play.' }
       ],
@@ -1224,15 +1224,15 @@ class Component extends DCLogic {
       comecarRot: mesmoPlano ? 'Este es tu plan' : (s.cancelado && socio ? 'Volver a suscribirme' : (upgrade ? 'Pasar al plan con Barback' : (socio ? 'Volver al Socio, sin el Barback' : 'Empezar 30 días gratis'))),
       comecar: () => {
         if (mesmoPlano || (novo && !s.aceito)) return;
-        let msg = 'En la app, la suscripción pasa por la App Store o Google Play. No se cobra nada hasta el 18/12; te avisamos el 03/12.';
-        if (s.cancelado && socio) msg = 'Suscripción recuperada. El primer cobro sigue siendo el 18/12, con aviso el 03/12.';
+        let msg = 'En la app, la suscripción pasa por la App Store o Google Play. No se cobra nada hasta el 20/12; te avisamos el 05/12.';
+        if (s.cancelado && socio) msg = 'Suscripción recuperada. El primer cobro sigue siendo el 20/12, con aviso el 05/12.';
         else if (upgrade) msg = 'En la app, el cambio pasa por la tienda. El Barback personal empieza hoy y la diferencia entra en el próximo cobro.';
-        else if (socio && !s.cancelado) msg = 'A partir del próximo cobro, ' + precoAtual('socio', ciclo) + '. El Barback personal sigue hasta el 18/12.';
+        else if (socio && !s.cancelado) msg = 'A partir del próximo cobro, ' + precoAtual('socio', ciclo) + '. El Barback personal sigue hasta el 20/12.';
         voltarDe({ plano: escolha, ciclo: ciclo, cancelado: false, aviso: msg });
       },
       casaTxt: escolha === 'barback'
-        ? 'El Sea Bar tiene el Plan Casa, que incluye el Socio para 2 personas y tiene 1 plaza libre. El Barback personal es tuyo, va contigo de casa en casa y no entra en el plan de la casa.'
-        : 'El Sea Bar tiene el Plan Casa, que incluye el Socio para 2 personas del equipo. Una de las plazas está libre.',
+        ? 'El Bar Salitre tiene el Plan Casa, que incluye el Socio para 2 personas y tiene 1 plaza libre. El Barback personal es tuyo, va contigo de casa en casa y no entra en el plan de la casa.'
+        : 'El Bar Salitre tiene el Plan Casa, que incluye el Socio para 2 personas del equipo. Una de las plazas está libre.',
       mostraCasa: !socio,
       podePedir: !s.pedidoCasa, pedido: !!s.pedidoCasa, pedidoTxt: pedidoTxt, pedirCasa: pedirCasa
     };
@@ -1244,9 +1244,9 @@ class Component extends DCLogic {
       fatos: [
         { k: 'Plan', v: precos[planoAssin].nome + ' · ' + (s.ciclo === 'anual' ? 'anual' : 'mensual') },
         { k: 'Precio', v: precoAtual(planoAssin, s.ciclo) + ', IVA incluido' },
-        { k: 'Prueba', v: 'gratis hasta el 18/12/2026' },
-        { k: 'Aviso', v: s.cancelado ? 'ninguno: no hay próximo cobro' : 'el 03/12, quince días antes del cobro' },
-        { k: 'Cobro', v: s.cancelado ? 'cancelado' : 'por la App Store, el 18/12' }
+        { k: 'Prueba', v: 'gratis hasta el 20/12/2026' },
+        { k: 'Aviso', v: s.cancelado ? 'ninguno: no hay próximo cobro' : 'el 05/12, quince días antes del cobro' },
+        { k: 'Cobro', v: s.cancelado ? 'cancelado' : 'por la App Store, el 20/12' }
       ],
       ativa: socio && !s.cancelado && !s.confirmando,
       trocarRot: s.plano === 'barback' ? 'Volver al Socio, sin el Barback' : 'Pasar al plan con Barback',
@@ -1254,11 +1254,11 @@ class Component extends DCLogic {
       podeCancelar: true,
       pedirCancel: () => set({ confirmando: true, aviso: '' }),
       confirmando: socio && !s.cancelado && !!s.confirmando,
-      confTxt: 'Sigues siendo socio hasta el 18/12 y no se cobra nada. Los sellos, las fichas y lo que hay en tu estante se quedan contigo.',
-      cancelar: () => set({ cancelado: true, confirmando: false, aviso: 'Suscripción cancelada. Sigues siendo socio hasta el 18/12.' }),
+      confTxt: 'Sigues siendo socio hasta el 20/12 y no se cobra nada. Los sellos, las fichas y lo que hay en tu estante se quedan contigo.',
+      cancelar: () => set({ cancelado: true, confirmando: false, aviso: 'Suscripción cancelada. Sigues siendo socio hasta el 20/12.' }),
       manter: () => set({ confirmando: false }),
       cancelada: socio && !!s.cancelado,
-      canceladaTxt: 'Socio hasta el 18/12. No se cobrará nada.',
+      canceladaTxt: 'Socio hasta el 20/12. No se cobrará nada.',
       reassinar: () => abrirPlano(s.plano === 'barback' ? 'barback' : 'socio')
     };
 
@@ -1271,8 +1271,8 @@ class Component extends DCLogic {
       publicada: a.publicada.map((x) => ({ t: x })), pubNota: a.pubNota, fonteTxt: 'Fuente: ' + a.fonte,
       ml: a.ml.map((x) => ({ i: x[0], q: x[1] })), mudou: a.mudou, temAlerg: !!a.alerg, alerg: a.alerg,
       semRegistro: !ra, temRegistro: !!ra,
-      registrar: () => { const rg = Object.assign({}, s.registros); rg[a.id] = { feito: '18/11/2026', conf: [] }; set({ registros: rg, aviso: 'Registro hecho. Ahora pide a dos colegas que la prueben y la comprueben.' }); },
-      feitoTxt: ra ? 'Hecho con la receta el ' + ra.feito + ', en el Sea Bar.' : '',
+      registrar: () => { const rg = Object.assign({}, s.registros); rg[a.id] = { feito: '20/11/2026', conf: [] }; set({ registros: rg, aviso: 'Registro hecho. Ahora pide a dos colegas que la prueben y la comprueben.' }); },
+      feitoTxt: ra ? 'Hecho con la receta el ' + ra.feito + ', en el Bar Salitre.' : '',
       colegas: a.colegas.map((cl) => {
         const assinou = conf.indexOf(cl.nome) >= 0;
         return {

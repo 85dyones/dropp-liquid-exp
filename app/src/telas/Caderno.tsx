@@ -30,7 +30,7 @@ export function Caderno({ t, lang, avisar }: { t: Textos; lang: Lang; avisar: (t
               <Botao onClick={() => avisar(c.lerAviso)}>{c.ler}</Botao>
             </div>
             <div className="dia">
-              <h3 className="dp-rot">{c.diaTit}</h3>
+              <h3 className="sub-titulo">{c.diaTit}</h3>
               <ul className="garrafas">
                 {c.garrafas.map((g) => (
                   <li key={g.lote} data-estado={g.estado}>
