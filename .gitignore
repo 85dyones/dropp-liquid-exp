@@ -24,3 +24,11 @@ dist/
 /site/src/styles/tokens.css
 /site/public/fonts/
 /site/.astro/
+
+# Variáveis locais (o .env.example vai para o git)
+.env
+.env.*
+!.env.example
+
+# Cache da CLI do Supabase
+/supabase/.temp/

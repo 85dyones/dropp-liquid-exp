@@ -1,0 +1,84 @@
+/* Escola: mesmas peças do sistema de design (papel, carimbo, selos de estado), sem nada decorativo. */
+
+.esc { gap: 16px; }
+.esc-estado { padding: 16px 0; display: grid; gap: 10px; justify-items: start; }
+.esc-bloco { display: grid; gap: 10px; }
+.esc-lista { display: grid; gap: 10px; }
+.esc-lista > .sub-titulo { margin-top: 6px; }
+.esc-cab-linha { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 12px; }
+.esc-pe { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.esc-lido { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; font-size: 14px; line-height: 1.4; }
+.esc-acoes { display: grid; gap: 10px; }
+
+/* link de ação discreto, com alvo de toque inteiro */
+.esc-link {
+  appearance: none; border: 0; background: transparent; color: var(--tinta); cursor: pointer;
+  min-height: var(--alvo-toque); padding: 0 2px; justify-self: start;
+  font: 600 14px var(--font-texto); text-decoration: underline; text-underline-offset: 3px;
+}
+.esc-link:disabled { opacity: 0.5; cursor: default; }
+
+/* formulários */
+.esc-form { display: grid; gap: 10px; }
+.esc-campo, .esc-campo-grupo { display: grid; gap: 6px; }
+.esc-rotulo { font: 600 13px/1.3 var(--font-texto); color: var(--tinta); }
+.esc-campo input, .esc-campo textarea {
+  font: 400 16px/1.4 var(--font-texto); color: var(--tinta);
+  background: var(--papel); border: var(--borda-tinta) solid var(--tinta); border-radius: var(--raio-0);
+  padding: 10px 12px; min-height: var(--alvo-toque); width: 100%;
+}
+.esc-campo textarea { resize: vertical; }
+.esc-demo .dp-seg { flex-direction: column; gap: 2px; }
+.esc-form .dp-btn--peq { justify-self: start; }
+
+/* cartões de turma e de material */
+.esc-turma { appearance: none; text-align: left; color: inherit; font: inherit; cursor: pointer; display: grid; gap: 7px; width: 100%; }
+.esc-turma:hover { background-color: var(--papel); }
+.esc-material { display: grid; gap: 7px; }
+.esc-mat-nome { font: 700 17px/1.25 var(--font-texto); }
+.esc-pe .dp-st { white-space: normal; }
+
+/* crítica */
+.esc-critica { display: grid; gap: 6px; padding-top: 10px; border-top: 1px dotted var(--fio); }
+.esc-ficha { font: 13px/1.5 var(--font-medida); }
+.esc-resposta { display: grid; gap: 4px; padding-left: 10px; border-left: 3px solid var(--tinta); font-size: 14px; line-height: 1.45; }
+
+/* turma */
+.esc-voltar { margin: -6px 0 0 -12px; }
+.esc-turma-grade { display: grid; gap: 28px; align-items: start; }
+.esc-fatos { display: grid; border-top: var(--borda-tinta) solid var(--tinta); }
+.esc-fatos > div { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); gap: 12px; padding: 9px 0; border-bottom: 1px dotted var(--fio); }
+.esc-fatos dt { font: 600 10.5px/1.5 var(--font-texto); font-variation-settings: "wdth" 125; letter-spacing: 0.16em; text-transform: uppercase; color: var(--tinta-suave); }
+.esc-fatos dd { font-size: 14px; line-height: 1.4; }
+.esc-encontros { display: grid; }
+.esc-encontros li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 12px; padding: 10px 0; border-bottom: 1px dotted var(--fio); }
+.esc-encontros li:last-child { border-bottom: 0; }
+.esc-en-d { font: 400 22px/1.1 var(--font-display); }
+.esc-encontros li[data-feito="true"] .esc-en-d { text-decoration: line-through; text-decoration-thickness: 2px; }
+.esc-en-l { display: grid; gap: 3px; min-width: 0; }
+.esc-en-t { font-weight: 700; font-size: 15px; line-height: 1.3; }
+
+/* carimbo */
+.esc-carimbo { display: grid; gap: 12px; justify-items: start; padding: 8px 4px; }
+.esc-conferir { display: grid; gap: 8px; padding-top: 10px; border-top: 1px dotted var(--fio); }
+.esc-pedidos { display: grid; }
+.esc-pedidos li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 10px 0; border-bottom: 1px dotted var(--fio); }
+.esc-pedidos li:last-child { border-bottom: 0; }
+.esc-assinaturas { display: grid; gap: 4px; min-width: 0; }
+.esc-ass { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+.esc-ass .dp-st { white-space: normal; }
+
+/* mural */
+.esc-mural { gap: 12px; }
+.esc-compor .dp-btn { justify-self: start; }
+.esc-post { display: grid; gap: 8px; }
+.esc-post[data-oculto="true"], .esc-respostas li[data-oculto="true"] { opacity: 0.7; border-style: dashed; }
+.esc-post-cab { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 10px; }
+.esc-autor { font-size: 14px; }
+.esc-post-txt { font-size: 15px; line-height: 1.5; white-space: pre-line; overflow-wrap: anywhere; }
+.esc-respostas { display: grid; gap: 8px; padding-left: 12px; border-left: 3px solid var(--fio); }
+.esc-respostas li { display: grid; gap: 3px; font-size: 14px; line-height: 1.45; overflow-wrap: anywhere; }
+
+@media (min-width: 1000px) {
+  .esc-turma-grade { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; }
+}

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es-ES">
+<head>
+<meta charset="utf-8">
+<title>DROPP · Una noche en la barra</title>
+<style>
+  html, body { margin: 0; background: #1C1A16; }
+  canvas { display: block; width: 1080px; height: 1920px; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// Vídeo de lançamento, 1080 × 1920, ~30 s. Só telas reais dos protótipos em espanhol (pasta telas/).
+// ?t=12.5 desenha um quadro parado; window.gravar() grava o vídeo inteiro e envia para /salvar.
+const W = 1080, H = 1920, DUR = 30.0, XF = 0.35;
+const PAPEL = '#EFE8D8', TINTA = '#1C1A16', SUAVE = '#5B5344';
+const FONTES = '../sistema-de-design/project/fonts/';
+const PETALAS = [
+  ['M50 8 C50 8 36 28 32 46 C37 40 45 36 50 36 C55 36 63 40 68 46 C64 28 50 8 50 8 Z', '#FACC15'],
+  ['M32 46 C24 57 20 68 22 79 C25 80 29 80 34 78 C31 66 33 55 42 46 C38 45 35 45 32 46 Z', '#10B981'],
+  ['M22 79 C24 93 35 106 50 108 C46 98 46 88 50 78 C39 77 31 82 22 79 Z', '#06B6D4'],
+  ['M68 46 C76 57 80 68 78 79 C75 80 71 80 66 78 C69 66 67 55 58 46 C62 45 65 45 68 46 Z', '#F97316'],
+  ['M78 79 C76 93 65 106 50 108 C54 98 54 88 50 78 C61 77 69 82 78 79 Z', '#EF4444'],
+  ['M50 38 C42 45 38 56 39 68 C40 82 48 94 50 96 C52 94 60 82 61 68 C62 56 58 45 50 38 Z', '#D946EF'],
+  ['M50 78 C44 86 44 95 50 106 C56 95 56 86 50 78 Z', '#8B5CF6']
+].map(([d, cor]) => [new Path2D(d), cor]);
+
+// Linha do tempo. Cada cena com a tela real, a hora e a legenda conferidas contra a tela.
+const CENAS = [
+  { tipo: 'abertura', ini: 0, fim: 2.6 },
+  { tipo: 'tela', ini: 2.25, fim: 7.15, img: 'telas/1-recados.png', hora: '17:00', cor: '#10B981',
+    texto: 'Tres recados antes del servicio. Cada uno con la cuenta a la vista.' },
+  { tipo: 'tela', ini: 6.8, fim: 11.7, img: 'telas/2-lote.png', hora: '18:10', cor: '#F97316',
+    texto: 'El cordial sale con etiqueta: caducidad, alérgenos y QR.' },
+  { tipo: 'tela', ini: 11.35, fim: 16.25, img: 'telas/3-servicio.png', hora: '21:30', cor: '#06B6D4',
+    texto: 'En el servicio, solo voz. Sin ficha, no hay respuesta.' },
+  { tipo: 'tela', ini: 15.9, fim: 20.8, img: 'telas/4-cierre.png', hora: '01:30', cor: '#8B5CF6',
+    texto: 'Sesenta segundos hablando y el turno queda en el libro.' },
+  { tipo: 'tela', ini: 20.45, fim: 25.6, img: 'telas/5-pasaporte.png', hora: null, cor: '#D946EF',
+    texto: 'Y lo que haces en la barra queda firmado en tu Pasaporte.' },
+  { tipo: 'fecho', ini: 25.25, fim: DUR }
+];
+
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+const imagens = {};
+
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const sai = (x) => 1 - Math.pow(1 - clamp(x), 3);          // ease-out cúbico
+const entraSai = (x) => { x = clamp(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+
+let grao;
+function prepararGrao() {
+  grao = document.createElement('canvas');
+  grao.width = grao.height = 12;
+  const g = grao.getContext('2d');
+  g.fillStyle = 'rgba(90, 65, 30, 0.07)';
+  g.beginPath(); g.arc(6, 6, 1.6, 0, Math.PI * 2); g.fill();
+}
+
+function fundo() {
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = PAPEL; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = ctx.createPattern(grao, 'repeat'); ctx.fillRect(0, 0, W, H);
+}
+
+function gota(cx, cy, altura, progresso = 1) {
+  const s = altura / 104;
+  PETALAS.forEach(([p, cor], i) => {
+    const a = sai((progresso * 1.6) - i * 0.09);
+    if (a <= 0) return;
+    ctx.save();
+    ctx.globalAlpha *= a;
+    ctx.translate(cx, cy);
+    ctx.scale(s * (0.85 + 0.15 * a), s * (0.85 + 0.15 * a));
+    ctx.translate(-50, -58);
+    ctx.fillStyle = cor; ctx.fill(p);
+    ctx.restore();
+  });
+}
+
+function texto(t, x, y, { fonte, cor = TINTA, alinhar = 'center', espaco = '0px' }) {
+  ctx.font = fonte; ctx.fillStyle = cor; ctx.textAlign = alinhar; ctx.textBaseline = 'alphabetic';
+  ctx.letterSpacing = espaco;
+  ctx.fillText(t, x, y);
+  ctx.letterSpacing = '0px';
+}
+
+function quebrar(t, largura, fonte) {
+  ctx.font = fonte;
+  const palavras = t.split(' ');
+  const linhas = [];
+  let atual = '';
+  for (const p of palavras) {
+    const teste = atual ? `${atual} ${p}` : p;
+    if (ctx.measureText(teste).width > largura && atual) { linhas.push(atual); atual = p; } else atual = teste;
+  }
+  if (atual) linhas.push(atual);
+  return linhas;
+}
+
+function marca(cy, alfa) {
+  ctx.globalAlpha = alfa;
+  texto('DROPP', W / 2, cy, { fonte: '400 190px Anton', espaco: '6px' });
+  texto('LIQUID EXPERIENCE', W / 2 + 7, cy + 78, { fonte: '600 34px Archivo', cor: SUAVE, espaco: '14px' });
+}
+
+function abertura(u, alfa) {
+  ctx.save();
+  ctx.globalAlpha = alfa;
+  gota(W / 2, 640, 300, clamp(u / 1.1));
+  marca(1010, alfa * sai((u - 0.5) / 0.6));
+  ctx.globalAlpha = alfa * sai((u - 1.15) / 0.5);
+  texto('Una noche en la barra.', W / 2, 1330, { fonte: '700 64px Archivo' });
+  ctx.restore();
+}
+
+function fecho(u, alfa) {
+  ctx.save();
+  ctx.globalAlpha = alfa;
+  gota(W / 2, 640, 300, 1);
+  marca(1010, alfa);
+  ctx.globalAlpha = alfa * sai((u - 0.6) / 0.6);
+  texto('El bar primero.', W / 2, 1360, { fonte: '400 70px Anton', espaco: '2px' });
+  ctx.restore();
+}
+
+function tela(cena, u, alfa) {
+  const img = imagens[cena.img];
+  const dur = cena.fim - cena.ini;
+  ctx.save();
+  ctx.globalAlpha = alfa;
+
+  // Texto do topo: hora em Anton com uma barra na cor da gota e a legenda.
+  const entraTexto = sai((u - 0.12) / 0.5);
+  const dy = (1 - entraTexto) * 30;
+  let y = 250;
+  ctx.globalAlpha = alfa * entraTexto;
+  if (cena.hora) {
+    texto(cena.hora, 84, y + dy, { fonte: '400 150px Anton', alinhar: 'left' });
+    ctx.fillStyle = cena.cor; ctx.fillRect(84, y + 26 + dy, 120 * sai((u - 0.3) / 0.5), 12);
+    y += 112;
+  } else {
+    ctx.fillStyle = cena.cor; ctx.fillRect(84, y + 26 + dy, 120 * sai((u - 0.3) / 0.5), 12);
+    y += 112;
+  }
+  const fonteLegenda = '600 54px Archivo';
+  const linhas = quebrar(cena.texto, W - 168, fonteLegenda);
+  linhas.forEach((l, i) => texto(l, 84, y + i * 66 + dy, { fonte: fonteLegenda, alinhar: 'left' }));
+
+  // Celular com a tela real: entra subindo, depois aproxima devagar.
+  const entra = sai(u / 0.6);
+  const escalaTela = 712 / img.width;
+  const largura = 712 + 48;
+  const altura = img.height * escalaTela + 48;
+  const zoom = 1 + 0.025 * entraSai(u / dur);
+  const x0 = (W - largura) / 2;
+  const topo = 640 + (1 - entra) * 160;
+  ctx.globalAlpha = alfa * entra;
+  ctx.translate(W / 2, topo);
+  ctx.scale(zoom, zoom);
+  ctx.translate(-W / 2, 0);
+  ctx.save();
+  ctx.shadowColor = 'rgba(60, 45, 20, 0.35)'; ctx.shadowBlur = 70; ctx.shadowOffsetY = 34;
+  ctx.fillStyle = TINTA;
+  ctx.beginPath(); ctx.roundRect(x0, 0, largura, altura, 76); ctx.fill();
+  ctx.restore();
+  ctx.save();
+  ctx.beginPath(); ctx.roundRect(x0 + 24, 24, 712, img.height * escalaTela, 54); ctx.clip();
+  ctx.drawImage(img, x0 + 24, 24, 712, img.height * escalaTela);
+  ctx.restore();
+  ctx.restore();
+}
+
+function alfaDe(cena, t) {
+  const primeira = cena === CENAS[0], ultima = cena === CENAS[CENAS.length - 1];
+  // Passagem pelo papel: quem sai some na primeira metade da troca, quem entra aparece na segunda.
+  const a = primeira ? 1 : clamp((t - cena.ini - XF / 2) / (XF / 2));
+  const b = ultima ? 1 : clamp((cena.fim - XF / 2 - t) / (XF / 2));
+  return Math.min(a, b);
+}
+
+function desenhar(t) {
+  fundo();
+  for (const cena of CENAS) {
+    if (t < cena.ini || t > cena.fim) continue;
+    const alfa = alfaDe(cena, t);
+    if (alfa <= 0) continue;
+    const u = t - cena.ini;
+    if (cena.tipo === 'abertura') abertura(u, alfa);
+    else if (cena.tipo === 'tela') tela(cena, u, alfa);
+    else fecho(u, alfa);
+  }
+}
+
+async function preparar() {
+  const fontes = [
+    new FontFace('Anton', `url(${FONTES}anton-400.woff2)`, { weight: '400' }),
+    new FontFace('Archivo', `url(${FONTES}archivo-variavel.woff2)`, { weight: '100 900' }),
+    new FontFace('Courier Prime', `url(${FONTES}courier-prime-400.woff2)`, { weight: '400' })
+  ];
+  await Promise.all(fontes.map((f) => f.load().then((ff) => document.fonts.add(ff))));
+  await Promise.all(CENAS.filter((x) => x.img).map((x) => new Promise((ok, falha) => {
+    const im = new Image(); im.onload = () => { imagens[x.img] = im; ok(); }; im.onerror = () => falha(new Error('imagem ' + x.img)); im.src = x.img;
+  })));
+  prepararGrao();
+}
+
+const pronto = preparar().then(() => {
+  const q = new URLSearchParams(location.search);
+  desenhar(q.has('t') ? Number(q.get('t')) : 0);
+  return true;
+});
+window.pronto = pronto;
+window.desenhar = desenhar;
+window.DUR = DUR;
+
+window.gravar = async function (nome = 'dropp-lanzamiento-es') {
+  await pronto;
+  const tipos = ['video/mp4;codecs=avc1.640028', 'video/mp4;codecs=avc1.4d0028', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'];
+  const mime = tipos.find((m) => MediaRecorder.isTypeSupported(m));
+  const fluxo = c.captureStream(30);
+  const rec = new MediaRecorder(fluxo, { mimeType: mime, videoBitsPerSecond: 6_000_000 });
+  const pedacos = [];
+  rec.ondataavailable = (e) => { if (e.data.size) pedacos.push(e.data); };
+  const fim = new Promise((r) => { rec.onstop = r; });
+  desenhar(0);
+  rec.start(1000);
+  const t0 = performance.now();
+  let quadros = 0;
+  await new Promise((ok) => {
+    const passo = () => {
+      const t = (performance.now() - t0) / 1000;
+      desenhar(Math.min(t, DUR));
+      quadros++;
+      if (t >= DUR + 0.15) ok(); else requestAnimationFrame(passo);
+    };
+    requestAnimationFrame(passo);
+  });
+  rec.stop();
+  await fim;
+  const blob = new Blob(pedacos, { type: mime });
+  const ext = mime.startsWith('video/mp4') ? 'mp4' : 'webm';
+  const r = await fetch(`/salvar?nome=${encodeURIComponent(nome)}.${ext}`, { method: 'POST', body: blob });
+  return { mime, bytes: blob.size, quadros, segundos: (performance.now() - t0) / 1000, salvo: await r.text() };
+};
+</script>
+</body>
+</html>

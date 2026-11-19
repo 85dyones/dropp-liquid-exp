@@ -8,8 +8,13 @@ import { Atlas } from './telas/Atlas';
 
 const AREAS: Area[] = ['turno', 'caderno', 'passaporte', 'atlas'];
 
+// ?area=atlas abre direto numa área (o link de entrada da Escola volta para o Atlas).
+const areaInicial = (): Area => {
+  try { const a = new URLSearchParams(location.search).get('area'); return AREAS.includes(a as Area) ? (a as Area) : 'turno'; } catch { return 'turno'; }
+};
+
 export function App() {
-  const [area, setArea] = useState<Area>('turno');
+  const [area, setArea] = useState<Area>(areaInicial);
   const [lang, setLang] = useState<Lang>('pt');
   const [balcao, setBalcao] = useState(false);
   const [aviso, setAviso] = useState('');
@@ -56,7 +61,7 @@ export function App() {
         {area === 'turno' && <Turno t={t} avisar={avisar} />}
         {area === 'caderno' && <Caderno t={t} lang={lang} avisar={avisar} />}
         {area === 'passaporte' && <Passaporte t={t} avisar={avisar} />}
-        {area === 'atlas' && <Atlas t={t} avisar={avisar} />}
+        {area === 'atlas' && <Atlas t={t} lang={lang} avisar={avisar} />}
       </main>
 
       {aviso ? <div className="aviso-lugar"><Aviso onFechar={() => setAviso('')} fechar={t.fechar}>{aviso}</Aviso></div> : null}

@@ -1,0 +1,11 @@
+{
+  "name": "dropp-escola-banco",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node testes/regras.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.17"
+  }
+}
