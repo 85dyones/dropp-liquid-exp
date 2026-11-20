@@ -6,7 +6,8 @@ export type Txt = { es: string; pt: string };
 export type Plano = 'gratis' | 'socio' | 'barback';
 export type Papel = 'membro' | 'instrutor' | 'admin';
 
-export type Eu = { id: string; nome: string; plano: Plano; papel: Papel; email?: string };
+// plano é o que vale hoje: um teste vencido já chega como 'gratis'. planoAte é o último dia do plano, quando há.
+export type Eu = { id: string; nome: string; plano: Plano; papel: Papel; planoAte: string | null; email?: string };
 
 export type Turma = {
   id: string; codigo: string; titulo: Txt; oficio: string; descricao: Txt;
@@ -34,7 +35,8 @@ export type PedidoCarimbo = {
 export type Critica = { id: string; userId: string; userNome: string; mes: string; drink: string; ficha: string; resposta: string | null; respondidaEm: string | null };
 
 export type TipoMaterial = 'monografia' | 'ficha' | 'procedimento';
-export type Material = { id: string; titulo: Txt; tipo: TipoMaterial; oficio: string; resumo: Txt; guardado: boolean };
+// livreEm: o mês (dia 1) em que o material fica aberto a todos, o "material do mês".
+export type Material = { id: string; titulo: Txt; tipo: TipoMaterial; oficio: string; resumo: Txt; guardado: boolean; livreEm: string | null };
 
 export type Evento = { id: string; titulo: Txt; tipo: 'aula_ao_vivo' | 'critica' | 'troca_de_fichas'; quando: string; link: string | null; soSocios: boolean };
 

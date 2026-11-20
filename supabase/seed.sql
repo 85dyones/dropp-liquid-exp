@@ -38,3 +38,33 @@ insert into public.eventos (titulo, tipo, quando, so_socios)
 values
   ('{"es": "Clase en directo · Carta de invierno: qué entra y por qué", "pt": "Aula ao vivo · Carta de inverno: o que entra e por quê"}', 'aula_ao_vivo', '2026-12-10 18:00:00+01', true),
   ('{"es": "Crítica del mes: envío hasta el día 25", "pt": "Crítica do mês: envio até o dia 25"}', 'critica', '2026-11-25 23:59:00+01', true);
+
+-- Plano grátis (migração 20261120090000_gratis): dois cursos básicos abertos a quem tem conta,
+-- uma aula ao vivo aberta por mês e o material do mês da biblioteca.
+insert into public.turmas (codigo, titulo, oficio, descricao, instrutor_nome, inicio, vagas, patrocinador, aberta_a_todos, so_maiores)
+values
+  ('ESC-02', '{"es": "Medida y dilución: lo básico", "pt": "Medida e diluição: o básico"}', 'gelo-diluicao',
+   '{"es": "Curso básico, gratis con tu cuenta. El jigger, la cuchara y cuánta agua entra al remover o agitar. Dos clases en la app y una práctica en tu barra.", "pt": "Curso básico, grátis com a sua conta. O jigger, a colher e quanta água entra ao mexer ou bater. Duas aulas no app e uma prática no seu balcão."}',
+   'Irene Soler', '2026-11-30', 40, null, true, false),
+  ('ESC-03', '{"es": "Barra lista: mise en place", "pt": "Bancada pronta: mise en place"}', 'preparo-fermentacao',
+   '{"es": "Curso básico, gratis con tu cuenta. Qué preparar antes del servicio, en qué orden y cómo etiquetar los lotes en el Cuaderno.", "pt": "Curso básico, grátis com a sua conta. O que preparar antes do serviço, em que ordem e como etiquetar os lotes no Caderno."}',
+   'Pablo Ferrer', '2026-12-07', 40, null, true, false);
+
+insert into public.encontros (turma_id, ordem, tipo, titulo, descricao, quando, lugar)
+select t.id, e.ordem, e.tipo, e.titulo::jsonb, e.descricao::jsonb, e.quando::timestamptz, e.lugar
+from public.turmas t
+join (values
+  ('ESC-02', 1, 'aula_app', '{"es": "Clase 1 · El jigger y la dosis exacta", "pt": "Aula 1 · O jigger e a dose certa"}', '{"es": "En la app, cuando quieras.", "pt": "No app, quando quiser."}', null, null),
+  ('ESC-02', 2, 'aula_app', '{"es": "Clase 2 · Remover o agitar: cuánta agua entra", "pt": "Aula 2 · Mexer ou bater: quanta água entra"}', '{"es": "En la app, con tu ficha del Negroni.", "pt": "No app, com a sua ficha do Negroni."}', null, null),
+  ('ESC-02', 3, 'pratica', '{"es": "Práctica en tu barra", "pt": "Prática no seu balcão"}', '{"es": "En tu bar, con dos firmas: quien enseña, por vídeo, y un compañero del curso.", "pt": "No seu bar, com duas assinaturas: quem ensina, pelo vídeo, e um colega da turma."}', '2026-12-11 18:00:00+01', null),
+  ('ESC-03', 1, 'aula_app', '{"es": "Clase 1 · La lista de preparación", "pt": "Aula 1 · A lista de preparo"}', '{"es": "En la app: de las reservas del día a la lista del Cuaderno.", "pt": "No app: das reservas do dia à lista do Caderno."}', null, null),
+  ('ESC-03', 2, 'aula_app', '{"es": "Clase 2 · Lotes con etiqueta", "pt": "Aula 2 · Lotes com etiqueta"}', '{"es": "En la app: caducidad, alérgenos y el QR.", "pt": "No app: validade, alérgenos e o QR."}', null, null),
+  ('ESC-03', 3, 'pratica', '{"es": "Práctica en tu barra", "pt": "Prática no seu balcão"}', '{"es": "En tu bar, con dos firmas: quien enseña, por vídeo, y un compañero del curso.", "pt": "No seu bar, com duas assinaturas: quem ensina, pelo vídeo, e um colega da turma."}', '2026-12-18 18:00:00+01', null)
+) as e(codigo, ordem, tipo, titulo, descricao, quando, lugar) on e.codigo = t.codigo;
+
+insert into public.eventos (titulo, tipo, quando, so_socios)
+values ('{"es": "Clase abierta del mes · Hielo claro sin máquina", "pt": "Aula aberta do mês · Gelo claro sem máquina"}', 'aula_ao_vivo', '2026-12-02 19:00:00+01', false);
+
+-- Material do mês: novembro, o procedimento do cordial; dezembro, a monografia do gelo claro.
+update public.materiais set livre_em = '2026-11-01' where titulo ->> 'pt' = 'Cordial de limão: procedimento de preparo';
+update public.materiais set livre_em = '2026-12-01' where titulo ->> 'pt' = 'Gelo claro: congelamento direcional';

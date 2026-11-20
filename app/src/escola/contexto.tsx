@@ -40,7 +40,15 @@ export function EscolaPronta({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
 
-export function EscolaRaiz({ lang, avisar, children }: { lang: Lang; avisar: (txt: string) => void; children: ReactNode }) {
+// O estado bruto (abrindo, falhou ou pronto), para a página de entrada decidir o que mostrar.
+export function useEstadoEscola() {
+  const e = useContext(Contexto);
+  if (!e) throw new Error('useEstadoEscola fora de EscolaRaiz');
+  return e;
+}
+
+// Envolve o app inteiro: a conta vale para todas as áreas, não só para a Escola.
+export function EscolaRaiz({ lang, avisar, demo, children }: { lang: Lang; avisar: (txt: string) => void; demo: boolean; children: ReactNode }) {
   const t = TX[lang];
   const [fonte, setFonte] = useState<FonteEscola | null>(null);
   const [eu, setEu] = useState<Eu | null>(null);
@@ -51,11 +59,13 @@ export function EscolaRaiz({ lang, avisar, children }: { lang: Lang; avisar: (tx
   useEffect(() => {
     let vivo = true;
     setFalhou(false);
-    abrirFonte()
+    setFonte(null);
+    setEu(null);
+    abrirFonte(demo)
       .then(async (f) => { const e = await f.eu(); if (vivo) { setFonte(f); setEu(e); } })
       .catch(() => { if (vivo) setFalhou(true); });
     return () => { vivo = false; };
-  }, [tentativa]);
+  }, [tentativa, demo]);
 
   useEffect(() => {
     if (!fonte) return;

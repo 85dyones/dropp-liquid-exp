@@ -1,7 +1,6 @@
 // O painel da Escola, na aba Escola do Atlas: quem você é, as turmas, a crítica do mês, a biblioteca e os eventos.
 import { useState, type FormEvent } from 'react';
 import { Botao, Papel } from '../ds/componentes';
-import { LOGIN_POR_CODIGO } from './conexao';
 import { eInstrutor, eSocio, ensina, useCarregar, useEscola } from './contexto';
 import { dataHora, diaMes, diaSemana, mesAno } from './textos';
 import { mesDe, type Critica, type Plano, type Turma } from './tipos';
@@ -24,7 +23,6 @@ export function EscolaPainel({ abrirTurma }: { abrirTurma: (id: string) => void 
       </div>
 
       {fonte.modo === 'demo' ? <BarraDemo /> : null}
-      {fonte.modo === 'nuvem' && !eu ? <Entrar /> : null}
       {eu ? <SeuPlano /> : null}
 
       {ensino.length ? <ListaTurmas titulo={t.ensinaTit} turmas={ensino} abrir={abrirTurma} /> : null}
@@ -72,70 +70,23 @@ function BarraDemo() {
   );
 }
 
-function Entrar() {
-  const { fonte, t, lang, avisar, agir } = useEscola();
-  const [email, setEmail] = useState('');
-  const [codigo, setCodigo] = useState('');
-  const [estado, setEstado] = useState<'livre' | 'mandando' | 'mandado' | 'confirmando'>('livre');
-  const mandar = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setEstado('mandando');
-    try { await fonte.entrar(email.trim(), lang); setEstado('mandado'); }
-    catch { setEstado('livre'); avisar(t.erros.falhou); }
-  };
-  const confirmar = async (e: FormEvent) => {
-    e.preventDefault();
-    setEstado('confirmando');
-    // Deu certo: a sessão muda e o painel troca este bloco pelo plano.
-    if (!(await agir(() => fonte.confirmarCodigo(email.trim(), codigo)))) setEstado('mandado');
-  };
-  return (
-    <Papel className="esc-bloco">
-      <span className="dp-rot">{t.entrarTit}</span>
-      <p>{t.entrarTxt}</p>
-      {estado === 'mandado' || estado === 'confirmando' ? (
-        <>
-          <p className="esc-lido" role="status"><span className="dp-st dp-st--ok">ok</span><span>{LOGIN_POR_CODIGO ? t.codigoMandado(email.trim()) : t.linkMandado(email.trim())}</span></p>
-          {LOGIN_POR_CODIGO ? (
-            <form className="esc-form" onSubmit={confirmar}>
-              <label className="esc-campo">
-                <span className="esc-rotulo">{t.codigoRot}</span>
-                <input value={codigo} inputMode="numeric" autoComplete="one-time-code" pattern="[0-9 ]{6,10}" maxLength={10} required onChange={(e) => setCodigo(e.target.value)} />
-              </label>
-              <button type="submit" className="dp-btn dp-btn--cheio dp-btn--largo" disabled={estado === 'confirmando'}>{estado === 'confirmando' ? t.confirmando : t.confirmar}</button>
-            </form>
-          ) : null}
-          <button type="button" className="esc-link" onClick={() => { setEstado('livre'); setCodigo(''); }}>{t.outroEmail}</button>
-        </>
-      ) : (
-        <form className="esc-form" onSubmit={mandar}>
-          <label className="esc-campo">
-            <span className="esc-rotulo">{t.emailRot}</span>
-            <input type="email" autoComplete="email" inputMode="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-          </label>
-          <button type="submit" className="dp-btn dp-btn--cheio dp-btn--largo" disabled={estado === 'mandando'}>{estado === 'mandando' ? t.mandando : t.entrarBtn}</button>
-        </form>
-      )}
-    </Papel>
-  );
-}
-
 function SeuPlano() {
   const { fonte, eu, t, avisar } = useEscola();
   if (!eu) return null;
   const socio = eSocio(eu);
+  // O teste de 30 dias: plano de sócio com data de fim.
+  const emTeste = socio && !!eu.planoAte;
   return (
     <Papel className="esc-bloco">
       <div className="esc-cab-linha">
         <span className="dp-rot">{t.planoRot}</span>
-        <span className={socio ? 'dp-st dp-st--ok' : 'dp-st dp-st--falta'}>{t.planos[eu.plano]}</span>
+        <span className={socio ? 'dp-st dp-st--ok' : 'dp-st dp-st--falta'}>{t.planos[eu.plano]}{emTeste ? ` · ${t.testeAte(diaMes(eu.planoAte!))}` : ''}</span>
       </div>
-      <p>{t.planoTxt[eu.plano]}</p>
+      <p>{emTeste ? t.testeTxt(diaMes(eu.planoAte!)) : t.planoTxt[eu.plano]}</p>
       {eInstrutor(eu) ? <p className="dp-nota">{eu.nome} · {t.ensinaRot}</p> : null}
-      {!socio ? (
+      {!socio || emTeste ? (
         <>
-          <Botao cheio largo onClick={() => avisar(t.serSocioAviso)}>{t.serSocio}</Botao>
+          <Botao cheio largo onClick={() => avisar(t.serSocioAviso)}>{emTeste ? t.continuarSocio : t.serSocio}</Botao>
           <p className="dp-nota">{t.precoSocio}</p>
         </>
       ) : null}
@@ -196,7 +147,9 @@ function ListaTurmas({ titulo, turmas, abrir, status }: { titulo: string; turmas
             <span className="esc-pe">
               {status ? <span className="dp-st dp-st--ok">{status(tm.id)}</span> : null}
               {tm.patrocinador ? <span className="dp-st dp-st--meio">{t.pagoPor(tm.patrocinador)}</span> : null}
-              <span className="dp-st dp-st--falta">{tm.abertaATodos ? t.abertaATodos : t.paraSocios}</span>
+              {tm.abertaATodos
+                ? <span className="dp-st dp-st--ok">{tm.patrocinador ? t.gratisChip : t.basico}</span>
+                : <span className="dp-st dp-st--falta">{t.paraSocios}</span>}
               {tm.soMaiores ? <span className="dp-st dp-st--falta">{t.maiores}</span> : null}
             </span>
           </button>
@@ -314,6 +267,7 @@ function Biblioteca() {
   const { fonte, eu, t, lang, agir } = useEscola();
   const materiais = useCarregar((f) => f.materiais());
   const aberta = eSocio(eu) || eInstrutor(eu);
+  const doMes = mesDe(fonte.hoje());
   return (
     <div className="esc-lista">
       <h3 className="sub-titulo">{t.bibliotecaTit}</h3>
@@ -324,6 +278,7 @@ function Biblioteca() {
           <span className="esc-mat-nome">{m.titulo[lang]}</span>
           <span className="item-porque">{m.resumo[lang]}</span>
           <span className="esc-pe">
+            {m.livreEm === doMes ? <span className="dp-st dp-st--meio">{t.materialDoMes}</span> : null}
             {m.guardado ? <span className="dp-st dp-st--ok">{t.guardado}</span> : null}
             <button type="button" className="dp-btn dp-btn--peq" onClick={() => agir(() => fonte.guardar(m.id, !m.guardado))}>{m.guardado ? t.tirar : t.guardar}</button>
           </span>
@@ -340,7 +295,8 @@ function Eventos() {
   return (
     <div className="esc-lista">
       <h3 className="sub-titulo">{t.eventosTit}</h3>
-      {!eventos.length ? <p className="dp-nota">{eSocio(eu) || eInstrutor(eu) ? t.eventosVazio : t.eventosFechado}</p> : null}
+      {!eventos.length && (eSocio(eu) || eInstrutor(eu)) ? <p className="dp-nota">{t.eventosVazio}</p> : null}
+      {!(eSocio(eu) || eInstrutor(eu)) ? <p className="dp-nota">{t.eventosFechado}</p> : null}
       <ul className="agenda">
         {eventos.map((ev) => {
           const [dia, hora] = dataHora(ev.quando, lang).split(' · ');
@@ -348,7 +304,7 @@ function Eventos() {
           return (
             <li key={ev.id} className="dp-papel">
               <span className="ag-data"><span className="ag-k">{diaSemana(ev.quando, lang)}</span><b className="ag-d">{d}</b><span className="ag-k">{m}</span></span>
-              <span className="ag-l"><span className="ag-t">{ev.titulo[lang]}</span><span className="ag-s">{t.tipoEvento[ev.tipo]} · {hora}{ev.soSocios ? ` · ${t.paraSocios}` : ''}</span></span>
+              <span className="ag-l"><span className="ag-t">{ev.titulo[lang]}</span><span className="ag-s">{t.tipoEvento[ev.tipo]} · {hora} · {ev.soSocios ? t.paraSocios : t.abertaATodos}</span></span>
             </li>
           );
         })}

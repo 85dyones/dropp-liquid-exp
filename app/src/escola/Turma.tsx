@@ -34,7 +34,7 @@ export function TurmaTela({ id, voltar }: { id: string; voltar: () => void }) {
 
           <dl className="esc-fatos">
             <div><dt>{t.quemEnsina}</dt><dd>{turma.instrutorNome}</dd></div>
-            <div><dt>{t.acesso}</dt><dd>{turma.abertaATodos ? t.acessoTodos : t.acessoSocios}</dd></div>
+            <div><dt>{t.acesso}</dt><dd>{turma.abertaATodos ? (turma.patrocinador ? t.acessoPatrocinada(turma.patrocinador) : t.acessoBasico) : t.acessoSocios}</dd></div>
             <div><dt>{t.comoProva}</dt><dd>{t.comoProvaTxt}</dd></div>
             <div><dt>{t.oQueLeva}</dt><dd>{t.oQueLevaTxt(oficio)}</dd></div>
             <div><dt>{t.vagas}</dt><dd>{livres ? t.vagasTxt(livres, turma.vagas) : t.cheia}</dd></div>

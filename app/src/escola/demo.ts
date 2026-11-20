@@ -7,7 +7,7 @@ import {
   type PedidoCarimbo, type Pessoa, type Plano, type Post, type Resposta, type StatusInscricao, type Turma
 } from './tipos';
 
-const CHAVE = 'dropp-escola-demo-v1';
+const CHAVE = 'dropp-escola-demo-v2';
 const HOJE = new Date('2026-11-20T12:00:00+01:00');
 
 type PostLinha = Omit<Post, 'autorNome' | 'respostas'>;
@@ -17,7 +17,7 @@ type CriticaLinha = Omit<Critica, 'userNome'>;
 type MaterialLinha = Omit<Material, 'guardado'>;
 
 type Mundo = {
-  versao: 1;
+  versao: 2;
   euId: string;
   pessoas: Pessoa[];
   turmas: Array<Omit<Turma, 'ocupadas'>>;
@@ -62,6 +62,18 @@ function mundoNovo(): Mundo {
       titulo: { es: 'Coste por dosis y carta que paga', pt: 'Custo por dose e carta que paga' },
       descricao: { es: 'Coste de cada cóctel, la meta de la casa y el precio que cierra la cuenta, con tus propias fichas.', pt: 'Custo de cada drink, a meta da casa e o preço que fecha a conta, com as suas fichas.' },
       inicio: '2027-01-12', vagas: 12, patrocinador: null, abertaATodos: false, soMaiores: false, precoPratica: 39, status: 'aberta'
+    },
+    {
+      id: 'esc-02', codigo: 'ESC-02', oficio: 'gelo-diluicao', instrutorId: 'irene', instrutorNome: 'Irene Soler',
+      titulo: { es: 'Medida y dilución: lo básico', pt: 'Medida e diluição: o básico' },
+      descricao: { es: 'Curso básico, gratis con tu cuenta. El jigger, la cuchara y cuánta agua entra al remover o agitar. Dos clases en la app y una práctica en tu barra.', pt: 'Curso básico, grátis com a sua conta. O jigger, a colher e quanta água entra ao mexer ou bater. Duas aulas no app e uma prática no seu balcão.' },
+      inicio: '2026-11-30', vagas: 40, patrocinador: null, abertaATodos: true, soMaiores: false, precoPratica: 39, status: 'aberta'
+    },
+    {
+      id: 'esc-03', codigo: 'ESC-03', oficio: 'preparo-fermentacao', instrutorId: 'pablo', instrutorNome: 'Pablo Ferrer',
+      titulo: { es: 'Barra lista: mise en place', pt: 'Bancada pronta: mise en place' },
+      descricao: { es: 'Curso básico, gratis con tu cuenta. Qué preparar antes del servicio, en qué orden y cómo etiquetar los lotes en el Cuaderno.', pt: 'Curso básico, grátis com a sua conta. O que preparar antes do serviço, em que ordem e como etiquetar os lotes no Caderno.' },
+      inicio: '2026-12-07', vagas: 40, patrocinador: null, abertaATodos: true, soMaiores: false, precoPratica: 39, status: 'aberta'
     }
   ];
   const en = (turmaId: string, ordem: number, tipo: Encontro['tipo'], tes: string, tpt: string, des: string, dpt: string, quando: string | null, lugar: string | null): Encontro =>
@@ -73,11 +85,17 @@ function mundoNovo(): Mundo {
     en('esc-14', 1, 'aula_app', 'Clase 1 · El coste de una dosis', 'Aula 1 · O custo de uma dose', 'En la app, con tu ficha del Negroni.', 'No app, com a sua ficha do Negroni.', null, null),
     en('esc-14', 2, 'pratica', 'Práctica · Una carta con coste cerrado', 'Prática · Uma carta com custo fechado', 'Presencial, con dos firmas.', 'Presencial, com duas assinaturas.', '2027-01-26T16:00:00+01:00', 'Valencia'),
     en('esc-11', 1, 'aula_app', 'Clase 1 · Dulzor, acidez y cuerpo sin alcohol', 'Aula 1 · Doçura, acidez e corpo sem álcool', 'En la app, cuando quieras.', 'No app, quando quiser.', null, null),
-    en('esc-11', 2, 'pratica', 'Práctica evaluada', 'Prática avaliada', 'Presencial, evaluada por Irene Soler.', 'Presencial, avaliada por Irene Soler.', '2026-12-15T16:00:00+01:00', 'Ruzafa, Valencia')
+    en('esc-11', 2, 'pratica', 'Práctica evaluada', 'Prática avaliada', 'Presencial, evaluada por Irene Soler.', 'Presencial, avaliada por Irene Soler.', '2026-12-15T16:00:00+01:00', 'Ruzafa, Valencia'),
+    en('esc-02', 1, 'aula_app', 'Clase 1 · El jigger y la dosis exacta', 'Aula 1 · O jigger e a dose certa', 'En la app, cuando quieras.', 'No app, quando quiser.', null, null),
+    en('esc-02', 2, 'aula_app', 'Clase 2 · Remover o agitar: cuánta agua entra', 'Aula 2 · Mexer ou bater: quanta água entra', 'En la app, con tu ficha del Negroni.', 'No app, com a sua ficha do Negroni.', null, null),
+    en('esc-02', 3, 'pratica', 'Práctica en tu barra', 'Prática no seu balcão', 'En tu bar, con dos firmas: quien enseña, por vídeo, y un compañero del curso.', 'No seu bar, com duas assinaturas: quem ensina, pelo vídeo, e um colega da turma.', '2026-12-11T18:00:00+01:00', null),
+    en('esc-03', 1, 'aula_app', 'Clase 1 · La lista de preparación', 'Aula 1 · A lista de preparo', 'En la app: de las reservas del día a la lista del Cuaderno.', 'No app: das reservas do dia à lista do Caderno.', null, null),
+    en('esc-03', 2, 'aula_app', 'Clase 2 · Lotes con etiqueta', 'Aula 2 · Lotes com etiqueta', 'En la app: caducidad, alérgenos y el QR.', 'No app: validade, alérgenos e o QR.', null, null),
+    en('esc-03', 3, 'pratica', 'Práctica en tu barra', 'Prática no seu balcão', 'En tu bar, con dos firmas: quien enseña, por vídeo, y un compañero del curso.', 'No seu bar, com duas assinaturas: quem ensina, pelo vídeo, e um colega da turma.', '2026-12-18T18:00:00+01:00', null)
   ];
   const inscritos = (turmaId: string, ids: string[]) => ids.map((userId) => ({ turmaId, userId, status: 'inscrito' as StatusInscricao }));
   return {
-    versao: 1,
+    versao: 2,
     euId: 'teo',
     pessoas,
     turmas,
@@ -86,7 +104,9 @@ function mundoNovo(): Mundo {
     inscricoes: [
       ...inscritos('esc-07', ['nuria', 'lara', 'iker', 'elena', 'marcos', 'aitana', 'joel', 'carla', 'sergi']),
       ...inscritos('esc-11', ['lara', 'joel', 'carla', 'sergi']),
-      ...inscritos('esc-14', ['elena', 'marcos'])
+      ...inscritos('esc-14', ['elena', 'marcos']),
+      ...inscritos('esc-02', ['lara', 'iker', 'joel', 'aitana']),
+      ...inscritos('esc-03', ['carla', 'sergi'])
     ],
     progresso: [{ encontroId: 'esc-07-1', userId: 'nuria' }, { encontroId: 'esc-07-1', userId: 'lara' }],
     posts: [
@@ -107,18 +127,20 @@ function mundoNovo(): Mundo {
     ],
     materiais: [
       { id: 'm1', tipo: 'monografia', oficio: 'gelo-diluicao', titulo: { es: 'Hielo claro: congelación direccional', pt: 'Gelo claro: congelamento direcional' },
-        resumo: { es: 'Sin tapa, el frío entra solo por arriba y el hielo crece hacia abajo. 18 páginas, de Irene Soler.', pt: 'Sem tampa, o frio entra só por cima e o gelo cresce para baixo. 18 páginas, de Irene Soler.' } },
+        resumo: { es: 'Sin tapa, el frío entra solo por arriba y el hielo crece hacia abajo. 18 páginas, de Irene Soler.', pt: 'Sem tampa, o frio entra só por cima e o gelo cresce para baixo. 18 páginas, de Irene Soler.' }, livreEm: '2026-12-01' },
       { id: 'm2', tipo: 'procedimento', oficio: 'preparo-fermentacao', titulo: { es: 'Cordial de lima: procedimiento', pt: 'Cordial de limão: procedimento de preparo' },
-        resumo: { es: 'El lote de 3 L: pesos, orden de los pasos, caducidad y la etiqueta lista para el Cuaderno.', pt: 'O lote de 3 L: pesos, ordem dos passos, validade e a etiqueta pronta para o Caderno.' } },
+        resumo: { es: 'El lote de 3 L: pesos, orden de los pasos, caducidad y la etiqueta lista para el Cuaderno.', pt: 'O lote de 3 L: pesos, ordem dos passos, validade e a etiqueta pronta para o Caderno.' }, livreEm: '2026-11-01' },
       { id: 'm3', tipo: 'ficha', oficio: 'custo-gestao', titulo: { es: 'Coste de la carta de invierno', pt: 'Custo da carta de inverno' },
-        resumo: { es: 'Coste por dosis de cada cóctel, la meta de la casa y el precio que cierra la cuenta. De Pablo Ferrer.', pt: 'Custo por dose de cada drink, a meta da casa e o preço que fecha a conta. De Pablo Ferrer.' } }
+        resumo: { es: 'Coste por dosis de cada cóctel, la meta de la casa y el precio que cierra la cuenta. De Pablo Ferrer.', pt: 'Custo por dose de cada drink, a meta da casa e o preço que fecha a conta. De Pablo Ferrer.' }, livreEm: null }
     ],
     estante: [],
     eventos: [
       { id: 'v1', tipo: 'aula_ao_vivo', quando: '2026-12-10T18:00:00+01:00', link: null, soSocios: true,
         titulo: { es: 'Clase en directo · Carta de invierno: qué entra y por qué', pt: 'Aula ao vivo · Carta de inverno: o que entra e por quê' } },
       { id: 'v2', tipo: 'critica', quando: '2026-11-25T23:59:00+01:00', link: null, soSocios: true,
-        titulo: { es: 'Crítica del mes: envío hasta el día 25', pt: 'Crítica do mês: envio até o dia 25' } }
+        titulo: { es: 'Crítica del mes: envío hasta el día 25', pt: 'Crítica do mês: envio até o dia 25' } },
+      { id: 'v3', tipo: 'aula_ao_vivo', quando: '2026-12-02T19:00:00+01:00', link: null, soSocios: false,
+        titulo: { es: 'Clase abierta del mes · Hielo claro sin máquina', pt: 'Aula aberta do mês · Gelo claro sem máquina' } }
     ]
   };
 }
@@ -128,7 +150,7 @@ function ler(): Mundo {
     const bruto = localStorage.getItem(CHAVE);
     if (bruto) {
       const m = JSON.parse(bruto) as Mundo;
-      if (m && m.versao === 1) return m;
+      if (m && m.versao === 2) return m;
     }
   } catch { /* sem armazenamento: o mundo vive só nesta aba */ }
   return mundoNovo();
@@ -175,7 +197,7 @@ export function criarDemo(): FonteEscola {
   const fonte: FonteEscola = {
     modo: 'demo',
     hoje: () => HOJE,
-    eu: () => { const x = eu(); return pronto<Eu>({ id: x.id, nome: x.nome, plano: x.plano, papel: x.papel }); },
+    eu: () => { const x = eu(); return pronto<Eu>({ id: x.id, nome: x.nome, plano: x.plano, papel: x.papel, planoAte: null }); },
     aoMudarSessao: (cb) => { ouvintes.add(cb); return () => { ouvintes.delete(cb); }; },
     entrar: async () => {},
     confirmarCodigo: async () => {},
@@ -186,7 +208,7 @@ export function criarDemo(): FonteEscola {
     },
     sair: async () => {},
 
-    turmas: async () => m.turmas.map((t) => ({ ...t, ocupadas: ocupadas(t.id) })),
+    turmas: async () => m.turmas.map((t) => ({ ...t, ocupadas: ocupadas(t.id) })).sort((a, b) => a.inicio.localeCompare(b.inicio)),
     encontros: async (turmaId) => m.encontros.filter((e) => e.turmaId === turmaId).sort((a, b) => a.ordem - b.ordem),
     inscricoes: async () => m.inscricoes.filter((i) => i.userId === m.euId).map<Inscricao>((i) => ({ turmaId: i.turmaId, status: i.status })),
     inscrever: async (turmaId) => {
@@ -301,11 +323,12 @@ export function criarDemo(): FonteEscola {
     },
 
     materiais: async () => {
-      if (!eSocio() && !eInstrutor()) return [];
-      return m.materiais.map((x) => ({ ...x, guardado: m.estante.some((e) => e.userId === m.euId && e.materialId === x.id) }));
+      const ve = (x: MaterialLinha) => eSocio() || eInstrutor() || x.livreEm === mesDe(HOJE);
+      return m.materiais.filter(ve).map((x) => ({ ...x, guardado: m.estante.some((e) => e.userId === m.euId && e.materialId === x.id) }));
     },
     guardar: async (materialId, sim) => {
-      if (!eSocio() && !eInstrutor()) erro('so_socios');
+      const x = m.materiais.find((y) => y.id === materialId);
+      if (!x || !(eSocio() || eInstrutor() || x.livreEm === mesDe(HOJE))) erro('so_socios');
       muda(() => {
         m.estante = m.estante.filter((e) => !(e.userId === m.euId && e.materialId === materialId));
         if (sim) m.estante.push({ userId: m.euId, materialId });

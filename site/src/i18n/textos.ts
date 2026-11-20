@@ -50,7 +50,7 @@ export const T = {
       ],
       escolaTit: 'La Escuela DROPP',
       escolaTexto: 'La comunidad de pago para quien vive de la barra. Cursos en grupo con fecha, práctica evaluada en un bar y el sello Escuela en tu Pasaporte. Cada curso tiene su mural, y cada mes hay una crítica escrita y una clase en directo.',
-      escolaPreco: `Socio DROPP: 9,99${NB}€ al mes, con 30 días gratis.`,
+      escolaPreco: `Socio DROPP: 9,99${NB}€ al mes. Al crear la cuenta, 30 días de Socio gratis, sin tarjeta. Los cursos básicos son siempre gratis.`,
       escolaCta: 'Conocer la Escuela',
       casaTit: 'Para la casa',
       casaTexto: 'Las fichas de la casa para todo el equipo, la comprobación de la barra con QR, la formación de quien llega y el Barback en operación, finanzas y marketing.',
@@ -73,7 +73,7 @@ export const T = {
       lide: 'Cada uno paga por una cosa distinta, y nadie paga por una prueba.',
       blocos: [
         { id: 'bartender', tela: 'turno', titulo: 'Para bartenders', itens: [
-          'Gratis, sin plazo: la agenda del Turno, el Cuaderno con hasta 50 fichas, lotes, etiquetas con QR y alérgenos, las cuatro cuentas, el Pasaporte entero y el Atlas.',
+          'Gratis, sin plazo: la agenda del Turno, el Cuaderno con hasta 50 fichas, lotes, etiquetas con QR y alérgenos, las cuatro cuentas, el Pasaporte entero, el Atlas y, en la Escuela, los cursos básicos, la clase abierta del mes y el material del mes.',
           'Socio DROPP: la Escuela, fichas sin límite, historial de coste y exportación en PDF.',
           'Socio con Barback: además, un Barback que trabaja para ti y va contigo de casa en casa: rutina, ingresos, eventos por tu cuenta, itinerario de estudio y carrera.'
         ] },
@@ -101,6 +101,7 @@ export const T = {
       comoTit: 'Cómo funciona',
       como: [
         { t: 'Cursos con fecha, no catálogo', d: 'Cada curso tiene inicio, encuentros en la agenda y plazas.' },
+        { t: 'Los básicos son gratis', d: 'Con tu cuenta y sin pagar: medida y dilución, y la barra lista. Los cursos avanzados son para socios.' },
         { t: 'La clase es un ejercicio con tu ficha', d: 'Cambias el hielo y el tiempo hasta que el agua llega a lo que pide la ficha. Nada de masterclass de tres horas.' },
         { t: 'La práctica es presencial', d: 'En un bar, con dos firmas: la de quien enseña y la de un colega.' },
         { t: 'El certificado es el sello', d: 'Al terminar, el sello Escuela entra en tu Pasaporte. Nada de PDF suelto.' }
@@ -109,14 +110,14 @@ export const T = {
       comunidade: [
         { t: 'Un mural por curso', d: 'Moderado por quien enseña, para dudas, fotos y fichas. Sin likes que hagan ranking.' },
         { t: 'Una crítica al mes', d: 'Mandas foto y ficha de un cóctel y recibes una crítica escrita.' },
-        { t: 'Una clase en directo al mes', d: 'Con fecha en la agenda, para todos los socios.' },
-        { t: 'Una biblioteca que ordenas tú', d: 'Monografías, fichas técnicas y procedimientos, en tu propio estante.' }
+        { t: 'Clases en directo', d: 'Una al mes, abierta a todos. Las demás, con fecha en la agenda, para los socios.' },
+        { t: 'Una biblioteca que ordenas tú', d: 'Monografías, fichas técnicas y procedimientos, en tu propio estante. Cada mes, un material queda abierto a todos.' }
       ],
       quemTit: 'Quién enseña',
       quem: 'Bartenders con grado Reserva en ese oficio, pagados por DROPP por curso. Los cursos patrocinados siguen la misma evaluación.',
       planosTit: 'Planes',
       planos: [
-        { nome: 'Socio DROPP', preco: `9,99${NB}€ al mes`, alt: `o 99${NB}€ al año, IVA incluido`, itens: ['30 días gratis', 'Cursos en grupo y sello Escuela', 'Mural del curso, crítica mensual y clase en directo', 'Fichas sin límite y exportación en PDF'] },
+        { nome: 'Socio DROPP', preco: `9,99${NB}€ al mes`, alt: `o 99${NB}€ al año, IVA incluido`, itens: ['30 días gratis al crear la cuenta, sin tarjeta', 'Todos los cursos y el sello Escuela', 'Mural del curso, crítica mensual y clase en directo', 'Fichas sin límite y exportación en PDF'] },
         { nome: 'Socio con Barback', preco: `19,99${NB}€ al mes`, alt: `o 199${NB}€ al año, IVA incluido`, itens: ['Todo lo del Socio', 'Un Barback que trabaja para ti', 'Rutina, ingresos y eventos por tu cuenta', 'Itinerario de estudio a partir de tu Pasaporte'] },
         { nome: 'Práctica suelta', preco: `39${NB}€`, alt: 'por curso, sin ser socio', itens: ['Solo la práctica presencial', 'Con las mismas dos firmas', 'Bizum o tarjeta'] }
       ],
@@ -131,8 +132,8 @@ export const T = {
       nota: 'Precios del piloto de Valencia, 2027. Pueden cambiar después del piloto.',
       cab: ['Plan', 'Qué incluye', 'Precio'],
       linhas: [
-        ['Gratis', 'Agenda del Turno; Cuaderno con hasta 50 fichas, lotes, etiquetas con QR y alérgenos y las cuatro cuentas; el Pasaporte entero; el Atlas', `0${NB}€, sin plazo`],
-        ['Socio DROPP', 'La Escuela: cursos en grupo con práctica y sello, mural del curso, crítica mensual, clase en directo, biblioteca; fichas sin límite, historial de coste y PDF', `9,99${NB}€ al mes o 99${NB}€ al año, IVA incluido; 30 días gratis`],
+        ['Gratis', 'Agenda del Turno; Cuaderno con hasta 50 fichas, lotes, etiquetas con QR y alérgenos y las cuatro cuentas; el Pasaporte entero; el Atlas; en la Escuela, los cursos básicos, la clase abierta del mes y el material del mes', `0${NB}€, sin plazo`],
+        ['Socio DROPP', 'La Escuela: cursos en grupo con práctica y sello, mural del curso, crítica mensual, clase en directo, biblioteca; fichas sin límite, historial de coste y PDF', `9,99${NB}€ al mes o 99${NB}€ al año, IVA incluido; 30 días gratis al crear la cuenta, sin tarjeta`],
         ['Socio con Barback', 'Todo lo del Socio y el Barback personal: rutina, ingresos, eventos por tu cuenta, itinerario de estudio y carrera', `19,99${NB}€ al mes o 199${NB}€ al año, IVA incluido`],
         ['Plan Casa', 'Barback de la casa, fichas para el equipo, comprobación de la barra, formación, sello Casa-escuela y el Socio para 2 personas', `29${NB}€ al mes por local, sin IVA; cada socio de más, 6${NB}€`],
         ['Práctica suelta', 'Una práctica presencial de la Escuela, sin ser socio', `39${NB}€`],
@@ -194,7 +195,7 @@ export const T = {
       ],
       escolaTit: 'A Escola DROPP',
       escolaTexto: 'A comunidade paga para quem vive do balcão. Turmas com data, prática avaliada num bar e o carimbo Escola no seu Passaporte. Cada turma tem o seu mural, e todo mês há uma crítica escrita e uma aula ao vivo.',
-      escolaPreco: 'Sócio DROPP: €9,99 por mês, com 30 dias grátis.',
+      escolaPreco: 'Sócio DROPP: €9,99 por mês. Ao criar a conta, 30 dias de Sócio grátis, sem cartão. Os cursos básicos são sempre grátis.',
       escolaCta: 'Conhecer a Escola',
       casaTit: 'Para a casa',
       casaTexto: 'As fichas da casa para o time inteiro, a conferência da bancada com QR, o treino de quem chega e o Barback em operação, financeiro e marketing.',
@@ -217,7 +218,7 @@ export const T = {
       lide: 'Cada um paga por uma coisa diferente, e ninguém paga por uma prova.',
       blocos: [
         { id: 'bartender', tela: 'turno', titulo: 'Para bartenders', itens: [
-          'Grátis, sem prazo: a agenda do Turno, o Caderno com até 50 fichas, lotes, etiquetas com QR e alérgenos, as quatro contas, o Passaporte inteiro e o Atlas.',
+          'Grátis, sem prazo: a agenda do Turno, o Caderno com até 50 fichas, lotes, etiquetas com QR e alérgenos, as quatro contas, o Passaporte inteiro, o Atlas e, na Escola, os cursos básicos, a aula aberta do mês e o material do mês.',
           'Sócio DROPP: a Escola, fichas sem limite, histórico de custo e exportação em PDF.',
           'Sócio com Barback: além disso, um Barback que trabalha para você e vai junto de casa em casa: rotina, renda, eventos solo, trilhas de estudo e carreira.'
         ] },
@@ -245,6 +246,7 @@ export const T = {
       comoTit: 'Como funciona',
       como: [
         { t: 'Turma com data, não catálogo', d: 'Cada turma tem início, encontros na agenda e vagas.' },
+        { t: 'Os básicos são grátis', d: 'Com a sua conta e sem pagar: medida e diluição, e a bancada pronta. As turmas avançadas são para sócios.' },
         { t: 'A aula é um exercício com a sua ficha', d: 'Você troca o gelo e o tempo até a água chegar ao que a ficha pede. Nada de masterclass de três horas.' },
         { t: 'A prática é presencial', d: 'Num bar, com duas assinaturas: a de quem ensina e a de um colega.' },
         { t: 'O certificado é o carimbo', d: 'No fim, o carimbo Escola entra no seu Passaporte. Nada de PDF solto.' }
@@ -253,14 +255,14 @@ export const T = {
       comunidade: [
         { t: 'Um mural por turma', d: 'Moderado por quem ensina, para dúvidas, fotos e fichas. Sem curtida que vira ranking.' },
         { t: 'Uma crítica por mês', d: 'Você manda foto e ficha de um drink e recebe uma crítica escrita.' },
-        { t: 'Uma aula ao vivo por mês', d: 'Com data na agenda, para todos os sócios.' },
-        { t: 'Uma biblioteca que você organiza', d: 'Monografias, fichas técnicas e procedimentos, na sua própria estante.' }
+        { t: 'Aulas ao vivo', d: 'Uma por mês, aberta a todos. As outras, com data na agenda, para os sócios.' },
+        { t: 'Uma biblioteca que você organiza', d: 'Monografias, fichas técnicas e procedimentos, na sua própria estante. Todo mês, um material fica aberto a todos.' }
       ],
       quemTit: 'Quem ensina',
       quem: 'Bartenders com grau Reserva naquele ofício, pagos pela DROPP por turma. Os cursos patrocinados seguem a mesma avaliação.',
       planosTit: 'Planos',
       planos: [
-        { nome: 'Sócio DROPP', preco: '€9,99 por mês', alt: 'ou €99 por ano, IVA incluído', itens: ['30 dias grátis', 'Turmas e carimbo Escola', 'Mural da turma, crítica mensal e aula ao vivo', 'Fichas sem limite e exportação em PDF'] },
+        { nome: 'Sócio DROPP', preco: '€9,99 por mês', alt: 'ou €99 por ano, IVA incluído', itens: ['30 dias grátis ao criar a conta, sem cartão', 'Todas as turmas e o carimbo Escola', 'Mural da turma, crítica mensal e aula ao vivo', 'Fichas sem limite e exportação em PDF'] },
         { nome: 'Sócio com Barback', preco: '€19,99 por mês', alt: 'ou €199 por ano, IVA incluído', itens: ['Tudo do Sócio', 'Um Barback que trabalha para você', 'Rotina, renda e eventos solo', 'Trilha de estudo a partir do seu Passaporte'] },
         { nome: 'Prática avulsa', preco: '€39', alt: 'por turma, sem ser sócio', itens: ['Só a prática presencial', 'Com as mesmas duas assinaturas', 'Bizum ou cartão'] }
       ],
@@ -275,8 +277,8 @@ export const T = {
       nota: 'Preços do piloto de Valência, 2027. Podem mudar depois do piloto.',
       cab: ['Plano', 'O que inclui', 'Preço'],
       linhas: [
-        ['Grátis', 'Agenda do Turno; Caderno com até 50 fichas, lotes, etiquetas com QR e alérgenos e as quatro contas; o Passaporte inteiro; o Atlas', '€0, sem prazo'],
-        ['Sócio DROPP', 'A Escola: turmas com prática e carimbo, mural da turma, crítica mensal, aula ao vivo, biblioteca; fichas sem limite, histórico de custo e PDF', '€9,99 por mês ou €99 por ano, IVA incluído; 30 dias grátis'],
+        ['Grátis', 'Agenda do Turno; Caderno com até 50 fichas, lotes, etiquetas com QR e alérgenos e as quatro contas; o Passaporte inteiro; o Atlas; na Escola, os cursos básicos, a aula aberta do mês e o material do mês', '€0, sem prazo'],
+        ['Sócio DROPP', 'A Escola: turmas com prática e carimbo, mural da turma, crítica mensal, aula ao vivo, biblioteca; fichas sem limite, histórico de custo e PDF', '€9,99 por mês ou €99 por ano, IVA incluído; 30 dias grátis ao criar a conta, sem cartão'],
         ['Sócio com Barback', 'Tudo do Sócio e o Barback pessoal: rotina, renda, eventos solo, trilhas de estudo e carreira', '€19,99 por mês ou €199 por ano, IVA incluído'],
         ['Plano Casa', 'Barback da casa, fichas para o time, conferência da bancada, treino, selo Casa-escola e o Sócio para 2 pessoas', '€29 por mês por local, sem IVA; cada sócio a mais, €6'],
         ['Prática avulsa', 'Uma prática presencial da Escola, sem ser sócio', '€39'],

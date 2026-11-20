@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Abas, Papel } from '../ds/componentes';
 import type { Lang, Textos } from '../textos';
 import { Agenda, Secao } from './comum';
-import { EscolaPronta, EscolaRaiz } from '../escola/contexto';
+import { EscolaPronta } from '../escola/contexto';
 import { EscolaPainel } from '../escola/Painel';
 import { TurmaTela } from '../escola/Turma';
 import '../escola/escola.css';
@@ -21,7 +21,7 @@ export function Atlas({ t, lang, avisar }: { t: Textos; lang: Lang; avisar: (txt
   const abrirTurma = (id: string | null) => { setTurma(id); window.scrollTo({ top: 0 }); };
 
   return (
-    <EscolaRaiz lang={lang} avisar={avisar}>
+    <>
       {turma ? (
         <EscolaPronta><TurmaTela id={turma} voltar={() => { abrirTurma(null); setAba('escola'); }} /></EscolaPronta>
       ) : (
@@ -54,6 +54,6 @@ export function Atlas({ t, lang, avisar }: { t: Textos; lang: Lang; avisar: (txt
           </div>
         </div>
       )}
-    </EscolaRaiz>
+    </>
   );
 }

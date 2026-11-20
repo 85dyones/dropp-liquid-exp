@@ -43,10 +43,13 @@ export function criarNuvem(url: string, chave: string): FonteEscola {
     eu: async () => {
       const s = (await sb.auth.getSession()).data.session;
       if (!s) return null;
-      const r = await sb.from('perfis').select('id, nome, plano, papel').eq('id', s.user.id).maybeSingle();
+      const r = await sb.from('perfis').select('id, nome, plano, plano_ate, papel').eq('id', s.user.id).maybeSingle();
       const p = ok(r);
-      if (!p) return { id: s.user.id, nome: '', plano: 'gratis', papel: 'membro', email: s.user.email } as Eu;
-      return { id: p.id, nome: p.nome, plano: p.plano, papel: p.papel, email: s.user.email } as Eu;
+      if (!p) return { id: s.user.id, nome: '', plano: 'gratis', papel: 'membro', planoAte: null, email: s.user.email } as Eu;
+      // O banco guarda o plano e o último dia; o teste de 30 dias vencido vale como grátis (como em e_socio).
+      const hoje = new Date().toISOString().slice(0, 10);
+      const vencido = p.plano !== 'gratis' && !!p.plano_ate && p.plano_ate < hoje;
+      return { id: p.id, nome: p.nome, plano: vencido ? 'gratis' : p.plano, papel: p.papel, planoAte: vencido ? null : p.plano_ate, email: s.user.email } as Eu;
     },
     aoMudarSessao: (cb) => {
       const { data } = sb.auth.onAuthStateChange((evento) => { if (evento !== 'TOKEN_REFRESHED') cb(); });
@@ -186,10 +189,10 @@ export function criarNuvem(url: string, chave: string): FonteEscola {
     materiais: async () => {
       const id = await uid();
       if (!id) return [];
-      const linhas = ok(await sb.from('materiais').select('id, titulo, tipo, oficio, resumo').order('criado_em')) ?? [];
+      const linhas = ok(await sb.from('materiais').select('id, titulo, tipo, oficio, resumo, livre_em').order('criado_em')) ?? [];
       const est = ok(await sb.from('estante').select('material_id').eq('user_id', id)) ?? [];
       const guardados = new Set(est.map((e) => e.material_id));
-      return linhas.map<Material>((x) => ({ id: x.id, titulo: txt(x.titulo), tipo: x.tipo, oficio: x.oficio, resumo: txt(x.resumo), guardado: guardados.has(x.id) }));
+      return linhas.map<Material>((x) => ({ id: x.id, titulo: txt(x.titulo), tipo: x.tipo, oficio: x.oficio, resumo: txt(x.resumo), guardado: guardados.has(x.id), livreEm: x.livre_em }));
     },
     guardar: async (materialId, sim) => {
       const id = await precisaUid();
