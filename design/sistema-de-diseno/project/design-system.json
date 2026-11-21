@@ -1,0 +1,96 @@
+{
+  "v": 3,
+  "assetGroups": {
+    "Icones": {
+      "files": {
+        "atlas.svg": {
+          "blob": "0b3331be1db3472dd15b22669c6a62e6",
+          "name": "atlas.svg",
+          "size": 288,
+          "type": "image/svg+xml"
+        },
+        "caderno.svg": {
+          "blob": "6abf84fc9f35167e9ff195008e398858",
+          "name": "caderno.svg",
+          "size": 278,
+          "type": "image/svg+xml"
+        },
+        "conferir.svg": {
+          "blob": "09828f8e34de4f48587ab76e4c9a290a",
+          "name": "conferir.svg",
+          "size": 297,
+          "type": "image/svg+xml"
+        },
+        "turno.svg": {
+          "blob": "054d900f46a2c87db57c1fcbfb589630",
+          "name": "turno.svg",
+          "size": 257,
+          "type": "image/svg+xml"
+        }
+      },
+      "name": "Iconos",
+      "order": [
+        "turno.svg",
+        "caderno.svg",
+        "atlas.svg",
+        "conferir.svg"
+      ],
+      "tile": "s"
+    },
+    "Marca": {
+      "files": {
+        "gota-contorno.svg": {
+          "blob": "6259bbe4069685d7ca2d60571ec79e84",
+          "name": "gota-contorno.svg",
+          "size": 853,
+          "type": "image/svg+xml"
+        },
+        "gota.svg": {
+          "blob": "4db42e614c3c76c792d27755a3043d88",
+          "name": "gota.svg",
+          "size": 859,
+          "type": "image/svg+xml"
+        }
+      },
+      "name": "Marca",
+      "order": [
+        "gota.svg",
+        "gota-contorno.svg"
+      ],
+      "tile": "l"
+    }
+  },
+  "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-11-21T15:42:59Z",
+    "v": 1
+  },
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "groups": [
+    "Marca",
+    "Icones"
+  ],
+  "lastChange": {
+    "at": "2026-11-21T15:42:59Z",
+    "by": "Claude",
+    "note": "Versión en español de España del sistema en portugués: README, componentes, vistas previas, tokens y etiquetas del código. Los nombres de tokens, componentes y props siguen en portugués.",
+    "via": "Claude Code"
+  },
+  "layout": "files",
+  "libraries": [
+    {
+      "name": "react",
+      "version": "18"
+    },
+    {
+      "name": "react-dom",
+      "version": "18"
+    }
+  ],
+  "namespace": "Dropp",
+  "sections": {},
+  "title": "DROPP Liquid Experience (español)"
+}

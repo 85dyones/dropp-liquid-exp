@@ -1,0 +1,74 @@
+<!-- @dsCard height=320 -->
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Portada</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Archivo:wdth,wght@62..125,400..800&amp;family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;display=swap"><style>
+body { margin: 0; }
+.capa { position: relative; width: 960px; height: 320px; background: var(--papel); overflow: hidden; }
+.capa svg { position: absolute; left: 0; top: 0; width: 960px; height: 120px; display: block; }
+.b-tinta { fill: var(--tinta); }
+.b-amarelo { fill: var(--gota-amarelo); }
+.b-magenta { fill: var(--gota-magenta); }
+.b-ciano { fill: var(--gota-ciano); }
+.b-laranja { fill: var(--gota-laranja); }
+.furo { fill: var(--papel); }
+.nome { position: absolute; left: 40px; top: 146px; max-width: 880px; font-family: var(--font-display); font-weight: 400; font-size: 64px; line-height: 0.95; color: var(--tinta); margin: 0; }
+.linha { position: absolute; left: 40px; top: 284px; max-width: 880px; font-family: var(--font-texto); font-size: 14px; line-height: 1.4; color: var(--tinta-suave); margin: 0; }
+</style></head>
+<body>
+<div class="capa">
+<!-- bloques: tinta 432px, amarillo 192px, magenta 168px, cian 84px, naranja 84px, todos de 112px de alto y raio-0 (esquinas rectas, como una etiqueta cortada)
+     disposición: franja de bandas desiguales arriba, a sangre por los bordes, como la cinta de la impresora térmica
+     patrón: 40 agujeros de troquel (el troquel de la etiqueta térmica), discos de 3px de radio cada 24px (6 × espaco-1) en el borde inferior de la franja, en el color del fondo; elegido porque la identidad nace de la etiqueta de preparación
+     escalas: alturas y pasos en múltiplos de espaco-1 (4px); raio-0 en los bloques; agujeros en raio-pilula reducidos a discos -->
+<svg viewBox="0 0 960 120" aria-hidden="true">
+  <rect class="b-tinta" x="0" y="0" width="432" height="112"></rect>
+  <rect class="b-amarelo" x="432" y="0" width="192" height="112"></rect>
+  <rect class="b-magenta" x="624" y="0" width="168" height="112"></rect>
+  <rect class="b-ciano" x="792" y="0" width="84" height="112"></rect>
+  <rect class="b-laranja" x="876" y="0" width="84" height="112"></rect>
+  <circle class="furo" cx="6" cy="112" r="3"></circle>
+  <circle class="furo" cx="30" cy="112" r="3"></circle>
+  <circle class="furo" cx="54" cy="112" r="3"></circle>
+  <circle class="furo" cx="78" cy="112" r="3"></circle>
+  <circle class="furo" cx="102" cy="112" r="3"></circle>
+  <circle class="furo" cx="126" cy="112" r="3"></circle>
+  <circle class="furo" cx="150" cy="112" r="3"></circle>
+  <circle class="furo" cx="174" cy="112" r="3"></circle>
+  <circle class="furo" cx="198" cy="112" r="3"></circle>
+  <circle class="furo" cx="222" cy="112" r="3"></circle>
+  <circle class="furo" cx="246" cy="112" r="3"></circle>
+  <circle class="furo" cx="270" cy="112" r="3"></circle>
+  <circle class="furo" cx="294" cy="112" r="3"></circle>
+  <circle class="furo" cx="318" cy="112" r="3"></circle>
+  <circle class="furo" cx="342" cy="112" r="3"></circle>
+  <circle class="furo" cx="366" cy="112" r="3"></circle>
+  <circle class="furo" cx="390" cy="112" r="3"></circle>
+  <circle class="furo" cx="414" cy="112" r="3"></circle>
+  <circle class="furo" cx="438" cy="112" r="3"></circle>
+  <circle class="furo" cx="462" cy="112" r="3"></circle>
+  <circle class="furo" cx="486" cy="112" r="3"></circle>
+  <circle class="furo" cx="510" cy="112" r="3"></circle>
+  <circle class="furo" cx="534" cy="112" r="3"></circle>
+  <circle class="furo" cx="558" cy="112" r="3"></circle>
+  <circle class="furo" cx="582" cy="112" r="3"></circle>
+  <circle class="furo" cx="606" cy="112" r="3"></circle>
+  <circle class="furo" cx="630" cy="112" r="3"></circle>
+  <circle class="furo" cx="654" cy="112" r="3"></circle>
+  <circle class="furo" cx="678" cy="112" r="3"></circle>
+  <circle class="furo" cx="702" cy="112" r="3"></circle>
+  <circle class="furo" cx="726" cy="112" r="3"></circle>
+  <circle class="furo" cx="750" cy="112" r="3"></circle>
+  <circle class="furo" cx="774" cy="112" r="3"></circle>
+  <circle class="furo" cx="798" cy="112" r="3"></circle>
+  <circle class="furo" cx="822" cy="112" r="3"></circle>
+  <circle class="furo" cx="846" cy="112" r="3"></circle>
+  <circle class="furo" cx="870" cy="112" r="3"></circle>
+  <circle class="furo" cx="894" cy="112" r="3"></circle>
+  <circle class="furo" cx="918" cy="112" r="3"></circle>
+  <circle class="furo" cx="942" cy="112" r="3"></circle>
+</svg>
+<p class="nome">DROPP<br>Liquid Experience</p>
+<p class="linha">El turno, el cuaderno, el pasaporte y el atlas de quien trabaja detrás de la barra.</p>
+</div>
+</body>
+</html>
