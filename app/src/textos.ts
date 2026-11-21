@@ -199,9 +199,9 @@ export const TEXTOS = {
       escolaTit: 'Escola DROPP',
       escolaTxt: 'Cursos em turma, com prática no bar. Quem termina leva o carimbo Escola no Passaporte.',
       escolaProx: 'Próxima turma: Gelo claro na prática · começa 01/12 · 3 vagas livres',
-      escolaBtn: 'Ser sócio · 30 dias grátis',
+      escolaBtn: 'Ser sócio',
       escolaPreco: '€9,99 por mês, ou €19,99 com o Barback pessoal',
-      escolaAviso: 'No app, a assinatura abre aqui: €9,99 por mês depois de 30 dias grátis, com aviso 15 dias antes da cobrança.',
+      escolaAviso: 'No app, a assinatura abre aqui: €9,99 por mês. Conta nova já começa com 30 dias de Sócio, sem cartão.',
       agendaTit: 'Agenda do setor',
       agendaItens: agendaPt
     }
@@ -374,9 +374,9 @@ export const TEXTOS = {
       escolaTit: 'Escuela DROPP',
       escolaTxt: 'Cursos en grupo, con práctica en el bar. Quien termina se lleva el sello Escuela en el Pasaporte.',
       escolaProx: 'Próximo curso: Hielo claro en la práctica · empieza el 01/12 · 3 plazas libres',
-      escolaBtn: 'Hazte socio · 30 días gratis',
+      escolaBtn: 'Hazte socio',
       escolaPreco: '9,99 € al mes, o 19,99 € con el Barback personal',
-      escolaAviso: 'En la app, la suscripción se abre aquí: 9,99 € al mes después de 30 días gratis, con aviso 15 días antes del cobro.',
+      escolaAviso: 'En la app, la suscripción se abre aquí: 9,99 € al mes. Una cuenta nueva ya empieza con 30 días de Socio, sin tarjeta.',
       agendaTit: 'Agenda del sector',
       agendaItens: agendaEs
     }

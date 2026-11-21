@@ -249,7 +249,7 @@ button { font-family: inherit; color: #1C1A16; }
         <p>{{esc.planoTxt}}</p>
         <sc-if value="{{esc.gratis}}" hint-placeholder-val="{{ true }}">
           <div class="acoes">
-            <button type="button" class="btn cheio largo" onClick="{{esc.serSocio}}">Ser sócio · 30 dias grátis</button>
+            <button type="button" class="btn cheio largo" onClick="{{esc.serSocio}}">Ser sócio</button>
             <sc-if value="{{esc.podePedir}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn largo" onClick="{{esc.pedirCasa}}">Pedir o Sócio ao Bar Salitre</button></sc-if>
             <sc-if value="{{esc.pedido}}" hint-placeholder-val="{{ false }}"><p class="lido"><span class="st ok">pedido</span><span>{{esc.pedidoTxt}}</span></p></sc-if>
           </div>
@@ -419,7 +419,7 @@ button { font-family: inherit; color: #1C1A16; }
       </sc-if>
       <sc-if value="{{tu.precisaSocio}}" hint-placeholder-val="{{ false }}">
         <div class="acoes">
-          <button type="button" class="btn cheio largo" onClick="{{tu.serSocio}}">Ser sócio para entrar · 30 dias grátis</button>
+          <button type="button" class="btn cheio largo" onClick="{{tu.serSocio}}">Ser sócio para entrar</button>
           <button type="button" class="btn largo" onClick="{{tu.avulso}}">Só a prática presencial · €39</button>
         </div>
         <p class="nota">A prática presencial dá o carimbo do mesmo jeito. As aulas online, a biblioteca e a crítica ficam para sócios.</p>
@@ -512,8 +512,8 @@ button { font-family: inherit; color: #1C1A16; }
         </div>
       </sc-if>
       <sc-if value="{{mt.gratis}}" hint-placeholder-val="{{ true }}">
-        <button type="button" class="btn cheio largo" onClick="{{mt.serSocio}}">Ser sócio para ler tudo · 30 dias grátis</button>
-        <p class="nota">Sem ser sócio, você lê o começo de cada material.</p>
+        <button type="button" class="btn cheio largo" onClick="{{mt.serSocio}}">Ser sócio para ler tudo</button>
+        <p class="nota">Sem ser sócio, você lê o começo de cada material e, inteiro, o material do mês.</p>
       </sc-if>
     </sc-if>
 
@@ -890,13 +890,25 @@ class Component extends DCLogic {
         prova: 'Você cria um drink sem álcool com custo por dose calculado no Caderno. A instrutora prova e assina.',
         leva: 'Carimbo Escola · Sem álcool, no ofício Sem álcool.',
         encontros: [{ id: 'pr', d: '03/12', t: 'Encontro único, com prática', onde: 'Quinta, 19h · Ruzafa, Valência' }],
-        temAula: false, carimbo: { tipo: 'Escola', tit: 'Sem álcool', linha: 'prática aprovada' } }
+        temAula: false, carimbo: { tipo: 'Escola', tit: 'Sem álcool', linha: 'prática aprovada' } },
+      { id: 'bancada', cod: 'ESC-03', nome: 'Bancada pronta: mise en place', oficio: 'Preparo e fermentação', inicio: '07/12', livres: 31, total: 40, pago: '', basico: true,
+        porque: 'O Turno mandou 3 L de cordial de limão para a lista de preparo. A turma ensina a montar essa lista a partir das reservas e a etiquetar cada lote.',
+        porqueBarback: '',
+        quem: 'Pablo Ferrer, grau Reserva em Custo e gestão',
+        prova: 'Você monta a lista de preparo de uma sexta e etiqueta um lote no seu balcão. O Pablo confere pelo vídeo e assina; um colega da turma confere com ele.',
+        leva: 'Carimbo Escola · Bancada pronta, no ofício Preparo e fermentação.',
+        encontros: [
+          { id: 'a1', d: '07/12', t: 'Aula 1 · A lista de preparo', onde: 'No app: das reservas do dia à lista do Caderno' },
+          { id: 'a2', d: '10/12', t: 'Aula 2 · Lotes com etiqueta', onde: 'No app: validade, alérgenos e o QR' },
+          { id: 'pr', d: '18/12', t: 'Prática no seu balcão', onde: 'Sexta, 18h · no seu bar, com o Pablo pelo vídeo' }
+        ],
+        temAula: false, carimbo: { tipo: 'Escola', tit: 'Bancada pronta', linha: 'prática aprovada' } }
     ];
 
     const materiais = [
       { id: 'mgelo', nome: 'Gelo claro: congelamento direcional', tipo: 'Monografia · 18 páginas', oficio: 'Gelo e diluição', autor: 'Irene Soler',
         trecho: ['Sem tampa, o frio entra só por cima. O gelo cresce para baixo e empurra o ar e os sais para a água que ainda não congelou.', 'Num freezer a −18 °C, uma caixa de 12 L leva de 24 a 36 horas. O fundo turvo é o que sobra, e é ele que você descarta.'], abrirRot: 'Abrir as 18 páginas' },
-      { id: 'mlima', nome: 'Cordial de limão: procedimento de preparo', tipo: 'Ficha técnica · 4 páginas', oficio: 'Preparo e fermentação', autor: 'Equipe DROPP',
+      { id: 'mlima', doMes: true, nome: 'Cordial de limão: procedimento de preparo', tipo: 'Ficha técnica · 4 páginas', oficio: 'Preparo e fermentação', autor: 'Equipe DROPP',
         trecho: ['Como fazer o lote de 3 L: pesos, ordem dos passos, validade e o que conferir antes de servir.', 'A última página traz a etiqueta pronta para o Caderno, com o alérgeno e o lote.'], abrirRot: 'Abrir as 4 páginas' },
       { id: 'mcarta', nome: 'Custo da carta de inverno', tipo: 'Planilha · modelo', oficio: 'Custo e gestão', autor: 'Pablo Ferrer',
         trecho: ['Custo por dose de cada drink, a meta da casa e o preço que fecha a conta.', 'Abre direto no Caderno, com as suas fichas no lugar dos exemplos.'], abrirRot: 'Abrir no Caderno' },
@@ -937,10 +949,11 @@ class Component extends DCLogic {
       let chip = null;
       if (e === 'aprovado') chip = { t: 'carimbo no Passaporte', cls: 'st ok' };
       else if (e !== 'aberta') chip = { t: 'na turma', cls: 'st ok' };
+      else if (tm.basico) chip = { t: 'básico · grátis', cls: 'st ok' };
       else if (!tm.pago && !socio) chip = { t: 'para sócios', cls: 'st trava' };
       else if (tm.pago) chip = { t: 'aberta a todos', cls: 'st falta' };
       return {
-        rot: (tm.pago ? 'Turma patrocinada' : 'Turma') + ' · ' + tm.cod + ' · ' + tm.oficio, nome: tm.nome,
+        rot: (tm.pago ? 'Turma patrocinada' : (tm.basico ? 'Curso básico' : 'Turma')) + ' · ' + tm.cod + ' · ' + tm.oficio, nome: tm.nome,
         linha: 'começa ' + tm.inicio + ' · ' + tm.encontros.length + (tm.encontros.length > 1 ? ' encontros' : ' encontro') + ' · ' + (naTurma(tm.id) ? 'você está nela' : tm.livres + ' vagas livres'),
         temPago: !!tm.pago, pagoT: tm.pago ? 'Pago por ' + tm.pago : '',
         temChip: !!chip, chipT: chip ? chip.t : '', chipCls: chip ? chip.cls : 'st', temPe: !!chip || !!tm.pago,
@@ -950,21 +963,22 @@ class Component extends DCLogic {
 
     const nGuard = materiais.filter((m) => s.guardados[m.id]).length;
     const materialLista = materiais.map((m) => {
-      const chip = !socio ? { t: 'prévia · para sócios', cls: 'st trava' } : (s.guardados[m.id] ? { t: 'na sua estante', cls: 'st ok' } : null);
+      const chip = !socio ? (m.doMes ? { t: 'material do mês · aberto a todos', cls: 'st ok' } : { t: 'prévia · para sócios', cls: 'st trava' }) : (s.guardados[m.id] ? { t: 'na sua estante', cls: 'st ok' } : null);
       return { rot: m.tipo, nome: m.nome, linha: 'por ' + m.autor + ' · ' + m.oficio, temChip: !!chip, chipT: chip ? chip.t : '', chipCls: chip ? chip.cls : 'st', abrir: () => ir('material', { matSel: m.id }) };
     });
 
     const planoNome = socio ? precos[s.plano].nome : 'Plano Grátis';
+    const renova = s.ciclo === 'anual' ? '20/11/2027' : '20/12';
     const esc = {
       gratis: !socio, socio: socio,
       planoRot: planoNome,
-      planoSt: socio ? (s.cancelado ? 'cancelada' : 'teste grátis') : 'grátis',
+      planoSt: socio ? (s.cancelado ? 'cancelada' : 'ativa') : 'grátis',
       planoStCls: socio ? (s.cancelado ? 'st falta' : 'st ok') : 'st falta',
       planoTxt: !socio
-        ? 'A Escola é dos sócios: turmas com prática, a biblioteca inteira, uma crítica por mês e uma aula ao vivo. São 30 dias grátis e depois €9,99 por mês.'
+        ? 'No grátis ficam os cursos básicos, as turmas patrocinadas, a aula aberta do mês e o material do mês. As outras turmas, a biblioteca inteira, a crítica e as outras aulas ao vivo são dos sócios, por €9,99 por mês.'
         : (s.cancelado
-          ? 'Assinatura cancelada. Você segue sócio até 20/12; carimbos, fichas e a sua estante ficam.'
-          : 'Teste grátis até 20/12. Avisamos em 05/12, quinze dias antes da primeira cobrança de ' + precoAtual(s.plano, s.ciclo) + '.'),
+          ? 'Assinatura cancelada. Você segue sócio até ' + renova + '; carimbos, fichas e a sua estante ficam.'
+          : 'Assinatura ativa: renova em ' + renova + ' por ' + precoAtual(s.plano, s.ciclo) + '. Cancelar fica em Minha assinatura, com um toque.'),
       serSocio: () => abrirPlano('socio'),
       podePedir: !s.pedidoCasa, pedido: !!s.pedidoCasa, pedidoTxt: pedidoTxt, pedirCasa: pedirCasa,
       minhaAssin: () => ir('assinatura'),
@@ -1114,16 +1128,16 @@ class Component extends DCLogic {
       return { d: en.d, t: en.t, onde: en.onde, temSt: temSt, stT: stT, stCls: stCls, temBtn: temBtn, btnRot: btnRot, abrir: abrir };
     });
     const tu = {
-      rot: (tc.pago ? 'Turma patrocinada' : 'Turma') + ' · ' + tc.cod + ' · ' + tc.oficio, nome: tc.nome,
+      rot: (tc.pago ? 'Turma patrocinada' : (tc.basico ? 'Curso básico' : 'Turma')) + ' · ' + tc.cod + ' · ' + tc.oficio, nome: tc.nome,
       temPago: !!tc.pago, pagoT: tc.pago ? 'Pago por ' + tc.pago : '',
       porque: comBarback && tc.porqueBarback ? tc.porqueBarback : tc.porque,
       quem: tc.quem,
-      acesso: tc.pago ? 'Aberta a todos, paga pela marca.' : (socio ? 'Incluída no seu plano de sócio.' : 'Incluída no Sócio. Sem ser sócio, só a prática presencial, por €39.'),
+      acesso: tc.pago ? 'Aberta a todos, paga pela marca.' : tc.basico ? 'Curso básico: grátis com a sua conta, sócio ou não.' : (socio ? 'Incluída no seu plano de sócio.' : 'Incluída no Sócio. Sem ser sócio, só a prática presencial, por €39.'),
       prova: tc.prova, leva: tc.leva, vagas: vagasTxt(tc),
       encontros: encontrosTu,
-      podeEntrar: et === 'aberta' && (socio || !!tc.pago),
+      podeEntrar: et === 'aberta' && (socio || !!tc.pago || !!tc.basico),
       entrar: () => mudaTurma('dentro', { aviso: tc.encontros.length > 1 ? 'Você entrou na turma. As ' + tc.encontros.length + ' datas foram para a sua agenda e vão aparecer no Turno.' : 'Você entrou na turma. O encontro foi para a sua agenda e vai aparecer no Turno.' }),
-      precisaSocio: et === 'aberta' && !socio && !tc.pago,
+      precisaSocio: et === 'aberta' && !socio && !tc.pago && !tc.basico,
       serSocio: () => abrirPlano('socio'),
       avulso: () => set({ aviso: 'No app, a prática presencial avulsa é paga por Bizum ou cartão, fora da loja. Ela dá o carimbo do mesmo jeito.' }),
       dentro: et === 'dentro',
@@ -1188,8 +1202,8 @@ class Component extends DCLogic {
     const mt = {
       rot: m.tipo + ' · ' + m.oficio, nome: m.nome, autor: 'por ' + m.autor,
       trecho: m.trecho.map((x) => ({ t: x })),
-      continua: socio ? 'continua no material completo' : 'prévia · o resto é para sócios',
-      socio: socio, gratis: !socio,
+      continua: socio ? 'continua no material completo' : (m.doMes ? 'material do mês · inteiro para todos até 30/11' : 'prévia · o resto é para sócios'),
+      socio: socio || !!m.doMes, gratis: !socio && !m.doMes,
       guardado: guardado, guardarRot: guardado ? 'Na sua estante' : 'Guardar na minha estante',
       guardar: () => { if (guardado) return; const gd = Object.assign({}, s.guardados); gd[m.id] = true; set({ guardados: gd, aviso: 'Guardado na sua estante. Fica no celular para ler sem internet.' }); },
       abrirRot: m.abrirRot,
@@ -1211,23 +1225,23 @@ class Component extends DCLogic {
       ciclos: [{ id: 'mensal', t: 'Mensal', s: precos[escolha].mensal + ' por mês' }, { id: 'anual', t: 'Anual', s: '2 meses grátis' }].map((c) => ({ t: c.t, s: c.s, on: ciclo === c.id, pick: () => set({ ciclo: c.id }) })),
       valor: ciclo === 'anual' ? precos[escolha].anual : precos[escolha].mensal,
       unidade: ciclo === 'anual' ? 'por ano' : 'por mês',
-      valorNota: (ciclo === 'anual' ? 'Sai a ' + precos[escolha].anualMes + ' por mês. ' : '') + 'IVA incluído. ' + (socio ? 'Seu teste grátis vai até 20/12.' : 'Os 30 primeiros dias são grátis.'),
+      valorNota: (ciclo === 'anual' ? 'Sai a ' + precos[escolha].anualMes + ' por mês. ' : '') + 'IVA incluído. ' + (socio ? 'Seu plano renova em ' + renova + '.' : 'A cobrança começa hoje; cancele quando quiser.'),
       inclui: (escolha === 'barback' ? incluiBarback : incluiSocio).map((x) => ({ t: x })),
       regras: [
-        { k: 'aviso', t: 'Avisamos em 05/12, quinze dias antes da primeira cobrança.' },
+        { k: 'cobrança', t: novo ? (ciclo === 'anual' ? 'Hoje, e de novo em 20/11/2027, com aviso 15 dias antes.' : 'Hoje, e depois todo dia 20.') : 'A próxima continua em ' + renova + '.' },
         { k: 'cancelar', t: 'Cancelar fica em Minha assinatura, com um toque, do mesmo jeito que você assinou.' },
         { k: 'loja', t: 'A cobrança passa pela App Store ou pelo Google Play.' }
       ],
       pedeAceite: novo, aceito: !!s.aceito, marca: s.aceito ? '✓' : '',
       aceitar: () => set({ aceito: !s.aceito }),
       bloqueado: mesmoPlano || (novo && !s.aceito),
-      comecarRot: mesmoPlano ? 'Este é o seu plano' : (s.cancelado && socio ? 'Voltar a assinar' : (upgrade ? 'Passar para o plano com Barback' : (socio ? 'Voltar ao Sócio, sem o Barback' : 'Começar 30 dias grátis'))),
+      comecarRot: mesmoPlano ? 'Este é o seu plano' : (s.cancelado && socio ? 'Voltar a assinar' : (upgrade ? 'Passar para o plano com Barback' : (socio ? 'Voltar ao Sócio, sem o Barback' : 'Assinar · ' + (ciclo === 'anual' ? precos[escolha].anual + ' por ano' : precos[escolha].mensal + ' por mês')))),
       comecar: () => {
         if (mesmoPlano || (novo && !s.aceito)) return;
-        let msg = 'No app, a assinatura passa pela App Store ou pelo Google Play. Nada é cobrado até 20/12; avisamos em 05/12.';
-        if (s.cancelado && socio) msg = 'Assinatura de volta. A primeira cobrança continua em 20/12, com aviso em 05/12.';
+        let msg = 'No app, a assinatura passa pela App Store ou pelo Google Play. A Escola abre na hora; a próxima cobrança é em ' + (ciclo === 'anual' ? '20/11/2027' : '20/12') + '.';
+        if (s.cancelado && socio) msg = 'Assinatura de volta. A próxima cobrança continua em ' + renova + '.';
         else if (upgrade) msg = 'No app, a troca passa pela loja. O Barback pessoal começa hoje e a diferença entra na próxima cobrança.';
-        else if (socio && !s.cancelado) msg = 'A partir da próxima cobrança, ' + precoAtual('socio', ciclo) + '. O Barback pessoal fica até 20/12.';
+        else if (socio && !s.cancelado) msg = 'A partir da próxima cobrança, ' + precoAtual('socio', ciclo) + '. O Barback pessoal fica até ' + renova + '.';
         voltarDe({ plano: escolha, ciclo: ciclo, cancelado: false, aviso: msg });
       },
       casaTxt: escolha === 'barback'
@@ -1244,9 +1258,9 @@ class Component extends DCLogic {
       fatos: [
         { k: 'Plano', v: precos[planoAssin].nome + ' · ' + (s.ciclo === 'anual' ? 'anual' : 'mensal') },
         { k: 'Preço', v: precoAtual(planoAssin, s.ciclo) + ', IVA incluído' },
-        { k: 'Teste', v: 'grátis até 20/12/2026' },
-        { k: 'Aviso', v: s.cancelado ? 'nenhum: não há próxima cobrança' : 'em 05/12, quinze dias antes da cobrança' },
-        { k: 'Cobrança', v: s.cancelado ? 'cancelada' : 'pela App Store, em 20/12' }
+        { k: 'Desde', v: '20/11/2026' },
+        { k: 'Renovação', v: s.cancelado ? 'nenhuma: não há próxima cobrança' : 'em ' + renova + (s.ciclo === 'anual' ? ', com aviso 15 dias antes' : '') },
+        { k: 'Cobrança', v: s.cancelado ? 'cancelada' : 'pela App Store, ' + (s.ciclo === 'anual' ? 'uma vez por ano' : 'todo mês') }
       ],
       ativa: socio && !s.cancelado && !s.confirmando,
       trocarRot: s.plano === 'barback' ? 'Voltar ao Sócio, sem o Barback' : 'Passar para o plano com Barback',
@@ -1254,11 +1268,11 @@ class Component extends DCLogic {
       podeCancelar: true,
       pedirCancel: () => set({ confirmando: true, aviso: '' }),
       confirmando: socio && !s.cancelado && !!s.confirmando,
-      confTxt: 'Você segue sócio até 20/12 e nada é cobrado. Carimbos, fichas e o que está na sua estante ficam com você.',
-      cancelar: () => set({ cancelado: true, confirmando: false, aviso: 'Assinatura cancelada. Você segue sócio até 20/12.' }),
+      confTxt: 'Você segue sócio até ' + renova + ' e nada mais é cobrado. Carimbos, fichas e o que está na sua estante ficam com você.',
+      cancelar: () => set({ cancelado: true, confirmando: false, aviso: 'Assinatura cancelada. Você segue sócio até ' + renova + '.' }),
       manter: () => set({ confirmando: false }),
       cancelada: socio && !!s.cancelado,
-      canceladaTxt: 'Sócio até 20/12. Nada será cobrado.',
+      canceladaTxt: 'Sócio até ' + renova + '. Nada mais será cobrado.',
       reassinar: () => abrirPlano(s.plano === 'barback' ? 'barback' : 'socio')
     };
 
