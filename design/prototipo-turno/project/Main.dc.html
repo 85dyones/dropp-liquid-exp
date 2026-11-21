@@ -138,6 +138,17 @@ button { font-family: inherit; color: #1C1A16; }
 .cad-nome { display: flex; align-items: center; gap: 10px; font-family: Anton, Impact, "Arial Narrow", sans-serif; font-size: 21px; line-height: 1; text-transform: uppercase; }
 .niveis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
 
+.tres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.duas-op { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.cand { padding: 14px; display: grid; gap: 8px; border-radius: 4px; }
+.cand-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.cand-nome { font-weight: 700; font-size: 18px; line-height: 1.2; min-width: 0; }
+.cand-ordem { font-family: "Courier Prime", "Courier New", monospace; font-size: 12px; color: #5B5344; }
+.btn[aria-pressed="true"] { background: #1C1A16; color: #F8F3E7; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.bb-nota { display: grid; gap: 6px; border-top: 1.5px dashed #1C1A16; padding-top: 8px; }
+.ev-nome { font-weight: 700; font-size: 17px; line-height: 1.25; }
+
 .aviso { position: absolute; left: 12px; right: 12px; bottom: 74px; background: #1C1A16; color: #F8F3E7; padding: 6px 6px 6px 14px; display: flex; gap: 8px; align-items: center; font-size: 14px; line-height: 1.35; font-weight: 600; z-index: 5; box-shadow: 0 10px 24px rgba(60, 45, 20, 0.35); }
 .aviso button { appearance: none; border: 0; background: transparent; color: #F8F3E7; min-height: 44px; padding: 0 10px; font-weight: 700; font-size: 13px; cursor: pointer; text-decoration: underline; }
 .nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1.5px solid #1C1A16; background: #EFE8D8; position: relative; z-index: 6; flex: none; }
@@ -272,11 +283,17 @@ button { font-family: inherit; color: #1C1A16; }
       </sc-if>
       <sc-if value="{{casa}}" hint-placeholder-val="{{ true }}">
         <div class="linha-btns">
+          <button type="button" class="btn" onClick="{{irVagas}}">Vagas e eventos</button>
           <button type="button" class="btn" onClick="{{irLivro}}">Livro de turno</button>
           <button type="button" class="btn" onClick="{{irRegras}}">O que ele pode fazer</button>
         </div>
       </sc-if>
       <sc-if value="{{meu}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">Vagas abertas em Valência</span>
+          <p class="nota">{{vagasResumo}}</p>
+          <div><button type="button" class="btn" onClick="{{irVagas}}">Ver as vagas</button></div>
+        </div>
         <div class="papel corte bloco">
           <span class="rot">Vai com você</span>
           <p class="nota">Só você vê este Barback. Se sair do Bar Salitre, você leva o passaporte, as fichas pessoais e a sua renda. A casa fica com as fichas e os lotes dela.</p>
@@ -390,6 +407,174 @@ button { font-family: inherit; color: #1C1A16; }
       </sc-for>
     </sc-if>
 
+    <sc-if value="{{tVagasCasa}}" hint-placeholder-val="{{ false }}">
+      <p class="nota">Todo bartender do DROPP em Valência vê a vaga e se candidata de graça. A casa escolhe olhando o passaporte.</p>
+      <article class="papel corte recado">
+        <div class="rec-topo">
+          <span class="cadeira"><i class="pet" style="background: #10B981" aria-hidden="true"></i><span>Operação · vaga</span></span>
+          <span class="nivel">{{vcEstado}}</span>
+        </div>
+        <p class="rec-titulo">Sábado, 28/11: faltam 2 pessoas no balcão</p>
+        <dl class="rec-linhas">
+          <sc-for list="{{vcLinhas}}" as="l" hint-placeholder-count="6">
+            <div><dt>{{l.k}}</dt><dd>{{l.v}}</dd></div>
+          </sc-for>
+        </dl>
+        <button type="button" class="fonte-btn" aria-expanded="{{vcFonteAberta}}" onClick="{{vcVerFonte}}">{{vcFonteRot}}</button>
+        <sc-if value="{{vcFonteAberta}}" hint-placeholder-val="{{ false }}">
+          <p class="fonte">Reservas do sistema, o evento privado de 60 pessoas fechado em 12/11 e a nota de turno de quinta, 19/11, que diz que faltou uma pessoa no balcão. O valor por hora é a média dos últimos 3 extras da casa. Valores ilustrativos.</p>
+        </sc-if>
+        <sc-if value="{{vcRascunho}}" hint-placeholder-val="{{ true }}">
+          <div class="campo">
+            <span class="rot" id="lbl-contrato">Como a casa contrata</span>
+            <div class="tres" role="group" aria-labelledby="lbl-contrato">
+              <sc-for list="{{contratos}}" as="ct" hint-placeholder-count="3">
+                <button type="button" class="seg" aria-pressed="{{ct.on}}" onClick="{{ct.pick}}">{{ct.t}}</button>
+              </sc-for>
+            </div>
+            <p class="nota">{{contratoNota}}</p>
+          </div>
+          <div class="opcoes">
+            <button type="button" class="btn cheio opcao-btn" onClick="{{publicarVaga}}"><span>Publicar a vaga</span><span class="efeito">grátis para ver</span></button>
+            <button type="button" class="btn opcao-btn" onClick="{{editarVaga}}"><span>Mudar antes</span></button>
+          </div>
+        </sc-if>
+        <sc-if value="{{vcTemFeito}}" hint-placeholder-val="{{ false }}">
+          <p class="feito"><span class="st ok">{{vcChip}}</span><span>{{vcFeitoTxt}}</span></p>
+        </sc-if>
+      </article>
+
+      <sc-if value="{{vcComCandidatos}}" hint-placeholder-val="{{ false }}">
+        <div class="sec-cab">
+          <p class="titulo-bloco">Candidatos</p>
+          <p class="nota">Por ordem de chegada. O DROPP não dá nota a ninguém: mostra o que a vaga pede e o que cada passaporte prova.</p>
+        </div>
+        <div class="duas-op" role="group" aria-label="Quais candidatos mostrar">
+          <sc-for list="{{filtros}}" as="fl" hint-placeholder-count="2">
+            <button type="button" class="seg" aria-pressed="{{fl.on}}" onClick="{{fl.pick}}">{{fl.t}}</button>
+          </sc-for>
+        </div>
+        <sc-for list="{{candidatos}}" as="c" hint-placeholder-count="3">
+          <article class="papel corte cand">
+            <div class="cand-cab">
+              <p class="cand-nome">{{c.nome}}</p>
+              <span class="{{c.atendeCls}}">{{c.atendeT}}</span>
+            </div>
+            <p class="cand-ordem">{{c.ordem}}</p>
+            <dl class="rec-linhas">
+              <sc-for list="{{c.provas}}" as="pv" hint-placeholder-count="3">
+                <div><dt>{{pv.k}}</dt><dd>{{pv.v}}</dd></div>
+              </sc-for>
+            </dl>
+            <div class="linha-btns">
+              <button type="button" class="btn" onClick="{{c.verPassaporte}}">Ver o passaporte</button>
+              <sc-if value="{{c.podeEscolher}}" hint-placeholder-val="{{ true }}">
+                <button type="button" class="btn escolher" aria-pressed="{{c.escolhido}}" onClick="{{c.escolher}}">{{c.escolherRot}}</button>
+              </sc-if>
+            </div>
+          </article>
+        </sc-for>
+        <sc-if value="{{vcPublicada}}" hint-placeholder-val="{{ true }}">
+          <button type="button" class="btn cheio largo" onClick="{{convidar}}" disabled="{{semEscolha}}">{{convidarRot}}</button>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{vcFechada}}" hint-placeholder-val="{{ false }}">
+        <div class="papel corte bloco">
+          <span class="rot">Antes do sábado</span>
+          <ul class="chk">
+            <li><span class="st ok">ok</span><span>{{confirmTxt}}</span></li>
+            <li><span class="st meio">casa</span><span>{{contratoPasso}}</span></li>
+            <li><span class="st ok">aviso</span><span>{{naoEscolhidosTxt}}</span></li>
+          </ul>
+        </div>
+        <div class="papel corte bloco">
+          <span class="rot">Depois do sábado, 28/11</span>
+          <p class="nota">Quem trabalhou recebe o carimbo Jornada, assinado pela casa. É a prova que fica com a pessoa, de casa em casa.</p>
+          <sc-if value="{{podeCarimbar}}" hint-placeholder-val="{{ true }}">
+            <button type="button" class="btn cheio largo" onClick="{{assinarJornada}}">Assinar o carimbo Jornada</button>
+          </sc-if>
+          <sc-if value="{{carimbada}}" hint-placeholder-val="{{ false }}">
+            <p class="feito"><span class="st ok">assinado</span><span>{{carimboTxt}}</span></p>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <div class="sec-cab">
+        <p class="titulo-bloco">Eventos da casa</p>
+        <p class="nota">Vão para a Agenda do Atlas, visíveis para todo bartender de Valência.</p>
+      </div>
+      <sc-for list="{{eventos}}" as="ev" hint-placeholder-count="2">
+        <div class="papel corte bloco">
+          <span class="rot">{{ev.quando}}</span>
+          <p class="ev-nome">{{ev.nome}}</p>
+          <p class="nota">{{ev.txt}}</p>
+          <sc-if value="{{ev.rascunho}}" hint-placeholder-val="{{ true }}">
+            <div><button type="button" class="btn" onClick="{{ev.publicar}}">Publicar o evento</button></div>
+          </sc-if>
+          <sc-if value="{{ev.publicado}}" hint-placeholder-val="{{ false }}">
+            <p class="feito"><span class="st ok">na agenda</span><span>{{ev.status}}</span></p>
+          </sc-if>
+        </div>
+      </sc-for>
+      <div class="papel corte bloco">
+        <span class="rot">Quem paga</span>
+        <p class="nota">Vagas e eventos entram no Plano Casa. Uma casa sem o plano paga só quando a vaga fecha. Para o bartender, ver e se candidatar é sempre grátis.</p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{tVagasMeu}}" hint-placeholder-val="{{ false }}">
+      <div class="campo">
+        <span class="rot" id="lbl-plano">Plano simulado</span>
+        <div class="duas-op" role="group" aria-labelledby="lbl-plano">
+          <sc-for list="{{planos}}" as="pl" hint-placeholder-count="2">
+            <button type="button" class="seg" aria-pressed="{{pl.on}}" onClick="{{pl.pick}}">{{pl.t}}</button>
+          </sc-for>
+        </div>
+      </div>
+      <p class="nota">Ver e se candidatar é grátis para todo bartender. A casa escolhe pelo passaporte, só com os carimbos públicos.</p>
+      <sc-if value="{{semBarback}}" hint-placeholder-val="{{ true }}">
+        <div class="papel corte bloco">
+          <span class="rot">Com o Barback pessoal</span>
+          <p class="nota">Ele avisa quando abre uma vaga que bate com os seus ofícios, compara o valor com o que a sua noite rende, olha a sua agenda e manda a candidatura com as fichas certas. A vaga é a mesma para todos.</p>
+          <div><button type="button" class="btn" onClick="{{verComBarback}}">Ver como fica</button></div>
+        </div>
+      </sc-if>
+      <sc-for list="{{vagasMeu}}" as="vg" hint-placeholder-count="3">
+        <article class="papel corte recado">
+          <div class="rec-topo">
+            <span class="cadeira"><span>{{vg.casa}}</span></span>
+            <span class="nivel">{{vg.fecha}}</span>
+          </div>
+          <p class="rec-titulo">{{vg.titulo}}</p>
+          <dl class="rec-linhas">
+            <sc-for list="{{vg.linhas}}" as="l" hint-placeholder-count="4">
+              <div><dt>{{l.k}}</dt><dd>{{l.v}}</dd></div>
+            </sc-for>
+          </dl>
+          <sc-if value="{{vg.comBarback}}" hint-placeholder-val="{{ false }}">
+            <div class="bb-nota">
+              <span class="rot">Barback</span>
+              <ul class="chk">
+                <sc-for list="{{vg.bb}}" as="b" hint-placeholder-count="2">
+                  <li><span class="st bb">{{b.k}}</span><span>{{b.v}}</span></li>
+                </sc-for>
+              </ul>
+            </div>
+          </sc-if>
+          <sc-if value="{{vg.aberta}}" hint-placeholder-val="{{ true }}">
+            <div class="opcoes">
+              <button type="button" class="btn cheio opcao-btn" onClick="{{vg.candidatar}}"><span>Candidatar com o passaporte</span><span class="efeito">grátis</span></button>
+              <button type="button" class="btn opcao-btn" aria-pressed="{{vg.guardada}}" onClick="{{vg.guardar}}"><span>{{vg.guardarRot}}</span></button>
+            </div>
+          </sc-if>
+          <sc-if value="{{vg.enviada}}" hint-placeholder-val="{{ false }}">
+            <p class="feito"><span class="st ok">enviada</span><span>{{vg.enviadaTxt}}</span></p>
+          </sc-if>
+        </article>
+      </sc-for>
+    </sc-if>
+
     <sc-if value="{{tRegras}}" hint-placeholder-val="{{ false }}">
       <p class="nota">Você escolhe, cadeira por cadeira, até onde o Barback vai. Isto vale para a casa; o Barback pessoal de cada bartender tem as próprias regras.</p>
       <sc-for list="{{cadeirasLista}}" as="cd" hint-placeholder-count="3">
@@ -443,7 +628,7 @@ button { font-family: inherit; color: #1C1A16; }
   </nav>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"tela":{"editor":"enum","options":["turno","livro","regras"],"default":"turno","section":"Protótipo"},"hora":{"editor":"enum","options":["antes","servico","fecho"],"default":"antes","section":"Protótipo"},"dono":{"editor":"enum","options":["casa","meu"],"default":"casa","section":"Protótipo"},"$preview":{"width":390,"height":844}}'>
+<script type="text/x-dc" data-dc-script data-props='{"tela":{"editor":"enum","options":["turno","vagas","livro","regras"],"default":"turno","section":"Protótipo"},"hora":{"editor":"enum","options":["antes","servico","fecho"],"default":"antes","section":"Protótipo"},"dono":{"editor":"enum","options":["casa","meu"],"default":"casa","section":"Protótipo"},"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
   componentDidMount() {
     this._marcar();
@@ -473,7 +658,8 @@ class Component extends DCLogic {
     const s = Object.assign({
       tela: p.tela || 'turno', hora: p.hora || 'antes', dono: p.dono || 'casa',
       decisoes: {}, fontes: {}, niveis: { op: 'sozinho', fin: 'sugere', mkt: 'ok' },
-      perguntas: [], zombie: false, gimlet: false, passo: 'gravar', supos: { mel: 0, especial: 0 }, humor: '', aviso: ''
+      perguntas: [], zombie: false, gimlet: false, passo: 'gravar', supos: { mel: 0, especial: 0 }, humor: '', aviso: '',
+      vaga: 'rascunho', contrato: 'casa', filtro: 'todos', escolhidos: {}, eventos: {}, plano: 'gratis', candidaturas: {}, guardadas: {}
     }, this.state || {});
     const set = (o) => this.setState(o);
     const casa = s.dono === 'casa';
@@ -665,6 +851,115 @@ class Component extends DCLogic {
     ];
     const humores = ['Tranquilo', 'Puxado', 'Pesado'].map((t) => ({ t: t, on: s.humor === t, pick: () => set({ humor: s.humor === t ? '' : t }) }));
 
+    // Vagas e eventos: a casa publica e escolhe pelo passaporte; ver e se candidatar é grátis
+    const juntar = (l) => l.length <= 1 ? (l[0] || '') : l.slice(0, -1).join(', ') + ' e ' + l[l.length - 1];
+    const vaga = s.vaga;
+    const vagaFechada = vaga === 'escolhida' || vaga === 'carimbada';
+    const contratosDef = [
+      { id: 'casa', t: 'Contrato da casa', linha: 'contrato da casa, com alta na Seguridade Social',
+        nota: 'A casa dá a alta na Seguridade Social antes do turno, como em qualquer extra. O DROPP não é o empregador.',
+        passo: 'Dar a alta de quem vai trabalhar na Seguridade Social antes das 20:30 de sábado.' },
+      { id: 'autonomo', t: 'Autônomo', linha: 'fatura de autônomo',
+        nota: 'Só para quem já fatura como autônomo e trabalha para várias casas. Na dúvida, contrato: extra fixo disfarçado de autônomo dá multa.',
+        passo: 'Receber a fatura de cada pessoa depois do evento.' },
+      { id: 'ett', t: 'Por uma ETT', linha: 'por uma empresa de trabalho temporário',
+        nota: 'A ETT contrata e paga; a casa paga a ETT. O DROPP só mostra a vaga e o passaporte.',
+        passo: 'Mandar os nomes para a ETT, que faz o contrato antes de sábado.' }
+    ];
+    const contrato = contratosDef.find((c) => c.id === s.contrato) || contratosDef[0];
+    const vcLinhas = [
+      ['por quê', 'Evento privado de 60 pessoas, das 21h às 02h, com a varanda aberta. Na quinta, a nota de turno já dizia que faltou uma pessoa no balcão.'],
+      ['vaga', 'Bartender de evento, 2 pessoas'],
+      ['quando', 'Sábado 28/11, 20:30 a 02:00 (5,5 h)'],
+      ['pede', 'Hospitalidade, grau Infusão ou mais'],
+      ['paga', '€20 por hora (€110 a noite), mais a gorjeta do evento'],
+      ['contrata', contrato.linha],
+      ['quem vê', 'Todo bartender do DROPP em Valência, de graça']
+    ].map((l) => ({ k: l[0], v: l[1] }));
+    const candidatosDef = [
+      { id: 'lara', nome: 'Lara Gil', fem: true, link: 'dropp.me/lara', atende: true,
+        provas: [['ofício', 'Hospitalidade, Reserva · Clássicos, Infusão'], ['jornada', '6 carimbos, o último no Bar Brasa'], ['extras', '14 de 14 turnos cumpridos'], ['casa', 'brindou com o Bar Salitre em 20/11']] },
+      { id: 'joel', nome: 'Joel Ortega', fem: false, link: 'dropp.me/joel', atende: true,
+        provas: [['ofício', 'Hospitalidade, Infusão · Sem álcool, Infusão'], ['jornada', '2 carimbos'], ['extras', '5 de 5 turnos cumpridos']] },
+      { id: 'aitana', nome: 'Aitana Ruiz', fem: true, link: 'dropp.me/aitana', atende: false,
+        provas: [['ofício', 'Hospitalidade, Gota · Criação, Infusão'], ['jornada', '1 carimbo'], ['extras', '3 de 4 turnos cumpridos; avisou a falta 2 dias antes']] },
+      { id: 'marcos', nome: 'Marcos Vidal', fem: false, link: 'dropp.me/marcos', atende: true,
+        provas: [['ofício', 'Hospitalidade, Infusão · Gelo e diluição, Reserva'], ['jornada', '9 carimbos'], ['extras', '21 de 22 turnos cumpridos']] }
+    ];
+    const escolhidosNomes = candidatosDef.filter((c) => s.escolhidos[c.id]).map((c) => c.nome);
+    const nEscolhidos = escolhidosNomes.length;
+    const naoEscolhidos = candidatosDef.filter((c) => !s.escolhidos[c.id]).map((c) => c.nome.split(' ')[0]);
+    const candidatos = candidatosDef.filter((c) => s.filtro !== 'atendem' || c.atende).map((c) => {
+      const esc = !!s.escolhidos[c.id];
+      return {
+        nome: c.nome,
+        atendeT: c.atende ? 'atende o pedido' : 'pede Infusão',
+        atendeCls: c.atende ? 'st ok' : 'st meio',
+        ordem: (candidatosDef.indexOf(c) + 1) + 'ª candidatura · ' + c.link,
+        provas: c.provas.map((p) => ({ k: p[0], v: p[1] })),
+        verPassaporte: () => set({ aviso: 'No app, abre ' + c.link + ', só com os carimbos públicos.' }),
+        podeEscolher: vaga === 'publicada',
+        escolhido: esc,
+        escolherRot: esc ? (c.fem ? 'Escolhida' : 'Escolhido') : 'Escolher',
+        escolher: () => { const o = Object.assign({}, s.escolhidos); if (esc) delete o[c.id]; else o[c.id] = true; set({ escolhidos: o, aviso: '' }); }
+      };
+    });
+    const eventosDef = [
+      { id: 'brasa', fixo: true, quando: 'Quinta, 26/11 · 21h', nome: 'Guest shift do Bar Brasa', txt: 'Seis drinks autorais do Bar Brasa no balcão do Salitre.', status: 'Visível para todos. Sócios têm 10 lugares guardados até quarta.' },
+      { id: 'vermute', fixo: false, quando: 'Terça, 1/12 · 18h', nome: 'Degustação de vermutes da casa', txt: 'Três vermutes e o Negroni de cada um. 20 lugares.', status: 'Visível para todos. Sócios têm 6 lugares guardados até domingo.' }
+    ];
+    const eventos = eventosDef.map((e) => {
+      const pub = e.fixo || !!s.eventos[e.id];
+      return {
+        quando: e.quando, nome: e.nome, txt: e.txt, status: e.status,
+        rascunho: !pub, publicado: pub,
+        publicar: () => { const o = Object.assign({}, s.eventos); o[e.id] = true; set({ eventos: o, aviso: 'Publicado na Agenda do Atlas, visível para todo bartender de Valência.' }); }
+      };
+    });
+    const comBarback = s.plano === 'barback';
+    const res = s.decisoes.residencia;
+    const vagasMeuDef = [
+      { id: 'ostra', casa: 'Casa Ostra', titulo: 'Residência de 2 semanas em Clássicos', fecha: 'fecha 30/11',
+        linhas: [['quando', '30/11 a 13/12, de quinta a sábado, 20h a 01h'], ['pede', 'Clássicos, grau Infusão ou mais'], ['paga', '€22 por hora, mais gorjetas'], ['contrata', 'contrato da casa']],
+        bb: [['bate', 'Clássicos: você é Infusão há 3 anos e 2 meses'], ['agenda', 'pega 4 noites da sua escala no Bar Salitre; peça troca antes'], ['vai junto', 'os 6 carimbos de Clássicos e 3 fichas']] },
+      { id: 'turia', casa: 'Terraza Turia', titulo: 'Casamento de 80 convidados', fecha: 'fecha 26/11',
+        linhas: [['quando', 'Sábado 28/11, 18:00 a 01:00 (7 h)'], ['pede', 'Hospitalidade, grau Infusão ou mais'], ['paga', '€18 por hora (€126 a noite)'], ['contrata', 'por uma ETT']],
+        bb: [['bate', 'Hospitalidade: você é Solera'], ['valor', '€18/h fica abaixo do que a sua noite rende: €27/h com gorjetas'], ['agenda', 'sábado 28/11 está livre']] },
+      { id: 'albufera', casa: 'Catering Albufera', titulo: 'Jantar de empresa, 3 vagas', fecha: 'fecha 2/12',
+        linhas: [['quando', 'Sexta 4/12, 19:00 a 00:00 (5 h)'], ['pede', 'nenhum grau mínimo'], ['paga', '€16 por hora (€80 a noite)'], ['contrata', 'contrato da casa']],
+        bb: [['valor', '€16/h, o menor desta lista'], ['agenda', 'sexta 4/12 é a sua folga']] }
+    ];
+    const vagasMeu = vagasMeuDef.map((v) => {
+      const ostra = v.id === 'ostra';
+      const env = ostra ? res === 0 : !!s.candidaturas[v.id];
+      const gu = ostra ? res === 1 : !!s.guardadas[v.id];
+      return {
+        casa: v.casa, titulo: v.titulo, fecha: v.fecha,
+        linhas: v.linhas.map((l) => ({ k: l[0], v: l[1] })),
+        comBarback: comBarback,
+        bb: v.bb.map((b) => ({ k: b[0], v: b[1] })),
+        aberta: !env, enviada: env,
+        enviadaTxt: 'Enviada com dropp.me/teo, só com os carimbos públicos. A resposta chega aqui.',
+        guardada: gu, guardarRot: gu ? 'Guardada' : 'Guardar',
+        candidatar: () => {
+          const msg = 'Candidatura enviada com o seu passaporte. Não custou nada.';
+          if (ostra) { const d = Object.assign({}, s.decisoes); d.residencia = 0; set({ decisoes: d, aviso: msg }); }
+          else { const o = Object.assign({}, s.candidaturas); o[v.id] = true; set({ candidaturas: o, aviso: msg }); }
+        },
+        guardar: () => {
+          if (gu) return;
+          if (ostra) { const d = Object.assign({}, s.decisoes); d.residencia = 1; set({ decisoes: d, aviso: 'Guardada na sua lista de vagas.' }); }
+          else { const o = Object.assign({}, s.guardadas); o[v.id] = true; set({ guardadas: o, aviso: 'Guardada na sua lista de vagas.' }); }
+        }
+      };
+    });
+    const nEnviadas = vagasMeu.filter((v) => v.enviada).length;
+    const nGuardadas = vagasMeu.filter((v) => v.guardada && !v.enviada).length;
+    const vagasResumo = vagasMeu.length + ' vagas abertas'
+      + (nEnviadas ? ', ' + nEnviadas + (nEnviadas === 1 ? ' candidatura enviada' : ' candidaturas enviadas') : '')
+      + (nGuardadas ? ', ' + nGuardadas + (nGuardadas === 1 ? ' guardada' : ' guardadas') : '')
+      + '. Ver e se candidatar é grátis.';
+
     const opSozinho = s.niveis.op === 'sozinho';
     const hoje = [];
     if (opSozinho) {
@@ -676,6 +971,8 @@ class Component extends DCLogic {
       const i = s.decisoes[r.id];
       if (i !== undefined) hoje.push({ h: horaDec[r.id], cad: r.cad, t: r.opcoes[i].feito, quem: 'decidido por Teo · ' + cadeiras[r.cad].nome });
     });
+    if (vaga !== 'rascunho') hoje.push({ h: '17:12', cad: 'op', t: 'Vaga publicada: 2 bartenders para o evento de sábado, 28/11, a €20 por hora.', quem: 'publicada por Teo · Operação' });
+    if (vagaFechada) hoje.push({ h: '17:30', cad: 'op', t: 'Convidados para sábado: ' + juntar(escolhidosNomes) + '.', quem: 'escolhido por Teo · Operação' });
     if (agora >= 1) {
       hoje.push({ h: '21:52', cad: 'op', t: 'Gelo em bola acabou. Salão avisado; 2 sacos no pedido de amanhã.', quem: 'aviso por voz de Teo' });
       if (s.gimlet) hoje.push({ h: '22:30', cad: 'op', t: 'Lembrete: às 23:00 o salão para de oferecer o Gimlet.', quem: 'pedido por voz de Teo' });
@@ -742,7 +1039,7 @@ class Component extends DCLogic {
     return {
       principal: principal,
       mostrarVoltar: !principal,
-      tituloTela: titulos[s.tela] || '',
+      tituloTela: s.tela === 'vagas' ? (casa ? 'Vagas e eventos' : 'Vagas abertas') : (titulos[s.tela] || ''),
       voltar: () => set({ tela: 'turno', aviso: '' }),
       donoCasa: casa,
       donoMeu: meu,
@@ -760,6 +1057,45 @@ class Component extends DCLogic {
       tFecho: principal && casa && s.hora === 'fecho',
       tLivro: s.tela === 'livro',
       tRegras: s.tela === 'regras',
+      tVagasCasa: s.tela === 'vagas' && casa,
+      tVagasMeu: s.tela === 'vagas' && meu,
+      irVagas: () => set({ tela: 'vagas', aviso: '' }),
+      vagasResumo: vagasResumo,
+
+      vcEstado: { rascunho: 'rascunho do Barback', publicada: 'publicada · fecha 27/11', escolhida: 'fechada', carimbada: 'fechada' }[vaga] || '',
+      vcLinhas: vcLinhas,
+      vcFonteAberta: !!s.fontes.vaga,
+      vcFonteRot: s.fontes.vaga ? 'Esconder de onde veio' : 'De onde veio o pedido',
+      vcVerFonte: () => { const f = Object.assign({}, s.fontes); f.vaga = !s.fontes.vaga; set({ fontes: f }); },
+      vcRascunho: vaga === 'rascunho',
+      contratos: contratosDef.map((c) => ({ t: c.t, on: s.contrato === c.id, pick: () => set({ contrato: c.id, aviso: '' }) })),
+      contratoNota: contrato.nota,
+      publicarVaga: () => set({ vaga: 'publicada', aviso: 'Vaga publicada para todo bartender de Valência. As candidaturas chegam aqui.' }),
+      editarVaga: () => set({ aviso: 'No app, abre o formulário já preenchido pelo Barback.' }),
+      vcTemFeito: vaga !== 'rascunho',
+      vcChip: vagaFechada ? 'fechada' : 'publicada',
+      vcFeitoTxt: vagaFechada ? 'Convites aceitos: ' + juntar(escolhidosNomes) + '.' : '4 candidaturas em 2 horas. Ela fecha sexta, 27/11, às 18:00.',
+      vcComCandidatos: vaga === 'publicada',
+      vcPublicada: vaga === 'publicada',
+      filtros: [{ id: 'todos', t: 'Todos · 4' }, { id: 'atendem', t: 'Atendem o pedido · 3' }].map((f) => ({ t: f.t, on: s.filtro === f.id, pick: () => set({ filtro: f.id, aviso: '' }) })),
+      candidatos: candidatos,
+      semEscolha: nEscolhidos === 0,
+      convidarRot: nEscolhidos === 0 ? 'Escolha quem convidar' : 'Convidar ' + nEscolhidos + (nEscolhidos === 1 ? ' pessoa' : ' pessoas'),
+      convidar: () => { if (!nEscolhidos) return; set({ vaga: 'escolhida', aviso: 'Convites enviados. Quem não foi escolhido recebe um aviso de que a vaga fechou.' }); },
+      vcFechada: vagaFechada,
+      confirmTxt: juntar(escolhidosNomes) + (nEscolhidos === 1 ? ' confirmou.' : ' confirmaram.'),
+      contratoPasso: contrato.passo,
+      naoEscolhidosTxt: naoEscolhidos.length ? juntar(naoEscolhidos) + (naoEscolhidos.length === 1 ? ' recebe' : ' recebem') + ' um aviso de que a vaga fechou, com o agradecimento da casa.' : 'Todo mundo que se candidatou foi chamado.',
+      podeCarimbar: vaga === 'escolhida',
+      carimbada: vaga === 'carimbada',
+      assinarJornada: () => set({ vaga: 'carimbada', aviso: 'Carimbo Jornada assinado. Ele aparece no passaporte de quem trabalhou.' }),
+      carimboTxt: 'Carimbo Jornada · Bar Salitre, 28/11, no passaporte de ' + juntar(escolhidosNomes) + '. Cada pessoa ganha mais um turno cumprido.',
+      eventos: eventos,
+
+      planos: [{ id: 'gratis', t: 'Grátis' }, { id: 'barback', t: 'Com Barback' }].map((p) => ({ t: p.t, on: s.plano === p.id, pick: () => set({ plano: p.id, aviso: '' }) })),
+      semBarback: !comBarback,
+      verComBarback: () => set({ plano: 'barback', aviso: 'Plano simulado: com o Barback pessoal.' }),
+      vagasMeu: vagasMeu,
 
       fatoRot: fato.rot,
       fatoN: fato.n,
