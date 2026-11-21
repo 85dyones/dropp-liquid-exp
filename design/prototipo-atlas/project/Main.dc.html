@@ -246,7 +246,7 @@ button { font-family: inherit; color: #1C1A16; }
     <sc-if value="{{tAgenda}}" hint-placeholder-val="{{ false }}">
       <div class="sec-cab">
         <p class="titulo-bloco">Agenda do setor</p>
-        <p class="nota">Guest shifts, cursos e encontros. O que você salva vai para o calendário do celular e aparece no Turno do dia.</p>
+        <p class="nota">Guest shifts, cursos, encontros e os eventos que as casas publicam. O que você salva vai para o calendário do celular e aparece no Turno do dia.</p>
       </div>
       <div class="tipos">
         <sc-for list="{{filtrosAg}}" as="fa" hint-placeholder-count="4">
@@ -260,10 +260,12 @@ button { font-family: inherit; color: #1C1A16; }
             <span class="rot">{{ev.rot}}</span>
             <span class="ev-tit">{{ev.tit}}</span>
             <span class="ev-sub">{{ev.onde}}</span>
+            <sc-if value="{{ev.temCasa}}" hint-placeholder-val="{{ false }}"><span class="st falta">{{ev.casaT}}</span></sc-if>
             <span class="ev-nota">{{ev.nota}}</span>
             <sc-if value="{{ev.temPago}}" hint-placeholder-val="{{ false }}"><span class="st meio">{{ev.pagoT}}</span></sc-if>
             <div class="ev-acoes">
               <sc-if value="{{ev.salvo}}" hint-placeholder-val="{{ false }}"><span class="st ok">{{ev.salvoTxt}}</span></sc-if>
+              <sc-if value="{{ev.podeConfirmar}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn peq" onClick="{{ev.confirmar}}">{{ev.confirmarRot}}</button></sc-if>
               <sc-if value="{{ev.podeSalvar}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn peq" onClick="{{ev.salvar}}">Salvar na agenda</button></sc-if>
               <sc-if value="{{ev.temCurso}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn peq" onClick="{{ev.verCurso}}">Ver o curso</button></sc-if>
             </div>
@@ -606,11 +608,13 @@ class Component extends DCLogic {
     ];
 
     const eventosBase = [
-      { id: 'brasa', d: '26', m: 'nov', dia: 'qui', h: '21h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Brasa no Bar Salitre', onde: 'Bar Salitre, Valência', nota: 'Você recebe. A equipe do Brasa leva o carimbo Jornada; você esteve lá em 14/11.' },
+      { id: 'brasa', casaT: 'publicado pelo Bar Salitre', d: '26', m: 'nov', dia: 'qui', h: '21h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Brasa no Bar Salitre', onde: 'Bar Salitre, Valência', nota: 'Você recebe. A equipe do Brasa leva o carimbo Jornada; você esteve lá em 14/11.' },
       { id: 'esc1', d: '01', m: 'dez', dia: 'ter', h: 'quando quiser', tipo: 'curso', tipoT: 'Curso', tit: 'Gelo claro na prática · aula 1', onde: 'No app', nota: 'Exercício com a sua ficha do Negroni.', curso: 'gelo' },
+      { id: 'vermute', casaT: 'publicado pelo Bar Salitre', lugares: 6, d: '01', m: 'dez', dia: 'ter', h: '18h', tipo: 'casa', tipoT: 'Evento da casa', tit: 'Degustação de vermutes', onde: 'Bar Salitre, Valência', nota: 'Três vermutes e o Negroni de cada um. 20 lugares, 6 guardados para sócios até domingo.' },
       { id: 'apex', d: '03', m: 'dez', dia: 'qui', h: '19h', tipo: 'curso', tipoT: 'Curso patrocinado', tit: 'Carta sem álcool que vende', onde: 'Ruzafa, Valência', nota: 'Encontro único, com prática.', curso: 'semalcool', pago: 'Aperitivos Exemplo' },
       { id: 'esc2', d: '04', m: 'dez', dia: 'sex', h: '11h', tipo: 'curso', tipoT: 'Curso · ao vivo', tit: 'Gelo claro na prática · aula 2', onde: 'Online, com Irene Soler', nota: 'Corte do bloco, com perguntas no fim.', curso: 'gelo' },
       { id: 'esc3', d: '08', m: 'dez', dia: 'ter', h: '16h', tipo: 'curso', tipoT: 'Curso', tit: 'Gelo claro na prática · prática avaliada', onde: 'Bar Salitre, Valência', nota: 'Termina com o carimbo Escola · Gelo claro, com duas assinaturas.', curso: 'gelo' },
+      { id: 'highball', casaT: 'publicado pela Terraza Turia', lugares: 8, d: '09', m: 'dez', dia: 'qua', h: '19h', tipo: 'casa', tipoT: 'Evento da casa', tit: 'Noite de highballs com gelo claro', onde: 'Terraza Turia, Valência', nota: 'A equipe da casa mostra o serviço de highball com bloco cortado. 30 lugares, 8 guardados para sócios até segunda.' },
       { id: 'troca', d: '13', m: 'dez', dia: 'dom', h: '17h', tipo: 'encontro', tipoT: 'Encontro', tit: 'Troca de fichas de inverno', onde: 'Ruzafa, Valência', nota: 'Bartenders de Valência trocam fichas pessoais. Cada um leva uma e volta com outra.' },
       { id: 'ostra', d: '14', m: 'dez', dia: 'seg', h: '20h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Salitre na Casa Ostra', onde: 'Casa Ostra, Lisboa', nota: 'Convite de Tomás Vidal. Dá o carimbo Jornada.' }
     ];
@@ -660,18 +664,22 @@ class Component extends DCLogic {
       return { rot: 'Arquivo · ' + a.cod, nome: a.nome, linha: a.linha, temChip: !!ch, chipT: ch ? ch.t : '', chipCls: ch ? ch.cls : 'st', abrir: () => abrirArq(a.id) };
     });
 
-    const contaAg = (tp) => eventosBase.filter((e) => tp === 'tudo' || e.tipo === tp).length;
-    const filtrosAg = [{ id: 'tudo', t: 'tudo' }, { id: 'guest', t: 'guest shifts' }, { id: 'curso', t: 'cursos' }, { id: 'encontro', t: 'encontros' }].map((f) => ({
+    const doTipo = (e, tp) => tp === 'tudo' || (tp === 'casa' ? !!e.casaT : e.tipo === tp);
+    const contaAg = (tp) => eventosBase.filter((e) => doTipo(e, tp)).length;
+    const filtrosAg = [{ id: 'tudo', t: 'tudo' }, { id: 'guest', t: 'guest shifts' }, { id: 'curso', t: 'cursos' }, { id: 'encontro', t: 'encontros' }, { id: 'casa', t: 'das casas' }].map((f) => ({
       t: f.t, n: contaAg(f.id), on: s.filtroAg === f.id, pick: () => set({ filtroAg: f.id, aviso: '' })
     }));
-    const eventos = eventosBase.filter((e) => s.filtroAg === 'tudo' || e.tipo === s.filtroAg).map((e) => {
+    const eventos = eventosBase.filter((e) => doTipo(e, s.filtroAg)).map((e) => {
       const inscrito = !!e.curso && estadoCurso(e.curso) !== 'aberto';
       const salvo = e.curso ? inscrito : !!s.salvos[e.id];
       return {
         d: e.d, m: e.m, dia: e.dia, rot: e.tipoT + ' · ' + e.h, tit: e.tit, onde: e.onde, nota: e.nota,
         temPago: !!e.pago, pagoT: e.pago ? 'Pago por ' + e.pago : '',
-        salvo: salvo, salvoTxt: e.curso ? 'inscrito · na sua agenda' : 'na sua agenda',
-        podeSalvar: !e.curso && !salvo,
+        salvo: salvo, salvoTxt: e.curso ? 'inscrito · na sua agenda' : (e.lugares ? 'presença confirmada · na sua agenda' : 'na sua agenda'),
+        podeSalvar: !e.curso && !e.lugares && !salvo,
+        temCasa: !!e.casaT, casaT: e.casaT || '',
+        podeConfirmar: !!e.lugares && !salvo, confirmarRot: 'Confirmar presença',
+        confirmar: () => { const sv = Object.assign({}, s.salvos); sv[e.id] = true; set({ salvos: sv, aviso: 'Presença confirmada. A casa sabe que você vai, e o evento entrou na sua agenda.' }); },
         salvar: () => { const sv = Object.assign({}, s.salvos); sv[e.id] = true; set({ salvos: sv, aviso: 'Salvo. Vai para o calendário do celular e aparece no Turno de ' + e.dia + ', ' + e.d + '/' + (e.m === 'nov' ? '11' : '12') + '.' }); },
         temCurso: !!e.curso, verCurso: () => abrirCurso(e.curso, 'agenda')
       };

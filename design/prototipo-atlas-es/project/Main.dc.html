@@ -246,7 +246,7 @@ button { font-family: inherit; color: #1C1A16; }
     <sc-if value="{{tAgenda}}" hint-placeholder-val="{{ false }}">
       <div class="sec-cab">
         <p class="titulo-bloco">Agenda del sector</p>
-        <p class="nota">Guest shifts, cursos y encuentros. Lo que guardas va al calendario del móvil y aparece en el Turno del día.</p>
+        <p class="nota">Guest shifts, cursos, encuentros y los eventos que publican las casas. Lo que guardas va al calendario del móvil y aparece en el Turno del día.</p>
       </div>
       <div class="tipos">
         <sc-for list="{{filtrosAg}}" as="fa" hint-placeholder-count="4">
@@ -260,10 +260,12 @@ button { font-family: inherit; color: #1C1A16; }
             <span class="rot">{{ev.rot}}</span>
             <span class="ev-tit">{{ev.tit}}</span>
             <span class="ev-sub">{{ev.onde}}</span>
+            <sc-if value="{{ev.temCasa}}" hint-placeholder-val="{{ false }}"><span class="st falta">{{ev.casaT}}</span></sc-if>
             <span class="ev-nota">{{ev.nota}}</span>
             <sc-if value="{{ev.temPago}}" hint-placeholder-val="{{ false }}"><span class="st meio">{{ev.pagoT}}</span></sc-if>
             <div class="ev-acoes">
               <sc-if value="{{ev.salvo}}" hint-placeholder-val="{{ false }}"><span class="st ok">{{ev.salvoTxt}}</span></sc-if>
+              <sc-if value="{{ev.podeConfirmar}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn peq" onClick="{{ev.confirmar}}">{{ev.confirmarRot}}</button></sc-if>
               <sc-if value="{{ev.podeSalvar}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn peq" onClick="{{ev.salvar}}">Guardar en la agenda</button></sc-if>
               <sc-if value="{{ev.temCurso}}" hint-placeholder-val="{{ false }}"><button type="button" class="btn peq" onClick="{{ev.verCurso}}">Ver el curso</button></sc-if>
             </div>
@@ -606,11 +608,13 @@ class Component extends DCLogic {
     ];
 
     const eventosBase = [
-      { id: 'brasa', d: '26', m: 'nov', dia: 'jue', diaL: 'jueves', h: '21h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Brasa en el Bar Salitre', onde: 'Bar Salitre, Valencia', nota: 'Tú recibes. El equipo del Brasa se lleva el sello Jornada; tú estuviste allí el 14/11.' },
+      { id: 'brasa', casaT: 'publicado por el Bar Salitre', d: '26', m: 'nov', dia: 'jue', diaL: 'jueves', h: '21h', tipo: 'guest', tipoT: 'Guest shift', tit: 'Bar Brasa en el Bar Salitre', onde: 'Bar Salitre, Valencia', nota: 'Tú recibes. El equipo del Brasa se lleva el sello Jornada; tú estuviste allí el 14/11.' },
       { id: 'esc1', d: '01', m: 'dic', dia: 'mar', diaL: 'martes', h: 'cuando quieras', tipo: 'curso', tipoT: 'Curso', tit: 'Hielo claro en la práctica · clase 1', onde: 'En la app', nota: 'Ejercicio con tu ficha del Negroni.', curso: 'gelo' },
+      { id: 'vermute', casaT: 'publicado por el Bar Salitre', lugares: 6, d: '01', m: 'dic', dia: 'mar', diaL: 'martes', h: '18h', tipo: 'casa', tipoT: 'Evento de la casa', tit: 'Cata de vermuts', onde: 'Bar Salitre, Valencia', nota: 'Tres vermuts y el Negroni de cada uno. 20 plazas, 6 guardadas para socios hasta el domingo.' },
       { id: 'apex', d: '03', m: 'dic', dia: 'jue', diaL: 'jueves', h: '19h', tipo: 'curso', tipoT: 'Curso patrocinado', tit: 'Carta sin alcohol que vende', onde: 'Ruzafa, Valencia', nota: 'Encuentro único, con práctica.', curso: 'semalcool', pago: 'Aperitivos Ejemplo' },
       { id: 'esc2', d: '04', m: 'dic', dia: 'vie', diaL: 'viernes', h: '11h', tipo: 'curso', tipoT: 'Curso · en directo', tit: 'Hielo claro en la práctica · clase 2', onde: 'Online, con Irene Soler', nota: 'Corte del bloque, con preguntas al final.', curso: 'gelo' },
       { id: 'esc3', d: '08', m: 'dic', dia: 'mar', diaL: 'martes', h: '16h', tipo: 'curso', tipoT: 'Curso', tit: 'Hielo claro en la práctica · práctica evaluada', onde: 'Bar Salitre, Valencia', nota: 'Termina con el sello Escuela · Hielo claro, con dos firmas.', curso: 'gelo' },
+      { id: 'highball', casaT: 'publicado por Terraza Turia', lugares: 8, d: '09', m: 'dic', dia: 'mié', diaL: 'miércoles', h: '19h', tipo: 'casa', tipoT: 'Evento de la casa', tit: 'Noche de highballs con hielo claro', onde: 'Terraza Turia, Valencia', nota: 'El equipo de la casa enseña el servicio de highball con bloque cortado. 30 plazas, 8 guardadas para socios hasta el lunes.' },
       { id: 'troca', d: '13', m: 'dic', dia: 'dom', diaL: 'domingo', h: '17h', tipo: 'encontro', tipoT: 'Encuentro', tit: 'Intercambio de fichas de invierno', onde: 'Ruzafa, Valencia', nota: 'Bartenders de Valencia intercambian fichas personales. Cada uno trae una y se lleva otra.' },
       { id: 'ostra', d: '14', m: 'dic', dia: 'lun', diaL: 'lunes', h: '20h', tipo: 'guest', tipoT: 'Guest shift', tit: 'El Bar Salitre en la Casa Ostra', onde: 'Casa Ostra, Lisboa', nota: 'Invitación de Tomás Vidal. Da el sello Jornada.' }
     ];
@@ -660,18 +664,22 @@ class Component extends DCLogic {
       return { rot: 'Archivo · ' + a.cod, nome: a.nome, linha: a.linha, temChip: !!ch, chipT: ch ? ch.t : '', chipCls: ch ? ch.cls : 'st', abrir: () => abrirArq(a.id) };
     });
 
-    const contaAg = (tp) => eventosBase.filter((e) => tp === 'tudo' || e.tipo === tp).length;
-    const filtrosAg = [{ id: 'tudo', t: 'todo' }, { id: 'guest', t: 'guest shifts' }, { id: 'curso', t: 'cursos' }, { id: 'encontro', t: 'encuentros' }].map((f) => ({
+    const doTipo = (e, tp) => tp === 'tudo' || (tp === 'casa' ? !!e.casaT : e.tipo === tp);
+    const contaAg = (tp) => eventosBase.filter((e) => doTipo(e, tp)).length;
+    const filtrosAg = [{ id: 'tudo', t: 'todo' }, { id: 'guest', t: 'guest shifts' }, { id: 'curso', t: 'cursos' }, { id: 'encontro', t: 'encuentros' }, { id: 'casa', t: 'de las casas' }].map((f) => ({
       t: f.t, n: contaAg(f.id), on: s.filtroAg === f.id, pick: () => set({ filtroAg: f.id, aviso: '' })
     }));
-    const eventos = eventosBase.filter((e) => s.filtroAg === 'tudo' || e.tipo === s.filtroAg).map((e) => {
+    const eventos = eventosBase.filter((e) => doTipo(e, s.filtroAg)).map((e) => {
       const inscrito = !!e.curso && estadoCurso(e.curso) !== 'aberto';
       const salvo = e.curso ? inscrito : !!s.salvos[e.id];
       return {
         d: e.d, m: e.m, dia: e.dia, rot: e.tipoT + ' · ' + e.h, tit: e.tit, onde: e.onde, nota: e.nota,
         temPago: !!e.pago, pagoT: e.pago ? 'Pagado por ' + e.pago : '',
-        salvo: salvo, salvoTxt: e.curso ? 'inscrito · en tu agenda' : 'en tu agenda',
-        podeSalvar: !e.curso && !salvo,
+        salvo: salvo, salvoTxt: e.curso ? 'inscrito · en tu agenda' : (e.lugares ? 'asistencia confirmada · en tu agenda' : 'en tu agenda'),
+        podeSalvar: !e.curso && !e.lugares && !salvo,
+        temCasa: !!e.casaT, casaT: e.casaT || '',
+        podeConfirmar: !!e.lugares && !salvo, confirmarRot: 'Confirmar asistencia',
+        confirmar: () => { const sv = Object.assign({}, s.salvos); sv[e.id] = true; set({ salvos: sv, aviso: 'Asistencia confirmada. La casa sabe que vas, y el evento entró en tu agenda.' }); },
         salvar: () => { const sv = Object.assign({}, s.salvos); sv[e.id] = true; set({ salvos: sv, aviso: 'Guardado. Va al calendario del móvil y aparece en el Turno del ' + e.diaL + ' ' + e.d + '/' + (e.m === 'nov' ? '11' : '12') + '.' }); },
         temCurso: !!e.curso, verCurso: () => abrirCurso(e.curso, 'agenda')
       };
